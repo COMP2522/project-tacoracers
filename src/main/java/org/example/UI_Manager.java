@@ -1,5 +1,10 @@
 package org.example;
 
+import processing.core.PApplet;
+import processing.core.PVector;
+import processing.event.KeyEvent;
+
+import java.awt.*;
 public class UI_Manager {
     private UI_Manager uiManager;
     private String curUser;

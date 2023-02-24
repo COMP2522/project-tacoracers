@@ -1,5 +1,9 @@
 package org.example;
+import processing.core.PApplet;
+import processing.core.PVector;
+import processing.event.KeyEvent;
 
+import java.awt.*;
 public class Sprite implements Drawable {
     protected float xPos;
     protected float yPos;
