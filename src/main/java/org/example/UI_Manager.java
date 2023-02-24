@@ -6,10 +6,52 @@ import processing.event.KeyEvent;
 
 import java.awt.*;
 public class UI_Manager {
-    UI_Manager uiManager;
-    String curUser;
-    long curScore;
-    long userHighScore;
-    String highestScoreOwner;
+    private UI_Manager uiManager;
+    private String curUser;
+    private long curScore;
+    private long userHighScore;
+    private String highestScoreOwner;
 
+    private long highestScore;
+
+    private Player player;
+
+    private UI_Manager(){
+
+    }
+
+    public UI_Manager getInstance(){
+
+        return null;
+    }
+
+    public void generateUI(){
+
+    }
+    public void setHighScore(long score){}
+
+    public String getCurUser(){
+
+        return null;
+    }
+
+    public long getCurScore(){
+
+        return 0;
+    }
+
+    public long getUserHighScore(){
+
+        return 0;
+    }
+
+    public String getHighestScoreOwner(){
+
+        return null;
+    }
+
+    public long getHighestScore(){
+
+        return 0;
+    }
 }
