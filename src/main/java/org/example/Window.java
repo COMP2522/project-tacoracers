@@ -1,6 +1,11 @@
 package org.example;
 
-public class Window {
+import processing.core.PApplet;
+import processing.core.PVector;
+import processing.event.KeyEvent;
+
+import java.awt.*;
+public class Window extends PApplet {
     public Player player;
     private UI_Manager uiManager;
     private Sprite_Manager spriteManager;
@@ -11,7 +16,9 @@ public class Window {
     }
     public void draw() {
     }
-    public static void main(String[] args) {
-
+    public static void main(String[] passedArgs) {
+        String[] appletArgs = new String[]{"eatBubbles"};
+        Window eatBubbles = new Window();
+        PApplet.runSketch(appletArgs, eatBubbles);
     }
 }
