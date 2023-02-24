@@ -10,7 +10,9 @@ public class Server {
 
     private Path_Manager pathManager;
 
-    private Server();
+    private Server() {
+
+    }
 
     public void getInstance(){
 
