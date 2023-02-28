@@ -10,6 +10,7 @@ public class Window extends PApplet {
     private UI_Manager uiManager;
     private Sprite_Manager spriteManager;
     public void settings() {
+        Background(0);
         size(920,480);
     }
     public void init() {
