@@ -1,10 +1,14 @@
 package org.example;
 
-public class UI {
+import processing.core.*;
+import processing.core.PFont;
+
+public class UI extends PApplet {
 
     public Window window;
+    private UI_Manager uiManager;
 
-    //public font PFont;
+    public PFont font;
 
     public float xPos;
 
@@ -14,14 +18,19 @@ public class UI {
 
     public float width;
 
-    public void UI(Window window, float x, float y,
-                    float width, float height){
-
+    public UI(Window window, float x, float y,
+                    float width, float height) {
+        window = this.window;
+        x = this.xPos;
+        y = this.yPos;
+        width = this.width;
+        height = this.height;
+    }
+    public UI() {
     }
 
-    public void displayHighScore(long newScore){
+
+    public void displayHighScore(long newScore) {
 
     }
-
-
 }
