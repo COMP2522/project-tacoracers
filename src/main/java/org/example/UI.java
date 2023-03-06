@@ -27,13 +27,10 @@ public class UI extends PApplet {
         height = this.height;
     }
     public UI() {
-
     }
 
-    public void road() {
-        window.rect(255, 255, 255, 255);
-    }
-    public void displayHighScore(long newScore){
+
+    public void displayHighScore(long newScore) {
 
     }
 }
