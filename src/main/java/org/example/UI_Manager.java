@@ -1,12 +1,15 @@
 package org.example;
 
+
 import processing.core.PApplet;
+import processing.core.PFont;
 import processing.core.PVector;
 import processing.event.KeyEvent;
 
 import java.awt.*;
-public class UI_Manager {
-    private UI_Manager uiManager;
+public class UI_Manager extends UI {
+    private static UI_Manager uiManager1;
+    private UI ui;
     private String curUser;
     private long curScore;
     private long userHighScore;
@@ -16,13 +19,15 @@ public class UI_Manager {
 
     private Player player;
 
-    private UI_Manager(){
-
+    private UI_Manager() {
+        ui = new UI();
     }
 
-    public UI_Manager getInstance(){
-
-        return null;
+    public static UI_Manager getInstance() {
+        if (uiManager1 == null) {
+            uiManager1 = new UI_Manager();
+        }
+        return uiManager1;
     }
 
     public void generateUI(){

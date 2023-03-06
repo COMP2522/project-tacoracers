@@ -13,9 +13,10 @@ public class Window extends PApplet {
         size(920,480);
     }
     public void init() {
-
+        background(0);
     }
     public void draw() {
+        init();
     }
     public static void main(String[] passedArgs) {
         String[] appletArgs = new String[]{"eatBubbles"};
