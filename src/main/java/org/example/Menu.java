@@ -7,10 +7,10 @@ import java.awt.event.MouseListener;
 
 public class Menu extends Window implements Drawable {
     Window window;
-    boolean playing = false;
+    UI game;
     public Menu(Window window) {
         this.window = window;
-        this.draw();
+        game = new UI(window);
     }
     public void draw() {
         window.fill(255);
@@ -26,9 +26,12 @@ public class Menu extends Window implements Drawable {
         window.textSize(50);
         window.text("PLAY", 540, 455);
         if (window.mouseX > 465 && window.mouseX < 615
-         && window.mouseY > 400 && window.mouseY < 475) {
+                && window.mouseY > 400 && window.mouseY < 475) {
             if (window.mousePressed) { // when play button is pressed
-
+                gameMode = 1;
+                if (gameMode == 1) {
+                    window.playing = true;
+                }
             }
         }
     }
