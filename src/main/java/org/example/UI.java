@@ -26,11 +26,24 @@ public class UI extends PApplet {
         width = this.width;
         height = this.height;
     }
-    public UI() {
+    public UI(Window scene) {
+        this.window = scene;
     }
 
+    public void draw() {
+        window.background(0);
+        window.rect(0, 580, 1080, 15);
+        window.fill(255);
+        window.rect(0, 180, 1080, 15);
+        window.fill(255);
+    }
 
     public void displayHighScore(long newScore) {
+
+    }
+
+    public void init() {
+
 
     }
 }
