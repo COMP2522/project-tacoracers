@@ -1,9 +1,5 @@
-package org.example;
-import processing.core.PApplet;
-import processing.core.PVector;
-import processing.event.KeyEvent;
+package org.bcit.comp2522.dui.client;
 
-import java.awt.*;
 public class Path_Manager {
     public Path[] paths;
     private static Path_Manager pathManager;

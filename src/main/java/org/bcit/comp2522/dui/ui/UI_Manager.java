@@ -1,12 +1,13 @@
-package org.example;
+package org.bcit.comp2522.dui.ui;
 
-import processing.core.PApplet;
-import processing.core.PVector;
-import processing.event.KeyEvent;
 
-import java.awt.*;
+import org.bcit.comp2522.dui.client.Player;
+import org.bcit.comp2522.dui.client.Window;
+
 public class UI_Manager {
-    private UI_Manager uiManager;
+    private static UI_Manager uiManager1;
+    private UI ui;
+    Window window;
     private String curUser;
     private long curScore;
     private long userHighScore;
@@ -16,17 +17,22 @@ public class UI_Manager {
 
     private Player player;
 
-    private UI_Manager(){
+    public UI_Manager(Window window) {
+        ui = new UI(window);
 
     }
+    private UI_Manager() {}
 
-    public UI_Manager getInstance(){
-
-        return null;
+    public static UI_Manager getInstance() {
+        if (uiManager1 == null) {
+            uiManager1 = new UI_Manager();
+            System.out.println("in here");
+        }
+        return uiManager1;
     }
 
-    public void generateUI(){
-
+    public void generateUI() {
+        ui.init();
     }
     public void setHighScore(long score){}
 

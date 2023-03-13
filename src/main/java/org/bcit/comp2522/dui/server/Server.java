@@ -1,4 +1,8 @@
-package org.example;
+package org.bcit.comp2522.dui.server;
+
+import org.bcit.comp2522.dui.client.Path_Manager;
+import org.bcit.comp2522.dui.client.Sprite_Manager;
+import org.bcit.comp2522.dui.ui.UI_Manager;
 
 public class Server {
 
@@ -10,7 +14,7 @@ public class Server {
 
     private Path_Manager pathManager;
 
-    private Server();
+    private Server() {}
 
     public void getInstance(){
 
