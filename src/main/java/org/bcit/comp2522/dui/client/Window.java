@@ -1,18 +1,14 @@
 package org.bcit.comp2522.dui.client;
 
-import org.bcit.comp2522.dui.ui.UI_Manager;
 import processing.core.PApplet;
 import processing.core.PFont;
-
-import java.awt.event.KeyEvent;
-
+import processing.event.KeyEvent;
 public class Window extends PApplet {
     public Player player;
     public PFont font;
     public boolean playing = false;
     protected int gameMode;
-    private UI_Manager UI;
-    private Sprite_Manager spriteManager;
+    private Manager manager;
     public void settings() {
         size(1080,640);
     }
@@ -21,20 +17,25 @@ public class Window extends PApplet {
     }
     public void init() {
         font = createFont("Helvetica", 16, true);
-        UI = new UI_Manager(this);
+        player = new Player(
+                500, 300,
+                this
+        );
+        manager = new Manager(this);
         background(0);
     }
     public void draw() {
-        UI.generateUI();
+        manager.run();
     }
+    @Override
     public void keyPressed(KeyEvent event) {
         int keyCode = event.getKeyCode();
         switch(keyCode) {
             case UP:
-                player.move(player.getYPos() + 50);
+                player.move(50);
                 break;
             case DOWN:
-                player.move(player.getYPos() - 50);
+                player.move(-50);
                 break;
         }
     }

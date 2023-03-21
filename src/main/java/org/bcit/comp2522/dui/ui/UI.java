@@ -1,13 +1,12 @@
 package org.bcit.comp2522.dui.ui;
 
 import org.bcit.comp2522.dui.client.*;
-import org.bcit.comp2522.dui.ignore.UI_Manager;
 import processing.core.PApplet;
 import processing.core.PFont;
 
 public class UI extends PApplet implements Drawable {
     public Window window;
-    private UI_Manager uiManager;
+    private Manager manager;
     private Player player;
     private Obstacle traffic;
     public PFont font;
