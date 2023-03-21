@@ -1,19 +1,23 @@
 package org.bcit.comp2522.dui.client;
 
+import processing.core.PVector;
+
 public class Player extends Sprite implements Collidable {
     private final float yVel = 1;
 
-    public Player(float xPos, float yPos, Window window) {
-        super(xPos, yPos, window);
+    public Player(PVector position, Window window) {
+        super(position, window);
     }
 
 
     public void move(int event) {
         if (event > 0) {
-            this.setyPos(this.getYPos() + 50);
+            this.setPosition(event);
+            System.out.println("y increased");
         }
         if (event < 0) {
-            this.setyPos(this.getYPos() - 50);
+            this.setPosition(event);
+            System.out.println("y decreased");
         }
     }
 
@@ -32,5 +36,10 @@ public class Player extends Sprite implements Collidable {
     @Override
     public void collide() {
 
+    }
+
+    @Override
+    public void draw() {
+//        window.ellipse(this.getPosition().y, 100, 75);
     }
 }

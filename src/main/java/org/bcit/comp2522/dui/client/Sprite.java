@@ -1,30 +1,25 @@
 package org.bcit.comp2522.dui.client;
 
+import processing.core.*;
+
 public class Sprite implements Drawable {
-    protected float xPos;
-    protected static float yPos;
-    protected float xSize;
-    protected float ySize;
+    protected PVector position;
     protected Window window;
     // i removed xSize and ySize for now, seemed unnecessary. will revisit
-    public Sprite(float xPos, float yPos, Window window) {
-        this.yPos = yPos;
-        this.xPos = xPos;
+    public Sprite(PVector position, Window window) {
+        this.position = position;
         this.window = window;
+    }
+
+
+    public PVector getPosition() {
+        return this.position;
+    }
+    public void setPosition(int y) {
+        this.position = getPosition().add(0, y);
     }
 
     @Override
     public void draw() {
-        if (window.playing == true) {
-            window.ellipse(xPos, yPos, 100, 75);
-        }
-    }
-
-    public void setyPos(float yPos) {
-        this.yPos = yPos;
-    }
-
-    public float getYPos() {
-        return this.yPos;
     }
 }

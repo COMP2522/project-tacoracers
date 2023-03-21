@@ -17,10 +17,6 @@ public class Window extends PApplet {
     }
     public void init() {
         font = createFont("Helvetica", 16, true);
-        player = new Player(
-                500, 300,
-                this
-        );
         manager = new Manager(this);
         background(0);
     }
@@ -33,9 +29,11 @@ public class Window extends PApplet {
         switch(keyCode) {
             case UP:
                 player.move(50);
+                System.out.println("up");
                 break;
             case DOWN:
                 player.move(-50);
+                System.out.println("down");
                 break;
         }
     }

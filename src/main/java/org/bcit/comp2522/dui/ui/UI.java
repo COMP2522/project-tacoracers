@@ -7,11 +7,8 @@ import processing.core.PFont;
 public class UI extends PApplet implements Drawable {
     public Window window;
     private Manager manager;
-    private Player player;
     private Obstacle traffic;
     public PFont font;
-    public float xPos;
-    public float yPos;
     public float height;
     public float width;
     public UI(Window scene) {
@@ -61,7 +58,6 @@ public class UI extends PApplet implements Drawable {
 
     public void init() {
         this.draw();
-        Sprite sprite = new Sprite(this.xPos, this.yPos, this.window);
-        sprite.draw();
+        manager.player.draw();
     }
 }
