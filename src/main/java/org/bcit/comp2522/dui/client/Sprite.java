@@ -2,7 +2,7 @@ package org.bcit.comp2522.dui.client;
 
 public class Sprite implements Drawable {
     protected float xPos;
-    protected float yPos;
+    protected static float yPos;
     protected float xSize;
     protected float ySize;
     protected Window window;
@@ -16,8 +16,12 @@ public class Sprite implements Drawable {
     @Override
     public void draw() {
         if (window.playing == true) {
-            window.rect(xPos, yPos, 100, 75);
+            window.ellipse(xPos, yPos, 100, 75);
         }
+    }
+
+    public void setyPos(float yPos) {
+        this.yPos = yPos;
     }
 
     public float getYPos() {
