@@ -1,8 +1,9 @@
-package org.bcit.comp2522.dui.ui;
+package org.bcit.comp2522.dui.ignore;
 
 
 import org.bcit.comp2522.dui.client.Player;
 import org.bcit.comp2522.dui.client.Window;
+import org.bcit.comp2522.dui.ui.UI;
 
 public class UI_Manager {
     private static UI_Manager uiManager1;

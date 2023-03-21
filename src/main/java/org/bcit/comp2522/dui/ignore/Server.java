@@ -1,8 +1,4 @@
-package org.bcit.comp2522.dui.server;
-
-import org.bcit.comp2522.dui.client.Path_Manager;
-import org.bcit.comp2522.dui.client.Sprite_Manager;
-import org.bcit.comp2522.dui.ui.UI_Manager;
+package org.bcit.comp2522.dui.ignore;
 
 public class Server {
 

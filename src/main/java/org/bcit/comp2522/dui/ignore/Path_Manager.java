@@ -1,4 +1,4 @@
-package org.bcit.comp2522.dui.client;
+package org.bcit.comp2522.dui.ignore;
 
 public class Path_Manager {
     public Path[] paths;
