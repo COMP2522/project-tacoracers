@@ -1,5 +1,11 @@
 # Project
 
+## Individual Pitches and UML Diagrams
+Pavanpreet - My individual contribution of 1000 lines to the project will be the score logic. This includes setting and resetting the current score, making sure the score gets faster as you go and stops once a crash happens. Also, I will be implementing the high score feature which will update once the user passes the previous high score. I will be focusing mainly on the UI_Manager class and the methods it contains.
+
+UML Diagram - https://lucid.app/lucidchart/354fd5b3-181c-462a-8c43-1dbef4c79919/edit?viewport_loc=-11%2C-11%2C1741%2C928%2C0_0&invitationId=inv_7f6dcc91-6145-472a-9507-7823ffc2aa25
+
+
 ## Technical Project Requirements
 
 The minimum requirements for the project are outlined here to give you a starting point. Meeting the minimum requirements alone will not guarantee you a good mark. You are welcome to meet and exceed the minimum requirements if you have good, creative ideas and would like to discuss them with me.
