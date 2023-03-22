@@ -3,12 +3,10 @@ package org.bcit.comp2522.dui.client;
 import processing.core.PVector;
 
 public class Player extends Sprite implements Collidable {
-    private final float yVel = 1;
 
     public Player(PVector position, Window window) {
         super(position, window);
     }
-
 
     public void move(int event) {
         if (event > 0) {
@@ -21,25 +19,17 @@ public class Player extends Sprite implements Collidable {
         }
     }
 
-
-//            this.yPos += y;
-//        if (keyPressed) { // Check if a key is pressed
-//            if (keyCode == UP) { // Check if the up arrow key is pressed
-//                y -= 5; // Move the circle up
-//            } else if (keyCode == DOWN) { // Check if the down arrow key is pressed
-//                y += 5; // Move the circle down
-//            }
-//        }
-
-
-
     @Override
     public void collide() {
 
     }
 
+
+
     @Override
     public void draw() {
-//        window.ellipse(this.getPosition().y, 100, 75);
+        window.pushStyle();
+        window.ellipse(this.position.x, this.position.y, 50, 50);
+        window.popStyle();
     }
 }
