@@ -1,36 +1,35 @@
 package org.bcit.comp2522.dui.client;
 
+import processing.core.PVector;
+
 public class Player extends Sprite implements Collidable {
-    private final float yVel = 1;
 
-    public Player(float xPos, float yPos, Window window) {
-        super(xPos, yPos, window);
+    public Player(PVector position, Window window) {
+        super(position, window);
     }
-
 
     public void move(int event) {
         if (event > 0) {
-            this.setyPos(this.getYPos() + 50);
+            this.setPosition(event);
+            System.out.println("y increased");
         }
         if (event < 0) {
-            this.setyPos(this.getYPos() - 50);
+            this.setPosition(event);
+            System.out.println("y decreased");
         }
     }
-
-
-//            this.yPos += y;
-//        if (keyPressed) { // Check if a key is pressed
-//            if (keyCode == UP) { // Check if the up arrow key is pressed
-//                y -= 5; // Move the circle up
-//            } else if (keyCode == DOWN) { // Check if the down arrow key is pressed
-//                y += 5; // Move the circle down
-//            }
-//        }
-
-
 
     @Override
     public void collide() {
 
+    }
+
+
+
+    @Override
+    public void draw() {
+        window.pushStyle();
+        window.ellipse(this.position.x, this.position.y, 50, 50);
+        window.popStyle();
     }
 }
