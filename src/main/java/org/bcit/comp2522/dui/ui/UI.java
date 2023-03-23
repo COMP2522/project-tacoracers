@@ -10,6 +10,7 @@ public class UI extends Manager implements Drawable {
     private Manager manager;
     private Obstacle traffic;
     public Player player;
+    public Path path;
     public PFont font;
     public float height;
     public float width;
@@ -18,6 +19,7 @@ public class UI extends Manager implements Drawable {
     public UI(Window scene) {
         super();
         this.window = scene;
+        path = new Path(scene);
         player = new Player(new PVector(window.width / 5, 400), this.window);
     }
     public void keyPressed(KeyEvent event) {
@@ -49,6 +51,7 @@ public class UI extends Manager implements Drawable {
             window.fill(255);
             window.rect(0, 100, 1080, -500); // bottom of the border
             window.fill(255);
+
 
             // update the player position gradually using an animation loop
             if (currentPosition != targetPosition) {
@@ -85,6 +88,7 @@ public class UI extends Manager implements Drawable {
             } else if (!window.keyPressed) {
                 keyPressed = false;
             }
+            path.drawLines();
         }
     }
 

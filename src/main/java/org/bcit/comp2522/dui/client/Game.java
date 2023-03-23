@@ -20,7 +20,7 @@ public class Game {
   }
   public void displayScore() {
     window.textSize(20);
-    window.textAlign(LEFT);
+//    window.textAlign(LEFT);
     window.fill(255, 255, 255);
     window.text("Score: " + score, 10, 50); // display the score at position (10, 50)
   }
@@ -33,7 +33,7 @@ public class Game {
 
   public void displayHighScore() {
     window.textSize(20);
-    window.textAlign(LEFT);
+//    window.textAlign(LEFT);
     window.fill(255, 255, 255);
     window.text("High Score: " + highScore, 10, 30); // display the high score at position (10, 30)
   }
