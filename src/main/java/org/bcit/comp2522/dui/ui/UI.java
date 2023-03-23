@@ -51,6 +51,8 @@ public class UI extends Manager implements Drawable {
             window.fill(255);
             window.rect(0, 100, 1080, -500); // bottom of the border
             window.fill(255);
+            displayScore();
+            displayHighScore();
 
 
             // update the player position gradually using an animation loop
@@ -118,8 +120,18 @@ public class UI extends Manager implements Drawable {
         }
     }
 
-    public void displayHighScore(long newScore) {
-
+    Game game = new Game();
+    public void displayScore() {
+        window.textSize(20);
+        window.textAlign(LEFT);
+        window.fill(255, 255, 255);
+        window.text("Score: " + game.score, 540, 455); // display the score at position (, )
+    }
+    public void displayHighScore() {
+        window.textSize(20);
+        window.textAlign(LEFT);
+        window.fill(255, 255, 255);
+        window.text("High Score: " + game.highScore, 540, 430); // display the high score at position (, )
     }
 
     public void init() {
