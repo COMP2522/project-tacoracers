@@ -10,7 +10,7 @@ public class Window extends PApplet {
     protected int gameMode;
     private Manager manager;
     public void settings() {
-        size(1080,640);
+        size(1080,600);
     }
     public void setup() {
         this.init();
@@ -24,8 +24,6 @@ public class Window extends PApplet {
     public void draw() {
         manager.run();
     }
-
-
 
     public static void main(String[] passedArgs) {
         String[] appletArgs = new String[]{"eatBubbles"};

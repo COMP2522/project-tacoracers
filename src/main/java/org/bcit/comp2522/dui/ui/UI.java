@@ -36,11 +36,9 @@ public class UI extends Manager implements Drawable {
         }
     }
 
-    boolean keyPressed = false;
     int targetPosition = 327;
     int currentPosition = 125;
     int animationFrames = 10; // number of frames to complete the animation
-
     @Override
     public void draw() {
         if (window.playing == false) {
@@ -90,6 +88,8 @@ public class UI extends Manager implements Drawable {
             } else if (!window.keyPressed) {
                 keyPressed = false;
             }
+
+
             path.drawLines();
         }
     }
