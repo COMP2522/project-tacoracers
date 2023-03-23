@@ -13,26 +13,32 @@ public class Path extends Manager implements Drawable {
     public void drawLines() {
         // Move the origin of the coordinate system to the right
         // by an amount equal to the current frame count
-        float xTranslation = -window.frameCount % window.width;
+        float xTranslation = -2 * window.frameCount % window.width;
         window.translate(xTranslation, 0);
 
         // Draw the rectangles
-        window.rect(0, 450,  90, 10);
-        window.rect(200, 450, 90, 10);
-        window.rect(400, 450, 90, 10);
-        window.rect(600, 450, 90, 10);
-        window.rect(800, 450, 90, 10);
-        window.rect(1035, 450, 90, 10);
+        window.fill(240,230,140);
+        window.rect(0, 430, 180, 10);
+        window.rect(360, 430, 180, 10);
+        window.rect(720, 430, 180, 10);
+        window.rect(1080, 430, 180, 10);
+        window.rect(0, 233, 180, 10);
+        window.rect(360, 233, 180, 10);
+        window.rect(720, 233, 180, 10);
+        window.rect(1080, 233, 180, 10);
         // If the rectangles have moved off the screen on the left,
         // move them back to the right
         if (xTranslation < 0) {
             window.translate(window.width, 0);
-            window.rect(0, 450,  0, 10);
-            window.rect(200, 450, 90, 10);
-            window.rect(400, 450, 90, 10);
-            window.rect(600, 450, 90, 10);
-            window.rect(800, 450, 90, 10);
-            window.rect(1000, 450, 90, 10);
+            window.fill(240,230,140);
+            window.rect(0, 430, 180, 10);
+            window.rect(360, 430, 180, 10);
+            window.rect(720, 430, 180, 10);
+            window.rect(1080, 430, 180, 10);
+            window.rect(0, 233, 180, 10);
+            window.rect(360, 233, 180, 10);
+            window.rect(720, 233, 180, 10);
+            window.rect(1080, 233, 180, 10);
         }
     }
 }

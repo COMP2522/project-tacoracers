@@ -36,11 +36,9 @@ public class UI extends Manager implements Drawable {
         }
     }
 
-    boolean keyPressed = false;
-    int targetPosition = 125;
+    int targetPosition = 327;
     int currentPosition = 125;
     int animationFrames = 10; // number of frames to complete the animation
-
     @Override
     public void draw() {
         if (window.playing == false) {
@@ -67,21 +65,21 @@ public class UI extends Manager implements Drawable {
                 keyPressed = true;
                 switch(window.keyCode) {
                     case UP:
-                        if (targetPosition - 125 > 100 ) {
-                            targetPosition -= 125;
+                        if (targetPosition - 187.5 > 140 ) {
+                            targetPosition -= 187.5;
                             System.out.println(targetPosition);
                         } else {
-                            targetPosition = 125;
+                            targetPosition = 140;
                             System.out.println(targetPosition);
 
                         }
                         break;
                     case DOWN:
-                        if (targetPosition + 125 < 550) {
-                            targetPosition += 125;
+                        if (targetPosition + 187.5 < 500) {
+                            targetPosition += 187.5;
                             System.out.println(targetPosition);
                         } else {
-                            targetPosition = 550;
+                            targetPosition = 515;
                             System.out.println(targetPosition);
 
                         }
@@ -90,6 +88,8 @@ public class UI extends Manager implements Drawable {
             } else if (!window.keyPressed) {
                 keyPressed = false;
             }
+
+
             path.drawLines();
         }
     }
