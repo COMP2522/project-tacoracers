@@ -1,5 +1,9 @@
 package org.bcit.comp2522.dui.client;
 
+import javax.swing.Timer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  * Scoring, using JSON data structure
  * Use processing elements to display text to ui
@@ -9,16 +13,46 @@ package org.bcit.comp2522.dui.client;
  * Display to UI, read current high score if there is one
  */
 public class Game {
+  private static Game theGame; // Static variable reference of theGame of type Singleton
   public long highScore = 0;
   public long score = 0;
+  public int scoreIncrement = 10; // Score increment amount in each timer tick
+
   Window window;
   // initial variables to work with, both for displaying and tracking score
   Manager manager;
+
+  Timer scoreTimer;
+
+  private Game() {
+    scoreTimer = new Timer(100, new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        updateScore();
+//        System.out.println(score);
+      }
+    });
+  }
+
+  public void start() {
+    scoreTimer.start();
+  }
+
+  // Static method to create instance of Singleton class
+  public static Game getInstance() {
+    if (theGame == null) {
+      theGame = new Game();
+    }
+    return theGame;
+  }
 
   void setup() {
     highScore = loadHighScoreFromFile(); // load high score from database
   }
 
+
+  public void updateScore() {
+    score += scoreIncrement; // Increment the score by the scoreIncrement amount
+  }
   void updateHighScore(int score) {
     if (score > highScore) {
       highScore = score; // if the user beats the previous high score, their score becomes the new high score
@@ -31,5 +65,9 @@ public class Game {
   }
 
   void saveHighScoreToFile() {
+  }
+
+  public static void main(String[] args) {
+
   }
 }

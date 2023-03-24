@@ -15,7 +15,7 @@ public class Manager extends PApplet {
   public Player player;
   public Manager(Window window) {
     ui = new UI(window);
-    game = new Game(); // CHANGE WITH NECESSARY PARAMS
+    game = Game.getInstance(); // CHANGE WITH NECESSARY PARAMS
     // sprite here. arraylist? player? change later
   }
   public Manager() {
@@ -44,7 +44,6 @@ public class Manager extends PApplet {
 
   public void run() {
     ui.init();
-    // game.init() which starts the process
     // some shit with sprites idk yet
   }
 }
