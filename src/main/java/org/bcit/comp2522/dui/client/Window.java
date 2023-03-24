@@ -3,6 +3,8 @@ package org.bcit.comp2522.dui.client;
 import processing.core.PApplet;
 import processing.core.PFont;
 
+import java.util.ArrayList;
+
 public class Window extends PApplet {
     public Player player;
     public PFont font;
@@ -12,17 +14,24 @@ public class Window extends PApplet {
     public void settings() {
         size(1080,600);
     }
+
+
     public void setup() {
-        frameRate(120);
         this.init();
+
     }
     public void init() {
+        frameRate(270);
         font = createFont("Helvetica", 16, true);
         manager = new Manager(this);
         background(0);
     }
     public void draw() {
         manager.run();
+//        for (Enemycar enemyCar : enemycars) {
+//            enemyCar.draw();
+//            enemyCar.update();
+//        }
     }
 
     public static void main(String[] passedArgs) {
