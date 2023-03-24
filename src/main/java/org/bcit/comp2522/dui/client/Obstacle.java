@@ -15,13 +15,16 @@ public class Obstacle extends Sprite implements Collidable {
 
     }
 
+    public void move(float speed) {
+        this.position.x -= speed;
+    }
 
     /**
      * half of this might be redundant tbh.
      * might just combine it in another function.
      * @return one of the 3 lanes
      */
-    public int pickLane() {
+    public PVector pickLane(int laneWidth, int numberOfLanes) {
         Random random = new Random();
         int top = 140;
         int middle = 327;
@@ -30,10 +33,15 @@ public class Obstacle extends Sprite implements Collidable {
         lanes.add(top);
         lanes.add(middle);
         lanes.add(bottom);
-        int num = random.nextInt(3);
+        int num = random.nextInt(numberOfLanes);
         this.lane = lanes.get(num);
-        return this.lane - 140;
+
+        // Start at the right edge of the window
+        int x = window.width;
+
+        return new PVector(x, this.lane);
     }
+
 
     public float getLane() {
         return this.lane;

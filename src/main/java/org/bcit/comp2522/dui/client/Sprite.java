@@ -22,7 +22,8 @@ public class Sprite extends Manager implements Drawable {
     public void drawPlayer(float x, float y) {
         window.rect(x, y, 100, 50);
     }
-    public void setPosition(float y) {
+    public void setPosition(float x, float y) {
+        this.position.x += x;
         this.position.y += y;
     }
 

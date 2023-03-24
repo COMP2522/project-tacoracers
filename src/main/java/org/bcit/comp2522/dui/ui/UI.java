@@ -6,6 +6,7 @@ import processing.core.PVector;
 import processing.event.KeyEvent;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class UI extends Manager implements Drawable {
     public Window window;
@@ -25,20 +26,6 @@ public class UI extends Manager implements Drawable {
         path = new Path(scene);
         player = new Player(new PVector(window.width / 5, 400), this.window);
         traffic = new ArrayList<Obstacle>();
-    }
-
-    public void keyPressed(KeyEvent event) {
-        int keyCode = event.getKeyCode();
-        switch(keyCode) {
-            case UP:
-                player.setPosition(player.getPosition().y + 1);
-                System.out.println("up");
-                break;
-            case DOWN:
-                player.setPosition(player.getPosition().y - 1);
-                System.out.println("down");
-                break;
-        }
     }
 
 
@@ -90,6 +77,20 @@ public class UI extends Manager implements Drawable {
                 keyPressed = false;
             }
             path.drawLines();
+            addCars();
+
+            // Draw and move the obstacles
+            Iterator<Obstacle> iterator = traffic.iterator();
+            while (iterator.hasNext()) {
+                Obstacle car = iterator.next();
+                drawObstacle(car);
+                car.move(3); // Adjust the speed value as needed
+
+                // Remove the obstacle if it's off the screen
+                if (car.getPosition().x + 100 < 0) {
+                    iterator.remove();
+                }
+            }
         }
     }
 
@@ -121,21 +122,19 @@ public class UI extends Manager implements Drawable {
 
     public void addCars() {
         if (traffic.size() < 2) {
-            for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < 2 - traffic.size(); i++) {
                 car = new Obstacle(new PVector(this.window.width / 2, 140), this.window);
                 traffic.add(car);
-                drawObstacle(car);
             }
         }
     }
     public void drawObstacle(Obstacle a) {
-        System.out.println(traffic.size());
-        if (traffic.size() <= 2) {
-            a.setPosition(a.pickLane());
-            System.out.println(a.getPosition().y);
-            window.rect(500, a.getLane(), 100, 50);
-        }
+        PVector newPosition = a.pickLane(100, 3); // Assuming 100 as lane width and 3 lanes
+        a.setPosition(newPosition.x, newPosition.y);
+        System.out.println(a.getPosition().x + ", " + a.getPosition().y);
+        window.rect(a.getPosition().x, a.getPosition().y, 100, 50);
     }
+
 
     Game game = Game.getInstance();
     public void displayScore() {
