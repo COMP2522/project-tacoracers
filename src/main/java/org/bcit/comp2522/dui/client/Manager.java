@@ -37,11 +37,6 @@ public class Manager extends PApplet {
     }
   }
 
-
-  public void playerMove(int y) {
-    player.move(y);
-  }
-
   public void run() {
     ui.init();
     // some shit with sprites idk yet

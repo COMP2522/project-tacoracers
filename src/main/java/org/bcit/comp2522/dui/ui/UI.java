@@ -5,10 +5,13 @@ import processing.core.PFont;
 import processing.core.PVector;
 import processing.event.KeyEvent;
 
+import java.util.ArrayList;
+
 public class UI extends Manager implements Drawable {
     public Window window;
     private Manager manager;
-    private Obstacle traffic;
+    private ArrayList<Obstacle> traffic;
+    private Obstacle car;
     public Player player;
     public Path path;
     public PFont font;
@@ -21,7 +24,9 @@ public class UI extends Manager implements Drawable {
         this.window = scene;
         path = new Path(scene);
         player = new Player(new PVector(window.width / 5, 400), this.window);
+        traffic = new ArrayList<Obstacle>();
     }
+
     public void keyPressed(KeyEvent event) {
         int keyCode = event.getKeyCode();
         switch(keyCode) {
@@ -35,6 +40,7 @@ public class UI extends Manager implements Drawable {
                 break;
         }
     }
+
 
     int targetPosition = 327;
     int currentPosition = 125;
@@ -52,16 +58,14 @@ public class UI extends Manager implements Drawable {
             game.start(); // Start the Timer
             displayScore();
             displayHighScore();
+            addCars();
 
-
-            // update the player position gradually using an animation loop
             if (currentPosition != targetPosition) {
                 float delta = (targetPosition - currentPosition) / (float) animationFrames;
                 currentPosition += delta;
             }
             player.drawPlayer(player.getPosition().x, currentPosition);
 
-            // handle key presses
             if (window.keyPressed && !keyPressed) {
                 keyPressed = true;
                 switch(window.keyCode) {
@@ -72,9 +76,7 @@ public class UI extends Manager implements Drawable {
                         } else {
                             targetPosition = 140;
                             System.out.println(targetPosition);
-
-                        }
-                        break;
+                        } break;
                     case DOWN:
                         if (targetPosition + 187.5 < 500) {
                             targetPosition += 187.5;
@@ -82,15 +84,11 @@ public class UI extends Manager implements Drawable {
                         } else {
                             targetPosition = 515;
                             System.out.println(targetPosition);
-
-                        }
-                        break;
+                        } break;
                 }
             } else if (!window.keyPressed) {
                 keyPressed = false;
             }
-
-
             path.drawLines();
         }
     }
@@ -121,6 +119,24 @@ public class UI extends Manager implements Drawable {
         }
     }
 
+    public void addCars() {
+        if (traffic.size() < 2) {
+            for (int i = 0; i < 2; i++) {
+                car = new Obstacle(new PVector(this.window.width / 2, 140), this.window);
+                traffic.add(car);
+                drawObstacle(car);
+            }
+        }
+    }
+    public void drawObstacle(Obstacle a) {
+        System.out.println(traffic.size());
+        if (traffic.size() <= 2) {
+            a.setPosition(a.pickLane());
+            System.out.println(a.getPosition().y);
+            window.rect(500, a.getLane(), 100, 50);
+        }
+    }
+
     Game game = Game.getInstance();
     public void displayScore() {
         window.textSize(20);
@@ -138,4 +154,5 @@ public class UI extends Manager implements Drawable {
     public void init() {
         this.draw();
     }
+
 }

@@ -6,6 +6,7 @@ public class Sprite extends Manager implements Drawable {
     int yVel = 50;
     protected PVector position;
     protected Window window;
+    protected Obstacle car;
     Player player;
     // i removed xSize and ySize for now, seemed unnecessary. will revisit
     public Sprite(PVector position, Window window) {
@@ -24,7 +25,6 @@ public class Sprite extends Manager implements Drawable {
     public void setPosition(float y) {
         this.position.y += y;
     }
-
 
 
     @Override
