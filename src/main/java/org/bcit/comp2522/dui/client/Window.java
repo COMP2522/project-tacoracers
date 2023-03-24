@@ -13,10 +13,10 @@ public class Window extends PApplet {
         size(1080,600);
     }
     public void setup() {
+        frameRate(120);
         this.init();
     }
     public void init() {
-        frameRate(270);
         font = createFont("Helvetica", 16, true);
         manager = new Manager(this);
         background(0);
