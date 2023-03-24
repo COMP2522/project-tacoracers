@@ -23,9 +23,10 @@ public class Sprite extends Manager implements Drawable {
         window.rect(x, y, 100, 50);
     }
     public void setPosition(float x, float y) {
-        this.position.x += x;
-        this.position.y += y;
+        this.position.x = x;
+        this.position.y = y;
     }
+
 
 
     @Override
