@@ -49,6 +49,7 @@ public class UI extends Manager implements Drawable {
             window.fill(255);
             window.rect(0, 100, 1080, -500); // bottom of the border
             window.fill(255);
+            game.start(); // Start the Timer
             displayScore();
             displayHighScore();
 
@@ -120,18 +121,18 @@ public class UI extends Manager implements Drawable {
         }
     }
 
-    Game game = new Game();
+    Game game = Game.getInstance();
     public void displayScore() {
         window.textSize(20);
         window.textAlign(LEFT);
-        window.fill(255, 255, 255);
-        window.text("Score: " + game.score, 540, 455); // display the score at position (, )
+        window.fill(0, 0, 255);
+        window.text("Score: " + game.score, 900, 70); // display the score at position (, )
     }
     public void displayHighScore() {
         window.textSize(20);
         window.textAlign(LEFT);
-        window.fill(255, 255, 255);
-        window.text("High Score: " + game.highScore, 540, 430); // display the high score at position (, )
+        window.fill(0, 0, 255);
+        window.text("High Score: " + game.highScore, 900, 50); // display the high score at position (, )
     }
 
     public void init() {
