@@ -36,11 +36,12 @@ public class Obstacle extends Sprite implements Collidable {
         int num = random.nextInt(numberOfLanes);
         this.lane = lanes.get(num);
 
-        // Start at the right edge of the window
-        int x = window.width;
+        // Assign a random x position within the screen bounds
+        int x = random.nextInt(window.width - 100);
 
         return new PVector(x, this.lane);
     }
+
 
 
     public float getLane() {
