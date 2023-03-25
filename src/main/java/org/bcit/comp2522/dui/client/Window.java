@@ -28,10 +28,6 @@ public class Window extends PApplet {
     }
     public void draw() {
         manager.run();
-//        for (Enemycar enemyCar : enemycars) {
-//            enemyCar.draw();
-//            enemyCar.update();
-//        }
     }
 
     public static void main(String[] passedArgs) {
