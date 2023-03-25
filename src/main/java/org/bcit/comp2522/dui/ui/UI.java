@@ -11,22 +11,32 @@ import java.util.Iterator;
 public class UI extends Manager implements Drawable {
     public Window window;
     private Manager manager;
-    private ArrayList<Obstacle> traffic;
-    private Obstacle car;
+//    private ArrayList<Obstacle> traffic;
+    private ArrayList<Enemycar> traffic;
     public Player player;
     public Path path;
-    public PFont font;
-    public float height;
-    public float width;
-    boolean hasKeyPressed = false;
 
     public UI(Window scene) {
         super();
         this.window = scene;
         path = new Path(scene);
         player = new Player(new PVector(window.width / 5, 400), this.window);
-        traffic = new ArrayList<Obstacle>();
+        traffic = new ArrayList<Enemycar>();
+
+        // Spawn initial enemy cars
+        for (int i = 0; i < 3; i++) {
+            float speed = random(1, 3);
+            float size = 50;
+            Enemycar enemyCar = new Enemycar(i, speed, size, this.window);
+            traffic.add(enemyCar);
+        }
     }
+
+    /** FOR ERIC TONIGHT
+     * find the issue with disappearance
+     * collision
+     *
+     */
 
 
     int targetPosition = 327;
@@ -45,8 +55,6 @@ public class UI extends Manager implements Drawable {
             game.start(); // Start the Timer
             displayScore();
             displayHighScore();
-            addCars();
-
             if (currentPosition != targetPosition) {
                 float delta = (targetPosition - currentPosition) / (float) animationFrames;
                 currentPosition += delta;
@@ -77,19 +85,33 @@ public class UI extends Manager implements Drawable {
                 keyPressed = false;
             }
             path.drawLines();
-            addCars();
+            for (Enemycar enemyCar : traffic) {
+                enemyCar.update(player);
+                enemyCar.display();
+            }
+        }
+    }
+    private void spawnEnemyCars() {
+        float[] lanesArray = new float[]{140, 327, 515};
+        float minDistance = window.width * 0.5f; // Minimum distance between cars
 
-            // Draw and move the obstacles
-            Iterator<Obstacle> iterator = traffic.iterator();
-            while (iterator.hasNext()) {
-                Obstacle car = iterator.next();
-                drawObstacle(car);
-                car.move(3); // Adjust the speed value as needed
-
-                // Remove the obstacle if it's off the screen
-                if (car.getPosition().x + 100 < 0) {
-                    iterator.remove();
+        for (int i = 0; i < lanesArray.length; i++) {
+            boolean shouldSpawnCar = true;
+            for (Enemycar enemyCar : traffic) {
+                if (enemyCar.position.y == lanesArray[i]) {
+                    float distance = Math.abs(enemyCar.position.x - window.width);
+                    if (distance < minDistance) {
+                        shouldSpawnCar = false;
+                        break;
+                    }
                 }
+            }
+
+            if (shouldSpawnCar) {
+                float speed = random(1, 3);
+                float size = 50;
+                Enemycar enemyCar = new Enemycar(i, speed, size, this.window);
+                traffic.add(enemyCar);
             }
         }
     }
@@ -120,21 +142,6 @@ public class UI extends Manager implements Drawable {
         }
     }
 
-    public void addCars() {
-        if (traffic.size() < 2) {
-            for (int i = 0; i < 2 - traffic.size(); i++) {
-                car = new Obstacle(new PVector(this.window.width / 2, 140), this.window);
-                traffic.add(car);
-            }
-        }
-    }
-    public void drawObstacle(Obstacle a) {
-        PVector newPosition = a.pickLane(100, 3); // Assuming 100 as lane width and 3 lanes
-        a.setPosition(newPosition.x, newPosition.y);
-        System.out.println(a.getPosition().x + ", " + a.getPosition().y);
-        window.rect(a.getPosition().x, a.getPosition().y, 100, 50);
-    }
-
 
     Game game = Game.getInstance();
     public void displayScore() {
@@ -151,6 +158,7 @@ public class UI extends Manager implements Drawable {
     }
 
     public void init() {
+
         this.draw();
     }
 

@@ -13,7 +13,7 @@ public class Path extends Manager implements Drawable {
     public void drawLines() {
         // Move the origin of the coordinate system to the right
         // by an amount equal to the current frame count
-        float xTranslation = -3 * window.frameCount % window.width;
+        float xTranslation = -2 * window.frameCount % window.width;
         window.translate(xTranslation, 0);
 
         // Draw the rectangles
