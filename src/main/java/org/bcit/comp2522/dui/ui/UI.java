@@ -14,6 +14,7 @@ public class UI extends Manager implements Drawable {
     public float playerWidth = 100;
     public float playerHeight = 50;
     public Path path;
+    public Game game;
 
     public UI(Window scene) {
         super();
@@ -21,7 +22,7 @@ public class UI extends Manager implements Drawable {
         path = new Path(scene);
         player = new Player(new PVector(window.width / 5, 400), this.window, playerWidth, playerHeight);
         traffic = new ArrayList<EnemyCar>();
-
+        game = Game.getInstance();
         // Spawn initial enemy cars
         int carsPerLane = 2; // Adjust this value to control the number of cars per lane
         float carSpeed = 2.0f; // Set a constant speed for all cars
@@ -49,9 +50,9 @@ public class UI extends Manager implements Drawable {
             }
         } else {
             window.background(0);
-            window.rect(0, 600, 1080, 500); // top of the border
+            window.rect(0, 600, 1280, 500); // top of the border
             window.fill(255);
-            window.rect(0, 100, 1080, -500); // bottom of the border
+            window.rect(0, 100, 1280, -500); // bottom of the border
             window.fill(255);
             game.start(); // Start the Timer
             displayScore();
@@ -101,6 +102,7 @@ public class UI extends Manager implements Drawable {
 
     public void gameOver() {
         window.playing = false;
+        game.score = 0; /** !!! Change with whatever score system/method we end up using **/
         window.background(0);
         window.fill(255, 0, 0);
         window.textSize(150);
@@ -144,18 +146,17 @@ public class UI extends Manager implements Drawable {
     }
 
 
-    Game game = Game.getInstance();
     public void displayScore() {
         window.textSize(20);
         window.textAlign(LEFT);
         window.fill(0, 0, 255);
-        window.text("Score: " + game.score, 900, 70); // display the score at position (, )
+        window.text("Score: " + game.score, 1100, 70); // display the score at position (, )
     }
     public void displayHighScore() {
         window.textSize(20);
         window.textAlign(LEFT);
         window.fill(0, 0, 255);
-        window.text("High Score: " + game.highScore, 900, 50); // display the high score at position (, )
+        window.text("High Score: " + game.highScore, 1100, 50); // display the high score at position (, )
     }
 
     public void init() {
