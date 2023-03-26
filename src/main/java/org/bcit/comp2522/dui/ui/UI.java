@@ -1,18 +1,15 @@
 package org.bcit.comp2522.dui.ui;
 
 import org.bcit.comp2522.dui.client.*;
-import processing.core.PFont;
 import processing.core.PVector;
-import processing.event.KeyEvent;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class UI extends Manager implements Drawable {
     public Window window;
     private Manager manager;
 //    private ArrayList<Obstacle> traffic;
-    private ArrayList<Enemycar> traffic;
+    private ArrayList<EnemyCar> traffic;
     public Player player;
     public Path path;
 
@@ -21,27 +18,28 @@ public class UI extends Manager implements Drawable {
         this.window = scene;
         path = new Path(scene);
         player = new Player(new PVector(window.width / 5, 400), this.window);
-        traffic = new ArrayList<Enemycar>();
+        traffic = new ArrayList<EnemyCar>();
 
         // Spawn initial enemy cars
+        int carsPerLane = 2; // Adjust this value to control the number of cars per lane
+        float carSpeed = 2.0f; // Set a constant speed for all cars
+
         for (int i = 0; i < 3; i++) {
-            float speed = random(1, 3);
-            float size = 50;
-            Enemycar enemyCar = new Enemycar(i, speed, size, this.window);
-            traffic.add(enemyCar);
+            for (int j = 0; j < carsPerLane; j++) {
+                float size = 50;
+                float initialOffset = j * (window.width / carsPerLane);
+                EnemyCar enemyCar = new EnemyCar(i, random(carSpeed, 2.8F), size, initialOffset, this.window);
+                traffic.add(enemyCar);
+            }
         }
+
+
+
     }
-
-    /** FOR ERIC TONIGHT
-     * find the issue with disappearance
-     * collision
-     *
-     */
-
 
     int targetPosition = 327;
     int currentPosition = 125;
-    int animationFrames = 10; // number of frames to complete the animation
+    int animationFrames = 20; // number of frames to complete the animation
     @Override
     public void draw() {
         if (window.playing == false) {
@@ -85,37 +83,12 @@ public class UI extends Manager implements Drawable {
                 keyPressed = false;
             }
             path.drawLines();
-            for (Enemycar enemyCar : traffic) {
+            for (EnemyCar enemyCar : traffic) {
                 enemyCar.update(player);
                 enemyCar.display();
             }
         }
     }
-    private void spawnEnemyCars() {
-        float[] lanesArray = new float[]{140, 327, 515};
-        float minDistance = window.width * 0.5f; // Minimum distance between cars
-
-        for (int i = 0; i < lanesArray.length; i++) {
-            boolean shouldSpawnCar = true;
-            for (Enemycar enemyCar : traffic) {
-                if (enemyCar.position.y == lanesArray[i]) {
-                    float distance = Math.abs(enemyCar.position.x - window.width);
-                    if (distance < minDistance) {
-                        shouldSpawnCar = false;
-                        break;
-                    }
-                }
-            }
-
-            if (shouldSpawnCar) {
-                float speed = random(1, 3);
-                float size = 50;
-                Enemycar enemyCar = new Enemycar(i, speed, size, this.window);
-                traffic.add(enemyCar);
-            }
-        }
-    }
-
 
 
 

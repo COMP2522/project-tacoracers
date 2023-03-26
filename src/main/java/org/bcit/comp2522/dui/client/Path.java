@@ -6,39 +6,30 @@ public class Path extends Manager implements Drawable {
 
     Window window;
     UI ui;
+    float[] linePositions;
 
     public Path(Window manager) {
         this.window = manager;
+        this.linePositions = new float[] {0, 180, 360, 540, 720, 900, 1080};
     }
+
     public void drawLines() {
-        // Move the origin of the coordinate system to the right
-        // by an amount equal to the current frame count
-        float xTranslation = -2 * window.frameCount % window.width;
-        window.translate(xTranslation, 0);
+        window.fill(240, 230, 140);
+
+        // Update line positions
+        for (int i = 0; i < linePositions.length; i++) {
+            linePositions[i] -= 3;
+            if (linePositions[i] < -180) {
+                linePositions[i] = window.width;
+            }
+        }
 
         // Draw the rectangles
-        window.fill(240,230,140);
-        window.rect(0, 430, 180, 10);
-        window.rect(360, 430, 180, 10);
-        window.rect(720, 430, 180, 10);
-        window.rect(1080, 430, 180, 10);
-        window.rect(0, 233, 180, 10);
-        window.rect(360, 233, 180, 10);
-        window.rect(720, 233, 180, 10);
-        window.rect(1080, 233, 180, 10);
-        // If the rectangles have moved off the screen on the left,
-        // move them back to the right
-        if (xTranslation < 0) {
-            window.translate(window.width, 0);
-            window.fill(240,230,140);
-            window.rect(0, 430, 180, 10);
-            window.rect(360, 430, 180, 10);
-            window.rect(720, 430, 180, 10);
-            window.rect(1080, 430, 180, 10);
-            window.rect(0, 233, 180, 10);
-            window.rect(360, 233, 180, 10);
-            window.rect(720, 233, 180, 10);
-            window.rect(1080, 233, 180, 10);
+        for (float linePosition : linePositions) {
+            for (int i = 0; i < 4; i++) {
+                window.rect(linePosition + i * 180, 430, 75, 10);
+                window.rect(linePosition + i * 180, 233, 75, 10);
+            }
         }
     }
 }
