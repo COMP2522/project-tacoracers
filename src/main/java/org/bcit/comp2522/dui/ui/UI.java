@@ -65,7 +65,7 @@ public class UI extends Manager implements Drawable {
             }
             player.setPosition(player.getPosition().x, currentPosition);
             player.drawPlayer(player.getPosition().x, currentPosition);
-            displayLives();
+            displayHealth();
             if (window.keyPressed && !keyPressed) {
                 keyPressed = true;
                 switch(window.keyCode) {
@@ -98,11 +98,11 @@ public class UI extends Manager implements Drawable {
         }
     }
 
-    public void displayLives() {
+    public void displayHealth() {
         window.textSize(50);
         window.textAlign(LEFT);
         window.fill(255, 0, 0);
-        window.text("Lives: " + player.lives, 30, 59); // display the high score at position (, )
+        window.text("Car Health: " + player.lives, 30, 59); // display the high score at position (, )
 
     }
 
