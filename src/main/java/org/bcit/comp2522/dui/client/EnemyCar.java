@@ -1,28 +1,29 @@
 package org.bcit.comp2522.dui.client;
 
-import java.util.ArrayList;
 import processing.core.*;
 
-public class Enemycar {
+public class EnemyCar {
     public PVector position;
     float speed;
     public float size;
     Window window;
     private final float[] lanes = {140, 327, 515};
 
-    public Enemycar(int laneIndex, float speed, float size, Window window) {
-        this.position = new PVector(window.width, lanes[laneIndex]);
+    public EnemyCar(int laneIndex, float speed, float size, float initialOffset, Window window) {
+        this.position = new PVector(window.width + initialOffset, lanes[laneIndex]);
         this.speed = speed;
         this.size = size;
         this.window = window;
     }
+
 
     public void update(Player player) {
         this.position.x -= speed;
 
         if (this.position.x < -size) {
             this.position.x = window.width + size + (float) (Math.random() * window.width * 0.5);
-            this.position.y = lanes[(int) (Math.random() * lanes.length)];
+            int laneIndex = (int) (Math.random() * lanes.length);
+            this.position.y = lanes[laneIndex];
         }
     }
 
