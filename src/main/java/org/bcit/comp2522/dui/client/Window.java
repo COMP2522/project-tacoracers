@@ -12,9 +12,8 @@ public class Window extends PApplet {
     protected int gameMode;
     private Manager manager;
     public void settings() {
-        size(1080,600);
+        size(1280,600);
     }
-
 
     public void setup() {
         this.init();

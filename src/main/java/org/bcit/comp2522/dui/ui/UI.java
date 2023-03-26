@@ -11,13 +11,15 @@ public class UI extends Manager implements Drawable {
 //    private ArrayList<Obstacle> traffic;
     private ArrayList<EnemyCar> traffic;
     public Player player;
+    public float playerWidth = 100;
+    public float playerHeight = 50;
     public Path path;
 
     public UI(Window scene) {
         super();
         this.window = scene;
         path = new Path(scene);
-        player = new Player(new PVector(window.width / 5, 400), this.window);
+        player = new Player(new PVector(window.width / 5, 400), this.window, playerWidth, playerHeight);
         traffic = new ArrayList<EnemyCar>();
 
         // Spawn initial enemy cars
@@ -32,18 +34,19 @@ public class UI extends Manager implements Drawable {
                 traffic.add(enemyCar);
             }
         }
-
-
-
     }
 
     int targetPosition = 327;
     int currentPosition = 125;
-    int animationFrames = 20; // number of frames to complete the animation
+    int animationFrames = 25; // number of frames to complete the animation
     @Override
     public void draw() {
         if (window.playing == false) {
-            this.menu();
+            if (player.playerDeath) {
+                this.gameOver();
+            } else {
+                this.menu();
+            }
         } else {
             window.background(0);
             window.rect(0, 600, 1080, 500); // top of the border
@@ -57,6 +60,7 @@ public class UI extends Manager implements Drawable {
                 float delta = (targetPosition - currentPosition) / (float) animationFrames;
                 currentPosition += delta;
             }
+            player.setPosition(player.getPosition().x, currentPosition);
             player.drawPlayer(player.getPosition().x, currentPosition);
 
             if (window.keyPressed && !keyPressed) {
@@ -86,30 +90,54 @@ public class UI extends Manager implements Drawable {
             for (EnemyCar enemyCar : traffic) {
                 enemyCar.update(player);
                 enemyCar.display();
+                if (player.collide(enemyCar)) {
+                    // score control -> reset to 0
+                    window.playing = false;
+                    player.playerDeath = true;
+                }
             }
         }
     }
 
-
+    public void gameOver() {
+        window.playing = false;
+        window.background(0);
+        window.fill(255, 0, 0);
+        window.textSize(150);
+        window.textAlign(CENTER);
+        window.text("GAME OVER", (window.width / 2), 200);
+        window.rect((window.width / 2) - 150, 400, 300, 75);
+        window.textAlign(CENTER);
+        window.fill(0);
+        window.textSize(50);
+        window.text("PLAY AGAIN", (window.width / 2), 455);
+        if (window.mouseX > ((window.width / 2) - 150) && window.mouseX < (window.width / 2) + 150
+                && window.mouseY > 400 && window.mouseY < 475) {
+            if (window.mousePressed) { // when play button is pressed
+                window.playing = true;
+                window.init();
+            }
+        }
+    }
 
     public void menu() {
         window.background(0);
         window.fill(255);
-//        window.textFont(window.font);
         window.textSize(150);
         window.textAlign(CENTER);
-        window.text("DUI", 540, 200);
+        window.text("DUI", window.width / 2, 200);
         window.textSize(50);
-        window.text("Driving Unintelligently", 540, 300);
-        window.rect(465, 400, 150, 75);
+        window.text("Driving Unintelligently", window.width / 2, 300);
+        window.rect( (window.width / 2) - 75, 400, 150, 75);
         window.textAlign(CENTER);
         window.fill(0);
         window.textSize(50);
-        window.text("PLAY", 540, 455);
-        if (window.mouseX > 465 && window.mouseX < 615
+        window.text("PLAY", window.width / 2, 455);
+        if (window.mouseX > ((window.width / 2) - 75) && window.mouseX < ((window.width / 2) - 75) + 150
                 && window.mouseY > 400 && window.mouseY < 475) {
             if (window.mousePressed) { // when play button is pressed
                 window.playing = true;
+
                 this.draw();
             }
         }
