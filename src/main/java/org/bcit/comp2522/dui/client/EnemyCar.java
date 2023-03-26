@@ -31,7 +31,7 @@ public class EnemyCar {
 
     public void display() {
         window.fill(255, 0, 0);
-        window.rect(this.position.x, this.position.y, size, size);
+        window.rect(this.position.x, this.position.y, size * 2, size);
     }
 
     public PVector getPosition() {

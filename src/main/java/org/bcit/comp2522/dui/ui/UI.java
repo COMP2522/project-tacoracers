@@ -16,11 +16,13 @@ public class UI extends Manager implements Drawable {
     public Path path;
     public Game game;
 
+
     public UI(Window scene) {
         super();
         this.window = scene;
         path = new Path(scene);
         player = new Player(new PVector(window.width / 5, 400), this.window, playerWidth, playerHeight);
+        player.lives = 3;
         traffic = new ArrayList<EnemyCar>();
         game = Game.getInstance();
         // Spawn initial enemy cars
@@ -63,7 +65,7 @@ public class UI extends Manager implements Drawable {
             }
             player.setPosition(player.getPosition().x, currentPosition);
             player.drawPlayer(player.getPosition().x, currentPosition);
-
+            displayLives();
             if (window.keyPressed && !keyPressed) {
                 keyPressed = true;
                 switch(window.keyCode) {
@@ -91,13 +93,17 @@ public class UI extends Manager implements Drawable {
             for (EnemyCar enemyCar : traffic) {
                 enemyCar.update(player);
                 enemyCar.display();
-                if (player.collide(enemyCar)) {
-                    // score control -> reset to 0
-                    window.playing = false;
-                    player.playerDeath = true;
-                }
+                player.check(enemyCar, this);
             }
         }
+    }
+
+    public void displayLives() {
+        window.textSize(50);
+        window.textAlign(LEFT);
+        window.fill(255, 0, 0);
+        window.text("Lives: " + player.lives, 30, 59); // display the high score at position (, )
+
     }
 
     public void gameOver() {
@@ -139,7 +145,6 @@ public class UI extends Manager implements Drawable {
                 && window.mouseY > 400 && window.mouseY < 475) {
             if (window.mousePressed) { // when play button is pressed
                 window.playing = true;
-
                 this.draw();
             }
         }

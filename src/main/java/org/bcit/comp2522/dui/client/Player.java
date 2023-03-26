@@ -1,11 +1,13 @@
 package org.bcit.comp2522.dui.client;
 
+import org.bcit.comp2522.dui.ui.UI;
 import processing.core.PVector;
 
 public class Player extends Sprite {
     public boolean playerDeath;
     private PVector position;
     private Window window;
+    public int lives = 3;
     private float playerWidth;
     private float playerHeight;
 
@@ -22,7 +24,7 @@ public class Player extends Sprite {
         float playerTop = getPosition().y;
         float playerBottom = getPosition().y + playerHeight;
         float enemyCarLeft = enemyCar.getPosition().x;
-        float enemyCarRight = enemyCar.getPosition().x + enemyCar.size;
+        float enemyCarRight = enemyCar.getPosition().x + enemyCar.size * 2;
         float enemyCarTop = enemyCar.getPosition().y;
         float enemyCarBottom = enemyCar.getPosition().y + enemyCar.size;
 
@@ -36,30 +38,14 @@ public class Player extends Sprite {
         return false;
     }
 
-
-
-    public int compareTo(Object a) {
-        if (a instanceof EnemyCar) {
-            EnemyCar enemyCar = (EnemyCar) a;
-            PVector playerPos = getPosition();
-            PVector enemyCarPos = enemyCar.getPosition();
-
-            if (playerPos.y < enemyCarPos.y) {
-                return -1; // Player is above the enemy car
-            } else if (playerPos.y > enemyCarPos.y) {
-                return 1; // Player is below the enemy car
-            } else {
-                // Player and enemy car have the same y position
-                if (playerPos.x < enemyCarPos.x) {
-                    return -1; // Player is to the left of the enemy car
-                } else if (playerPos.x > enemyCarPos.x) {
-                    return 1; // Player is to the right of the enemy car
-                } else {
-                    return 0; // Player and enemy car have the same x and y positions
-                }
+    public void check(EnemyCar enemyCar, UI ui) {
+        if (collide(enemyCar) && lives <= 3) {
+            lives -= 1;
+            enemyCar.position.x -= 1000;
+            if (lives == -1) {
+                ui.gameOver();
+                playerDeath = true;
             }
-        } else {
-            throw new IllegalArgumentException("Object must be an instance of EnemyCar");
         }
     }
 }
