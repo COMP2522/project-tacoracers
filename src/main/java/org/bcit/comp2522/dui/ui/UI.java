@@ -8,11 +8,10 @@ import java.util.ArrayList;
 public class UI extends Manager implements Drawable {
     public Window window;
     private Manager manager;
-//    private ArrayList<Obstacle> traffic;
     private ArrayList<EnemyCar> traffic;
     public Player player;
-    public float playerWidth = 100;
-    public float playerHeight = 50;
+    public float playerWidth = 140;
+    public float playerHeight = 75;
     public Path path;
     public Game game;
 
@@ -30,7 +29,7 @@ public class UI extends Manager implements Drawable {
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < carsPerLane; j++) {
-                float size = 50;
+                float size = 75;
                 float initialOffset = j * (window.width / carsPerLane);
                 EnemyCar enemyCar = new EnemyCar(i, random(carSpeed, 2.8F), size, initialOffset, this.window);
                 traffic.add(enemyCar);
@@ -69,7 +68,7 @@ public class UI extends Manager implements Drawable {
                 keyPressed = true;
                 switch(window.keyCode) {
                     case UP:
-                        if (targetPosition - 187.5 > 140 ) {
+                        if (targetPosition - 187.5 > 140) {
                             targetPosition -= 187.5;
                             System.out.println(targetPosition);
                         } else {
@@ -134,8 +133,14 @@ public class UI extends Manager implements Drawable {
         window.fill(0);
         window.textFont(window.smallFont);
         window.text("PLAY AGAIN", (window.width / 2), 455);
-        if (window.mouseX > ((window.width / 2) - 150) && window.mouseX < (window.width / 2) + 150
+        if (window.mouseX > ((window.width / 2) - 280) && window.mouseX < (window.width / 2) + 280
                 && window.mouseY > 400 && window.mouseY < 475) {
+            window.fill(150, 0, 0);
+            window.rect((window.width / 2) - 280, 400, 560, 75);
+            window.textAlign(CENTER);
+            window.fill(0);
+            window.textFont(window.smallFont);
+            window.text("PLAY AGAIN", (window.width / 2), 455);
             if (window.mousePressed) { // when play button is pressed
                 window.playing = true;
                 window.init();
@@ -149,6 +154,11 @@ public class UI extends Manager implements Drawable {
         window.textAlign(CENTER);
         window.textFont(window.bigFont);
         window.text("DUI", window.width / 2, 200);
+        window.fill(0, 0, 255);
+        window.textAlign(CENTER);
+        window.textFont(window.bigFont);
+        window.text("DUI", window.width / 2 + 10, 200 + 10);
+        window.fill(255);
         window.textFont(window.smallFont);
         window.text("Driving\nUnintelligently", window.width / 2, 300);
         window.rect( (window.width / 2) - 150, 450, 300, 125);
@@ -156,8 +166,14 @@ public class UI extends Manager implements Drawable {
         window.fill(0);
         window.textFont(window.mediumFont);
         window.text("PLAY", window.width / 2, 535);
-        if (window.mouseX > ((window.width / 2) - 75) && window.mouseX < ((window.width / 2) - 75) + 150
-                && window.mouseY > 500 && window.mouseY < 575) {
+        if (window.mouseX > ((window.width / 2) - 150) && window.mouseX < ((window.width / 2)) + 150
+                && window.mouseY > 450 && window.mouseY < 575) {
+            window.fill(0, 0, 255);
+            window.rect( (window.width / 2) - 150, 450, 300, 125);
+            window.textAlign(CENTER);
+            window.fill(255,255,255);
+            window.textFont(window.mediumFont);
+            window.text("PLAY", window.width / 2, 535);
             if (window.mousePressed) { // when play button is pressed
                 window.playing = true;
                 this.draw();
@@ -170,13 +186,13 @@ public class UI extends Manager implements Drawable {
         window.textFont(window.tinyFont);
         window.textAlign(LEFT);
         window.fill(0, 0, 255);
-        window.text("Score: " + game.score, 900, 70); // display the score at position (, )
+        window.text("Score: " + game.score, 900, 75); // display the score at position (, )
     }
     public void displayHighScore() {
         window.textFont(window.tinyFont);
         window.textAlign(LEFT);
         window.fill(0, 0, 255);
-        window.text("High Score: " + game.highScore, 900, 50); // display the high score at position (, )
+        window.text("High Score: " + game.highScore, 900, 45); // display the high score at position (, )
     }
 
     public void init() {

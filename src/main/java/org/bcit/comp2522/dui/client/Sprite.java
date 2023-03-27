@@ -25,7 +25,7 @@ public class Sprite extends Manager implements Drawable {
 
     }
     public void drawPlayer(float x, float y) {
-        window.image(playerImage, x, y, 125, 75);
+        window.image(playerImage, x, y, 140, 75);
     }
 
     /**

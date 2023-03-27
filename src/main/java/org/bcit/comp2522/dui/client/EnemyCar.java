@@ -1,6 +1,7 @@
 package org.bcit.comp2522.dui.client;
 
 import processing.core.*;
+import java.math.*;
 
 /**
  * EnemyCar represents and individual enemy in the world. Each enemy can
@@ -14,6 +15,7 @@ public class EnemyCar {
     float speed;
     public float size;
     Window window;
+    PImage car;
     private final float[] lanes = {140, 327, 515};
 
     public EnemyCar(int laneIndex, float speed, float size, float initialOffset, Window window) {
@@ -21,6 +23,24 @@ public class EnemyCar {
         this.speed = speed;
         this.size = size;
         this.window = window;
+        int random = (int) (Math.random() * 5) + 1;
+        switch (random) {
+            case 1:
+                car = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/carImage1.png");
+                break;
+            case 2:
+                car = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/carImage2.png");
+                break;
+            case 3:
+                car = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/carImage3.png");
+                break;
+            case 4:
+                car = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/carImage4.png");
+                break;
+            case 5:
+                car = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/carImage5.png");
+                break;
+        }
     }
 
 
@@ -37,8 +57,7 @@ public class EnemyCar {
 
 
     public void display() {
-        window.fill(255, 0, 0);
-        window.rect(this.position.x, this.position.y, size * 2, size);
+        window.image(car, this.position.x, this.position.y, (size * 2) - 10, size);
     }
 
     public PVector getPosition() {

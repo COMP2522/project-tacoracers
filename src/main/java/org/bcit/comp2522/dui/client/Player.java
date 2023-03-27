@@ -38,7 +38,7 @@ public class Player extends Sprite {
         float playerTop = getPosition().y;
         float playerBottom = getPosition().y + playerHeight;
         float enemyCarLeft = enemyCar.getPosition().x;
-        float enemyCarRight = enemyCar.getPosition().x + enemyCar.size * 2;
+        float enemyCarRight = enemyCar.getPosition().x + ((enemyCar.size * 2) - 10);
         float enemyCarTop = enemyCar.getPosition().y;
         float enemyCarBottom = enemyCar.getPosition().y + enemyCar.size;
 

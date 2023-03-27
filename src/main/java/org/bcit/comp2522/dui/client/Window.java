@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * Window creates the actual window and Manager runs the game.
  *
- * @author Eric
+ * @author Eric Tatchell
  */
 public class Window extends PApplet {
     public Player player;
@@ -20,7 +20,6 @@ public class Window extends PApplet {
     public boolean playing = false;
     protected int gameMode;
     private Manager manager;
-    PImage playerImage;
     public void settings() {
         size(1280,600);
     }
