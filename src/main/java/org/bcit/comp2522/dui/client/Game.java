@@ -11,6 +11,8 @@ import java.awt.event.ActionListener;
  * Should work with Manager.java to track Game state (alive or dead)
  * If alive, compounding score, stop and write to JSON when dead
  * Display to UI, read current high score if there is one
+ *
+ * @author Pavan Brar
  */
 public class Game {
   private static Game theGame; // Static variable reference of theGame of type Singleton

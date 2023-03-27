@@ -2,6 +2,13 @@ package org.bcit.comp2522.dui.client;
 
 import processing.core.*;
 
+/**
+ * EnemyCar represents and individual enemy in the world. Each enemy can
+ * be in 1 of 3 lanes and has position, speed and size properties kept.
+ * In UI, an arraylist of EnemyCars are created and subsequently drawn.
+ *
+ * @authors Eric Tatchell, Jaskaran Toor
+ */
 public class EnemyCar {
     public PVector position;
     float speed;
