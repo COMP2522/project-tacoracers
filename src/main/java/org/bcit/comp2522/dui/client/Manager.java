@@ -5,8 +5,9 @@ import processing.core.PApplet;
 import processing.event.KeyEvent;
 
 /**
- * In my head: Window should create and call a Manager
- * Manager creates and calls UI, sprites and game scoring
+ * Manager class creates a UI and game instance
+ *
+ * @author Eric Tatchell
  */
 public class Manager extends PApplet {
   Window window;
