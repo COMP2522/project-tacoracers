@@ -7,9 +7,17 @@ public class Player extends Sprite {
     public boolean playerDeath;
     private PVector position;
     private Window window;
-    public int lives = 3;
     private float playerWidth;
     private float playerHeight;
+    public int lives = 3;
+
+    public int getLives() {
+        return lives;
+    }
+
+    public void setLives(int lives) {
+        this.lives = lives;
+    }
 
     public Player(PVector position, Window window, float playerWidth, float playerHeight) {
         super(position, window);
@@ -40,8 +48,8 @@ public class Player extends Sprite {
 
     public void check(EnemyCar enemyCar, UI ui) {
         if (collide(enemyCar) && lives <= 3) {
-            lives -= 1;
-            enemyCar.position.x -= 1000;
+            setLives(getLives() - 1);
+            enemyCar.getPosition().x -= 1000;
             if (lives == -1) {
                 ui.gameOver();
                 playerDeath = true;

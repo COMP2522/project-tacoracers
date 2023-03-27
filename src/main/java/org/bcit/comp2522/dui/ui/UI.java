@@ -108,7 +108,7 @@ public class UI extends Manager implements Drawable {
 
     public void gameOver() {
         window.playing = false;
-        game.score = 0; /** !!! Change with whatever score system/method we end up using **/
+        game.setScore(0); /** !!! Change with whatever score system/method we end up using **/
         window.background(0);
         window.fill(255, 0, 0);
         window.textSize(150);
