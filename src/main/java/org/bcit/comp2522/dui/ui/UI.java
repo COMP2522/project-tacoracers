@@ -87,12 +87,12 @@ public class UI extends Manager implements Drawable {
             } else if (!window.keyPressed) {
                 keyPressed = false;
             }
-            path.drawLines();
             for (EnemyCar enemyCar : traffic) {
                 enemyCar.update(player);
                 enemyCar.display();
                 player.check(enemyCar, this);
             }
+            path.drawLines();
         }
     }
 
