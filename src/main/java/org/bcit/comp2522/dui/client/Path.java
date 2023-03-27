@@ -15,6 +15,7 @@ public class Path extends Manager implements Drawable {
     UI ui;
     float[] linePositions;
     PImage roadline;
+    int speed = 4;
 
     public Path(Window manager) {
         this.window = manager;
@@ -27,7 +28,7 @@ public class Path extends Manager implements Drawable {
 
         // Update line positions
         for (int i = 0; i < linePositions.length; i++) {
-            linePositions[i] -= 3;
+            linePositions[i] -= speed;
             if (linePositions[i] < -180) {
                 linePositions[i] = window.width;
             }
