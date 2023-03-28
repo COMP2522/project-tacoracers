@@ -9,13 +9,13 @@ import processing.core.PImage;
  *
  * @author Eric Tatchell
  */
-public class Path extends Manager implements Drawable {
+public class Path implements Drawable {
 
     Window window;
     UI ui;
     float[] linePositions;
     PImage roadline;
-    public float speed = 4;
+    public float speed = 20;
 
     public Path(Window manager) {
         this.window = manager;
@@ -49,5 +49,10 @@ public class Path extends Manager implements Drawable {
                 window.image(roadline, linePosition + i * 180, 233);
             }
         }
+    }
+
+    @Override
+    public void draw() {
+
     }
 }
