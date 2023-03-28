@@ -26,7 +26,6 @@ public class Window extends PApplet {
 
     public void setup() {
         this.init();
-
     }
 
     @Override
