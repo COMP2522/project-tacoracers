@@ -26,21 +26,22 @@ public class Window extends PApplet {
 
     public void setup() {
         this.init();
-
     }
+
     @Override
     public void keyPressed() {
         if (this.playing == true) {
-            manager.ui.player.handleKeyEvent(keyCode, manager.ui.path, true);
+            manager.ui.player.pressedKeys.add(manager.ui.window.keyCode);
         }
     }
 
     @Override
     public void keyReleased() {
         if (this.playing == true) {
-            manager.ui.player.handleKeyEvent(keyCode, manager.ui.path, false);
+            manager.ui.player.pressedKeys.remove(manager.ui.window.keyCode);
         }
     }
+
 
 
 

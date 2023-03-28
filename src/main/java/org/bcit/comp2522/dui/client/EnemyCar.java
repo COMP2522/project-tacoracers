@@ -14,7 +14,7 @@ import static java.lang.Math.random;
  * @authors Eric Tatchell, Jaskaran Toor
  */
 public class EnemyCar extends Sprite {
-    public final float[] lanes = {140, 327, 515};
+    public final float[] lanes = {140, 170, 297, 327, 357, 485, 515};
     PImage car;
     private float originalSpeed;
     private ArrayList<PImage> carImages;

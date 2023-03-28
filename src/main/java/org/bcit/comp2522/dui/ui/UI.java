@@ -68,8 +68,8 @@ public class UI extends Manager implements Drawable {
         } else {
             borders();
             game.start();
-            player.draw();
             path.drawLines();
+            player.draw();
             player.displayHealth();
             game.displayScore(window);
             game.displayHighScore(window);
