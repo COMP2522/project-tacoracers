@@ -16,12 +16,17 @@ import static java.lang.Math.random;
 public class EnemyCar extends Sprite {
     public final float[] lanes = {140, 327, 515};
     PImage car;
+    private float originalSpeed;
     private ArrayList<PImage> carImages;
 
     public EnemyCar(PVector position, Window window, float width, float height, float speed, ArrayList<PImage> carImages) {
         super(position, window, width, height, speed);
+        this.originalSpeed = speed;
         this.carImages = carImages;
         pickCar();
+    }
+    public float getOriginalSpeed() {
+        return originalSpeed;
     }
 
     private void pickCar() {

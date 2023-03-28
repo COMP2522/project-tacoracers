@@ -16,6 +16,8 @@ public class Player extends Sprite implements Collidable {
     public int lives = 3;
     public PImage heart;
     public PImage heartLost;
+    private float speedMultiplier = 1.0f;
+    private boolean isSpeedHalved = false;
 
     public Player(PVector position, Window window, float playerWidth, float playerHeight) {
         super(position, window, playerWidth, playerHeight);
@@ -36,21 +38,100 @@ public class Player extends Sprite implements Collidable {
             }
         }
     }
+    public void update(UI ui) {
+        updateKeyStates(ui);
+    }
 
-    public void handleKeyPress(int keyCode) {
-        switch (keyCode) {
-            case UP:
-                setPosition(getPosition().x, lerp(getPosition().y, getPosition().y - 6, 1F));
-                break;
-            case DOWN:
-                setPosition(getPosition().x, lerp(getPosition().y, getPosition().y + 6, 1F));
-                System.out.println("here");
-                break;
+    private void updateKeyStates(UI ui) {
+        if (window.keyPressed) {
+            if (window.key == CODED) {
+                if (window.keyCode == UP) {
+                    handleKeyEvent(window.keyCode, ui.path, true);
+                }
+                if (window.keyCode == DOWN) {
+                    handleKeyEvent(window.keyCode, ui.path, true);
+                }
+                if (window.keyCode == LEFT) {
+                    handleKeyEvent(window.keyCode, ui.path, true);
+                    if (!isSpeedHalved) {
+                        speedMultiplier = 0.5f;
+                        for (EnemyCar enemyCar : ui.traffic) {
+                            enemyCar.setSpeed(enemyCar.getOriginalSpeed() * speedMultiplier);
+                        }
+                        isSpeedHalved = true;
+                    }
+                }
+            }
+        } else {
+            if (!(window.keyCode == LEFT)) {
+                handleKeyEvent(LEFT, ui.path, false);
+                if (isSpeedHalved) {
+                    speedMultiplier = 1.0f;
+                    for (EnemyCar enemyCar : ui.traffic) {
+                        enemyCar.setSpeed(enemyCar.getOriginalSpeed() * speedMultiplier);
+                    }
+                    isSpeedHalved = false;
+                }
+            }
         }
     }
 
 
 
+
+    public void handleKeyEvent(int keyCode, Path path, boolean keyDown) {
+        if (keyDown) {
+            switch (keyCode) {
+                case UP:
+                    if (getPosition().y > 100) {
+                        setPosition(getPosition().x, lerp(getPosition().y, getPosition().y - 6, 0.3F));
+                    }
+                    break;
+                case DOWN:
+                    if (getPosition().y < 515) {
+                        setPosition(getPosition().x, lerp(getPosition().y, getPosition().y + 6, 0.3F));
+                        System.out.println("here");
+                    }
+                    break;
+                case LEFT:
+                    path.setSpeed(10);
+                    window.fill(255, 255, 255);
+                    window.textFont(window.mediumFont);
+                    window.text("SLOWED", (window.width / 4), 327);
+                    break;
+            }
+        } else {
+            if (keyCode == LEFT) {
+                path.setSpeed(20);
+            }
+        }
+    }
+
+
+
+    public void displayHealth() {
+        switch (this.lives) {
+            case 3:
+                window.image(this.heart, 75, 25, 50, 50);
+                window.image(this.heart, 135, 25, 50, 50);
+                window.image(this.heart, 195, 25, 50, 50);
+                break;
+            case 2:
+                window.image(this.heart, 75, 25, 50, 50);
+                window.image(this.heart, 135, 25, 50, 50);
+                window.image(this.heartLost, 195, 25, 50, 50);
+                break;
+            case 1:
+                window.image(this.heart, 75, 25, 50, 50);
+                window.image(this.heartLost, 135, 25, 50, 50);
+                window.image(this.heartLost, 195, 25, 50, 50);
+                break;
+            case 0:
+                window.image(this.heartLost, 75, 25, 50, 50);
+                window.image(this.heartLost, 135, 25, 50, 50);
+                window.image(this.heartLost, 195, 25, 50, 50);
+        }
+    }
 
     @Override
     public void draw() {

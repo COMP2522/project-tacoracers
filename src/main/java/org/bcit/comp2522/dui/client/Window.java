@@ -28,6 +28,22 @@ public class Window extends PApplet {
         this.init();
 
     }
+    @Override
+    public void keyPressed() {
+        if (this.playing == true) {
+            manager.ui.player.handleKeyEvent(keyCode, manager.ui.path, true);
+        }
+    }
+
+    @Override
+    public void keyReleased() {
+        if (this.playing == true) {
+            manager.ui.player.handleKeyEvent(keyCode, manager.ui.path, false);
+        }
+    }
+
+
+
     public void init() {
         bigFont = createFont("src/main/java/org/bcit/comp2522/dui/content/PublicPixel-z84yD.ttf", 150, true);
         smallFont = createFont("src/main/java/org/bcit/comp2522/dui/content/PublicPixel-z84yD.ttf", 48, true);

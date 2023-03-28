@@ -34,6 +34,18 @@ public class Game {
       }
     });
   }
+  public void displayScore(Window window) {
+    window.textFont(window.tinyFont);
+    window.textAlign(window.LEFT);
+    window.fill(0, 0, 255);
+    window.text("Score: " + this.score, 900, 75); // display the score at position (, )
+  }
+  public void displayHighScore(Window window) {
+    window.textFont(window.tinyFont);
+    window.textAlign(window.LEFT);
+    window.fill(0, 0, 255);
+    window.text("High Score: " + this.highScore, 900, 45); // display the high score at position (, )
+  }
 
   public void start() {
     scoreTimer.start();
