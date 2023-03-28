@@ -8,8 +8,6 @@ import java.io.File;
 
 
 public class MusicPlayer {
-
-
     private Clip clip;
     public MusicPlayer(String path) {
         try {
@@ -32,17 +30,13 @@ public class MusicPlayer {
         clip.stop();
         clip.close();
     }
-
-
     public long getMicrosecondPosition() {
         return clip.getMicrosecondPosition();
     }
 
-
     public void start() {
         clip.start();
     }
-
 
     public void setMicrosecondPosition(long clipPosition) {
         clip.setMicrosecondPosition(clipPosition);

@@ -14,12 +14,12 @@ public class Manager extends PApplet {
   UI ui;
   Game game;
   public Player player;
-  public KeyInput keyInput;
+//  public KeyInput keyInput;
   public Manager(Window scene) {
     this.window = scene;
     ui = new UI(scene);
     game = Game.getInstance(); // CHANGE WITH NECESSARY PARAMS
-    keyInput = new KeyInput(scene, ui.player);
+//    keyInput = new KeyInput(scene, ui.player);
     // sprite here. arraylist? player? change later
   }
   public Manager() {}

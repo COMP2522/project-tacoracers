@@ -20,6 +20,7 @@ public class UI extends Manager implements Drawable {
     public Button button;
 
     public UI(Window scene) {
+        super();
         this.window = scene;
         path = new Path(scene);
         player = new Player(new PVector(window.width / 5, 327), this.window, playerWidth, playerHeight);
@@ -29,9 +30,6 @@ public class UI extends Manager implements Drawable {
         button = new Button(this.window, this);
         loadCarImages();
         spawnCars(traffic);
-    }
-    public void update(UI ui) {
-        keyInput.updateKeyStates(ui);
     }
     private void spawnCars(ArrayList<EnemyCar> traffic) {
         int numCars = 2;
@@ -80,7 +78,7 @@ public class UI extends Manager implements Drawable {
                 enemyCar.update();
                 enemyCar.draw();
                 player.check(enemyCar, this);
-                update(this);
+                player.update(this);
             }
         }
     }

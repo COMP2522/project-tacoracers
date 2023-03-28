@@ -4,6 +4,7 @@ import org.bcit.comp2522.dui.ui.UI;
 import processing.core.PImage;
 import processing.core.PVector;
 
+import java.util.HashSet;
 
 
 /**
@@ -14,42 +15,22 @@ import processing.core.PVector;
  */
 public class Player extends Sprite implements Collidable {
     public boolean playerDeath;
+    private boolean isSpeedHalved = false;
+    public float speedMultiplier = 1.0f;
+    HashSet<Integer> pressedKeys = new HashSet<>();
     public int lives = 3;
     public PImage heart;
     public PImage heartLost;
     private float playerSpeed = 0.3F;
     float slowedPlayerSpeed = 0.1F;
-    private KeyInput keyInput;
 
     public Player(PVector position, Window window, float playerWidth, float playerHeight) {
         super(position, window, playerWidth, playerHeight);
         this.playerDeath = false;
         this.lives = 3;
-        this.keyInput = new KeyInput(window, this);
+//        this.keyInput = new KeyInput(window, this);
         heart = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/heart.png");
         heartLost = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/heartLost.png");
-    }
-
-
-    public void check(EnemyCar enemyCar, UI ui) {
-        if (collide(enemyCar) && lives <= 3) {
-            lives -= 1;
-            enemyCar.position.x -= 1000;
-            if (lives == -1) {
-                ui.gameOver();
-                playerDeath = true;
-            }
-        }
-    }
-
-
-
-
-
-
-
-    public float getPlayerSpeed() {
-        return playerSpeed;
     }
 
     public void handleKeyEvent(int keyCode, Path path, boolean keyDown) {
@@ -57,15 +38,15 @@ public class Player extends Sprite implements Collidable {
             switch (keyCode) {
                 case UP:
                     if (getPosition().y > 100) {
-                        setPosition(getPosition().x, lerp(getPosition().y, getPosition().y - 6, playerSpeed));
-                    }
-                    break;
+                        setPosition(getPosition().x, lerp(getPosition().y,
+                                getPosition().y - 6, getPlayerSpeed()));
+                    } break;
                 case DOWN:
                     if (getPosition().y < 515) {
-                        setPosition(getPosition().x, lerp(getPosition().y, getPosition().y + 6, playerSpeed));
+                        setPosition(getPosition().x, lerp(getPosition().y,
+                                getPosition().y + 6, getPlayerSpeed()));
                         System.out.println("here");
-                    }
-                    break;
+                    } break;
                 case LEFT:
                     path.setSpeed(10);
                     setSpeed(slowedPlayerSpeed);
@@ -81,7 +62,49 @@ public class Player extends Sprite implements Collidable {
             }
         }
     }
-
+    public void update(UI ui) {
+        updateKeyStates(ui);
+    }
+    public void updateKeyStates(UI ui) {
+        if (pressedKeys.contains(UP)) {
+            handleKeyEvent(UP, ui.path, true);
+        }
+        if (pressedKeys.contains(DOWN)) {
+            handleKeyEvent(DOWN, ui.path, true);
+        }
+        if (pressedKeys.contains(LEFT)) {
+            handleKeyEvent(LEFT, ui.path, true);
+            if (!isSpeedHalved) {
+                speedMultiplier = 0.5f;
+                for (EnemyCar enemyCar : ui.traffic) {
+                    enemyCar.setSpeed(enemyCar.getOriginalSpeed() * speedMultiplier);
+                }
+                isSpeedHalved = true;
+            }
+        } else {
+            if (isSpeedHalved) {
+                handleKeyEvent(LEFT, ui.path, false);
+                speedMultiplier = 1.0f;
+                for (EnemyCar enemyCar : ui.traffic) {
+                    enemyCar.setSpeed(enemyCar.getOriginalSpeed() * speedMultiplier);
+                }
+                isSpeedHalved = false;
+            }
+        }
+    }
+    public void check(EnemyCar enemyCar, UI ui) {
+        if (collide(enemyCar) && lives <= 3) {
+            lives -= 1;
+            enemyCar.position.x -= 1000;
+            if (lives == -1) {
+                ui.gameOver();
+                playerDeath = true;
+            }
+        }
+    }
+    public float getPlayerSpeed() {
+        return playerSpeed;
+    }
 
 
     public void displayHealth() {
