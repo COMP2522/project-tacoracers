@@ -20,12 +20,17 @@ public class Window extends PApplet {
     public boolean playing = false;
     protected int gameMode;
     private Manager manager;
+
+    private MusicPlayer musicPlayer;
     public void settings() {
         size(1280,600);
     }
 
     public void setup() {
         this.init();
+        musicPlayer = new MusicPlayer("src/main/java/org/bcit/comp2522/dui/content/Team America - America, Fck Yeah! (Lyrics).wav");
+        musicPlayer.play();
+
     }
 
     @Override
