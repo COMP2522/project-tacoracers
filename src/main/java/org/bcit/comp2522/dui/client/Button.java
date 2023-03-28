@@ -42,10 +42,10 @@ public class Button extends PApplet {
             }
         }
     }
-    public void move(Player player) {
-        if (window.keyPressed) {
-            player.handleKeyPress(window.keyCode);
-        }
-    }
+//    public void move(Player player) {
+//        if (window.keyPressed) {
+//            player.handleKeyPress(window.keyCode, ui.path);
+//        }
+//    }
 
 }

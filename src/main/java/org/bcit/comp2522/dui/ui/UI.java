@@ -10,7 +10,7 @@ public class UI extends Manager implements Drawable {
     public final float[] lanes = {140, 327, 515};
     public ArrayList<PImage> cars;
     public Window window;
-    private ArrayList<EnemyCar> traffic;
+    public ArrayList<EnemyCar> traffic;
     public Player player;
     public float playerWidth = 140;
     public float playerHeight = 75;
@@ -18,16 +18,12 @@ public class UI extends Manager implements Drawable {
     public Path path;
     public Game game;
     public Button button;
-    public final int TOP_LANE = 140;
-    private final int MIDDLE_LANE = 327;
-    public final int BOTTOM_LANE = 515;
-    public final float MOVE_NUM = 187.5F;
 
     public UI(Window scene) {
         super();
         this.window = scene;
         path = new Path(scene);
-        player = new Player(new PVector(window.width / 5, 400), this.window, playerWidth, playerHeight);
+        player = new Player(new PVector(window.width / 5, 327), this.window, playerWidth, playerHeight);
         traffic = new ArrayList<EnemyCar>();
         game = Game.getInstance();
         cars = new ArrayList<>();
@@ -60,9 +56,6 @@ public class UI extends Manager implements Drawable {
     }
 
 
-    public void keyPressed() {
-        player.handleKeyPress(keyCode);
-    }
 
     @Override
     public void draw() {
@@ -73,54 +66,20 @@ public class UI extends Manager implements Drawable {
                 this.menu();
             }
         } else {
-            window.background(0);
-            window.rect(0, 600, 1280, 500); // top of the border
-            window.fill(255);
-            window.rect(0, 100, 1280, -500); // bottom of the border
-            window.fill(255);
-            game.start(); // Start the Timer
+            borders();
+            game.start();
             player.draw();
             path.drawLines();
-            button.move(player);
-
-            displayHealth();
-            displayScore();
-            displayHighScore();
+            player.displayHealth();
+            game.displayScore(window);
+            game.displayHighScore(window);
 
             for (EnemyCar enemyCar : traffic) {
                 enemyCar.update();
                 enemyCar.draw();
                 player.check(enemyCar, this);
+                player.update(this);
             }
-            if (path.getSpeed() == 3) {
-                window.fill(255, 255, 255);
-                window.textFont(window.mediumFont);
-                window.text("SLOWED", (window.width / 4), 327);
-            }
-        }
-    }
-
-    public void displayHealth() {
-        switch (player.lives) {
-            case 3:
-                window.image(player.heart, 75, 25, 50, 50);
-                window.image(player.heart, 135, 25, 50, 50);
-                window.image(player.heart, 195, 25, 50, 50);
-                break;
-            case 2:
-                window.image(player.heart, 75, 25, 50, 50);
-                window.image(player.heart, 135, 25, 50, 50);
-                window.image(player.heartLost, 195, 25, 50, 50);
-                break;
-            case 1:
-                window.image(player.heart, 75, 25, 50, 50);
-                window.image(player.heartLost, 135, 25, 50, 50);
-                window.image(player.heartLost, 195, 25, 50, 50);
-                break;
-            case 0:
-                window.image(player.heartLost, 75, 25, 50, 50);
-                window.image(player.heartLost, 135, 25, 50, 50);
-                window.image(player.heartLost, 195, 25, 50, 50);
         }
     }
 
@@ -161,22 +120,14 @@ public class UI extends Manager implements Drawable {
         button.play();
     }
 
-
-    public void displayScore() {
-        window.textFont(window.tinyFont);
-        window.textAlign(LEFT);
-        window.fill(0, 0, 255);
-        window.text("Score: " + game.score, 900, 75); // display the score at position (, )
+    public void borders() {
+        window.background(0);
+        window.rect(0, 600, 1280, 500); // top of the border
+        window.fill(255);
+        window.rect(0, 100, 1280, -500); // bottom of the border
+        window.fill(255);
     }
-    public void displayHighScore() {
-        window.textFont(window.tinyFont);
-        window.textAlign(LEFT);
-        window.fill(0, 0, 255);
-        window.text("High Score: " + game.highScore, 900, 45); // display the high score at position (, )
-    }
-
     public void init() {
         this.draw();
     }
-
 }
