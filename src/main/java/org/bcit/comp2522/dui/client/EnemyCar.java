@@ -54,7 +54,13 @@ public class EnemyCar {
         }
     }
 
+    public float getSpeed() {
+        return speed;
+    }
 
+    public void setSpeed(float speed) {
+        this.speed = speed;
+    }
 
     public void display() {
         window.image(car, this.position.x, this.position.y, (size * 2) - 10, size);
