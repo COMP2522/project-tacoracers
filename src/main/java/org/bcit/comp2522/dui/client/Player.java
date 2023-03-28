@@ -3,6 +3,8 @@ package org.bcit.comp2522.dui.client;
 import org.bcit.comp2522.dui.ui.UI;
 import processing.core.PImage;
 import processing.core.PVector;
+import java.util.HashSet;
+
 
 
 /**
@@ -13,10 +15,13 @@ import processing.core.PVector;
  */
 public class Player extends Sprite implements Collidable {
     public boolean playerDeath;
+    HashSet<Integer> pressedKeys = new HashSet<>();
     public int lives = 3;
     public PImage heart;
     public PImage heartLost;
-    private float speedMultiplier = 1.0f;
+    public float speedMultiplier = 1.0f;
+    private float playerSpeed = 0.3F;
+    private float slowedPlayerSpeed = 0.1F;
     private boolean isSpeedHalved = false;
 
     public Player(PVector position, Window window, float playerWidth, float playerHeight) {
@@ -43,35 +48,29 @@ public class Player extends Sprite implements Collidable {
     }
 
     private void updateKeyStates(UI ui) {
-        if (window.keyPressed) {
-            if (window.key == CODED) {
-                if (window.keyCode == UP) {
-                    handleKeyEvent(window.keyCode, ui.path, true);
+        if (pressedKeys.contains(UP)) {
+            handleKeyEvent(UP, ui.path, true);
+        }
+        if (pressedKeys.contains(DOWN)) {
+            handleKeyEvent(DOWN, ui.path, true);
+        }
+        if (pressedKeys.contains(LEFT)) {
+            handleKeyEvent(LEFT, ui.path, true);
+            if (!isSpeedHalved) {
+                speedMultiplier = 0.5f;
+                for (EnemyCar enemyCar : ui.traffic) {
+                    enemyCar.setSpeed(enemyCar.getOriginalSpeed() * speedMultiplier);
                 }
-                if (window.keyCode == DOWN) {
-                    handleKeyEvent(window.keyCode, ui.path, true);
-                }
-                if (window.keyCode == LEFT) {
-                    handleKeyEvent(window.keyCode, ui.path, true);
-                    if (!isSpeedHalved) {
-                        speedMultiplier = 0.5f;
-                        for (EnemyCar enemyCar : ui.traffic) {
-                            enemyCar.setSpeed(enemyCar.getOriginalSpeed() * speedMultiplier);
-                        }
-                        isSpeedHalved = true;
-                    }
-                }
+                isSpeedHalved = true;
             }
         } else {
-            if (!(window.keyCode == LEFT)) {
+            if (isSpeedHalved) {
                 handleKeyEvent(LEFT, ui.path, false);
-                if (isSpeedHalved) {
-                    speedMultiplier = 1.0f;
-                    for (EnemyCar enemyCar : ui.traffic) {
-                        enemyCar.setSpeed(enemyCar.getOriginalSpeed() * speedMultiplier);
-                    }
-                    isSpeedHalved = false;
+                speedMultiplier = 1.0f;
+                for (EnemyCar enemyCar : ui.traffic) {
+                    enemyCar.setSpeed(enemyCar.getOriginalSpeed() * speedMultiplier);
                 }
+                isSpeedHalved = false;
             }
         }
     }
@@ -79,22 +78,28 @@ public class Player extends Sprite implements Collidable {
 
 
 
+
+    public float getPlayerSpeed() {
+        return playerSpeed;
+    }
+
     public void handleKeyEvent(int keyCode, Path path, boolean keyDown) {
         if (keyDown) {
             switch (keyCode) {
                 case UP:
                     if (getPosition().y > 100) {
-                        setPosition(getPosition().x, lerp(getPosition().y, getPosition().y - 6, 0.3F));
+                        setPosition(getPosition().x, lerp(getPosition().y, getPosition().y - 6, playerSpeed));
                     }
                     break;
                 case DOWN:
                     if (getPosition().y < 515) {
-                        setPosition(getPosition().x, lerp(getPosition().y, getPosition().y + 6, 0.3F));
+                        setPosition(getPosition().x, lerp(getPosition().y, getPosition().y + 6, playerSpeed));
                         System.out.println("here");
                     }
                     break;
                 case LEFT:
                     path.setSpeed(10);
+                    setSpeed(slowedPlayerSpeed);
                     window.fill(255, 255, 255);
                     window.textFont(window.mediumFont);
                     window.text("SLOWED", (window.width / 4), 327);
@@ -103,6 +108,7 @@ public class Player extends Sprite implements Collidable {
         } else {
             if (keyCode == LEFT) {
                 path.setSpeed(20);
+                setSpeed(0.3F);
             }
         }
     }
@@ -132,6 +138,11 @@ public class Player extends Sprite implements Collidable {
                 window.image(this.heartLost, 195, 25, 50, 50);
         }
     }
+
+    public void setSpeed(float speed) {
+        this.playerSpeed = speed;
+    }
+
 
     @Override
     public void draw() {
