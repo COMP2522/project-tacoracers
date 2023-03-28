@@ -31,14 +31,14 @@ public class Window extends PApplet {
     @Override
     public void keyPressed() {
         if (this.playing == true) {
-            manager.ui.player.pressedKeys.add(manager.ui.window.keyCode);
+            manager.keyInput.pressedKeys.add(manager.ui.window.keyCode);
         }
     }
 
     @Override
     public void keyReleased() {
         if (this.playing == true) {
-            manager.ui.player.pressedKeys.remove(manager.ui.window.keyCode);
+            manager.keyInput.pressedKeys.remove(manager.ui.window.keyCode);
         }
     }
 

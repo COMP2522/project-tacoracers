@@ -3,7 +3,6 @@ package org.bcit.comp2522.dui.client;
 import org.bcit.comp2522.dui.ui.UI;
 import processing.core.PImage;
 import processing.core.PVector;
-import java.util.HashSet;
 
 
 
@@ -15,19 +14,18 @@ import java.util.HashSet;
  */
 public class Player extends Sprite implements Collidable {
     public boolean playerDeath;
-    HashSet<Integer> pressedKeys = new HashSet<>();
     public int lives = 3;
     public PImage heart;
     public PImage heartLost;
-    public float speedMultiplier = 1.0f;
     private float playerSpeed = 0.3F;
-    private float slowedPlayerSpeed = 0.1F;
-    private boolean isSpeedHalved = false;
+    float slowedPlayerSpeed = 0.1F;
+    private KeyInput keyInput;
 
     public Player(PVector position, Window window, float playerWidth, float playerHeight) {
         super(position, window, playerWidth, playerHeight);
         this.playerDeath = false;
         this.lives = 3;
+        this.keyInput = new KeyInput(window, this);
         heart = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/heart.png");
         heartLost = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/heartLost.png");
     }
@@ -43,37 +41,8 @@ public class Player extends Sprite implements Collidable {
             }
         }
     }
-    public void update(UI ui) {
-        updateKeyStates(ui);
-    }
 
-    private void updateKeyStates(UI ui) {
-        if (pressedKeys.contains(UP)) {
-            handleKeyEvent(UP, ui.path, true);
-        }
-        if (pressedKeys.contains(DOWN)) {
-            handleKeyEvent(DOWN, ui.path, true);
-        }
-        if (pressedKeys.contains(LEFT)) {
-            handleKeyEvent(LEFT, ui.path, true);
-            if (!isSpeedHalved) {
-                speedMultiplier = 0.5f;
-                for (EnemyCar enemyCar : ui.traffic) {
-                    enemyCar.setSpeed(enemyCar.getOriginalSpeed() * speedMultiplier);
-                }
-                isSpeedHalved = true;
-            }
-        } else {
-            if (isSpeedHalved) {
-                handleKeyEvent(LEFT, ui.path, false);
-                speedMultiplier = 1.0f;
-                for (EnemyCar enemyCar : ui.traffic) {
-                    enemyCar.setSpeed(enemyCar.getOriginalSpeed() * speedMultiplier);
-                }
-                isSpeedHalved = false;
-            }
-        }
-    }
+
 
 
 
