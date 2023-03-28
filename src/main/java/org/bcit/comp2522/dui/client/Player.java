@@ -20,7 +20,6 @@ public class Player extends Sprite {
     public PImage heart;
     public PImage heartLost;
 
-
     public Player(PVector position, Window window, float playerWidth, float playerHeight) {
         super(position, window);
         this.playerWidth = playerWidth;
@@ -29,8 +28,6 @@ public class Player extends Sprite {
         heart = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/heart.png");
         heartLost = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/heartLost.png");
     }
-
-
 
     public boolean collide(EnemyCar enemyCar) {
         float playerLeft = getPosition().x;
@@ -46,7 +43,6 @@ public class Player extends Sprite {
                 && playerLeft <= enemyCarRight
                 && (playerTop <= enemyCarBottom && playerBottom >= enemyCarTop
                 || playerBottom >= enemyCarTop && playerTop <= enemyCarBottom)) {
-            System.out.println("here");
             return true;
         }
         return false;

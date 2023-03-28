@@ -7,13 +7,17 @@ import java.util.ArrayList;
 
 public class UI extends Manager implements Drawable {
     public Window window;
-    private Manager manager;
     private ArrayList<EnemyCar> traffic;
     public Player player;
     public float playerWidth = 140;
     public float playerHeight = 75;
+    private float slowedEnemyCarSpeed = 1.6F;
     public Path path;
     public Game game;
+    private final int TOP_LANE = 140;
+    private final int MIDDLE_LANE = 327;
+    private final int BOTTOM_LANE = 515;
+    private final float MOVE_NUM = 187.5F;
 
     public UI(Window scene) {
         super();
@@ -68,20 +72,31 @@ public class UI extends Manager implements Drawable {
                 keyPressed = true;
                 switch(window.keyCode) {
                     case UP:
-                        if (targetPosition - 187.5 > 140) {
-                            targetPosition -= 187.5;
-                            System.out.println(targetPosition);
+                        if (targetPosition - MOVE_NUM > TOP_LANE) {
+                            targetPosition -= MOVE_NUM;
                         } else {
-                            targetPosition = 140;
-                            System.out.println(targetPosition);
+                            targetPosition = TOP_LANE;
                         } break;
                     case DOWN:
-                        if (targetPosition + 187.5 < 500) {
-                            targetPosition += 187.5;
-                            System.out.println(targetPosition);
+                        if (targetPosition + MOVE_NUM < BOTTOM_LANE) {
+                            targetPosition += MOVE_NUM;
                         } else {
-                            targetPosition = 515;
+                            targetPosition = BOTTOM_LANE;
                             System.out.println(targetPosition);
+                        } break;
+                    case LEFT:
+                        /**
+                         * TODO: make this a CLICK + HOLD case for a maximum of 4 seconds
+                         */
+                        if (path.getSpeed() > 3) {
+                            path.setSpeed(path.getSpeed() - 1);
+                        } break;
+                    case RIGHT:
+                        /**
+                         * TODO: make this a CLICK + HOLD case for a maximum of 4 seconds
+                         */
+                        if (path.getSpeed() == 3) {
+                            path.setSpeed(path.getSpeed() + 1);
                         } break;
                 }
             } else if (!window.keyPressed) {
@@ -90,9 +105,17 @@ public class UI extends Manager implements Drawable {
             for (EnemyCar enemyCar : traffic) {
                 enemyCar.update(player);
                 enemyCar.display();
+                /**
+                 * TODO: write slowdown logic relative to the path speed
+                 */
                 player.check(enemyCar, this);
             }
             path.drawLines();
+            if (path.getSpeed() == 3) {
+                window.fill(255, 255, 255);
+                window.textFont(window.mediumFont);
+                window.text("SLOWED", (window.width / 4), 327);
+            }
         }
     }
 
