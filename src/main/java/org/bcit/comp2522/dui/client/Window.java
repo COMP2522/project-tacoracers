@@ -29,7 +29,6 @@ public class Window extends PApplet {
 
     }
     public void init() {
-        frameRate(270);
         bigFont = createFont("src/main/java/org/bcit/comp2522/dui/content/PublicPixel-z84yD.ttf", 150, true);
         smallFont = createFont("src/main/java/org/bcit/comp2522/dui/content/PublicPixel-z84yD.ttf", 48, true);
         mediumFont = createFont("src/main/java/org/bcit/comp2522/dui/content/PublicPixel-z84yD.ttf", 64, true);

@@ -14,32 +14,18 @@ public class Manager extends PApplet {
   UI ui;
   Game game;
   public Player player;
-  public Manager(Window window) {
-    ui = new UI(window);
+  public Manager(Window scene) {
+    this.window = scene;
+    ui = new UI(scene);
     game = Game.getInstance(); // CHANGE WITH NECESSARY PARAMS
     // sprite here. arraylist? player? change later
   }
-  public Manager() {
-
-  }
-
-  @Override
-  public void keyPressed(KeyEvent event) {
-    int keyCode = event.getKeyCode();
-    switch(keyCode) {
-      case UP:
-        ui.player.getPosition().y += ui.player.yVel;
-        System.out.println("up");
-        break;
-      case DOWN:
-        ui.player.getPosition().y -= ui.player.yVel;
-        System.out.println("down");
-        break;
-    }
-  }
+  public Manager() {}
 
   public void run() {
     ui.init();
     // some shit with sprites idk yet
   }
+
+
 }

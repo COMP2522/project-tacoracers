@@ -2,6 +2,9 @@ package org.bcit.comp2522.dui.client;
 
 import processing.core.*;
 import java.math.*;
+import java.util.ArrayList;
+
+import static java.lang.Math.random;
 
 /**
  * EnemyCar represents and individual enemy in the world. Each enemy can
@@ -10,63 +13,50 @@ import java.math.*;
  *
  * @authors Eric Tatchell, Jaskaran Toor
  */
-public class EnemyCar {
-    public PVector position;
-    float speed;
-    public float size;
-    Window window;
+public class EnemyCar extends Sprite {
+    public final float[] lanes = {140, 327, 515};
     PImage car;
-    private final float[] lanes = {140, 327, 515};
+    private ArrayList<PImage> carImages;
 
-    public EnemyCar(int laneIndex, float speed, float size, float initialOffset, Window window) {
-        this.position = new PVector(window.width + initialOffset, lanes[laneIndex]);
-        this.speed = speed;
-        this.size = size;
-        this.window = window;
-        int random = (int) (Math.random() * 5) + 1;
-        switch (random) {
-            case 1:
-                car = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/carImage1.png");
-                break;
-            case 2:
-                car = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/carImage2.png");
-                break;
-            case 3:
-                car = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/carImage3.png");
-                break;
-            case 4:
-                car = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/carImage4.png");
-                break;
-            case 5:
-                car = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/carImage5.png");
-                break;
-        }
+    public EnemyCar(PVector position, Window window, float width, float height, float speed, ArrayList<PImage> carImages) {
+        super(position, window, width, height, speed);
+        this.carImages = carImages;
+        pickCar();
+    }
+
+    private void pickCar() {
+        int random = (int) (Math.random() * carImages.size());
+        car = carImages.get(random);
     }
 
 
-    public void update(Player player) {
+    public void update() {
         this.position.x -= speed;
 
-        if (this.position.x < -size) {
-            this.position.x = window.width + size + (float) (Math.random() * window.width * 0.5);
+        if (this.position.x < -this.width) {
+            float offset = (float) (Math.random() * window.width * 0.5);
+            this.position.x = window.width + this.width + offset;
             int laneIndex = (int) (Math.random() * lanes.length);
             this.position.y = lanes[laneIndex];
         }
     }
 
-    public float getSpeed() {
-        return speed;
-    }
 
-    public void setSpeed(float speed) {
-        this.speed = speed;
-    }
 
-    public void display() {
-        window.image(car, this.position.x, this.position.y, (size * 2) - 10, size);
+    @Override
+    public void draw() {
+        window.image(car, this.position.x, this.position.y, this.width, this.height);
     }
 
     public PVector getPosition() {
         return position.copy();
+    }
+
+    public float getWidth() {
+        return this.width;
+    }
+
+    public float getHeight() {
+        return this.height;
     }
 }

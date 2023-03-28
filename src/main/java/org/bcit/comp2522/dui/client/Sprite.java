@@ -1,7 +1,10 @@
 package org.bcit.comp2522.dui.client;
 
+import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
+
+import java.util.ArrayList;
 
 /**
  * Sprite class represents objects in the world.
@@ -9,23 +12,52 @@ import processing.core.PVector;
  *
  * @author Eric Tatchell
  */
-public class Sprite extends Manager implements Drawable {
-    int yVel = 50;
+public class Sprite extends PApplet {
+    protected float size;
+    protected float laneSpeed;
+    protected float width;
+    protected float height;
+    protected float speed;
+    protected float initialOffset;
     protected PVector position;
     protected Window window;
     Player player;
     PImage playerImage;
 
-    // i removed xSize and ySize for now, seemed unnecessary. will revisit
-    public Sprite(PVector position, Window window) {
-        super();
+    /**
+     * Sprite constructor intended for Players.
+     * @param position PVector
+     * @param window Window
+     */
+    public Sprite(PVector position, Window window, float width, float height) {
         this.position = position;
         this.window = window;
+        this.width = width;
+        this.height = height;
         playerImage = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/playerImage.png");
-
     }
-    public void drawPlayer(float x, float y) {
-        window.image(playerImage, x, y, 140, 75);
+    /**
+     * Sprite constructor intended for EnemyCars.
+     * @param position PVector
+     * @param window Window
+     * @param width Car width
+     * @param height Car height
+     */
+    public Sprite(PVector position, Window window, float width, float height, float speed) {
+        this.position = position;
+        this.window = window;
+        this.width = width;
+        this.height = height;
+        this.speed = speed;
+    }
+
+
+    public float getSpeed() {
+        return this.speed;
+    }
+
+    public void setSpeed(float speed) {
+        this.speed = speed;
     }
 
     /**

@@ -1,11 +1,14 @@
 package org.bcit.comp2522.dui.ui;
 
 import org.bcit.comp2522.dui.client.*;
+import processing.core.PImage;
 import processing.core.PVector;
 
 import java.util.ArrayList;
 
 public class UI extends Manager implements Drawable {
+    public final float[] lanes = {140, 327, 515};
+    public ArrayList<PImage> cars;
     public Window window;
     private ArrayList<EnemyCar> traffic;
     public Player player;
@@ -14,36 +17,53 @@ public class UI extends Manager implements Drawable {
     private float slowedEnemyCarSpeed = 1.6F;
     public Path path;
     public Game game;
-    private final int TOP_LANE = 140;
+    public Button button;
+    public final int TOP_LANE = 140;
     private final int MIDDLE_LANE = 327;
-    private final int BOTTOM_LANE = 515;
-    private final float MOVE_NUM = 187.5F;
+    public final int BOTTOM_LANE = 515;
+    public final float MOVE_NUM = 187.5F;
 
     public UI(Window scene) {
         super();
         this.window = scene;
         path = new Path(scene);
         player = new Player(new PVector(window.width / 5, 400), this.window, playerWidth, playerHeight);
-        player.lives = 3;
         traffic = new ArrayList<EnemyCar>();
         game = Game.getInstance();
-        // Spawn initial enemy cars
-        int carsPerLane = 2; // Adjust this value to control the number of cars per lane
-        float carSpeed = 2.0f; // Set a constant speed for all cars
+        cars = new ArrayList<>();
+        button = new Button(this.window, this);
+        loadCarImages();
+        spawnCars(traffic);
+    }
+    private void spawnCars(ArrayList<EnemyCar> traffic) {
+        int numCars = 2;
+        int numLanes = lanes.length;
+        float carSpacing = window.width / numCars;
 
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < carsPerLane; j++) {
-                float size = 75;
-                float initialOffset = j * (window.width / carsPerLane);
-                EnemyCar enemyCar = new EnemyCar(i, random(carSpeed, 2.8F), size, initialOffset, this.window);
-                traffic.add(enemyCar);
+        for (int i = 0; i < numCars; i++) {
+            for (int j = 0; j < numLanes; j++) {
+                float carWidth = 140;
+                float carHeight = 75;
+                float carSpeed = (float) (Math.random() * 8 + 7);
+                float xPos = i * carSpacing + carWidth / 2 + (carSpacing / 2 * j);
+                EnemyCar car = new EnemyCar(new PVector(xPos, lanes[j]), this.window, carWidth, carHeight, carSpeed, cars);
+                traffic.add(car);
             }
         }
     }
 
-    int targetPosition = 327;
-    int currentPosition = 125;
-    int animationFrames = 25; // number of frames to complete the animation
+    private void loadCarImages() {
+        for (int i = 1; i <= 5; i++) {
+            PImage carImage = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/carImage" + i + ".png");
+            cars.add(carImage);
+        }
+    }
+
+
+    public void keyPressed() {
+        player.handleKeyPress(keyCode);
+    }
+
     @Override
     public void draw() {
         if (window.playing == false) {
@@ -59,58 +79,19 @@ public class UI extends Manager implements Drawable {
             window.rect(0, 100, 1280, -500); // bottom of the border
             window.fill(255);
             game.start(); // Start the Timer
+            player.draw();
+            path.drawLines();
+            button.move(player);
+
+            displayHealth();
             displayScore();
             displayHighScore();
-            if (currentPosition != targetPosition) {
-                float delta = (targetPosition - currentPosition) / (float) animationFrames;
-                currentPosition += delta;
-            }
-            player.setPosition(player.getPosition().x, currentPosition);
-            player.drawPlayer(player.getPosition().x, currentPosition);
-            displayHealth();
-            if (window.keyPressed && !keyPressed) {
-                keyPressed = true;
-                switch(window.keyCode) {
-                    case UP:
-                        if (targetPosition - MOVE_NUM > TOP_LANE) {
-                            targetPosition -= MOVE_NUM;
-                        } else {
-                            targetPosition = TOP_LANE;
-                        } break;
-                    case DOWN:
-                        if (targetPosition + MOVE_NUM < BOTTOM_LANE) {
-                            targetPosition += MOVE_NUM;
-                        } else {
-                            targetPosition = BOTTOM_LANE;
-                            System.out.println(targetPosition);
-                        } break;
-                    case LEFT:
-                        /**
-                         * TODO: make this a CLICK + HOLD case for a maximum of 4 seconds
-                         */
-                        if (path.getSpeed() > 3) {
-                            path.setSpeed(path.getSpeed() - 1);
-                        } break;
-                    case RIGHT:
-                        /**
-                         * TODO: make this a CLICK + HOLD case for a maximum of 4 seconds
-                         */
-                        if (path.getSpeed() == 3) {
-                            path.setSpeed(path.getSpeed() + 1);
-                        } break;
-                }
-            } else if (!window.keyPressed) {
-                keyPressed = false;
-            }
+
             for (EnemyCar enemyCar : traffic) {
-                enemyCar.update(player);
-                enemyCar.display();
-                /**
-                 * TODO: write slowdown logic relative to the path speed
-                 */
+                enemyCar.update();
+                enemyCar.draw();
                 player.check(enemyCar, this);
             }
-            path.drawLines();
             if (path.getSpeed() == 3) {
                 window.fill(255, 255, 255);
                 window.textFont(window.mediumFont);
@@ -150,25 +131,13 @@ public class UI extends Manager implements Drawable {
         window.fill(255, 0, 0);
         window.textFont(window.mediumFont);
         window.textAlign(CENTER);
-        window.text("GAME OVER", (window.width / 2), 200);
+        window.text("TOTALED", (window.width / 2), 200);
         window.rect((window.width / 2) - 280, 400, 560, 75);
         window.textAlign(CENTER);
         window.fill(0);
         window.textFont(window.smallFont);
         window.text("PLAY AGAIN", (window.width / 2), 455);
-        if (window.mouseX > ((window.width / 2) - 280) && window.mouseX < (window.width / 2) + 280
-                && window.mouseY > 400 && window.mouseY < 475) {
-            window.fill(150, 0, 0);
-            window.rect((window.width / 2) - 280, 400, 560, 75);
-            window.textAlign(CENTER);
-            window.fill(0);
-            window.textFont(window.smallFont);
-            window.text("PLAY AGAIN", (window.width / 2), 455);
-            if (window.mousePressed) { // when play button is pressed
-                window.playing = true;
-                window.init();
-            }
-        }
+        button.restart();
     }
 
     public void menu() {
@@ -189,19 +158,7 @@ public class UI extends Manager implements Drawable {
         window.fill(0);
         window.textFont(window.mediumFont);
         window.text("PLAY", window.width / 2, 535);
-        if (window.mouseX > ((window.width / 2) - 150) && window.mouseX < ((window.width / 2)) + 150
-                && window.mouseY > 450 && window.mouseY < 575) {
-            window.fill(0, 0, 255);
-            window.rect( (window.width / 2) - 150, 450, 300, 125);
-            window.textAlign(CENTER);
-            window.fill(255,255,255);
-            window.textFont(window.mediumFont);
-            window.text("PLAY", window.width / 2, 535);
-            if (window.mousePressed) { // when play button is pressed
-                window.playing = true;
-                this.draw();
-            }
-        }
+        button.play();
     }
 
 

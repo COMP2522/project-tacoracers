@@ -4,49 +4,27 @@ import org.bcit.comp2522.dui.ui.UI;
 import processing.core.PImage;
 import processing.core.PVector;
 
+
 /**
  * Player represents the movable car in the world.
  * Lives, position and sizing properties are kept.
  *
  * @author Eric Tatchell
  */
-public class Player extends Sprite {
+public class Player extends Sprite implements Collidable {
     public boolean playerDeath;
-    private PVector position;
-    private Window window;
     public int lives = 3;
-    private float playerWidth;
-    private float playerHeight;
     public PImage heart;
     public PImage heartLost;
 
     public Player(PVector position, Window window, float playerWidth, float playerHeight) {
-        super(position, window);
-        this.playerWidth = playerWidth;
-        this.playerHeight = playerHeight;
+        super(position, window, playerWidth, playerHeight);
         this.playerDeath = false;
+        this.lives = 3;
         heart = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/heart.png");
         heartLost = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/heartLost.png");
     }
 
-    public boolean collide(EnemyCar enemyCar) {
-        float playerLeft = getPosition().x;
-        float playerRight = getPosition().x + playerWidth;
-        float playerTop = getPosition().y;
-        float playerBottom = getPosition().y + playerHeight;
-        float enemyCarLeft = enemyCar.getPosition().x;
-        float enemyCarRight = enemyCar.getPosition().x + ((enemyCar.size * 2) - 10);
-        float enemyCarTop = enemyCar.getPosition().y;
-        float enemyCarBottom = enemyCar.getPosition().y + enemyCar.size;
-
-        if (playerRight >= enemyCarLeft
-                && playerLeft <= enemyCarRight
-                && (playerTop <= enemyCarBottom && playerBottom >= enemyCarTop
-                || playerBottom >= enemyCarTop && playerTop <= enemyCarBottom)) {
-            return true;
-        }
-        return false;
-    }
 
     public void check(EnemyCar enemyCar, UI ui) {
         if (collide(enemyCar) && lives <= 3) {
@@ -58,4 +36,36 @@ public class Player extends Sprite {
             }
         }
     }
+
+    public void handleKeyPress(int keyCode) {
+        switch (keyCode) {
+            case UP:
+                setPosition(getPosition().x, lerp(getPosition().y, getPosition().y - 6, 1F));
+                break;
+            case DOWN:
+                setPosition(getPosition().x, lerp(getPosition().y, getPosition().y + 6, 1F));
+                System.out.println("here");
+                break;
+        }
+    }
+
+
+
+
+    @Override
+    public void draw() {
+        window.image(playerImage, getPosition().x, getPosition().y, width, height);
+    }
+
+    @Override
+    public boolean collide(EnemyCar enemyCar) {
+        float minDistanceX = (width / 2) + (enemyCar.getWidth() / 2);
+        float minDistanceY = (height / 2) + (enemyCar.getHeight() / 2);
+        if (Math.abs(position.x - enemyCar.getPosition().x) < minDistanceX
+                && Math.abs(position.y - enemyCar.getPosition().y) < minDistanceY) {
+            return true;
+        }
+        return false;
+    }
+
 }
