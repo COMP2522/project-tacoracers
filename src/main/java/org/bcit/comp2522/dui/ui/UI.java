@@ -47,6 +47,9 @@ public class UI extends Manager implements Drawable {
             }
         }
     }
+    public void update(UI ui) {
+        player.keyInput.update();
+    }
 
     private void loadCarImages() {
         for (int i = 1; i <= 5; i++) {
@@ -78,8 +81,8 @@ public class UI extends Manager implements Drawable {
                 enemyCar.update();
                 enemyCar.draw();
                 player.check(enemyCar, this);
-                player.update(this);
             }
+            player.keyInput.update();
         }
     }
 

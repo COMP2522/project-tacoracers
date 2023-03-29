@@ -23,7 +23,9 @@ public class Manager extends PApplet {
     // sprite here. arraylist? player? change later
   }
   public Manager() {}
-
+  public UI getUI() {
+    return ui;
+  }
   public void run() {
     ui.init();
     // some shit with sprites idk yet

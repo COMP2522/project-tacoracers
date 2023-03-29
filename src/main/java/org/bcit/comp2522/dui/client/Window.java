@@ -1,10 +1,8 @@
 package org.bcit.comp2522.dui.client;
 
+import org.bcit.comp2522.dui.ui.UI;
 import processing.core.PApplet;
 import processing.core.PFont;
-import processing.core.PImage;
-
-import java.util.ArrayList;
 
 /**
  * Window creates the actual window and Manager runs the game.
@@ -32,21 +30,18 @@ public class Window extends PApplet {
         musicPlayer.play();
 
     }
-
     @Override
     public void keyPressed() {
         if (this.playing == true) {
-            manager.ui.player.pressedKeys.add(manager.ui.window.keyCode);
+            player.keyInput.handleKeyEvent(keyCode, true);
         }
     }
-
     @Override
     public void keyReleased() {
         if (this.playing == true) {
-            manager.ui.player.pressedKeys.remove(manager.ui.window.keyCode);
+            player.keyInput.handleKeyEvent(keyCode, false);
         }
     }
-
 
 
 
