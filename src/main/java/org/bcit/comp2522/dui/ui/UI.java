@@ -25,7 +25,7 @@ public class UI extends Manager implements Drawable {
         path = new Path(scene);
         player = new Player(new PVector(window.width / 5, 327), this.window, playerWidth, playerHeight);
         traffic = new ArrayList<EnemyCar>();
-        game = Game.getInstance();
+        game = Game.getInstance(window);
         cars = new ArrayList<>();
         button = new Button(this.window, this);
         loadCarImages();
@@ -54,8 +54,6 @@ public class UI extends Manager implements Drawable {
             cars.add(carImage);
         }
     }
-
-
 
     @Override
     public void draw() {
@@ -86,14 +84,28 @@ public class UI extends Manager implements Drawable {
     public void gameOver() {
         window.playing = false;
         game.updateHighScore();
-        game.resetScore();
         window.background(0);
+
+        // Totaled Message
         window.fill(255, 0, 0);
         window.textFont(window.mediumFont);
         window.textAlign(CENTER);
         window.text("TOTALED", (window.width / 2), 200);
-        window.rect((window.width / 2) - 280, 400, 560, 75);
+        //window.rect((window.width / 2) - 280, 400, 560, 75);
+        //window.textAlign(CENTER);
+
+        // Score
+        window.fill(255, 255, 255);
+        window.textFont(window.smallFont);
         window.textAlign(CENTER);
+        String scoreDisplay = String.format("Your Score: %d", game.score);
+        window.text(scoreDisplay, (window.width / 2), 0);
+        System.out.println(scoreDisplay);
+
+        // Play Again
+        window.fill(255, 255, 255);
+        window.textAlign(CENTER);
+        window.rect((window.width / 2) - 280, 400, 560, 75);
         window.fill(0);
         window.textFont(window.smallFont);
         window.text("PLAY AGAIN", (window.width / 2), 455);

@@ -45,7 +45,6 @@ public class Player extends Sprite implements Collidable {
                     if (getPosition().y < 515) {
                         setPosition(getPosition().x, lerp(getPosition().y,
                                 getPosition().y + 6, getPlayerSpeed()));
-                        System.out.println("here");
                     } break;
                 case LEFT:
                     path.setSpeed(10);

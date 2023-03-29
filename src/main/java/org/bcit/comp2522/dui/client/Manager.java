@@ -18,7 +18,7 @@ public class Manager extends PApplet {
   public Manager(Window scene) {
     this.window = scene;
     ui = new UI(scene);
-    game = Game.getInstance(); // CHANGE WITH NECESSARY PARAMS
+    game = Game.getInstance(window); // CHANGE WITH NECESSARY PARAMS
 //    keyInput = new KeyInput(scene, ui.player);
     // sprite here. arraylist? player? change later
   }

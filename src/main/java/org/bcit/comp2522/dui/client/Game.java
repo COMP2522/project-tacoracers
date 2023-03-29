@@ -26,7 +26,8 @@ public class Game {
 
   Timer scoreTimer;
 
-  private Game() {
+  private Game(Window window) {
+    this.window = window;
     scoreTimer = new Timer(100, new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         updateScore();
@@ -52,9 +53,9 @@ public class Game {
   }
 
   // Static method to create instance of Singleton class
-  public static Game getInstance() {
+  public static Game getInstance(Window window) {
     if (theGame == null) {
-      theGame = new Game();
+      theGame = new Game(window);
     }
     return theGame;
   }
@@ -65,7 +66,9 @@ public class Game {
 
 
   public void updateScore() {
-    score += scoreIncrement; // Increment the score by the scoreIncrement amount
+    if (window.playing) {
+      score += scoreIncrement; // Increment the score by the scoreIncrement amount
+    }
   }
   public void updateHighScore() {
     if (score > highScore) {

@@ -7,9 +7,11 @@ import processing.event.*;
 public class Button extends PApplet {
     private Window window;
     private UI ui;
+    private Game game;
     public Button(Window window, UI ui) {
         this.window = window;
         this.ui = ui;
+        this.game = Game.getInstance(window);
     }
     public void restart() {
         if (window.mouseX > ((window.width / 2) - 280) && window.mouseX < (window.width / 2) + 280
@@ -22,6 +24,8 @@ public class Button extends PApplet {
             window.text("PLAY AGAIN", (window.width / 2), 455);
             if (window.mousePressed) { // when play button is pressed
                 window.playing = true;
+                this.game = Game.getInstance(window);
+                game.resetScore();
                 window.init();
             }
         }
@@ -33,7 +37,7 @@ public class Button extends PApplet {
             window.fill(0, 0, 255);
             window.rect( (window.width / 2) - 150, 450, 300, 125);
             window.textAlign(window.CENTER);
-            window.fill(255,255,255);
+            window.fill(255, 255, 255);
             window.textFont(window.mediumFont);
             window.text("PLAY", window.width / 2, 535);
             if (window.mousePressed) { // when play button is pressed
