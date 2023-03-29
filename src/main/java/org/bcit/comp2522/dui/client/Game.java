@@ -1,5 +1,7 @@
 package org.bcit.comp2522.dui.client;
 
+import org.bson.Document;
+
 import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,6 +21,7 @@ public class Game {
   public long highScore = 0;
   public long score = 0;
   public int scoreIncrement = 10; // Score increment amount in each timer tick
+  public String name = "Barack Obama"; // Temporary variable until user is able to input their name
 
   Window window;
   // initial variables to work with, both for displaying and tracking score
@@ -70,7 +73,7 @@ public class Game {
   public void updateHighScore() {
     if (score > highScore) {
       highScore = score; // if the user beats the previous high score, their score becomes the new high score
-//      saveHighScoreToFile(); // saves the new high score to the database
+      saveHighScoreToFile(); // saves the new high score to the database
     }
   }
 
@@ -82,10 +85,9 @@ public class Game {
     return 0;
   }
 
-  void saveHighScoreToFile() {
+  DatabaseHandler dbh = new DatabaseHandler("pavanbrar73", "KFmJyFJrTM6Dd7c2");
+  public void saveHighScoreToFile() {
+    dbh.put("name", name, "score", highScore);
   }
 
-  public static void main(String[] args) {
-
-  }
 }
