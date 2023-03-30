@@ -1,10 +1,8 @@
 package org.bcit.comp2522.dui.client;
 
+import org.bcit.comp2522.dui.ui.ContentLoader;
 import processing.core.PApplet;
 import processing.core.PFont;
-import processing.core.PImage;
-
-import java.util.ArrayList;
 
 /**
  * Window creates the actual window and Manager runs the game.
@@ -12,58 +10,37 @@ import java.util.ArrayList;
  * @author Eric Tatchell
  */
 public class Window extends PApplet {
-    public Player player;
-    public PFont bigFont;
-    public PFont smallFont;
-    public PFont mediumFont;
-    public PFont tinyFont;
-    public boolean playing = false;
-    protected int gameMode;
     private Manager manager;
-
-    private MusicPlayer musicPlayer;
-    public boolean menu1Active = true;
-    public boolean menu2Active = false;
-
-
+    MusicPlayer musicPlayer;
     public void settings() {
         size(1280,600);
     }
 
     public void setup() {
-        this.init();
         musicPlayer = new MusicPlayer("src/main/java/org/bcit/comp2522/dui/content/Team America - America, Fck Yeah! (Lyrics).wav");
         musicPlayer.play();
-
+        manager = new Manager();
+        manager.contentLoader.load();
+        manager.contentLoader.loadFonts(this);
+        manager.run(this);
+        background(0);
     }
 
     @Override
     public void keyPressed() {
-        if (this.playing == true) {
-            manager.ui.player.pressedKeys.add(manager.ui.window.keyCode);
+        if (manager.screenState == 0) { // playing
+            manager.keyInput.pressedKeys.add(this.keyCode);
         }
     }
 
     @Override
     public void keyReleased() {
-        if (this.playing == true) {
-            manager.ui.player.pressedKeys.remove(manager.ui.window.keyCode);
+        if (manager.screenState == 0) { // playing
+            manager.keyInput.pressedKeys.remove(this.keyCode);
         }
     }
-
-
-
-
-    public void init() {
-        bigFont = createFont("src/main/java/org/bcit/comp2522/dui/content/PublicPixel-z84yD.ttf", 150, true);
-        smallFont = createFont("src/main/java/org/bcit/comp2522/dui/content/PublicPixel-z84yD.ttf", 48, true);
-        mediumFont = createFont("src/main/java/org/bcit/comp2522/dui/content/PublicPixel-z84yD.ttf", 64, true);
-        tinyFont = createFont("src/main/java/org/bcit/comp2522/dui/content/PublicPixel-z84yD.ttf", 24, true);
-        manager = new Manager(this);
-        background(0);
-    }
     public void draw() {
-        manager.run();
+        manager.ui.init();
     }
 
     public static void main(String[] passedArgs) {

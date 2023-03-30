@@ -13,6 +13,17 @@ public class Elements {
     this.loader = loader;
     this.window = window;
   }
+  public void muteButton() {
+    window.image(manager.contentLoader.mute, 300, 25);
+    manager.button.mute();
+  }
+  public void muted() {
+    if (manager.muted) {
+      window.fill(0);
+      window.textFont(manager.contentLoader.tinyFont);
+      window.text("Muted!", 400, 25);
+    }
+  }
 
   public void displayScore() {
     window.textFont(manager.contentLoader.tinyFont);

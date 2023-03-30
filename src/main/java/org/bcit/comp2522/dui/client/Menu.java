@@ -9,8 +9,6 @@ public class Menu {
   }
 
   public void gameOver() {
-    manager.playing = false;
-    manager.keyInput.reset();
     manager.game.updateHighScore();
     manager.game.resetScore();
     window.background(0);

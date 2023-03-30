@@ -6,30 +6,42 @@ import processing.core.PVector;
 
 import java.util.ArrayList;
 
-public class UI extends Manager implements Drawable {
+public class UI implements Drawable {
     public final float[] lanes = {140, 327, 515};
     public ArrayList<PImage> cars;
-    public Window window;
     public ArrayList<EnemyCar> traffic;
     public Player player;
     public float playerWidth = 140;
     public float playerHeight = 75;
     private float slowedEnemyCarSpeed = 1.6F;
-    public Path path;
-    public Game game;
+    public Menu menu;
     public Button button;
+    public Manager manager;
+    public Elements elements;
+    private Window window;
 
-    public UI(Window scene) {
-        super();
+    public UI(Manager manager, ContentLoader loader, Window scene) {
+        this.manager = manager;
+        this.elements = new Elements(scene, manager, loader); // Keep this one
+        this.player = new Player(manager, scene, new PVector(scene.width / 5, 327), playerWidth, playerHeight);
+        this.traffic = new ArrayList<EnemyCar>();
+        this.cars = new ArrayList<>();
+        this.button = new Button(scene, manager);
+        this.menu = new Menu(manager, scene);
         this.window = scene;
-        path = new Path(scene);
-        player = new Player(new PVector(window.width / 5, 327), this.window, playerWidth, playerHeight);
-        traffic = new ArrayList<EnemyCar>();
-        game = Game.getInstance();
-        cars = new ArrayList<>();
-        button = new Button(this.window, this);
-        loadCarImages();
+        loader.loadCarImages(manager, cars);
         spawnCars(traffic);
+    }
+    public void uiElements() {
+        window.background(0);
+        manager.game.start();
+        elements.borders();
+        elements.displayScore();
+        elements.displayHighScore();
+        elements.muteButton();
+        player.displayHealth();
+        manager.path.drawLines();
+        player.draw();
     }
     private void spawnCars(ArrayList<EnemyCar> traffic) {
         int numCars = 2;
@@ -42,95 +54,51 @@ public class UI extends Manager implements Drawable {
                 float carHeight = 75;
                 float carSpeed = (float) (Math.random() * 8 + 7);
                 float xPos = i * carSpacing + carWidth / 2 + (carSpacing / 2 * j);
-                EnemyCar car = new EnemyCar(new PVector(xPos, lanes[j]), this.window, carWidth, carHeight, carSpeed, cars);
+                EnemyCar car = new EnemyCar(manager, window, new PVector(xPos, lanes[j]), carWidth, carHeight, carSpeed, cars);
                 traffic.add(car);
             }
         }
     }
-
-    private void loadCarImages() {
-        for (int i = 1; i <= 5; i++) {
-            PImage carImage = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/carImage" + i + ".png");
-            cars.add(carImage);
-        }
-    }
-
-
-
     @Override
     public void draw() {
-        if (window.playing == false) {
-            if (player.playerDeath) {
-                this.gameOver();
-            } else {
-                this.menu();
-            }
-        } else {
-            borders();
-            game.start();
-            path.drawLines();
-            player.draw();
-            player.displayHealth();
-            game.displayScore(window);
-            game.displayHighScore(window);
-
-            for (EnemyCar enemyCar : traffic) {
-                enemyCar.update();
-                enemyCar.draw();
-                player.check(enemyCar, this);
-                player.update(this);
-            }
+        switch (manager.screenState) {
+            case 0:
+                uiElements();
+                for (EnemyCar enemyCar : traffic) {
+                    enemyCar.update();
+                    enemyCar.draw();
+                    player.check(enemyCar);
+                    player.update(this);
+                }
+                break;
+            case 1:
+                menu.gameOver();
+                break;
+            case 2:
+                menu.main();
+                break;
+            case 3:
+                this.menu2();
+                break;
+            case 4:
+                this.carSelection();
+                break;
+            case 5:
+                menu.gameOver();
+                break;
+            case 6:
+                menu.gameOver();
+                break;
         }
     }
-
-
-    public void gameOver() {
-        window.playing = false;
-        game.updateHighScore();
-        game.resetScore();
-        window.background(0);
-        window.fill(255, 0, 0);
-        window.textFont(window.mediumFont);
-        window.textAlign(CENTER);
-        window.text("TOTALED", (window.width / 2), 200);
-        window.rect((window.width / 2) - 280, 400, 560, 75);
-        window.textAlign(CENTER);
-        window.fill(0);
-        window.textFont(window.smallFont);
-        window.text("PLAY AGAIN", (window.width / 2), 455);
-        button.restart();
-    }
-
-    public void menu() {
-        window.background(0);
-        window.fill(255);
-        window.textAlign(CENTER);
-        window.textFont(window.bigFont);
-        window.text("DUI", window.width / 2, 200);
-        window.fill(0, 0, 255);
-        window.textAlign(CENTER);
-        window.textFont(window.bigFont);
-        window.text("DUI", window.width / 2 + 10, 200 + 10);
-        window.fill(255);
-        window.textFont(window.smallFont);
-        window.text("Driving\nUnintelligently", window.width / 2, 300);
-        window.rect( (window.width / 2) - 150, 450, 300, 125);
-        window.textAlign(CENTER);
-        window.fill(0);
-        window.textFont(window.mediumFont);
-        window.text("PLAY", window.width / 2, 535);
-        button.play();
-    }
-
-
 
     public void menu2() {
         window.background(0);
 
 
         window.fill(255);
-        window.textAlign(CENTER);
-        window.textFont(window.mediumFont);
+        window.textAlign(window.CENTER);
+        window.textFont(manager.contentLoader.mediumFont);
         window.text("DUI", window.width / 2, 90);
 
         //Should take you to a page to select a car style
@@ -138,34 +106,32 @@ public class UI extends Manager implements Drawable {
         //car = medium
         //moto = easy
         window.fill(0, 0, 255);
-        window.textAlign(CENTER);
-        window.textFont(window.smallFont);
+        window.textAlign(window.CENTER);
+        window.textFont(manager.contentLoader.smallFont);
         window.text("Difficulty", window.width / 2 + 10, 100 + 100);
         button.diff();
 
         // Should take you to a page to select show you what car color your at
         // like skins but for cars that you unlock at certain scores
         window.fill(0, 0, 255);
-        window.textAlign(CENTER);
-        window.textFont(window.smallFont);
+        window.textAlign(window.CENTER);
+        window.textFont(manager.contentLoader.smallFont);
         window.text("Cars", window.width / 2 + 10, 100 + 200);
         button.cars();
 
         // Should take you to a page to show you the top 3-5 scores
         window.fill(0, 0, 255);
-        window.textAlign(CENTER);
-        window.textFont(window.smallFont);
+        window.textAlign(window.CENTER);
+        window.textFont(manager.contentLoader.smallFont);
         window.text("LeaderBoard", window.width / 2 + 10, 100 + 300);
         button.leaderboard();
 
         // Should take you to a page that asks if you really want to quit
         window.fill(0, 0, 255);
-        window.textAlign(CENTER);
-        window.textFont(window.smallFont);
+        window.textAlign(window.CENTER);
+        window.textFont(manager.contentLoader.smallFont);
         window.text("Quit", 900, 100 + 450);
         button.quit();
-
-
     }
 
        /*
@@ -180,33 +146,33 @@ public class UI extends Manager implements Drawable {
 
         //red car
         window.fill(255);
-        window.textAlign(CENTER);
-        window.textFont(window.mediumFont);
+        window.textAlign(window.CENTER);
+        window.textFont(manager.contentLoader.mediumFont);
         window.text("Car Rank", window.width / 2, 90);
 
         window.fill(255, 0, 0);
-        window.textAlign(CENTER);
-        window.textFont(window.smallFont);
+        window.textAlign(window.CENTER);
+        window.textFont(manager.contentLoader.smallFont);
         window.text("Red", 150, 450);
 
         //image
         window.fill(255, 0, 0);
         window.rect(100, 125, 100, 250);
-        car = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/playerImage.png");
+//        car = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/playerImage.png");
         //player.redCar();
 
         //select/locked
-        if (game.highScore >= 0) {
+        if (manager.game.highScore >= 0) {
             window.fill(255, 0, 0);
-            window.textAlign(CENTER);
-            window.textFont(window.smallFont);
+            window.textAlign(window.CENTER);
+            window.textFont(manager.contentLoader.smallFont);
             window.textSize(30);
             window.text("Select", 150, 525);
             button.red();
         } else {
             window.fill(255, 0, 0);
-            window.textAlign(CENTER);
-            window.textFont(window.smallFont);
+            window.textAlign(window.CENTER);
+            window.textFont(manager.contentLoader.smallFont);
             window.textSize(30);
             window.text("Locked", 150, 525);
         }
@@ -214,8 +180,8 @@ public class UI extends Manager implements Drawable {
 
         //yellow car
         window.fill(255, 0, 0);
-        window.textAlign(CENTER);
-        window.textFont(window.smallFont);
+        window.textAlign(window.CENTER);
+        window.textFont(manager.contentLoader.smallFont);
         window.text("yello", 475, 450);
 
         //image
@@ -223,26 +189,26 @@ public class UI extends Manager implements Drawable {
         window.rect(425, 125, 100, 250);
 
         //select/locked
-        if (game.highScore >= 1000) {
+        if (manager.game.highScore >= 1000) {
             window.fill(255, 0, 0);
-            window.textAlign(CENTER);
-            window.textFont(window.smallFont);
+            window.textAlign(window.CENTER);
+            window.textFont(manager.contentLoader.smallFont);
             window.textSize(30);
             window.text("Select", 475, 525);
             button.yellow();
             //player.yellowCar();
         } else {
             window.fill(255, 0, 0);
-            window.textAlign(CENTER);
-            window.textFont(window.smallFont);
+            window.textAlign(window.CENTER);
+            window.textFont(manager.contentLoader.smallFont);
             window.textSize(30);
             window.text("Locked", 475, 525);
         }
 
         //blue car
         window.fill(255, 0, 0);
-        window.textAlign(CENTER);
-        window.textFont(window.smallFont);
+        window.textAlign(window.CENTER);
+        window.textFont(manager.contentLoader.smallFont);
         window.text("Blue", 775, 450);
 
         //image
@@ -250,44 +216,44 @@ public class UI extends Manager implements Drawable {
         window.rect(725, 125, 100, 250);
 
         //select/locked
-        if (game.highScore >= 5000) {
+        if (manager.game.highScore >= 5000) {
             window.fill(255, 0, 0);
-            window.textAlign(CENTER);
-            window.textFont(window.smallFont);
+            window.textAlign(window.CENTER);
+            window.textFont(manager.contentLoader.smallFont);
             window.textSize(30);
             window.text("Select", 775, 525);
             button.blue();
             //player.BlueCar();
         } else {
             window.fill(255, 0, 0);
-            window.textAlign(CENTER);
-            window.textFont(window.smallFont);
+            window.textAlign(window.CENTER);
+            window.textFont(manager.contentLoader.smallFont);
             window.textSize(30);
             window.text("Locked", 775, 525);
         }
 
         //purple car
         window.fill(255, 0, 0);
-        window.textAlign(CENTER);
-        window.textFont(window.smallFont);
+        window.textAlign(window.CENTER);
+        window.textFont(manager.contentLoader.smallFont);
         window.text("Purple", 1075, 450);
 
         window.fill(255, 0, 0);
         window.rect(1025, 125, 100, 250);
 
         //select/locked
-        if (game.highScore >= 10000) {
+        if (manager.game.highScore >= 10000) {
             window.fill(255, 0, 0);
-            window.textAlign(CENTER);
-            window.textFont(window.smallFont);
+            window.textAlign(window.CENTER);
+            window.textFont(manager.contentLoader.smallFont);
             window.textSize(30);
             window.text("Select", 1075, 525);
             button.purple();
             //player.BlueCar();
         } else {
             window.fill(255, 0, 0);
-            window.textAlign(CENTER);
-            window.textFont(window.smallFont);
+            window.textAlign(window.CENTER);
+            window.textFont(manager.contentLoader.smallFont);
             window.textSize(30);
             window.text("Locked", 1075, 525);
             //player.GreenCar();

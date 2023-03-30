@@ -72,9 +72,9 @@ public class Game {
     return 0;
   }
 
-//  DatabaseHandler dbh = new DatabaseHandler("pavanbrar73", "KFmJyFJrTM6Dd7c2");
-//  public void saveHighScoreToFile() {
-//    dbh.put("name", name, "score", highScore);
-//  }
+  DatabaseHandler dbh = new DatabaseHandler("pavanbrar73", "KFmJyFJrTM6Dd7c2");
+  public void saveHighScoreToFile() {
+    dbh.put("name", name, "score", highScore);
+  }
 
 }

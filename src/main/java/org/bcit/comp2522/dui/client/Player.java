@@ -23,12 +23,12 @@ public class Player extends Sprite implements Collidable {
         this.playerDeath = false;
         this.lives = 3;
     }
-    public void check(EnemyCar enemyCar, Menu menu) {
+    public void check(EnemyCar enemyCar) {
         if (collide(enemyCar) && lives <= 3) {
             lives -= 1;
             enemyCar.setPosition(enemyCar.getPosition().x - 1000, 0);
             if (lives == -1) {
-                menu.gameOver();
+                manager.screenState = 1;
                 playerDeath = true;
             }
         }
