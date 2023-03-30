@@ -21,8 +21,9 @@ public class Sprite extends PApplet {
     protected float initialOffset;
     protected PVector position;
     protected Window window;
-    Player player;
+    static Player player;
     PImage playerImage;
+    static String path;
 
     /**
      * Sprite constructor intended for Players.
@@ -36,6 +37,30 @@ public class Sprite extends PApplet {
         this.height = height;
         playerImage = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/playerImage.png");
     }
+
+//    public static void chooseCarColor(String color) {
+//        switch (color) {
+//            case "red":
+//                player.setCarColor(color);
+//                path = "src/main/java/org/bcit/comp2522/dui/content/viper.png";
+//                break;
+//            case "blue":
+//                player.setCarColor(color);
+//                path = "src/main/java/org/bcit/comp2522/dui/content/blue.png";
+//                break;
+//            case "yellow":
+//                player.setCarColor(color);
+//                path = "src/main/java/org/bcit/comp2522/dui/content/lambo.png";
+//                break;
+//            case "purple":
+//                player.setCarColor(color);
+//                path = "src/main/java/org/bcit/comp2522/dui/content/Purp.png";
+//                break;
+//            default:
+//                System.out.println("Invalid color choice.");
+//        }
+//    }
+
     /**
      * Sprite constructor intended for EnemyCars.
      * @param position PVector
