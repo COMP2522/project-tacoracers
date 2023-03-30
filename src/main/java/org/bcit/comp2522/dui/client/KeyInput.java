@@ -40,6 +40,7 @@ public class KeyInput {
                 case LEFT:
                     path.setSpeed(10);
                     player.setSpeed(player.slowedPlayerSpeed);
+                    manager.game.scoreIncrement = 5;
                     window.fill(255, 255, 255);
                     window.textFont(manager.contentLoader.mediumFont);
                     window.text("SLOWED", (window.width / 4), 327);
@@ -49,6 +50,7 @@ public class KeyInput {
             if (keyCode == LEFT) {
                 path.setSpeed(20);
                 player.setSpeed(0.3F);
+                manager.game.scoreIncrement = 10;
             }
         }
     }

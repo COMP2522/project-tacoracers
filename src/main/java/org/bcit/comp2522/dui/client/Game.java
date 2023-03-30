@@ -19,6 +19,7 @@ public class Game {
   public long highScore = 0;
   public long score = 0;
   public int scoreIncrement = 10; // Score increment amount in each timer tick
+  public int delay = 100;
   public String name = "Barack Obama"; // Temporary variable until user is able to input their name
 
   Window window;
@@ -28,7 +29,7 @@ public class Game {
   Timer scoreTimer;
 
   private Game() {
-    scoreTimer = new Timer(100, new ActionListener() {
+    scoreTimer = new Timer(delay, new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         updateScore();
 //        System.out.println(score);
