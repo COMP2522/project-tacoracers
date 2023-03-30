@@ -20,8 +20,11 @@ public class Window extends PApplet {
     public boolean playing = false;
     protected int gameMode;
     private Manager manager;
-
     private MusicPlayer musicPlayer;
+    public boolean menu1Active = true;
+    public boolean menu2Active = false;
+
+
     public void settings() {
         size(1280,600);
     }
