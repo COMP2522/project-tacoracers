@@ -35,7 +35,7 @@ public class Sprite extends PApplet {
         this.window = window;
         this.width = width;
         this.height = height;
-        playerImage = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/viper.png");
+        playerImage = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/playerImage.png");
     }
 
 //    public static void chooseCarColor(String color) {

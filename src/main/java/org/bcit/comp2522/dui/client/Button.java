@@ -139,7 +139,7 @@ public class Button extends PApplet {
 
             if (window.mousePressed) {
 //                Player.setCarColor("red");
-                Sprite.chooseCarColor("red");
+//                Sprite.chooseCarColor("red");
 
             }
         }
@@ -161,7 +161,7 @@ public class Button extends PApplet {
 
             if (window.mousePressed) {
 //                Player.setCarColor("yellow");
-                Sprite.chooseCarColor("yellow");
+//                Sprite.chooseCarColor("yellow");
 
             }
         }
@@ -183,7 +183,7 @@ public class Button extends PApplet {
 
             if (window.mousePressed) {
 //                Player.setCarColor("blue");
-                Sprite.chooseCarColor("blue");
+//                Sprite.chooseCarColor("blue");
 
             }
         }
@@ -205,7 +205,7 @@ public class Button extends PApplet {
 
             if (window.mousePressed) {
 //                Player.setCarColor("purple");
-                Sprite.chooseCarColor("purple");
+//                Sprite.chooseCarColor("purple");
             }
         }
 

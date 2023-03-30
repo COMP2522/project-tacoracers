@@ -144,8 +144,8 @@ public class Player extends Sprite implements Collidable {
     }
 
 
-
-    public void draw(PImage playerImage) {
+    @Override
+    public void draw() {
         window.image(playerImage, getPosition().x, getPosition().y, width, height);
     }
 

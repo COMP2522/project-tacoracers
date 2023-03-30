@@ -65,7 +65,7 @@ public class UI extends Manager implements Drawable {
                 this.gameOver();
             } else {
                 if (window.menu1Active) {
-                    this.carSelection();
+                    this.menu();
                 } else if (window.menu2Active) {
                     this.menu2();
                 }
