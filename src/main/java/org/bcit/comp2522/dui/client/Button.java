@@ -20,6 +20,9 @@ public class Button {
             if (window.mousePressed) { // when play button is pressed
                 manager.screenState = 0;
                 manager.ui.player.lives = 3;
+                manager.game.updateHighScore();
+                manager.game.resetScore();
+                manager.game.resumeScore();
                 manager.ui.init();
             }
         }

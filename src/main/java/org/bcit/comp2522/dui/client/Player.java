@@ -29,7 +29,6 @@ public class Player extends Sprite implements Collidable {
             enemyCar.setPosition(enemyCar.getPosition().x - 1000, 0);
             if (lives == -1) {
                 manager.screenState = 1;
-                playerDeath = true;
             }
         }
     }

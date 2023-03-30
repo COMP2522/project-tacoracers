@@ -72,6 +72,7 @@ public class UI implements Drawable {
                 }
                 break;
             case 1:
+                manager.game.stopScore();
                 menu.gameOver();
                 break;
             case 2:

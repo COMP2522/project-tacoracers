@@ -5,9 +5,6 @@ public class Menu {
   private Window window;
   String scoreDisplay;
   String highScoreDisplay;
-  boolean wasOn = true;
-  int timer = 60;
-  private static final int RESET_TIMER = 60;
   public Menu(Manager manager, Window scene) {
     this.manager = manager;
     this.window = scene;
@@ -198,18 +195,23 @@ public class Menu {
 
 
   public void gameOver() {
+    window.background(0);
     scoreDisplay = String.format("Your score: %d", manager.game.score);
     System.out.println(scoreDisplay);
 
     if (manager.game.score > manager.game.highScore) {
       highScoreDisplay = "New High Score!";
-      System.out.println(highScoreDisplay);
+      window.fill(255, 255, 0);
+      window.textFont(manager.contentLoader.smallFont);
+      window.textAlign(window.CENTER);
+      window.text(highScoreDisplay, (window.width / 2), 275);
     } else {
       highScoreDisplay = "";
     }
-    manager.game.updateHighScore();
-    manager.game.resetScore();
-    window.background(0);
+    window.fill(255, 255, 255);
+    window.textFont(manager.contentLoader.smallFont);
+    window.textAlign(window.CENTER);
+    window.text(scoreDisplay, (window.width / 2), 350);
 
     // Totaled
     window.fill(255, 0, 0);
@@ -224,28 +226,8 @@ public class Menu {
     window.textFont(manager.contentLoader.smallFont);
     window.text("PLAY AGAIN", (window.width / 2), 455);
     manager.button.restart();
-
-    // New High Score Display
-    if (wasOn) {
-      window.fill(255, 255, 0);
-      window.textFont(manager.contentLoader.smallFont);
-      window.textAlign(window.CENTER);
-      window.text(highScoreDisplay, (window.width / 2), 275);
-      if (timer == 0) {
-        wasOn = false;
-        timer = RESET_TIMER;
-      } else {
-        timer--;
-      }
-    } else {
-      if (timer == 0) {
-        wasOn = true;
-        timer = RESET_TIMER;
-      } else {
-        timer--;
-      }
-    }
   }
+
   public void main() {
     window.background(0);
     window.fill(255);

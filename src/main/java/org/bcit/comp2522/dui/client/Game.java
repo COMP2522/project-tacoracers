@@ -54,7 +54,12 @@ public class Game {
     highScore = loadHighScoreFromFile(); // load high score from database
   }
 
-
+  public void stopScore() {
+    scoreIncrement = 0;
+  }
+  public void resumeScore() {
+    scoreIncrement = 10;
+  }
   public void updateScore() {
     score += scoreIncrement; // Increment the score by the scoreIncrement amount
   }
