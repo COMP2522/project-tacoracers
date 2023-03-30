@@ -19,6 +19,7 @@ public class Button {
             window.text("PLAY AGAIN", (window.width / 2), 455);
             if (window.mousePressed) { // when play button is pressed
                 manager.playing = true;
+                manager.ui.player.lives = 3;
                 manager.ui.init();
             }
         }

@@ -1,6 +1,7 @@
 package org.bcit.comp2522.dui.ui;
 
 import org.bcit.comp2522.dui.client.Manager;
+import org.bcit.comp2522.dui.client.Window;
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PImage;
@@ -15,8 +16,10 @@ public class ContentLoader extends PApplet {
   public PFont bigFont;
   public PFont smallFont;
   public PFont mediumFont;
-  PFont tinyFont;
-  public ContentLoader() {  }
+  public PFont tinyFont;
+
+  public ContentLoader() {
+  }
 
   public void load() {
     playerImage = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/playerImage.png"));
@@ -25,11 +28,11 @@ public class ContentLoader extends PApplet {
     roadLine = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/roadline.png"));
   }
 
-  public void loadFonts(PApplet pApplet) {
-    bigFont = pApplet.createFont(sketchPath("src/main/java/org/bcit/comp2522/dui/content/PublicPixel-z84yD.ttf"), 150, true);
-    smallFont = pApplet.createFont(sketchPath("src/main/java/org/bcit/comp2522/dui/content/PublicPixel-z84yD.ttf"), 48, true);
-    mediumFont = pApplet.createFont(sketchPath("src/main/java/org/bcit/comp2522/dui/content/PublicPixel-z84yD.ttf"), 64, true);
-    tinyFont = pApplet.createFont(sketchPath("src/main/java/org/bcit/comp2522/dui/content/PublicPixel-z84yD.ttf"), 24, true);
+  public void loadFonts(PApplet p) {
+    bigFont = p.createFont(sketchPath("src/main/java/org/bcit/comp2522/dui/content/PublicPixel-z84yD.ttf"), 150, true);
+    smallFont = p.createFont(sketchPath("src/main/java/org/bcit/comp2522/dui/content/PublicPixel-z84yD.ttf"), 48, true);
+    mediumFont = p.createFont(sketchPath("src/main/java/org/bcit/comp2522/dui/content/PublicPixel-z84yD.ttf"), 64, true);
+    tinyFont = p.createFont(sketchPath("src/main/java/org/bcit/comp2522/dui/content/PublicPixel-z84yD.ttf"), 24, true);
   }
 
   void loadCarImages(Manager manager, ArrayList<PImage> cars) {

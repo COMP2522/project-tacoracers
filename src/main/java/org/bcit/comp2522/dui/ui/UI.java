@@ -35,12 +35,12 @@ public class UI implements Drawable {
     public void uiElements() {
         window.background(0);
         manager.game.start();
-        manager.path.drawLines();
         elements.borders();
         elements.displayScore();
         elements.displayHighScore();
-        player.draw();
         player.displayHealth();
+        manager.path.drawLines();
+        player.draw();
     }
     private void spawnCars(ArrayList<EnemyCar> traffic) {
         int numCars = 2;
@@ -72,7 +72,7 @@ public class UI implements Drawable {
                 enemyCar.update();
                 enemyCar.draw();
                 player.check(enemyCar, menu);
-//                player.update(this);
+                player.update(this);
             }
         }
     }

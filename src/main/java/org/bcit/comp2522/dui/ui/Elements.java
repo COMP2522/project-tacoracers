@@ -15,13 +15,13 @@ public class Elements {
   }
 
   public void displayScore() {
-    window.textFont(loader.tinyFont);
+    window.textFont(manager.contentLoader.tinyFont);
     window.textAlign(manager.LEFT);
     window.fill(0, 0, 255);
     window.text("Score: " + manager.game.score, 850, 75); // display the score at position (, )
   }
   public void displayHighScore() {
-    window.textFont(loader.tinyFont);
+    window.textFont(manager.contentLoader.tinyFont);
     window.textAlign(manager.LEFT);
     window.fill(0, 0, 255);
     window.text("High Score: " + manager.game.highScore, 850, 45); // display the high score at position (, )

@@ -15,13 +15,15 @@ public class Manager extends PApplet {
   public Button button;
   public Path path;
   public ContentLoader contentLoader;
+  public KeyInput keyInput;
   public boolean playing = false;
   public Manager() {
     contentLoader = new ContentLoader();
   }
   public void run(Window scene) {
+    path = new Path(this, scene); // Move this line before the UI initialization
     ui = new UI(this, contentLoader, scene);
-    path = new Path(this, scene);
+    keyInput = new KeyInput(scene, ui.player, this);
     game = Game.getInstance();
     button = new Button(scene, this);
     ui.init();

@@ -38,20 +38,20 @@ public class EnemyCar extends Sprite implements Drawable {
 
 
     public void update() {
-        this.position.x -= getSpeed();
-        if (this.position.x < -getWidth()) {
+        position.x -= getSpeed();
+        if (position.x < -getWidth()) {
             float offset = (float) (Math.random() * window.width * 0.5);
-            this.position.x = window.width + getWidth() + offset;
+            position.x = window.width + getWidth() + offset;
             int laneIndex = (int) (Math.random() * lanes.length);
-            this.position.y = lanes[laneIndex];
-            // Remove pickCar() from here
+            position.y = lanes[laneIndex];
         }
     }
 
 
+
     @Override
     public void draw() {
-        window.image(this.car, this.position.x, this.position.y, this.width, this.height);
+        window.image(car, position.x, position.y, width, height);
     }
 }
 

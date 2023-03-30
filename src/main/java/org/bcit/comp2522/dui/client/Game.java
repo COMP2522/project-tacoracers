@@ -60,7 +60,7 @@ public class Game {
   public void updateHighScore() {
     if (score > highScore) {
       highScore = score; // if the user beats the previous high score, their score becomes the new high score
-      saveHighScoreToFile(); // saves the new high score to the database
+//      saveHighScoreToFile(); // saves the new high score to the database
     }
   }
 
@@ -72,9 +72,9 @@ public class Game {
     return 0;
   }
 
-  DatabaseHandler dbh = new DatabaseHandler("pavanbrar73", "KFmJyFJrTM6Dd7c2");
-  public void saveHighScoreToFile() {
-    dbh.put("name", name, "score", highScore);
-  }
+//  DatabaseHandler dbh = new DatabaseHandler("pavanbrar73", "KFmJyFJrTM6Dd7c2");
+//  public void saveHighScoreToFile() {
+//    dbh.put("name", name, "score", highScore);
+//  }
 
 }

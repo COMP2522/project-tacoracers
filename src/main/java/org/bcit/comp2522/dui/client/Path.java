@@ -8,7 +8,7 @@ import org.bcit.comp2522.dui.ui.UI;
  *
  * @author Eric Tatchell
  */
-public class Path implements Drawable {
+public class Path {
 
     private Window window;
     private Manager manager;
@@ -44,14 +44,10 @@ public class Path implements Drawable {
         // Draw the roadlines
         for (float linePosition : linePositions) {
             for (int i = 0; i < 4; i++) {
+                System.out.println("here");
                 window.image(manager.contentLoader.roadLine, linePosition + i * 180, 430);
                 window.image(manager.contentLoader.roadLine, linePosition + i * 180, 233);
             }
         }
-    }
-
-    @Override
-    public void draw() {
-
     }
 }

@@ -2,6 +2,7 @@ package org.bcit.comp2522.dui.client;
 
 import org.bcit.comp2522.dui.ui.ContentLoader;
 import processing.core.PApplet;
+import processing.core.PFont;
 
 /**
  * Window creates the actual window and Manager runs the game.
@@ -21,31 +22,41 @@ public class Window extends PApplet {
     public void setup() {
         musicPlayer = new MusicPlayer("src/main/java/org/bcit/comp2522/dui/content/Team America - America, Fck Yeah! (Lyrics).wav");
         musicPlayer.play();
-        init();
+        manager = new Manager();
+        manager.contentLoader.load();
+        manager.contentLoader.loadFonts(this);
+        manager.run(this); // Add this line to the setup method
+        background(0);
     }
+
 
     @Override
     public void keyPressed() {
         if (manager.playing == true) {
-            manager.ui.player.pressedKeys.add(this.keyCode);
+            manager.keyInput.pressedKeys.add(this.keyCode);
         }
     }
 
     @Override
     public void keyReleased() {
         if (manager.playing == true) {
-            manager.ui.player.pressedKeys.remove(this.keyCode);
+            manager.keyInput.pressedKeys.remove(this.keyCode);
         }
     }
 
-    public void init() {
-        manager = new Manager();
-        manager.contentLoader.load();
-        manager.contentLoader.loadFonts(this);
-        background(0);
-    }
+//    public void init() {
+//        manager = new Manager();
+//        manager.contentLoader.load();
+//        bigFont = createFont(sketchPath("src/main/java/org/bcit/comp2522/dui/content/PublicPixel-z84yD.ttf"), 150, true);
+//        smallFont = createFont(sketchPath("src/main/java/org/bcit/comp2522/dui/content/PublicPixel-z84yD.ttf"), 48, true);
+//        mediumFont = createFont(sketchPath("src/main/java/org/bcit/comp2522/dui/content/PublicPixel-z84yD.ttf"), 64, true);
+//        tinyFont = createFont(sketchPath("src/main/java/org/bcit/comp2522/dui/content/PublicPixel-z84yD.ttf"), 24, true);
+//
+////        manager.contentLoader.loadFonts();
+//        background(0);
+//    }
     public void draw() {
-        manager.run(this);
+        manager.ui.init();
     }
 
     public static void main(String[] passedArgs) {
