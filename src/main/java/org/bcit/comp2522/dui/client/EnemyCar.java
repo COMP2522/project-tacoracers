@@ -13,36 +13,37 @@ import static java.lang.Math.random;
  *
  * @authors Eric Tatchell, Jaskaran Toor
  */
-public class EnemyCar extends Sprite {
+public class EnemyCar extends Sprite implements Drawable {
     public final float[] lanes = {140, 170, 297, 327, 357, 485, 515};
     PImage car;
     private float originalSpeed;
     private ArrayList<PImage> carImages;
 
-    public EnemyCar(PVector position, Window window, float width, float height, float speed, ArrayList<PImage> carImages) {
-        super(position, window, width, height, speed);
+    public EnemyCar(Manager manager, Window window, PVector position, float width, float height, float speed, ArrayList<PImage> carImages) {
+        super(manager, window, position, width, height, speed);
         this.originalSpeed = speed;
         this.carImages = carImages;
-        pickCar();
+        this.car = pickCar();
     }
+
     public float getOriginalSpeed() {
         return originalSpeed;
     }
 
-    private void pickCar() {
+    private PImage pickCar() {
         int random = (int) (Math.random() * carImages.size());
         car = carImages.get(random);
+        return car;
     }
 
 
     public void update() {
-        this.position.x -= speed;
-
-        if (this.position.x < -this.width) {
+        position.x -= getSpeed();
+        if (position.x < -getWidth()) {
             float offset = (float) (Math.random() * window.width * 0.5);
-            this.position.x = window.width + this.width + offset;
+            position.x = window.width + getWidth() + offset;
             int laneIndex = (int) (Math.random() * lanes.length);
-            this.position.y = lanes[laneIndex];
+            position.y = lanes[laneIndex];
         }
     }
 
@@ -50,18 +51,8 @@ public class EnemyCar extends Sprite {
 
     @Override
     public void draw() {
-        window.image(car, this.position.x, this.position.y, this.width, this.height);
-    }
-
-    public PVector getPosition() {
-        return position.copy();
-    }
-
-    public float getWidth() {
-        return this.width;
-    }
-
-    public float getHeight() {
-        return this.height;
+        window.image(car, position.x, position.y, width, height);
     }
 }
+
+

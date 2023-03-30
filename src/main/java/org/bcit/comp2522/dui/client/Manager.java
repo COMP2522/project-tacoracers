@@ -1,8 +1,8 @@
 package org.bcit.comp2522.dui.client;
 
+import org.bcit.comp2522.dui.ui.ContentLoader;
 import org.bcit.comp2522.dui.ui.UI;
-import processing.core.PApplet;
-import processing.event.KeyEvent;
+import processing.core.*;
 
 /**
  * Manager class creates a UI and game instance
@@ -10,24 +10,37 @@ import processing.event.KeyEvent;
  * @author Eric Tatchell
  */
 public class Manager extends PApplet {
-  Window window;
-  UI ui;
-  Game game;
-  public Player player;
-//  public KeyInput keyInput;
-  public Manager(Window scene) {
-    this.window = scene;
-    ui = new UI(scene);
-    game = Game.getInstance(); // CHANGE WITH NECESSARY PARAMS
-//    keyInput = new KeyInput(scene, ui.player);
-    // sprite here. arraylist? player? change later
-  }
-  public Manager() {}
+  public UI ui;
+  public Game game;
+  public Button button;
+  public Path path;
+  public ContentLoader contentLoader;
+  public KeyInput keyInput;
+  public boolean muted;
 
-  public void run() {
+  /**
+   * screenState tracks the current state of the screen and which to show.
+   * 0: Playing
+   * 1: Game Over
+   * 2: Title Screen
+   * 3: Main Menu
+   * 4. Car Selection
+   * 5. Leaderboard
+   * 6. Difficulty
+   */
+  public int screenState;
+
+  public Manager() {
+    contentLoader = new ContentLoader();
+  }
+  public void run(Window scene) {
+    screenState = 2; // main menu
+
+    path = new Path(this, scene); // Move this line before the UI initialization
+    ui = new UI(this, contentLoader, scene);
+    keyInput = new KeyInput(scene, ui.player, this);
+    game = Game.getInstance();
+    button = new Button(scene, this);
     ui.init();
-    // some shit with sprites idk yet
   }
-
-
 }
