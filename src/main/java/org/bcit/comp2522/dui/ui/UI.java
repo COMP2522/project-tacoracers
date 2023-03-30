@@ -88,19 +88,68 @@ public class UI extends Manager implements Drawable {
         }
     }
 
+    String scoreDisplay;
+    String highScoreDisplay;
+    boolean wasOn = true;
+    int timer = 60;
+    private static final int RESET_TIMER = 60;
 
     public void gameOver() {
+        if (window.playing) {
+            scoreDisplay = String.format("Your score: %d", game.score);
+            System.out.println(scoreDisplay);
+
+            if (game.score > game.highScore) {
+                highScoreDisplay = "New High Score!!!";
+                System.out.println(highScoreDisplay);
+            } else {
+                highScoreDisplay = "";
+            }
+        }
         window.playing = false;
         game.updateHighScore();
         game.resetScore();
         window.background(0);
+
+        // Totaled
         window.fill(255, 0, 0);
         window.textFont(window.mediumFont);
         window.textAlign(CENTER);
-        window.text("TOTALED", (window.width / 2), 200);
+        window.text("TOTALED", (window.width / 2), 175);
+
+        // New High Score Display
+        if (wasOn) {
+            window.fill(255, 255, 0);
+            window.textFont(window.smallFont);
+            window.textAlign(CENTER);
+            window.text(highScoreDisplay, (window.width / 2), 275);
+            if (timer == 0) {
+                wasOn = false;
+                timer = RESET_TIMER;
+            } else {
+                timer--;
+            }
+        } else {
+            if (timer == 0) {
+                wasOn = true;
+                timer = RESET_TIMER;
+            } else {
+                timer--;
+            }
+        }
+
+
+        // Score Display
+        window.fill(255, 255, 255);
+        window.textFont(window.smallFont);
+        window.textAlign(CENTER);
+        window.text(scoreDisplay, (window.width / 2), 375);
+
+        // Play Again
+        window.fill(255, 255, 255);
         window.rect((window.width / 2) - 280, 400, 560, 75);
         window.textAlign(CENTER);
-        window.fill(0);
+        window.fill(0, 0 ,0);
         window.textFont(window.smallFont);
         window.text("PLAY AGAIN", (window.width / 2), 455);
         button.restart();
@@ -108,17 +157,25 @@ public class UI extends Manager implements Drawable {
 
     public void menu() {
         window.background(0);
+
+        // DUI Behind
         window.fill(255);
         window.textAlign(CENTER);
         window.textFont(window.bigFont);
         window.text("DUI", window.width / 2, 200);
+
+        // DUI Front
         window.fill(0, 0, 255);
         window.textAlign(CENTER);
         window.textFont(window.bigFont);
         window.text("DUI", window.width / 2 + 10, 200 + 10);
+
+        // Game Creators
         window.fill(255);
         window.textFont(window.smallFont);
         window.text("Driving\nUnintelligently", window.width / 2, 300);
+
+        // Play Button
         window.rect( (window.width / 2) - 150, 450, 300, 125);
         window.textAlign(CENTER);
         window.fill(0);

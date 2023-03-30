@@ -32,6 +32,31 @@ public class Player extends Sprite implements Collidable {
         heartLost = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/heartLost.png");
     }
 
+    public void handleKeyEvent(int keyCode, Path path, boolean keyDown) {
+        if (keyDown) {
+            switch (keyCode) {
+                case UP:
+                    if (getPosition().y > 100) {
+                        setPosition(getPosition().x, lerp(getPosition().y,
+                                getPosition().y - 6, getPlayerSpeed()));
+                    } break;
+                case DOWN:
+                    if (getPosition().y < 515) {
+                        setPosition(getPosition().x, lerp(getPosition().y,
+                                getPosition().y + 6, getPlayerSpeed()));
+                    } break;
+                case LEFT:
+                    path.setSpeed(10);
+                    setSpeed(slowedPlayerSpeed);
+                    window.fill(255, 255, 255);
+                    window.textFont(window.mediumFont);
+                    window.text("SLOWED", (window.width / 4), 327);
+                    break;
+            }
+        } else {
+            if (keyCode == LEFT) {
+                path.setSpeed(20);
+                setSpeed(0.3F);
 
     public void check(EnemyCar enemyCar, UI ui) {
         if (collide(enemyCar) && lives <= 3) {
@@ -40,6 +65,7 @@ public class Player extends Sprite implements Collidable {
             if (lives == -1) {
                 ui.gameOver();
                 playerDeath = true;
+
             }
         }
     }
