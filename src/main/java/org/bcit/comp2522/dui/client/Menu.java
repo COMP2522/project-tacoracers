@@ -3,26 +3,31 @@ package org.bcit.comp2522.dui.client;
 public class Menu {
   private Manager manager;
   private Window window;
+  String scoreDisplay;
+  String highScoreDisplay;
+  boolean wasOn = true;
+  int timer = 60;
+  private static final int RESET_TIMER = 60;
   public Menu(Manager manager, Window scene) {
     this.manager = manager;
     this.window = scene;
   }
 
-  public void gameOver() {
-    manager.game.updateHighScore();
-    manager.game.resetScore();
-    window.background(0);
-    window.fill(255, 0, 0);
-    window.textFont(manager.contentLoader.mediumFont);
-    window.textAlign(window.CENTER);
-    window.text("TOTALED", (window.width / 2), 200);
-    window.rect((window.width / 2) - 280, 400, 560, 75);
-    window.textAlign(window.CENTER);
-    window.fill(0);
-    window.textFont(manager.contentLoader.smallFont);
-    window.text("PLAY AGAIN", (window.width / 2), 455);
-    manager.button.restart();
-  }
+//  public void gameOver() {
+//    manager.game.updateHighScore();
+//    manager.game.resetScore();
+//    window.background(0);
+//    window.fill(255, 0, 0);
+//    window.textFont(manager.contentLoader.mediumFont);
+//    window.textAlign(window.CENTER);
+//    window.text("TOTALED", (window.width / 2), 200);
+//    window.rect((window.width / 2) - 280, 400, 560, 75);
+//    window.textAlign(window.CENTER);
+//    window.fill(0);
+//    window.textFont(manager.contentLoader.smallFont);
+//    window.text("PLAY AGAIN", (window.width / 2), 455);
+//    manager.button.restart();
+//  }
   public void menu2() {
     window.background(0);
 
@@ -191,6 +196,56 @@ public class Menu {
     }
   }
 
+
+  public void gameOver() {
+    scoreDisplay = String.format("Your score: %d", manager.game.score);
+    System.out.println(scoreDisplay);
+
+    if (manager.game.score > manager.game.highScore) {
+      highScoreDisplay = "New High Score!";
+      System.out.println(highScoreDisplay);
+    } else {
+      highScoreDisplay = "";
+    }
+    manager.game.updateHighScore();
+    manager.game.resetScore();
+    window.background(0);
+
+    // Totaled
+    window.fill(255, 0, 0);
+    window.textFont(manager.contentLoader.mediumFont);
+    window.textAlign(window.CENTER);
+    window.text("TOTALED", (window.width / 2), 175);
+
+    // play again
+    window.rect((window.width / 2) - 280, 400, 560, 75);
+    window.textAlign(window.CENTER);
+    window.fill(0);
+    window.textFont(manager.contentLoader.smallFont);
+    window.text("PLAY AGAIN", (window.width / 2), 455);
+    manager.button.restart();
+
+    // New High Score Display
+    if (wasOn) {
+      window.fill(255, 255, 0);
+      window.textFont(manager.contentLoader.smallFont);
+      window.textAlign(window.CENTER);
+      window.text(highScoreDisplay, (window.width / 2), 275);
+      if (timer == 0) {
+        wasOn = false;
+        timer = RESET_TIMER;
+      } else {
+        timer--;
+      }
+    } else {
+      if (timer == 0) {
+        wasOn = true;
+        timer = RESET_TIMER;
+      } else {
+        timer--;
+      }
+    }
+  }
   public void main() {
     window.background(0);
     window.fill(255);

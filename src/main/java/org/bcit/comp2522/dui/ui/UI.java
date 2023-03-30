@@ -6,30 +6,42 @@ import processing.core.PVector;
 
 import java.util.ArrayList;
 
-public class UI extends Manager implements Drawable {
+public class UI implements Drawable {
     public final float[] lanes = {140, 327, 515};
     public ArrayList<PImage> cars;
-    public Window window;
     public ArrayList<EnemyCar> traffic;
     public Player player;
     public float playerWidth = 140;
     public float playerHeight = 75;
     private float slowedEnemyCarSpeed = 1.6F;
-    public Path path;
-    public Game game;
+    public Menu menu;
     public Button button;
+    public Manager manager;
+    public Elements elements;
+    private Window window;
 
-    public UI(Window scene) {
-        super();
+    public UI(Manager manager, ContentLoader loader, Window scene) {
+        this.manager = manager;
+        this.elements = new Elements(scene, manager, loader); // Keep this one
+        this.player = new Player(manager, scene, new PVector(scene.width / 5, 327), playerWidth, playerHeight);
+        this.traffic = new ArrayList<EnemyCar>();
+        this.cars = new ArrayList<>();
+        this.button = new Button(scene, manager);
+        this.menu = new Menu(manager, scene);
         this.window = scene;
-        path = new Path(scene);
-        player = new Player(new PVector(window.width / 5, 327), this.window, playerWidth, playerHeight);
-        traffic = new ArrayList<EnemyCar>();
-        game = Game.getInstance();
-        cars = new ArrayList<>();
-        button = new Button(this.window, this);
-        loadCarImages();
+        loader.loadCarImages(manager, cars);
         spawnCars(traffic);
+    }
+    public void uiElements() {
+        window.background(0);
+        manager.game.start();
+        elements.borders();
+        elements.displayScore();
+        elements.displayHighScore();
+        elements.muteButton();
+        player.displayHealth();
+        manager.path.drawLines();
+        player.draw();
     }
     private void spawnCars(ArrayList<EnemyCar> traffic) {
         int numCars = 2;
@@ -42,97 +54,44 @@ public class UI extends Manager implements Drawable {
                 float carHeight = 75;
                 float carSpeed = (float) (Math.random() * 8 + 7);
                 float xPos = i * carSpacing + carWidth / 2 + (carSpacing / 2 * j);
-                EnemyCar car = new EnemyCar(new PVector(xPos, lanes[j]), this.window, carWidth, carHeight, carSpeed, cars);
+                EnemyCar car = new EnemyCar(manager, window, new PVector(xPos, lanes[j]), carWidth, carHeight, carSpeed, cars);
                 traffic.add(car);
             }
         }
     }
-
-    private void loadCarImages() {
-        for (int i = 1; i <= 5; i++) {
-            PImage carImage = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/carImage" + i + ".png");
-            cars.add(carImage);
-        }
-    }
-
-
-
     @Override
     public void draw() {
-        if (window.playing == false) {
-            if (player.playerDeath) {
-                this.gameOver();
-            } else {
-                this.menu();
-            }
-        } else {
-            borders();
-            game.start();
-            path.drawLines();
-            player.draw();
-            player.displayHealth();
-            game.displayScore(window);
-            game.displayHighScore(window);
-
-            for (EnemyCar enemyCar : traffic) {
-                enemyCar.update();
-                enemyCar.draw();
-                player.check(enemyCar, this);
-                player.update(this);
-            }
+        switch (manager.screenState) {
+            case 0:
+                uiElements();
+                for (EnemyCar enemyCar : traffic) {
+                    enemyCar.update();
+                    enemyCar.draw();
+                    player.check(enemyCar);
+                    player.update(this);
+                }
+                break;
+            case 1:
+                menu.gameOver();
+                break;
+            case 2:
+                menu.main();
+                break;
+            case 3:
+                menu.menu2();
+                break;
+            case 4:
+                menu.carSelection();
+                break;
+//            case 5:
+//                menu.gameOver();
+//                break;
+//            case 6:
+//                menu.gameOver();
+//                break;
         }
     }
 
-    String scoreDisplay;
-    String highScoreDisplay;
-    boolean wasOn = true;
-    int timer = 60;
-    private static final int RESET_TIMER = 60;
-
-    public void gameOver() {
-        if (manager.screenState == 1) {
-            scoreDisplay = String.format("Your score: %d", game.score);
-            System.out.println(scoreDisplay);
-
-            if (game.score > game.highScore) {
-                highScoreDisplay = "New High Score!!!";
-                System.out.println(highScoreDisplay);
-            } else {
-                highScoreDisplay = "";
-            }
-        }
-        window.playing = false;
-        game.updateHighScore();
-        game.resetScore();
-        window.background(0);
-
-        // Totaled
-        window.fill(255, 0, 0);
-        window.textFont(window.mediumFont);
-        window.textAlign(CENTER);
-        window.text("TOTALED", (window.width / 2), 175);
-
-        // New High Score Display
-        if (wasOn) {
-            window.fill(255, 255, 0);
-            window.textFont(window.smallFont);
-            window.textAlign(CENTER);
-            window.text(highScoreDisplay, (window.width / 2), 275);
-            if (timer == 0) {
-                wasOn = false;
-                timer = RESET_TIMER;
-            } else {
-                timer--;
-            }
-        } else {
-            if (timer == 0) {
-                wasOn = true;
-                timer = RESET_TIMER;
-            } else {
-                timer--;
-            }
-        }
-    }
     public void init() {
         this.draw();
     }

@@ -34,7 +34,6 @@ public class KeyInput {
                     if (player.getPosition().y < 515) {
                         player.setPosition(player.getPosition().x, lerp(player.getPosition().y,
                                 player.getPosition().y + 6, 0.3F));
-                        System.out.println("here");
                     }
                     break;
                 case LEFT:

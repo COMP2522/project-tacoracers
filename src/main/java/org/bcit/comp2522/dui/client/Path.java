@@ -44,7 +44,6 @@ public class Path {
         // Draw the roadlines
         for (float linePosition : linePositions) {
             for (int i = 0; i < 4; i++) {
-                System.out.println("here");
                 window.image(manager.contentLoader.roadLine, linePosition + i * 180, 430);
                 window.image(manager.contentLoader.roadLine, linePosition + i * 180, 233);
             }
