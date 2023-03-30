@@ -6,7 +6,7 @@
 //
 //import static processing.core.PApplet.*;
 //
-//public class KeyInput {
+//public class KeyInput extends Manager {
 //    private Window window;
 //    private Player player;
 //

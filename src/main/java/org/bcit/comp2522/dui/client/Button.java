@@ -1,15 +1,12 @@
 package org.bcit.comp2522.dui.client;
 
-import org.bcit.comp2522.dui.ui.UI;
-import processing.core.*;
-import processing.event.*;
-
-public class Button extends PApplet {
+public class Button {
     private Window window;
-    private UI ui;
-    public Button(Window window, UI ui) {
+    private Manager manager;
+
+    public Button(Window window, Manager manager) {
         this.window = window;
-        this.ui = ui;
+        this.manager = manager;
     }
     public void restart() {
         if (window.mouseX > ((window.width / 2) - 280) && window.mouseX < (window.width / 2) + 280
@@ -18,11 +15,11 @@ public class Button extends PApplet {
             window.rect((window.width / 2) - 280, 400, 560, 75);
             window.textAlign(window.CENTER);
             window.fill(0);
-            window.textFont(window.smallFont);
+            window.textFont(manager.contentLoader.smallFont);
             window.text("PLAY AGAIN", (window.width / 2), 455);
             if (window.mousePressed) { // when play button is pressed
-                window.playing = true;
-                window.init();
+                manager.playing = true;
+                manager.ui.init();
             }
         }
     }
@@ -34,11 +31,11 @@ public class Button extends PApplet {
             window.rect( (window.width / 2) - 150, 450, 300, 125);
             window.textAlign(window.CENTER);
             window.fill(255,255,255);
-            window.textFont(window.mediumFont);
+            window.textFont(manager.contentLoader.mediumFont);
             window.text("PLAY", window.width / 2, 535);
             if (window.mousePressed) { // when play button is pressed
-                window.playing = true;
-                ui.draw();
+                manager.playing = true;
+                manager.ui.draw();
             }
         }
     }

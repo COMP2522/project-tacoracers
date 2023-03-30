@@ -1,7 +1,5 @@
 package org.bcit.comp2522.dui.client;
 
-import org.bson.Document;
-
 import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,18 +35,7 @@ public class Game {
       }
     });
   }
-  public void displayScore(Window window) {
-    window.textFont(window.tinyFont);
-    window.textAlign(window.LEFT);
-    window.fill(0, 0, 255);
-    window.text("Score: " + this.score, 850, 75); // display the score at position (, )
-  }
-  public void displayHighScore(Window window) {
-    window.textFont(window.tinyFont);
-    window.textAlign(window.LEFT);
-    window.fill(0, 0, 255);
-    window.text("High Score: " + this.highScore, 850, 45); // display the high score at position (, )
-  }
+
 
   public void start() {
     scoreTimer.start();

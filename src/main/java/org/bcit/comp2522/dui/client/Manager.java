@@ -1,8 +1,8 @@
 package org.bcit.comp2522.dui.client;
 
+import org.bcit.comp2522.dui.ui.ContentLoader;
 import org.bcit.comp2522.dui.ui.UI;
-import processing.core.PApplet;
-import processing.event.KeyEvent;
+import processing.core.*;
 
 /**
  * Manager class creates a UI and game instance
@@ -10,24 +10,20 @@ import processing.event.KeyEvent;
  * @author Eric Tatchell
  */
 public class Manager extends PApplet {
-  Window window;
-  UI ui;
-  Game game;
-  public Player player;
-//  public KeyInput keyInput;
-  public Manager(Window scene) {
-    this.window = scene;
-    ui = new UI(scene);
-    game = Game.getInstance(); // CHANGE WITH NECESSARY PARAMS
-//    keyInput = new KeyInput(scene, ui.player);
-    // sprite here. arraylist? player? change later
+  public UI ui;
+  public Game game;
+  public Button button;
+  public Path path;
+  public ContentLoader contentLoader;
+  public boolean playing = false;
+  public Manager() {
+    contentLoader = new ContentLoader();
   }
-  public Manager() {}
-
-  public void run() {
+  public void run(Window scene) {
+    ui = new UI(this, contentLoader, scene);
+    path = new Path(this, scene);
+    game = Game.getInstance();
+    button = new Button(scene, this);
     ui.init();
-    // some shit with sprites idk yet
   }
-
-
 }
