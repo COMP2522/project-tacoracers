@@ -1,18 +1,13 @@
 package org.bcit.comp2522.dui.client;
 
-import org.bcit.comp2522.dui.ui.UI;
-import processing.core.*;
-import processing.event.*;
-
-public class Button extends PApplet {
+public class Button {
     private Window window;
-    private UI ui;
+    private Manager manager;
 
-    public Button(Window window, UI ui) {
+    public Button(Window window, Manager manager) {
         this.window = window;
-        this.ui = ui;
+        this.manager = manager;
     }
-
     public void restart() {
         if (window.mouseX > ((window.width / 2) - 280) && window.mouseX < (window.width / 2) + 280
                 && window.mouseY > 400 && window.mouseY < 475) {
@@ -20,11 +15,15 @@ public class Button extends PApplet {
             window.rect((window.width / 2) - 280, 400, 560, 75);
             window.textAlign(window.CENTER);
             window.fill(0);
-            window.textFont(window.smallFont);
+            window.textFont(manager.contentLoader.smallFont);
             window.text("PLAY AGAIN", (window.width / 2), 455);
             if (window.mousePressed) { // when play button is pressed
-                window.playing = true;
-                window.init();
+                manager.screenState = 0;
+                manager.ui.player.lives = 3;
+                manager.game.updateHighScore();
+                manager.game.resetScore();
+                manager.game.resumeScore();
+                manager.ui.init();
             }
         }
     }
@@ -36,22 +35,16 @@ public class Button extends PApplet {
             window.rect((window.width / 2) - 150, 450, 300, 125);
             window.textAlign(window.CENTER);
             window.fill(255, 255, 255);
-            window.textFont(window.mediumFont);
+            window.textFont(manager.contentLoader.mediumFont);
             window.text("PLAY", window.width / 2, 535);
             if (window.mousePressed) { // when play button is pressed
 //                window.playing = true;
-                switchToMenu2();
+                manager.screenState = 3;
 //                ui.draw();
 
             }
         }
     }
-
-    public void switchToMenu2() {
-        window.menu1Active = false;
-        window.menu2Active = true;
-    }
-
 
     public void diff() {
         if (window.mouseX > ((window.width / 2) - 150) &&
@@ -61,12 +54,12 @@ public class Button extends PApplet {
             window.rect(375, 125, 525, 125);
             window.textAlign(window.CENTER);
             window.fill(255, 255, 255);
-            window.textFont(window.smallFont);
+            window.textFont(manager.contentLoader.smallFont);
             window.text("Difficulty", window.width / 2, 200);
 
             if (window.mousePressed) {
-                window.playing = true;
-                ui.draw();
+                manager.screenState = 6;
+                manager.ui.draw();
             }
         }
     }
@@ -79,12 +72,12 @@ public class Button extends PApplet {
             window.rect((window.width / 2) - 150, 225, 300, 125);
             window.textAlign(window.CENTER);
             window.fill(255, 255, 255);
-            window.textFont(window.smallFont);
+            window.textFont(manager.contentLoader.smallFont);
             window.text("Cars", window.width / 2, 300);
 
             if (window.mousePressed) {
-                window.playing = true;
-                ui.draw();
+                manager.screenState = 4;
+                manager.ui.draw();
             }
         }
     }
@@ -97,12 +90,12 @@ public class Button extends PApplet {
             window.rect(350, 325, 575, 125);
             window.textAlign(window.CENTER);
             window.fill(255, 255, 255);
-            window.textFont(window.smallFont);
-            window.text("LeaderBoard", window.width / 2, 400);
+            window.textFont(manager.contentLoader.smallFont);
+            window.text("Leaderboard", window.width / 2, 400);
 
             if (window.mousePressed) {
-                window.playing = true;
-                ui.draw();
+                manager.screenState = 5;
+                manager.ui.draw();
             }
         }
     }
@@ -115,7 +108,7 @@ public class Button extends PApplet {
             window.rect(775, 450, 250, 125);
             window.textAlign(window.CENTER);
             window.fill(255, 255, 255);
-            window.textFont(window.smallFont);
+            window.textFont(manager.contentLoader.smallFont);
             window.text("Quit", 900, 535);
 
             if (window.mousePressed) {
@@ -131,16 +124,14 @@ public class Button extends PApplet {
 
             window.fill(0, 0, 255);
             window.rect(50, 475, 200, 75);
-            window.textAlign(CENTER);
+            window.textAlign(window.CENTER);
             window.fill(255);
-            window.textFont(window.smallFont);
+            window.textFont(manager.contentLoader.smallFont);
             window.textSize(30);
             window.text("Select", 150, 525);
 
             if (window.mousePressed) {
-//                Player.setCarColor("red");
-//                Sprite.chooseCarColor("red");
-
+                manager.screenState = 0;
             }
         }
     }
@@ -153,16 +144,14 @@ public class Button extends PApplet {
             window.fill(0, 0, 255);
             window.rect(375, 475, 200, 75);
 
-            window.textAlign(CENTER);
+            window.textAlign(window.CENTER);
             window.fill(255, 0, 0);
-            window.textFont(window.smallFont);
+            window.textFont(manager.contentLoader.smallFont);
             window.textSize(30);
             window.text("Select", 475, 525);
 
             if (window.mousePressed) {
-//                Player.setCarColor("yellow");
-//                Sprite.chooseCarColor("yellow");
-
+                manager.screenState = 0;
             }
         }
     }
@@ -175,16 +164,14 @@ public class Button extends PApplet {
             window.fill(0, 0, 255);
             window.rect(675, 475, 200, 75);
 
-            window.textAlign(CENTER);
+            window.textAlign(window.CENTER);
             window.fill(255, 0, 0);
-            window.textFont(window.smallFont);
+            window.textFont(manager.contentLoader.smallFont);
             window.textSize(30);
             window.text("Select", 775, 525);
 
             if (window.mousePressed) {
-//                Player.setCarColor("blue");
-//                Sprite.chooseCarColor("blue");
-
+                manager.screenState = 0;
             }
         }
     }
@@ -197,27 +184,25 @@ public class Button extends PApplet {
             window.fill(0, 0, 255);
             window.rect(975, 475, 200, 75);
 
-            window.textAlign(CENTER);
+            window.textAlign(window.CENTER);
             window.fill(255, 0, 0);
-            window.textFont(window.smallFont);
+            window.textFont(manager.contentLoader.smallFont);
             window.textSize(30);
             window.text("Select", 1075, 525);
 
             if (window.mousePressed) {
-//                Player.setCarColor("purple");
-//                Sprite.chooseCarColor("purple");
+                manager.screenState = 0;
             }
         }
-
-
+    }
+    public void mute() {
+        if (window.mouseX > 300 && window.mouseX < 350
+        && window.mouseY > 25 && window.mouseY < 75) {
+            if (window.mousePressed) {
+                window.musicPlayer.stop();
+                manager.muted = true;
+                manager.ui.elements.muted();
+            }
+        }
     }
 }
-
-//    public void move(Player player) {
-//        if (window.keyPressed) {
-//            player.handleKeyPress(window.keyCode, ui.path);
-//        }
-//    }
-
-
-

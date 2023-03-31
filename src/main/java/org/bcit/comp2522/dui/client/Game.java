@@ -1,7 +1,5 @@
 package org.bcit.comp2522.dui.client;
 
-import org.bson.Document;
-
 import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,6 +19,7 @@ public class Game {
   public long highScore = 0;
   public long score = 0;
   public int scoreIncrement = 10; // Score increment amount in each timer tick
+  public int delay = 100;
   public String name = "Barack Obama"; // Temporary variable until user is able to input their name
 
   Window window;
@@ -30,25 +29,14 @@ public class Game {
   Timer scoreTimer;
 
   private Game() {
-    scoreTimer = new Timer(100, new ActionListener() {
+    scoreTimer = new Timer(delay, new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         updateScore();
 //        System.out.println(score);
       }
     });
   }
-  public void displayScore(Window window) {
-    window.textFont(window.tinyFont);
-    window.textAlign(window.LEFT);
-    window.fill(0, 0, 255);
-    window.text("Score: " + this.score, 850, 75); // display the score at position (, )
-  }
-  public void displayHighScore(Window window) {
-    window.textFont(window.tinyFont);
-    window.textAlign(window.LEFT);
-    window.fill(0, 0, 255);
-    window.text("High Score: " + this.highScore, 850, 45); // display the high score at position (, )
-  }
+
 
   public void start() {
     scoreTimer.start();
@@ -66,14 +54,19 @@ public class Game {
     highScore = loadHighScoreFromFile(); // load high score from database
   }
 
-
+  public void stopScore() {
+    scoreIncrement = 0;
+  }
+  public void resumeScore() {
+    scoreIncrement = 10;
+  }
   public void updateScore() {
     score += scoreIncrement; // Increment the score by the scoreIncrement amount
   }
   public void updateHighScore() {
     if (score > highScore) {
       highScore = score; // if the user beats the previous high score, their score becomes the new high score
-      saveHighScoreToFile(); // saves the new high score to the database
+//      saveHighScoreToFile(); // saves the new high score to the database
     }
   }
 

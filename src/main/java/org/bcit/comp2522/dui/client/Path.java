@@ -1,7 +1,6 @@
 package org.bcit.comp2522.dui.client;
 
 import org.bcit.comp2522.dui.ui.UI;
-import processing.core.PImage;
 
 /**
  * Path controls the speed at which the road lines move. This creates the illusion of
@@ -9,18 +8,18 @@ import processing.core.PImage;
  *
  * @author Eric Tatchell
  */
-public class Path implements Drawable {
+public class Path {
 
-    Window window;
+    private Window window;
+    private Manager manager;
     UI ui;
     float[] linePositions;
-    PImage roadline;
     public float speed = 20;
 
-    public Path(Window manager) {
-        this.window = manager;
+    public Path(Manager manager, Window scene) {
+        this.manager = manager;
+        this.window = scene;
         this.linePositions = new float[] {0, 180, 360, 540, 720, 900, 1080};
-        roadline = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/roadline.png");
     }
 
     public float getSpeed() {
@@ -45,14 +44,9 @@ public class Path implements Drawable {
         // Draw the roadlines
         for (float linePosition : linePositions) {
             for (int i = 0; i < 4; i++) {
-                window.image(roadline, linePosition + i * 180, 430);
-                window.image(roadline, linePosition + i * 180, 233);
+                window.image(manager.contentLoader.roadLine, linePosition + i * 180, 430);
+                window.image(manager.contentLoader.roadLine, linePosition + i * 180, 233);
             }
         }
-    }
-
-    @Override
-    public void draw() {
-
     }
 }
