@@ -6,6 +6,12 @@ import processing.core.PVector;
 
 import java.util.ArrayList;
 
+/**
+ * UI controls in what orders players see content.
+ * It also sets player and EnemyCar properties.
+ *
+ * @author Eric Tatchell
+ */
 public class UI implements Drawable {
     public final float[] lanes = {140, 327, 515};
     public ArrayList<PImage> cars;
@@ -43,6 +49,18 @@ public class UI implements Drawable {
         manager.path.drawLines();
         player.draw();
     }
+    private boolean carOverlap(EnemyCar car, ArrayList<EnemyCar> traffic) {
+        float minDistance = 50; // Set the minimum distance between cars here.
+
+        for (EnemyCar otherCar : traffic) {
+            if (car.checkCarOverlap(otherCar, minDistance)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     private void spawnCars(ArrayList<EnemyCar> traffic) {
         int numCars = 2;
         int numLanes = lanes.length;
@@ -55,17 +73,25 @@ public class UI implements Drawable {
                 float carSpeed = (float) (Math.random() * 8 + 7);
                 float xPos = i * carSpacing + carWidth / 2 + (carSpacing / 2 * j);
                 EnemyCar car = new EnemyCar(manager, window, new PVector(xPos, lanes[j]), carWidth, carHeight, carSpeed, cars);
+
+                // Adjust the car's position until it does not overlap with any existing car
+                while (carOverlap(car, traffic)) {
+                    xPos += 10; // Increase the X position until there is no overlap
+                    car.getPosition().x = xPos;
+                }
+
                 traffic.add(car);
             }
         }
     }
+
     @Override
     public void draw() {
         switch (manager.screenState) {
             case 0:
                 uiElements();
                 for (EnemyCar enemyCar : traffic) {
-                    enemyCar.update();
+                    enemyCar.update(traffic);
                     enemyCar.draw();
                     player.check(enemyCar);
                     player.update(this);

@@ -1,7 +1,5 @@
 package org.bcit.comp2522.dui.client;
 
-import org.bcit.comp2522.dui.ui.ContentLoader;
-
 public class Button {
     private Window window;
     private Manager manager;
@@ -60,8 +58,8 @@ public class Button {
             window.text("Difficulty", window.width / 2, 200);
 
             if (window.mousePressed) {
-                manager.screenState = 0;
-//                manager.ui.draw();
+                manager.screenState = 6;
+                manager.ui.draw();
             }
         }
     }
@@ -103,21 +101,21 @@ public class Button {
     }
 
 
-//    public void quit() {
-//        if (window.mouseX > ((900) - 150) && window.mouseX < ((900)) + 150
-//                && window.mouseY > 450 && window.mouseY < 575) {
-//            window.fill(0, 0, 255);
-//            window.rect(775, 450, 250, 125);
-//            window.textAlign(window.CENTER);
-//            window.fill(255, 255, 255);
-//            window.textFont(manager.contentLoader.smallFont);
-//            window.text("Quit", 900, 535);
-//
-//            if (window.mousePressed) {
-//                window.exit();
-//            }
-//        }
-//    }
+    public void quit() {
+        if (window.mouseX > ((900) - 150) && window.mouseX < ((900)) + 150
+                && window.mouseY > 450 && window.mouseY < 575) {
+            window.fill(0, 0, 255);
+            window.rect(775, 450, 250, 125);
+            window.textAlign(window.CENTER);
+            window.fill(255, 255, 255);
+            window.textFont(manager.contentLoader.smallFont);
+            window.text("Quit", 900, 535);
+
+            if (window.mousePressed) {
+                window.exit();
+            }
+        }
+    }
 
     public void red() {
         //red
@@ -133,18 +131,7 @@ public class Button {
             window.text("Select", 150, 525);
 
             if (window.mousePressed) {
-
-//                contentLoader.carLoader(0);
-                System.out.println("red");
-
-                manager.carType = 0;
-                manager.contentLoader.load();
-
-
-                //go back to menu2
-                manager.screenState = 3;
-
-
+                manager.screenState = 0;
             }
         }
     }
@@ -164,12 +151,7 @@ public class Button {
             window.text("Select", 475, 525);
 
             if (window.mousePressed) {
-
-                manager.carType = 1;
-
-                //go back to menu2
-                manager.screenState = 3;
-
+                manager.screenState = 0;
             }
         }
     }
@@ -189,11 +171,7 @@ public class Button {
             window.text("Select", 775, 525);
 
             if (window.mousePressed) {
-
-                manager.carType = 2;
-                manager.contentLoader.load();
-                //go back to menu2
-                manager.screenState = 3;
+                manager.screenState = 0;
             }
         }
     }
@@ -213,15 +191,10 @@ public class Button {
             window.text("Select", 1075, 525);
 
             if (window.mousePressed) {
-
-                manager.carType = 3;
-                //go back to menu2
-                manager.screenState = 3;
+                manager.screenState = 0;
             }
         }
     }
-
-
     public void mute() {
         if (window.mouseX > 300 && window.mouseX < 350
         && window.mouseY > 25 && window.mouseY < 75) {

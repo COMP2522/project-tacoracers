@@ -5,12 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Scoring, using JSON data structure
- * Use processing elements to display text to ui
- *
- * Should work with Manager.java to track Game state (alive or dead)
- * If alive, compounding score, stop and write to JSON when dead
- * Display to UI, read current high score if there is one
+ * TODO: this
  *
  * @author Pavan Brar
  */
@@ -37,7 +32,21 @@ public class Game {
     });
   }
 
+  /**
+   * For use when user is slowed
+   * @param num int
+   */
+  public void setScoreIncrement(int num) {
+    scoreIncrement = num;
+  }
 
+  /**
+   * Getter for score increment
+   * @return scoreIncrement
+   */
+  public int getScoreIncrement() {
+    return scoreIncrement;
+  }
   public void start() {
     scoreTimer.start();
   }
@@ -66,7 +75,7 @@ public class Game {
   public void updateHighScore() {
     if (score > highScore) {
       highScore = score; // if the user beats the previous high score, their score becomes the new high score
-//      saveHighScoreToFile(); // saves the new high score to the database
+      saveHighScoreToFile(); // saves the new high score to the database
     }
   }
 
