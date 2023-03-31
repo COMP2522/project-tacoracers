@@ -110,9 +110,9 @@ public class UI implements Drawable {
             case 4:
                 menu.carSelection();
                 break;
-//            case 5:
-//                menu.gameOver();
-//                break;
+            case 5:
+                menu.Leaderboard();
+                break;
 //            case 6:
 //                menu.gameOver();
 //                break;
