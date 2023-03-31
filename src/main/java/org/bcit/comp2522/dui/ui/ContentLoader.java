@@ -8,6 +8,11 @@ import processing.core.PImage;
 
 import java.util.ArrayList;
 
+/**
+ * ContentLoader loads fonts and images at the start of the program.
+ *
+ * @author Eric Tatchell
+ */
 public class ContentLoader extends PApplet {
   public PImage playerImage;
   public PImage heart;

@@ -2,6 +2,12 @@ package org.bcit.comp2522.dui.ui;
 
 import org.bcit.comp2522.dui.client.*;
 
+
+/**
+ * Elements handles the majority of UI elements seen on screen.
+ *
+ * @author Eric Tatchell
+ */
 public class Elements {
   private ContentLoader loader;
   private Manager manager;
