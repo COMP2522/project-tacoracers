@@ -74,7 +74,9 @@ public class KeyInput {
                     path.setSpeed(10);
                     player.setSpeed(player.slowedPlayerSpeed);
                     // halves the score increment
-                    manager.game.setScoreIncrement(manager.game.getScoreIncrement() / 2);
+                    if (manager.game.getScoreIncrement() / 2 == 5) {
+                        manager.game.setScoreIncrement(manager.game.getScoreIncrement() / 2);
+                    }
                     window.fill(255, 255, 255);
                     window.textFont(manager.contentLoader.mediumFont);
                     window.text("SLOWED", (window.width / 4), 327);
@@ -85,7 +87,9 @@ public class KeyInput {
                 // For when the left key is released, reset all speed values
                 path.setSpeed(20);
                 player.setSpeed(0.3F);
-                manager.game.setScoreIncrement(manager.game.getScoreIncrement() * 2);
+                if (manager.game.getScoreIncrement() * 2 == 10) {
+                    manager.game.setScoreIncrement(manager.game.getScoreIncrement() * 2);
+                }
             }
         }
     }

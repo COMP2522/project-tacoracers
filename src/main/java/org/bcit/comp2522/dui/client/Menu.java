@@ -1,24 +1,41 @@
 package org.bcit.comp2522.dui.client;
 
+import processing.core.PImage;
+
 import org.bson.Document;
 
-import java.util.ArrayList;
-
-/**
- * Menu draws each menu the player sees.
- *
- * @author Eric Tatchell & Jaskaran Toor
- */
 public class Menu {
   private Manager manager;
   private Window window;
   String scoreDisplay;
   String highScoreDisplay;
+
+  PImage car1, car2, car3, car4;
   public Menu(Manager manager, Window scene) {
     this.manager = manager;
     this.window = scene;
+
+    car1 = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/redUpright.png");
+    car2 = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/lamboUpright.png");
+    car3 = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/viperUpright.png");
+    car4 = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/PurpUpright.png");
   }
 
+  //  public void gameOver() {
+//    manager.game.updateHighScore();
+//    manager.game.resetScore();
+//    window.background(0);
+//    window.fill(255, 0, 0);
+//    window.textFont(manager.contentLoader.mediumFont);
+//    window.textAlign(window.CENTER);
+//    window.text("TOTALED", (window.width / 2), 200);
+//    window.rect((window.width / 2) - 280, 400, 560, 75);
+//    window.textAlign(window.CENTER);
+//    window.fill(0);
+//    window.textFont(manager.contentLoader.smallFont);
+//    window.text("PLAY AGAIN", (window.width / 2), 455);
+//    manager.button.restart();
+//  }
   public void menu2() {
     window.background(0);
 
@@ -58,7 +75,7 @@ public class Menu {
     window.textAlign(window.CENTER);
     window.textFont(manager.contentLoader.smallFont);
     window.text("Quit", 900, 100 + 450);
-    manager.button.quit();
+//    manager.button.quit();
   }
 
        /*
@@ -83,26 +100,33 @@ public class Menu {
     window.text("Red", 150, 450);
 
     //image
+//    window.fill(car1);
+    window.image(car1, 100, 125, 150, 250);
     window.fill(255, 0, 0);
-    window.rect(100, 125, 100, 250);
-//        car = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/playerImage.png");
-    //player.redCar();
+//
 
-    //select/locked
-    if (manager.game.highScore >= 0) {
-      window.fill(255, 0, 0);
-      window.textAlign(window.CENTER);
-      window.textFont(manager.contentLoader.smallFont);
-      window.textSize(30);
-      window.text("Select", 150, 525);
-      manager.button.red();
-    } else {
-      window.fill(255, 0, 0);
-      window.textAlign(window.CENTER);
-      window.textFont(manager.contentLoader.smallFont);
-      window.textSize(30);
-      window.text("Locked", 150, 525);
-    }
+    window.fill(255, 0, 0);
+    window.textAlign(window.CENTER);
+    window.textFont(manager.contentLoader.smallFont);
+    window.textSize(30);
+    window.text("Select", 150, 525);
+    manager.button.red();
+
+//    //select/locked
+//    if (manager.game.highScore >= 0) {
+//      window.fill(255, 0, 0);
+//      window.textAlign(window.CENTER);
+//      window.textFont(manager.contentLoader.smallFont);
+//      window.textSize(30);
+//      window.text("Select", 150, 525);
+//      manager.button.red();
+//    } else {
+//      window.fill(255, 0, 0);
+//      window.textAlign(window.CENTER);
+//      window.textFont(manager.contentLoader.smallFont);
+//      window.textSize(30);
+//      window.text("Locked", 150, 525);
+//    }
 
 
     //yellow car
@@ -112,11 +136,12 @@ public class Menu {
     window.text("yello", 475, 450);
 
     //image
-    window.fill(255, 0, 0);
-    window.rect(425, 125, 100, 250);
+    window.image(car2, 425, 125, 100, 250);
+//    window.fill(255, 0, 0);
+//    window.rect(425, 125, 100, 250);
 
     //select/locked
-    if (manager.game.highScore >= 1000) {
+    if (manager.game.highScore >= 0) {
       window.fill(255, 0, 0);
       window.textAlign(window.CENTER);
       window.textFont(manager.contentLoader.smallFont);
@@ -139,11 +164,12 @@ public class Menu {
     window.text("Blue", 775, 450);
 
     //image
-    window.fill(255, 0, 0);
-    window.rect(725, 125, 100, 250);
+    window.image(car3, 725, 125, 100, 250);
+//    window.fill(255, 0, 0);
+//    window.rect(725, 125, 100, 250);
 
     //select/locked
-    if (manager.game.highScore >= 5000) {
+    if (manager.game.highScore >= 0) {
       window.fill(255, 0, 0);
       window.textAlign(window.CENTER);
       window.textFont(manager.contentLoader.smallFont);
@@ -165,11 +191,12 @@ public class Menu {
     window.textFont(manager.contentLoader.smallFont);
     window.text("Purple", 1075, 450);
 
-    window.fill(255, 0, 0);
-    window.rect(1025, 125, 100, 250);
+    window.image(car4, 1025, 125, 100, 250);
+//    window.fill(255, 0, 0);
+//    window.rect(1025, 125, 100, 250);
 
     //select/locked
-    if (manager.game.highScore >= 10000) {
+    if (manager.game.highScore >= 0) {
       window.fill(255, 0, 0);
       window.textAlign(window.CENTER);
       window.textFont(manager.contentLoader.smallFont);
@@ -185,6 +212,41 @@ public class Menu {
       window.text("Locked", 1075, 525);
       //player.GreenCar();
     }
+  }
+
+
+  public void gameOver() {
+    window.background(0);
+    scoreDisplay = String.format("Your score: %d", manager.game.score);
+    System.out.println(scoreDisplay);
+
+    if (manager.game.score > manager.game.highScore) {
+      highScoreDisplay = "New High Score!";
+      window.fill(255, 255, 0);
+      window.textFont(manager.contentLoader.smallFont);
+      window.textAlign(window.CENTER);
+      window.text(highScoreDisplay, (window.width / 2), 275);
+    } else {
+      highScoreDisplay = "";
+    }
+    window.fill(255, 255, 255);
+    window.textFont(manager.contentLoader.smallFont);
+    window.textAlign(window.CENTER);
+    window.text(scoreDisplay, (window.width / 2), 350);
+
+    // Totaled
+    window.fill(255, 0, 0);
+    window.textFont(manager.contentLoader.mediumFont);
+    window.textAlign(window.CENTER);
+    window.text("TOTALED", (window.width / 2), 175);
+
+    // play again
+    window.rect((window.width / 2) - 280, 400, 560, 75);
+    window.textAlign(window.CENTER);
+    window.fill(0);
+    window.textFont(manager.contentLoader.smallFont);
+    window.text("PLAY AGAIN", (window.width / 2), 455);
+    manager.button.restart();
   }
 
   public void Leaderboard() {
@@ -244,47 +306,6 @@ public class Menu {
     window.stroke(255);
     window.strokeWeight(2);
     window.line(80, y - 20, window.width - 80, y - 20);
-  }
-
-  public void workInProgess() {
-    window.background(0);
-    window.textFont(manager.contentLoader.tinyFont);
-    window.text("Work in progress", window.width / 2, window.height / 2);
-  }
-
-  public void gameOver() {
-    window.background(0);
-    manager.keyInput.pressedKeys.clear();
-    scoreDisplay = String.format("Your score: %d", manager.game.score);
-    System.out.println(scoreDisplay);
-
-    if (manager.game.score > manager.game.highScore) {
-      highScoreDisplay = "New High Score!";
-      window.fill(255, 255, 0);
-      window.textFont(manager.contentLoader.smallFont);
-      window.textAlign(window.CENTER);
-      window.text(highScoreDisplay, (window.width / 2), 275);
-    } else {
-      highScoreDisplay = "";
-    }
-    window.fill(255, 255, 255);
-    window.textFont(manager.contentLoader.smallFont);
-    window.textAlign(window.CENTER);
-    window.text(scoreDisplay, (window.width / 2), 350);
-
-    // Totaled
-    window.fill(255, 0, 0);
-    window.textFont(manager.contentLoader.mediumFont);
-    window.textAlign(window.CENTER);
-    window.text("TOTALED", (window.width / 2), 175);
-
-    // play again
-    window.rect((window.width / 2) - 280, 400, 560, 75);
-    window.textAlign(window.CENTER);
-    window.fill(0);
-    window.textFont(manager.contentLoader.smallFont);
-    window.text("PLAY AGAIN", (window.width / 2), 455);
-    manager.button.restart();
   }
 
   public void main() {
