@@ -30,11 +30,14 @@ public class Manager extends PApplet {
    */
   public int screenState;
 
+  public int carType;
+
   public Manager() {
     contentLoader = new ContentLoader();
   }
   public void run(Window scene) {
     screenState = 2; // main menu
+    carType = 2;
 
     path = new Path(this, scene); // Move this line before the UI initialization
     ui = new UI(this, contentLoader, scene);
