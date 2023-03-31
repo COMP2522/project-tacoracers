@@ -6,6 +6,12 @@ import processing.core.PVector;
 
 import java.util.ArrayList;
 
+/**
+ * UI controls in what orders players see content.
+ * It also sets player and EnemyCar properties.
+ *
+ * @author Eric Tatchell
+ */
 public class UI implements Drawable {
     public final float[] lanes = {140, 327, 515};
     public ArrayList<PImage> cars;

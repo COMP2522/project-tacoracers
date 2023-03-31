@@ -3,8 +3,8 @@ package org.bcit.comp2522.dui.client;
 import org.bcit.comp2522.dui.ui.UI;
 
 /**
- * Path controls the speed at which the road lines move. This creates the illusion of
- * driving a car.
+ * Path controls the speed at which the road lines move.
+ * Adapts based on gameplay difficulty and progress.
  *
  * @author Eric Tatchell
  */

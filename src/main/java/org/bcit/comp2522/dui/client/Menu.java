@@ -1,5 +1,10 @@
 package org.bcit.comp2522.dui.client;
 
+/**
+ * Menu draws each menu the player sees.
+ *
+ * @author Eric Tatchell & Jaskaran Toor
+ */
 public class Menu {
   private Manager manager;
   private Window window;
