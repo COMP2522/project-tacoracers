@@ -1,5 +1,9 @@
 package org.bcit.comp2522.dui.client;
 
+import org.bson.Document;
+
+import java.util.ArrayList;
+
 /**
  * Menu draws each menu the player sees.
  *
@@ -15,21 +19,6 @@ public class Menu {
     this.window = scene;
   }
 
-//  public void gameOver() {
-//    manager.game.updateHighScore();
-//    manager.game.resetScore();
-//    window.background(0);
-//    window.fill(255, 0, 0);
-//    window.textFont(manager.contentLoader.mediumFont);
-//    window.textAlign(window.CENTER);
-//    window.text("TOTALED", (window.width / 2), 200);
-//    window.rect((window.width / 2) - 280, 400, 560, 75);
-//    window.textAlign(window.CENTER);
-//    window.fill(0);
-//    window.textFont(manager.contentLoader.smallFont);
-//    window.text("PLAY AGAIN", (window.width / 2), 455);
-//    manager.button.restart();
-//  }
   public void menu2() {
     window.background(0);
 
@@ -198,6 +187,70 @@ public class Menu {
     }
   }
 
+  public void Leaderboard() {
+    DatabaseHandler dbhandler = new DatabaseHandler("pavanbrar73", "KFmJyFJrTM6Dd7c2");
+
+    window.background(0);
+
+    window.textSize(32);
+    window.fill(255);
+    window.textAlign(window.CENTER);
+
+    window.text("Leaderboard", window.width/2, 80);
+    window.text("Rank", 100, 160);
+    window.text("Name", window.width/2 - 200, 160);
+    window.text("Score", window.width/2 + 200, 160);
+
+    window.textSize(28);
+    window.textAlign(window.CENTER, window.CENTER);
+//    window.fill(255);
+    int y = 200;
+    int rank = 1;
+
+    window.stroke(255);
+    window.strokeWeight(2);
+    window.line(80, 180, window.width - 80, 180);
+
+    window.rect(80, 180, 70, y - 180);
+
+    window.rect(window.width/2 - 390, 180, 340, y - 180);
+
+    for (Document doc : dbhandler.getHighestScores()) {
+
+      String name = doc.getString("name");
+      long score = doc.getLong("score");
+      window.stroke(255);
+      window.strokeWeight(2);
+      window.line(80, y - 20, window.width - 80, y - 20);
+
+      window.text(rank, 150, y);
+
+      window.rect(window.width/2 - 390, y - 20, 340, 40);
+
+      window.text(name, window.width/2 - 120, y);
+
+      window.rect(window.width/2 + 150, y - 20, 270, 40);
+
+      window.text(score, window.width/2 + 270, y);
+
+      window.stroke(255);
+      window.strokeWeight(2);
+      window.line(80, y + 20, window.width - 80, y + 20);
+
+      y += 40;
+      rank++;
+    }
+
+    window.stroke(255);
+    window.strokeWeight(2);
+    window.line(80, y - 20, window.width - 80, y - 20);
+  }
+
+  public void workInProgess() {
+    window.background(0);
+    window.textFont(manager.contentLoader.tinyFont);
+    window.text("Work in progress", window.width / 2, window.height / 2);
+  }
 
   public void gameOver() {
     window.background(0);
