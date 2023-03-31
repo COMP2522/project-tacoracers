@@ -113,9 +113,9 @@ public class UI implements Drawable {
             case 5:
                 menu.Leaderboard();
                 break;
-//            case 6:
-//                menu.gameOver();
-//                break;
+            case 6:
+                menu.workInProgess();
+                break;
         }
     }
 
