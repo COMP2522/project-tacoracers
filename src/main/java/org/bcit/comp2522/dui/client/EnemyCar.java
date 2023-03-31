@@ -25,6 +25,14 @@ public class EnemyCar extends Sprite implements Drawable {
         this.carImages = carImages;
         this.car = pickCar();
     }
+    public boolean checkCarOverlap(EnemyCar otherCar, float minDistance) {
+        float distanceX = Math.abs(otherCar.position.x - this.position.x);
+        float distanceY = Math.abs(otherCar.position.y - this.position.y);
+
+        return distanceX < minDistance && distanceY < getHeight();
+    }
+
+
 
     public float getOriginalSpeed() {
         return originalSpeed;
@@ -37,7 +45,19 @@ public class EnemyCar extends Sprite implements Drawable {
     }
 
 
-    public void update() {
+    public void update(ArrayList<EnemyCar> enemyCars) {
+        float minDistance = 200;
+
+        for (EnemyCar otherCar : enemyCars) {
+            if (otherCar == this) {
+                continue;
+            }
+
+            if (checkCarOverlap(otherCar, minDistance)) {
+                this.setSpeed(otherCar.getSpeed());
+            }
+        }
+
         position.x -= getSpeed();
         if (position.x < -getWidth()) {
             float offset = (float) (Math.random() * window.width * 0.5);
@@ -46,6 +66,8 @@ public class EnemyCar extends Sprite implements Drawable {
             position.y = lanes[laneIndex];
         }
     }
+
+
 
 
 
