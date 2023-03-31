@@ -19,21 +19,6 @@ public class Menu {
     this.window = scene;
   }
 
-//  public void gameOver() {
-//    manager.game.updateHighScore();
-//    manager.game.resetScore();
-//    window.background(0);
-//    window.fill(255, 0, 0);
-//    window.textFont(manager.contentLoader.mediumFont);
-//    window.textAlign(window.CENTER);
-//    window.text("TOTALED", (window.width / 2), 200);
-//    window.rect((window.width / 2) - 280, 400, 560, 75);
-//    window.textAlign(window.CENTER);
-//    window.fill(0);
-//    window.textFont(manager.contentLoader.smallFont);
-//    window.text("PLAY AGAIN", (window.width / 2), 455);
-//    manager.button.restart();
-//  }
   public void menu2() {
     window.background(0);
 
@@ -259,6 +244,12 @@ public class Menu {
     window.stroke(255);
     window.strokeWeight(2);
     window.line(80, y - 20, window.width - 80, y - 20);
+  }
+
+  public void workInProgess() {
+    window.background(0);
+    window.textFont(manager.contentLoader.tinyFont);
+    window.text("Work in progress", window.width / 2, window.height / 2);
   }
 
   public void gameOver() {
