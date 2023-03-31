@@ -105,21 +105,28 @@ public class Menu {
     window.fill(255, 0, 0);
 //
 
-    //select/locked
-    if (manager.game.highScore >= 0) {
-      window.fill(255, 0, 0);
-      window.textAlign(window.CENTER);
-      window.textFont(manager.contentLoader.smallFont);
-      window.textSize(30);
-      window.text("Select", 150, 525);
-      manager.button.red();
-    } else {
-      window.fill(255, 0, 0);
-      window.textAlign(window.CENTER);
-      window.textFont(manager.contentLoader.smallFont);
-      window.textSize(30);
-      window.text("Locked", 150, 525);
-    }
+    window.fill(255, 0, 0);
+    window.textAlign(window.CENTER);
+    window.textFont(manager.contentLoader.smallFont);
+    window.textSize(30);
+    window.text("Select", 150, 525);
+    manager.button.red();
+
+//    //select/locked
+//    if (manager.game.highScore >= 0) {
+//      window.fill(255, 0, 0);
+//      window.textAlign(window.CENTER);
+//      window.textFont(manager.contentLoader.smallFont);
+//      window.textSize(30);
+//      window.text("Select", 150, 525);
+//      manager.button.red();
+//    } else {
+//      window.fill(255, 0, 0);
+//      window.textAlign(window.CENTER);
+//      window.textFont(manager.contentLoader.smallFont);
+//      window.textSize(30);
+//      window.text("Locked", 150, 525);
+//    }
 
 
     //yellow car

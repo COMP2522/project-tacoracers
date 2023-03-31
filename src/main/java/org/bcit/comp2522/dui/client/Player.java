@@ -85,6 +85,5 @@ public class Player extends Sprite implements Collidable {
     public void update(UI ui) {
         manager.keyInput.updateKeyStates(ui);
         ContentLoader contentLoader = manager.contentLoader;
-        contentLoader.carupdate();
     }
 }
