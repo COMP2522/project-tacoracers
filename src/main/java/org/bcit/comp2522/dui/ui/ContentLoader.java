@@ -68,35 +68,59 @@ public class ContentLoader extends PApplet {
 
   private Manager manager;
 
+
+  //function that will update the image of the car when the user selects a new car
+  // using the manager.carType variable which gets changed in the button class
   public void carupdate(){
     manager = new Manager();
     switch (manager.carType){
 
       case 0:
-        playercar = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/redside2.png"));
+        playerImage = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/lambo.png"));
         break;
 
       case 1:
-        playercar = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/lambo.png"));
+        playerImage = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/lambo.png"));
         break;
 
       case 2:
-        playercar = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/viper.png"));
+        playerImage = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/viper.png"));
         break;
 
       case 3:
-        playercar = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/Purp.png"));
+        playerImage = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/Purp.png"));
         break;
 
-      default:
-        playercar = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/redside2.png"));
-        break;
+//      default:
+//        playerImage = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/redside2.png"));
+//        break;
     }
+    load();
   }
 
   public void load() {
-    playercar = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/redside2.png"));
-    carupdate();
+//    manager = new Manager();
+//    switch (manager.carType) {
+//
+//      case 0:
+//        playerImage = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/redside2.png"));
+//        break;
+//
+//      case 1:
+//        playerImage = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/lambo.png"));
+//        break;
+//
+//      case 2:
+//        playerImage = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/viper.png"));
+//        break;
+//
+//      case 3:
+//        playerImage = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/Purp.png"));
+//        break;
+//    }
+//    playerImage = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/redside2.png"));
+//    carupdate();
+    playerImage = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/lambo.png"));
     heart = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/heart.png"));
     heartLost = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/heartLost.png"));
     roadLine = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/roadline.png"));

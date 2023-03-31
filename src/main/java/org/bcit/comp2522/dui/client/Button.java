@@ -138,6 +138,7 @@ public class Button {
                 System.out.println("red");
 
                 manager.carType = 0;
+                manager.contentLoader.load();
 
 
                 //go back to menu2
@@ -190,6 +191,7 @@ public class Button {
             if (window.mousePressed) {
 
                 manager.carType = 2;
+                manager.contentLoader.load();
                 //go back to menu2
                 manager.screenState = 3;
             }
