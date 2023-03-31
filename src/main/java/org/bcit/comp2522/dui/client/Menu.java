@@ -196,6 +196,7 @@ public class Menu {
 
   public void gameOver() {
     window.background(0);
+    manager.keyInput.pressedKeys.clear();
     scoreDisplay = String.format("Your score: %d", manager.game.score);
     System.out.println(scoreDisplay);
 
