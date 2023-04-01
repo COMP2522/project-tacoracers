@@ -19,10 +19,12 @@ public class Player extends Sprite implements Collidable {
     public float slowedPlayerSpeed = 0.1F;
     public int lives;
     private float playerSpeed = 0.3F;
+    private PImage playerImage;
     public Player(Manager manager, Window window, PVector position, float playerWidth, float playerHeight) {
         super(manager, window, position, playerWidth, playerHeight);
         this.playerDeath = false;
         this.lives = 3;
+        this.playerImage = manager.contentLoader.playerImageRed;
     }
     public void check(EnemyCar enemyCar) {
         if (collide(enemyCar) && lives <= 3) {
@@ -32,6 +34,10 @@ public class Player extends Sprite implements Collidable {
                 manager.screenState = 1;
             }
         }
+    }
+
+    public void pickPlayer(PImage car) {
+        playerImage = car;
     }
 
     public void displayHealth() {
@@ -64,7 +70,7 @@ public class Player extends Sprite implements Collidable {
 
 
     public void draw() {
-        window.image(manager.contentLoader.playerImage, getPosition().x, getPosition().y, width, height);
+        window.image(playerImage, getPosition().x, getPosition().y, width, height);
     }
 
     @Override

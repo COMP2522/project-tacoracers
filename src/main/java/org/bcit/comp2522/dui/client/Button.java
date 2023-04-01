@@ -8,24 +8,12 @@ public class Button {
         this.window = window;
         this.manager = manager;
     }
-    public void restart() {
-        if (window.mouseX > ((window.width / 2) - 280) && window.mouseX < (window.width / 2) + 280
-                && window.mouseY > 400 && window.mouseY < 475) {
-            window.fill(150, 0, 0);
-            window.rect((window.width / 2) - 280, 400, 560, 75);
-            window.textAlign(window.CENTER);
-            window.fill(0);
-            window.textFont(manager.contentLoader.smallFont);
-            window.text("PLAY AGAIN", (window.width / 2), 455);
-            if (window.mousePressed) { // when play button is pressed
-                manager.screenState = 0;
-                manager.ui.player.lives = 3;
-                manager.game.updateHighScore();
-                manager.game.resetScore();
-                manager.game.resumeScore();
-                manager.ui.init();
-            }
-        }
+    public void reset() {
+        manager.ui.player.lives = 3;
+        manager.game.updateHighScore();
+        manager.game.resetScore();
+        manager.game.resumeScore();
+        manager.keyInput.pressedKeys.clear();
     }
 
     public void play() {
@@ -38,10 +26,7 @@ public class Button {
             window.textFont(manager.contentLoader.mediumFont);
             window.text("PLAY", window.width / 2, 535);
             if (window.mousePressed) { // when play button is pressed
-//                window.playing = true;
                 manager.screenState = 3;
-//                ui.draw();
-
             }
         }
     }
@@ -117,6 +102,37 @@ public class Button {
         }
     }
 
+    public void playAgain() {
+        window.fill(255, 255, 255);
+        window.rect((window.width / 2) - 270, 465, 540, 75);
+        window.textAlign(window.CENTER);
+        window.fill(0);
+        window.textFont(manager.contentLoader.smallFont);
+        window.text("RESTART", (window.width / 2), 525);
+        if (window.mouseX > window.width / 2 - 270 && window.mouseX < window.width / 2 + 270
+                && window.mouseY > 465 && window.mouseY < 535) {
+            if (window.mousePressed) {
+                reset();
+                manager.screenState = 0;
+            }
+        }
+    }
+    public void mainMenu() {
+        window.fill(255, 255, 255);
+        window.rect((window.width / 2) - 270, 380, 540, 75);
+        window.textAlign(window.CENTER);
+        window.fill(0);
+        window.textFont(manager.contentLoader.smallFont);
+        window.text("MAIN MENU", (window.width / 2), 440);
+        if (window.mouseX > window.width / 2 - 270 && window.mouseX < window.width / 2 + 270
+                && window.mouseY > 380 && window.mouseY < 455) {
+            if (window.mousePressed) {
+                reset();
+                manager.screenState = 3;
+            }
+        }
+    }
+
     public void red() {
         //red
         if (window.mouseX > ((50)) && window.mouseX < ((150)) + 100
@@ -131,6 +147,7 @@ public class Button {
             window.text("Select", 150, 525);
 
             if (window.mousePressed) {
+                manager.ui.player.pickPlayer(manager.contentLoader.playerImageRed);
                 manager.screenState = 0;
             }
         }
@@ -151,6 +168,7 @@ public class Button {
             window.text("Select", 475, 525);
 
             if (window.mousePressed) {
+                manager.ui.player.pickPlayer(manager.contentLoader.playerImageYellow);
                 manager.screenState = 0;
             }
         }
@@ -171,6 +189,7 @@ public class Button {
             window.text("Select", 775, 525);
 
             if (window.mousePressed) {
+                manager.ui.player.pickPlayer(manager.contentLoader.playerImageBlue);
                 manager.screenState = 0;
             }
         }
@@ -191,6 +210,7 @@ public class Button {
             window.text("Select", 1075, 525);
 
             if (window.mousePressed) {
+                manager.ui.player.pickPlayer(manager.contentLoader.playerImagePurple);
                 manager.screenState = 0;
             }
         }

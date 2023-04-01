@@ -21,21 +21,6 @@ public class Menu {
     car4 = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/PurpUpright.png");
   }
 
-  //  public void gameOver() {
-//    manager.game.updateHighScore();
-//    manager.game.resetScore();
-//    window.background(0);
-//    window.fill(255, 0, 0);
-//    window.textFont(manager.contentLoader.mediumFont);
-//    window.textAlign(window.CENTER);
-//    window.text("TOTALED", (window.width / 2), 200);
-//    window.rect((window.width / 2) - 280, 400, 560, 75);
-//    window.textAlign(window.CENTER);
-//    window.fill(0);
-//    window.textFont(manager.contentLoader.smallFont);
-//    window.text("PLAY AGAIN", (window.width / 2), 455);
-//    manager.button.restart();
-//  }
   public void menu2() {
     window.background(0);
 
@@ -100,7 +85,6 @@ public class Menu {
     window.text("Red", 150, 450);
 
     //image
-//    window.fill(car1);
     window.image(car1, 100, 125, 150, 250);
     window.fill(255, 0, 0);
 //
@@ -111,22 +95,6 @@ public class Menu {
     window.textSize(30);
     window.text("Select", 150, 525);
     manager.button.red();
-
-//    //select/locked
-//    if (manager.game.highScore >= 0) {
-//      window.fill(255, 0, 0);
-//      window.textAlign(window.CENTER);
-//      window.textFont(manager.contentLoader.smallFont);
-//      window.textSize(30);
-//      window.text("Select", 150, 525);
-//      manager.button.red();
-//    } else {
-//      window.fill(255, 0, 0);
-//      window.textAlign(window.CENTER);
-//      window.textFont(manager.contentLoader.smallFont);
-//      window.textSize(30);
-//      window.text("Locked", 150, 525);
-//    }
 
 
     //yellow car
@@ -190,10 +158,7 @@ public class Menu {
     window.textAlign(window.CENTER);
     window.textFont(manager.contentLoader.smallFont);
     window.text("Purple", 1075, 450);
-
     window.image(car4, 1025, 125, 100, 250);
-//    window.fill(255, 0, 0);
-//    window.rect(1025, 125, 100, 250);
 
     //select/locked
     if (manager.game.highScore >= 0) {
@@ -240,13 +205,8 @@ public class Menu {
     window.textAlign(window.CENTER);
     window.text("TOTALED", (window.width / 2), 175);
 
-    // play again
-    window.rect((window.width / 2) - 280, 400, 560, 75);
-    window.textAlign(window.CENTER);
-    window.fill(0);
-    window.textFont(manager.contentLoader.smallFont);
-    window.text("PLAY AGAIN", (window.width / 2), 455);
-    manager.button.restart();
+    manager.button.mainMenu();
+    manager.button.playAgain();
   }
 
   public void Leaderboard() {
