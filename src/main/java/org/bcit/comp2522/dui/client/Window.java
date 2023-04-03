@@ -11,14 +11,14 @@ import processing.core.PFont;
  */
 public class Window extends PApplet {
     private Manager manager;
-    MusicPlayer musicPlayer;
+    public MusicPlayer musicPlayer;
     public void settings() {
         size(1280,600);
     }
 
     public void setup() {
         musicPlayer = new MusicPlayer("src/main/java/org/bcit/comp2522/dui/content/Team America - America, Fck Yeah! (Lyrics).wav");
-        musicPlayer.play();
+//        musicPlayer.play();
         manager = new Manager();
         manager.contentLoader.load();
         manager.contentLoader.loadFonts(this);
@@ -39,6 +39,7 @@ public class Window extends PApplet {
             manager.keyInput.pressedKeys.remove(this.keyCode);
         }
     }
+
     public void draw() {
         manager.ui.init();
     }

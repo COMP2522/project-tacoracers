@@ -88,6 +88,14 @@ public class Player extends Sprite implements Collidable {
         return playerSpeed;
     }
 
+    public float getLives() {
+        return this.lives;
+    }
+
+    public void addLives(float a) {
+        this.lives += a;
+    }
+
     public void update(UI ui) {
         manager.keyInput.updateKeyStates(ui);
         ContentLoader contentLoader = manager.contentLoader;

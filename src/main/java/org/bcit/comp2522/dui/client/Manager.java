@@ -41,9 +41,17 @@ public class Manager extends PApplet {
 
     path = new Path(this, scene); // Move this line before the UI initialization
     ui = new UI(this, contentLoader, scene);
-    keyInput = new KeyInput(scene, ui.player, this);
+    keyInput = new KeyInput(scene, ui.player, this, ui.powerup);
     game = Game.getInstance();
     button = new Button(scene, this);
     ui.init();
   }
+
+  public void managePowerUp(PowerUp powerup) {
+    if (!powerup.isActive()) {
+      ui.spawnPowerUp(powerup);
+      powerup.setActive(true);
+    }
+  }
+
 }

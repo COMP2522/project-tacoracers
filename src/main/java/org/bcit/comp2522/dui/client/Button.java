@@ -12,7 +12,6 @@ public class Button {
         manager.ui.player.lives = 3;
         manager.game.updateHighScore();
         manager.game.resetScore();
-        manager.game.resumeScore();
         manager.keyInput.pressedKeys.clear();
     }
 
@@ -30,6 +29,8 @@ public class Button {
             }
         }
     }
+
+
 
     public void diff() {
         if (window.mouseX > ((window.width / 2) - 150) &&
@@ -175,7 +176,6 @@ public class Button {
     }
 
     public void blue() {
-        //blue
         if (window.mouseX > ((675)) && window.mouseX < ((775)) + 100
                 && window.mouseY > 500 && window.mouseY < 575) {
 
@@ -215,14 +215,10 @@ public class Button {
             }
         }
     }
-    public void mute() {
-        if (window.mouseX > 300 && window.mouseX < 350
-        && window.mouseY > 25 && window.mouseY < 75) {
-            if (window.mousePressed) {
-                window.musicPlayer.stop();
-                manager.muted = true;
-                manager.ui.elements.muted();
-            }
+    public void checkMuteButtonClick() {
+        if (window.mousePressed && window.mouseX >= 300 && window.mouseX <= 300 + manager.contentLoader.mute.width &&
+                window.mouseY >= 25 && window.mouseY <= 25 + manager.contentLoader.mute.height) {
+            manager.muted = true;
         }
     }
 }

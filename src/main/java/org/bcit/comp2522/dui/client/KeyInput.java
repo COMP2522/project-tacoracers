@@ -22,6 +22,9 @@ public class KeyInput {
     // instance for manager
     private Manager manager;
 
+    // instance for powerup
+    private PowerUp powerup;
+
     // hash set to track pressed keys
     HashSet<Integer> pressedKeys = new HashSet<>();
 
@@ -30,13 +33,15 @@ public class KeyInput {
 
     /**
      * Constructor assigning instances
-     * @param window Window
-     * @param player Player
+     *
+     * @param window  Window
+     * @param player  Player
      * @param manager Manager
      */
-    public KeyInput(Window window, Player player, Manager manager) {
+    public KeyInput(Window window, Player player, Manager manager, PowerUp powerup) {
         this.window = window;
         this.player = player;
+        this.powerup = powerup;
         this.manager = manager;
     }
 
@@ -48,8 +53,9 @@ public class KeyInput {
     /**
      * handleKeyEvent is the primary moving logic for the player.
      * Supports UP, DOWN and LEFT. Sets the players position based on a CLICK HOLD principle
+     *
      * @param keyCode received keycode from Window.java
-     * @param path for setting path speed
+     * @param path    for setting path speed
      * @param keyDown t/f if key is held
      */
     public void handleKeyEvent(int keyCode, Path path, boolean keyDown) {
@@ -96,35 +102,50 @@ public class KeyInput {
 
     /**
      * updateKeyStates is the primary communicator for UI to track key presses
+     *
      * @param ui
      */
     public void updateKeyStates(UI ui) {
+        // Check if the UP key is pressed
         if (pressedKeys.contains(UP)) {
             handleKeyEvent(UP, manager.path, true);
         }
+        // Check if the DOWN key is pressed
         if (pressedKeys.contains(DOWN)) {
             handleKeyEvent(DOWN, manager.path, true);
         }
-      float speedMultiplier;
-      if (pressedKeys.contains(LEFT)) {
+
+        float speedMultiplier;
+
+        // Check if the LEFT key is pressed
+        if (pressedKeys.contains(LEFT)) {
             handleKeyEvent(LEFT, manager.path, true);
+
+            // If the speed has not already been halved, do so now
             if (!isSpeedHalved) {
                 speedMultiplier = 0.5f;
+                // Iterate over enemy cars and set their speed to half of their original speed
                 for (EnemyCar enemyCar : ui.traffic) {
                     enemyCar.setSpeed(enemyCar.getOriginalSpeed() * speedMultiplier);
                 }
+                powerup.halfSpeed();
+                // Set the flag to indicate that the speed has been halved
                 isSpeedHalved = true;
             }
         } else {
+            // If the LEFT key is not pressed and the speed was previously halved, restore it
             if (isSpeedHalved) {
                 handleKeyEvent(LEFT, manager.path, false);
                 speedMultiplier = 1.0f;
+                // Iterate over enemy cars and set their speed to their original speed
                 for (EnemyCar enemyCar : ui.traffic) {
                     enemyCar.setSpeed(enemyCar.getOriginalSpeed() * speedMultiplier);
                 }
+                powerup.resetSpeed();
+                // Set the flag to indicate that the speed is no longer halved
                 isSpeedHalved = false;
             }
         }
     }
-
 }
+

@@ -24,6 +24,7 @@ public class UI implements Drawable {
     public Button button;
     public Manager manager;
     public Elements elements;
+    public PowerUp powerup;
     private Window window;
 
     public UI(Manager manager, ContentLoader loader, Window scene) {
@@ -35,9 +36,19 @@ public class UI implements Drawable {
         this.button = new Button(scene, manager);
         this.menu = new Menu(manager, scene);
         this.window = scene;
+
+        // Updated PowerUp instantiation
+        float powerUpWidth = 100;
+        float powerUpHeight = 100;
+        float powerUpSpeed = 20;
+        PVector powerUpPosition = new PVector(window.width, (float) (Math.random() * (window.height - 240) + 140));
+        this.powerup = new PowerUp(manager, scene, powerUpPosition, powerUpWidth, powerUpHeight, powerUpSpeed);
+
         loader.loadCarImages(manager, cars);
         spawnCars(traffic);
     }
+
+
     public void uiElements() {
         window.background(0);
         manager.game.start();
@@ -49,6 +60,17 @@ public class UI implements Drawable {
         manager.path.drawLines();
         player.draw();
     }
+
+    public void spawnPowerUp(PowerUp powerup) {
+        if (!powerup.isActive()) {
+            float x = window.width;
+            float y = (float) (Math.random() * (window.height - 240) + 140);
+            powerup.getPosition().set(x, y);
+            powerup.setActive(true);
+        }
+    }
+
+
     private boolean carOverlap(EnemyCar car, ArrayList<EnemyCar> traffic) {
         float minDistance = 50; // Set the minimum distance between cars here.
 
@@ -90,15 +112,19 @@ public class UI implements Drawable {
         switch (manager.screenState) {
             case 0:
                 uiElements();
+                manager.managePowerUp(powerup);
+                powerup.update(); // Add this line
+                powerup.draw();
+                manager.game.resumeScore();
                 for (EnemyCar enemyCar : traffic) {
                     enemyCar.update(traffic);
                     enemyCar.draw();
+                    powerup.check(player);
                     player.check(enemyCar);
                     player.update(this);
                 }
                 break;
             case 1:
-                manager.game.stopScore();
                 menu.gameOver();
                 break;
             case 2:
