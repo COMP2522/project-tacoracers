@@ -73,23 +73,21 @@ public class Menu {
   public void carSelection(){
     window.background(0);
 
-    //red car
-    window.fill(255);
+
+    window.fill(255,255,255);
     window.textAlign(window.CENTER);
     window.textFont(manager.contentLoader.mediumFont);
     window.text("Car Rank", window.width / 2, 90);
 
+    // Red
     window.fill(255, 0, 0);
     window.textAlign(window.CENTER);
     window.textFont(manager.contentLoader.smallFont);
     window.text("Red", 150, 450);
 
-    //image
     window.image(car1, 100, 125, 150, 250);
-    window.fill(255, 0, 0);
-//
 
-    window.fill(255, 0, 0);
+    window.fill(255, 255, 255);
     window.textAlign(window.CENTER);
     window.textFont(manager.contentLoader.smallFont);
     window.textSize(30);
@@ -97,90 +95,57 @@ public class Menu {
     manager.button.red();
 
 
-    //yellow car
-    window.fill(255, 0, 0);
+    // Yellow
+    window.fill(255, 255, 0);
     window.textAlign(window.CENTER);
     window.textFont(manager.contentLoader.smallFont);
-    window.text("yello", 475, 450);
+    window.text("Yellow", 475, 450);
 
-    //image
     window.image(car2, 425, 125, 100, 250);
-//    window.fill(255, 0, 0);
-//    window.rect(425, 125, 100, 250);
-
-    //select/locked
-    if (manager.game.highScore >= 0) {
-      window.fill(255, 0, 0);
+    if (manager.game.highScore >= 1000) {
+      window.fill(255, 255, 255);
       window.textAlign(window.CENTER);
       window.textFont(manager.contentLoader.smallFont);
       window.textSize(30);
       window.text("Select", 475, 525);
       manager.button.yellow();
-      //player.yellowCar();
-    } else {
-      window.fill(255, 0, 0);
-      window.textAlign(window.CENTER);
-      window.textFont(manager.contentLoader.smallFont);
-      window.textSize(30);
-      window.text("Locked", 475, 525);
     }
 
-    //blue car
-    window.fill(255, 0, 0);
+    // Blue
+    window.fill(0, 0, 255);
     window.textAlign(window.CENTER);
     window.textFont(manager.contentLoader.smallFont);
     window.text("Blue", 775, 450);
-
-    //image
     window.image(car3, 725, 125, 100, 250);
-//    window.fill(255, 0, 0);
-//    window.rect(725, 125, 100, 250);
-
-    //select/locked
-    if (manager.game.highScore >= 0) {
-      window.fill(255, 0, 0);
+    if (manager.game.highScore >= 2500) {
+      window.fill(255, 255, 255);
       window.textAlign(window.CENTER);
       window.textFont(manager.contentLoader.smallFont);
       window.textSize(30);
       window.text("Select", 775, 525);
       manager.button.blue();
-      //player.BlueCar();
-    } else {
-      window.fill(255, 0, 0);
-      window.textAlign(window.CENTER);
-      window.textFont(manager.contentLoader.smallFont);
-      window.textSize(30);
-      window.text("Locked", 775, 525);
     }
 
-    //purple car
-    window.fill(255, 0, 0);
+    // Purple
+    window.fill(160, 32, 240);
     window.textAlign(window.CENTER);
     window.textFont(manager.contentLoader.smallFont);
     window.text("Purple", 1075, 450);
     window.image(car4, 1025, 125, 100, 250);
-
-    //select/locked
-    if (manager.game.highScore >= 0) {
-      window.fill(255, 0, 0);
+    if (manager.game.highScore >= 5000) {
+      window.fill(255, 255, 255);
       window.textAlign(window.CENTER);
       window.textFont(manager.contentLoader.smallFont);
       window.textSize(30);
       window.text("Select", 1075, 525);
       manager.button.purple();
       //player.BlueCar();
-    } else {
-      window.fill(255, 0, 0);
-      window.textAlign(window.CENTER);
-      window.textFont(manager.contentLoader.smallFont);
-      window.textSize(30);
-      window.text("Locked", 1075, 525);
-      //player.GreenCar();
     }
   }
 
 
   public void gameOver() {
+    manager.game.stopScore();
     window.background(0);
     scoreDisplay = String.format("Your score: %d", manager.game.score);
     System.out.println(scoreDisplay);

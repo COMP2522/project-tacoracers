@@ -21,14 +21,17 @@ public class Elements {
   }
   public void muteButton() {
     window.image(manager.contentLoader.mute, 300, 25);
-    manager.button.mute();
-  }
-  public void muted() {
+    manager.button.checkMuteButtonClick();
     if (manager.muted) {
       window.fill(0);
       window.textFont(manager.contentLoader.tinyFont);
       window.text("Muted!", 400, 25);
+      window.musicPlayer.stop();
     }
+  }
+
+  public void muted(boolean muted) {
+
   }
   public void borders() {
     window.background(0);

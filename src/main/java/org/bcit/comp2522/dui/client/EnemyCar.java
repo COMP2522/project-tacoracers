@@ -16,7 +16,7 @@ import static java.lang.Math.random;
 public class EnemyCar extends Sprite implements Drawable {
 
     // Main lanes are 140, 327 and 515. All other numbers are to account for AFK cheating
-    public final float[] lanes = {140, 170, 297, 327, 357, 485, 515};
+    public final float[] lanes = {140, 175, 297, 327, 357, 485, 515};
 
     // Image for the enemyCar
     private PImage car;

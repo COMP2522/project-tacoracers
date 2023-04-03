@@ -23,11 +23,13 @@ public class ContentLoader extends PApplet {
   public PImage heartLost;
   public PImage roadLine;
   public PImage mute;
+  public  PImage playercar;
+  public PImage powerup;
   public PFont bigFont;
   public PFont smallFont;
   public PFont mediumFont;
   public PFont tinyFont;
-  public  PImage playercar;
+
   public PImage getCar(){
     return playercar;
   }
@@ -48,6 +50,7 @@ public class ContentLoader extends PApplet {
     heartLost = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/heartLost.png"));
     roadLine = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/roadline.png"));
     mute = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/mute.png"));
+    powerup = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/repair.png"));
   }
 
   public void loadFonts(PApplet p) {
