@@ -9,9 +9,10 @@ public class Button {
         this.manager = manager;
     }
     public void reset() {
-        manager.ui.player.lives = 3;
+        manager.ui.getPlayer().lives = 3;
         manager.game.updateHighScore();
         manager.game.resetScore();
+        manager.game.resumeScore();
         manager.keyInput.pressedKeys.clear();
     }
 
@@ -129,6 +130,7 @@ public class Button {
                 && window.mouseY > 380 && window.mouseY < 455) {
             if (window.mousePressed) {
                 reset();
+                System.out.println("here");
                 manager.screenState = 3;
             }
         }
@@ -148,7 +150,7 @@ public class Button {
             window.text("Select", 150, 525);
 
             if (window.mousePressed) {
-                manager.ui.player.pickPlayer(manager.contentLoader.playerImageRed);
+                manager.ui.getPlayer().pickPlayer(manager.contentLoader.playerImageRed);
                 manager.screenState = 0;
             }
         }
@@ -169,7 +171,7 @@ public class Button {
             window.text("Select", 475, 525);
 
             if (window.mousePressed) {
-                manager.ui.player.pickPlayer(manager.contentLoader.playerImageYellow);
+                manager.ui.getPlayer().pickPlayer(manager.contentLoader.playerImageYellow);
                 manager.screenState = 0;
             }
         }
@@ -189,7 +191,7 @@ public class Button {
             window.text("Select", 775, 525);
 
             if (window.mousePressed) {
-                manager.ui.player.pickPlayer(manager.contentLoader.playerImageBlue);
+                manager.ui.getPlayer().pickPlayer(manager.contentLoader.playerImageBlue);
                 manager.screenState = 0;
             }
         }
@@ -210,7 +212,7 @@ public class Button {
             window.text("Select", 1075, 525);
 
             if (window.mousePressed) {
-                manager.ui.player.pickPlayer(manager.contentLoader.playerImagePurple);
+                manager.ui.getPlayer().pickPlayer(manager.contentLoader.playerImagePurple);
                 manager.screenState = 0;
             }
         }

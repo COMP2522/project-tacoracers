@@ -23,6 +23,10 @@ public class Game {
 
   Timer scoreTimer;
 
+  public Game(Manager manager) {
+    this.manager = manager;
+  }
+
   private Game() {
     scoreTimer = new Timer(delay, new ActionListener() {
       public void actionPerformed(ActionEvent e) {

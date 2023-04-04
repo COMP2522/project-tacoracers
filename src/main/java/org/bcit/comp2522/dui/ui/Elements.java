@@ -33,6 +33,8 @@ public class Elements {
   public void muted(boolean muted) {
 
   }
+
+
   public void borders() {
     window.background(0);
     window.rect(0, 600, 1280, 500); // top of the border
