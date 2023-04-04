@@ -1,10 +1,6 @@
 package org.bcit.comp2522.dui.client;
 
 import processing.core.*;
-import java.math.*;
-import java.util.ArrayList;
-
-import static java.lang.Math.random;
 
 /**
  * EnemyCar represents and individual enemy in the world. Each enemy can
@@ -25,7 +21,7 @@ public class EnemyCar extends Sprite implements Drawable {
     private float originalSpeed;
 
     // Collection of different car sprites
-    private ArrayList<PImage> carImages;
+    private CarLinkedList<PImage> carImages;
 
     /**
      * Constructor setting car properties, initializing PImage array and picking a car image.
@@ -37,7 +33,7 @@ public class EnemyCar extends Sprite implements Drawable {
      * @param speed float
      * @param carImages arraylist
      */
-    public EnemyCar(Manager manager, Window window, PVector position, float width, float height, float speed, ArrayList<PImage> carImages) {
+    public EnemyCar(Manager manager, Window window, PVector position, float width, float height, float speed, CarLinkedList<PImage> carImages) {
         super(manager, window, position, width, height, speed);
         this.originalSpeed = speed;
         this.carImages = carImages;
@@ -80,18 +76,18 @@ public class EnemyCar extends Sprite implements Drawable {
      * Moves EnemyCar from the end of the screen to the left and moving them back to the right again
      * @param enemyCars the arraylist of enemyCars, used in UI.java
      */
-    public void update(ArrayList<EnemyCar> enemyCars) {
+    public void update(CarLinkedList<EnemyCar> enemyCars) {
         float minDistance = 200;
 
-        for (EnemyCar otherCar : enemyCars) {
+        enemyCars.forEach(otherCar -> {
             if (otherCar == this) {
-                continue;
+                return;
             }
 
             if (checkCarOverlap(otherCar, minDistance)) {
                 this.setSpeed(otherCar.getSpeed());
             }
-        }
+        });
 
         position.x -= getSpeed();
         if (position.x < -getWidth()) {

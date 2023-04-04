@@ -4,7 +4,7 @@ import org.bcit.comp2522.dui.client.*;
 import processing.core.PImage;
 import processing.core.PVector;
 
-import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * UI controls in what orders players see content.
@@ -13,34 +13,69 @@ import java.util.ArrayList;
  * @author Eric Tatchell
  */
 public class UI implements Drawable {
-    public final float[] lanes = {140, 327, 515};
-    public ArrayList<PImage> cars;
-    public ArrayList<EnemyCar> traffic;
-    public Player player;
-    public float playerWidth = 140;
-    public float playerHeight = 75;
-    private float slowedEnemyCarSpeed = 1.6F;
-    public Menu menu;
-    public Button button;
-    public Manager manager;
-    public Elements elements;
-    public PowerUp powerup;
+
+    // 3 main lanes
+    private final float[] lanes = {140, 327, 515};
+
+    // linked list of potential car images
+    private CarLinkedList<PImage> cars;
+
+    // linked list of enemycars
+    private CarLinkedList<EnemyCar> traffic;
+
+    // default player width
+    private float playerWidth = 140;
+
+    // default player width
+    private float playerHeight = 75;
+
+    // default powerup width
+    private float powerUpWidth = 100;
+
+    // default powerup height
+    private float powerUpHeight = 100;
+
+    // default powerup speed
+    private float powerUpSpeed = 20;
+
+    // menu instance
+    private Menu menu;
+
+    // player instance
+    private Player player;
+
+    // button instance
+    private Button button;
+
+    // manager instance
+    private Manager manager;
+
+    // instance for ui elements
+    private Elements elements;
+
+    // instance for the powerup
+    private PowerUp powerup;
+
+    // window instance
     private Window window;
 
+
+    /**
+     * Constructor creating all objects.
+     * @param manager manager
+     * @param loader contentloader
+     * @param scene window
+     */
     public UI(Manager manager, ContentLoader loader, Window scene) {
         this.manager = manager;
         this.elements = new Elements(scene, manager, loader); // Keep this one
         this.player = new Player(manager, scene, new PVector(scene.width / 5, 327), playerWidth, playerHeight);
-        this.traffic = new ArrayList<EnemyCar>();
-        this.cars = new ArrayList<>();
+        this.traffic = new CarLinkedList<EnemyCar>();
+        this.cars = new CarLinkedList<>();
         this.button = new Button(scene, manager);
         this.menu = new Menu(manager, scene);
         this.window = scene;
 
-        // Updated PowerUp instantiation
-        float powerUpWidth = 100;
-        float powerUpHeight = 100;
-        float powerUpSpeed = 20;
         PVector powerUpPosition = new PVector(window.width, (float) (Math.random() * (window.height - 240) + 140));
         this.powerup = new PowerUp(manager, scene, powerUpPosition, powerUpWidth, powerUpHeight, powerUpSpeed);
 
@@ -49,6 +84,7 @@ public class UI implements Drawable {
     }
 
 
+    // spawns most UI elements
     public void uiElements() {
         window.background(0);
         manager.game.start();
@@ -56,11 +92,18 @@ public class UI implements Drawable {
         elements.displayScore();
         elements.displayHighScore();
         elements.muteButton();
-        player.displayHealth();
         manager.path.drawLines();
+        manager.managePowerUp(powerup);
+        powerup.update();
+        powerup.draw();
+        player.displayHealth();
         player.draw();
     }
 
+    /**
+     * Sets the powerups position.
+     * @param powerup PowerUp
+     */
     public void spawnPowerUp(PowerUp powerup) {
         if (!powerup.isActive()) {
             float x = window.width;
@@ -70,20 +113,31 @@ public class UI implements Drawable {
         }
     }
 
-
-    private boolean carOverlap(EnemyCar car, ArrayList<EnemyCar> traffic) {
+    /**
+     * Checks for car overlap.
+     * @param car EnemyCar
+     * @param traffic CarLinkedList
+     * @return t/f
+     */
+    private boolean carOverlap(EnemyCar car, CarLinkedList<EnemyCar> traffic) {
         float minDistance = 50; // Set the minimum distance between cars here.
 
-        for (EnemyCar otherCar : traffic) {
+        AtomicBoolean hasOverlap = new AtomicBoolean(false);
+        traffic.forEach(otherCar -> {
             if (car.checkCarOverlap(otherCar, minDistance)) {
-                return true;
+                hasOverlap.set(true);
             }
-        }
-        return false;
+        });
+
+        return hasOverlap.get();
     }
 
 
-    private void spawnCars(ArrayList<EnemyCar> traffic) {
+    /**
+     * Sets the EnemyCar positions.
+     * @param traffic CarLinkedList
+     */
+    private void spawnCars(CarLinkedList<EnemyCar> traffic) {
         int numCars = 2;
         int numLanes = lanes.length;
         float carSpacing = window.width / numCars;
@@ -107,22 +161,20 @@ public class UI implements Drawable {
         }
     }
 
+
+    // UI drawing
     @Override
     public void draw() {
         switch (manager.screenState) {
             case 0:
                 uiElements();
-                manager.managePowerUp(powerup);
-                powerup.update(); // Add this line
-                powerup.draw();
-                manager.game.resumeScore();
-                for (EnemyCar enemyCar : traffic) {
+                traffic.forEach(enemyCar -> {
                     enemyCar.update(traffic);
                     enemyCar.draw();
                     powerup.check(player);
                     player.check(enemyCar);
                     player.update(this);
-                }
+                });
                 break;
             case 1:
                 menu.gameOver();
@@ -142,6 +194,38 @@ public class UI implements Drawable {
             case 6:
                 break;
         }
+    }
+
+    /**
+     * Getter for the player
+     * @return player
+     */
+    public Player getPlayer() {
+        return player;
+    }
+
+    /**
+     * Getter for the enemy car list
+     * @return traffic
+     */
+    public CarLinkedList<EnemyCar> getTraffic() {
+        return traffic;
+    }
+
+    /**
+     * Getter for car images
+     * @return cars
+     */
+    public CarLinkedList<PImage> getCars() {
+        return cars;
+    }
+
+    /**
+     * Getter for the powerup.
+     * @return powerup
+     */
+    public PowerUp getPowerup() {
+        return powerup;
     }
 
     public void init() {

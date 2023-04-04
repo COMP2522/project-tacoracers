@@ -125,9 +125,9 @@ public class KeyInput {
             if (!isSpeedHalved) {
                 speedMultiplier = 0.5f;
                 // Iterate over enemy cars and set their speed to half of their original speed
-                for (EnemyCar enemyCar : ui.traffic) {
+                ui.getTraffic().forEach(enemyCar -> {
                     enemyCar.setSpeed(enemyCar.getOriginalSpeed() * speedMultiplier);
-                }
+                });
                 powerup.halfSpeed();
                 // Set the flag to indicate that the speed has been halved
                 isSpeedHalved = true;
@@ -138,9 +138,9 @@ public class KeyInput {
                 handleKeyEvent(LEFT, manager.path, false);
                 speedMultiplier = 1.0f;
                 // Iterate over enemy cars and set their speed to their original speed
-                for (EnemyCar enemyCar : ui.traffic) {
+                ui.getTraffic().forEach(enemyCar -> {
                     enemyCar.setSpeed(enemyCar.getOriginalSpeed() * speedMultiplier);
-                }
+                });
                 powerup.resetSpeed();
                 // Set the flag to indicate that the speed is no longer halved
                 isSpeedHalved = false;

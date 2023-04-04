@@ -1,13 +1,10 @@
 package org.bcit.comp2522.dui.ui;
 
-import org.bcit.comp2522.dui.client.Button;
+import org.bcit.comp2522.dui.client.CarLinkedList;
 import org.bcit.comp2522.dui.client.Manager;
-import org.bcit.comp2522.dui.client.Window;
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PImage;
-
-import java.util.ArrayList;
 
 /**
  * ContentLoader loads fonts and images at the start of the program.
@@ -60,7 +57,7 @@ public class ContentLoader extends PApplet {
     tinyFont = p.createFont(sketchPath("src/main/java/org/bcit/comp2522/dui/content/PublicPixel-z84yD.ttf"), 24, true);
   }
 
-  void loadCarImages(Manager manager, ArrayList<PImage> cars) {
+  void loadCarImages(Manager manager, CarLinkedList<PImage> cars) {
     for (int i = 1; i <= 5; i++) {
       PImage carImage = loadImage("src/main/java/org/bcit/comp2522/dui/content/carImage" + i + ".png");
       cars.add(carImage);
