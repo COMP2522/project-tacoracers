@@ -45,11 +45,6 @@ public class KeyInput {
         this.manager = manager;
     }
 
-    // used at game over screen to clear key presses from the finished game
-    public void reset() {
-        pressedKeys.clear();
-    }
-
     /**
      * handleKeyEvent is the primary moving logic for the player.
      * Supports UP, DOWN and LEFT. Sets the players position based on a CLICK HOLD principle
@@ -78,13 +73,13 @@ public class KeyInput {
                 case LEFT:
                     // slow the game down
                     path.setSpeed(10);
-                    player.setSpeed(player.slowedPlayerSpeed);
+                    player.setSpeed(player.getSlowedPlayerSpeed());
                     // halves the score increment
                     if (manager.game.getScoreIncrement() / 2 == 5) {
                         manager.game.setScoreIncrement(manager.game.getScoreIncrement() / 2);
                     }
                     window.fill(255, 255, 255);
-                    window.textFont(manager.contentLoader.mediumFont);
+                    window.textFont(manager.contentLoader.getMediumFont());
                     window.text("SLOWED", (window.width / 4), 327);
                     break;
             }
@@ -103,7 +98,7 @@ public class KeyInput {
     /**
      * updateKeyStates is the primary communicator for UI to track key presses
      *
-     * @param ui
+     * @param ui UI to be updated
      */
     public void updateKeyStates(UI ui) {
         // Check if the UP key is pressed

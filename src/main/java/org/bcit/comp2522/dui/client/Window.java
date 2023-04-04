@@ -1,8 +1,6 @@
 package org.bcit.comp2522.dui.client;
 
-import org.bcit.comp2522.dui.ui.ContentLoader;
 import processing.core.PApplet;
-import processing.core.PFont;
 
 /**
  * Window creates the actual window and Manager runs the game.

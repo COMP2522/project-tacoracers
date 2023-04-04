@@ -1,6 +1,7 @@
 package org.bcit.comp2522.dui.ui;
 
 import org.bcit.comp2522.dui.client.*;
+import processing.core.*;
 
 
 /**
@@ -8,50 +9,64 @@ import org.bcit.comp2522.dui.client.*;
  *
  * @author Eric Tatchell
  */
-public class Elements {
-  private ContentLoader loader;
-  private Manager manager;
-  private Window window;
-  private Path path;
+public abstract class Elements {
 
+  // CL instance
+  private ContentLoader loader;
+
+  // Manager instance
+  private Manager manager;
+
+  // Window instance
+  private Window window;
+
+  /**
+   * Creates an elements object.
+   * @param window Window
+   * @param manager Manager
+   * @param loader ContentLoader
+   */
   public Elements(Window window, Manager manager, ContentLoader loader) {
     this.manager = manager;
     this.loader = loader;
     this.window = window;
   }
+
+  // draws the mute button
   public void muteButton() {
-    window.image(manager.contentLoader.mute, 300, 25);
+    window.image(manager.contentLoader.getMute(), 300, 25);
     manager.button.checkMuteButtonClick();
     if (manager.muted) {
-      window.fill(0);
-      window.textFont(manager.contentLoader.tinyFont);
-      window.text("Muted!", 400, 25);
+      displayText(loader.getTinyFont(), 0, 0, 0, 0,
+              "Muted!", 400, 25);
       window.musicPlayer.stop();
     }
   }
 
-  public void muted(boolean muted) {
-
-  }
-
-
+  // draws the white border on top
   public void borders() {
     window.background(0);
-    window.rect(0, 600, 1280, 500); // top of the border
     window.fill(255);
-    window.rect(0, 100, 1280, -500); // bottom of the border
-    window.fill(255);
+    window.rect(0, 100, 1280, -500);
   }
-  public void displayScore() {
-    window.textFont(manager.contentLoader.tinyFont);
-    window.textAlign(manager.LEFT);
-    window.fill(0, 0, 255);
-    window.text("Score: " + manager.game.score, 850, 75); // display the score at position (, )
-  }
-  public void displayHighScore() {
-    window.textFont(manager.contentLoader.tinyFont);
-    window.textAlign(manager.LEFT);
-    window.fill(0, 0, 255);
-    window.text("High Score: " + manager.game.highScore, 850, 45); // display the high score at position (, )
+
+  /**
+   * Displays text to the screen.
+   * @param font PFont from ContentLoader
+   * @param align Left, middle or right align. 0 if no align!!
+   * @param R Red RGB value
+   * @param G Green RGB value
+   * @param B Blue RGB value
+   * @param text String
+   * @param x x pos
+   * @param y y pos
+   */
+  public void displayText(PFont font, int align, float R, float G, float B, String text, float x, float y) {
+    window.fill(R,G,B);
+    window.textFont(font);
+    if (align != 0) {
+      window.textAlign(align);
+    }
+    window.text(text, x, y);
   }
 }
