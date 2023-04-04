@@ -1,5 +1,6 @@
 package org.bcit.comp2522.dui.client;
 
+
 public class Button {
     private Window window;
     private Manager manager;
