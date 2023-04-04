@@ -2,6 +2,8 @@ package org.bcit.comp2522.dui.client;
 
 
 public class Button {
+
+    // manager instance
     private Window window;
     private Manager manager;
 
