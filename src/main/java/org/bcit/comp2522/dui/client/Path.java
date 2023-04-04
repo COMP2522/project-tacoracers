@@ -12,9 +12,8 @@ public class Path {
 
     private Window window;
     private Manager manager;
-    UI ui;
-    float[] linePositions;
-    public float speed = 20;
+    private float[] linePositions;
+    private float speed = 20;
 
     public Path(Manager manager, Window scene) {
         this.manager = manager;
@@ -31,7 +30,6 @@ public class Path {
     }
 
     public void drawLines() {
-        window.fill(240, 230, 140);
 
         // Update line positions
         for (int i = 0; i < linePositions.length; i++) {
@@ -44,8 +42,8 @@ public class Path {
         // Draw the roadlines
         for (float linePosition : linePositions) {
             for (int i = 0; i < 4; i++) {
-                window.image(manager.contentLoader.roadLine, linePosition + i * 180, 430);
-                window.image(manager.contentLoader.roadLine, linePosition + i * 180, 233);
+                window.image(manager.contentLoader.getRoadLine(), linePosition + i * 180, 430);
+                window.image(manager.contentLoader.getRoadLine(), linePosition + i * 180, 233);
             }
         }
     }

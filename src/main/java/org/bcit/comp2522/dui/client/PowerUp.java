@@ -5,7 +5,7 @@ import processing.core.PVector;
 
 import java.util.ArrayList;
 
-public class PowerUp extends Sprite implements Drawable {
+public class PowerUp extends Sprite implements Drawable, Collidable {
 
     // window instance
     private Window window;
@@ -79,13 +79,19 @@ public class PowerUp extends Sprite implements Drawable {
      * @param player
      * @return
      */
-    private boolean collide(Player player) {
-        float minDistanceX = (width / 2) + (player.getWidth() / 2);
-        float minDistanceY = (height / 2) + (player.getHeight() / 2);
-        if (Math.abs(getPosition().x - player.getPosition().x) < minDistanceX
-                && Math.abs(getPosition().y - player.getPosition().y) < minDistanceY) {
-            return true;
-        }
+    @Override
+    public boolean collide(Player player) {
+       float minDistanceX = (width / 2) + (player.getWidth() / 2);
+       float minDistanceY = (height / 2) + (player.getHeight() / 2);
+       if (Math.abs(getPosition().x - player.getPosition().x) < minDistanceX
+               && Math.abs(getPosition().y - player.getPosition().y) < minDistanceY) {
+           return true;
+       }
+       return false;
+    }
+
+    @Override
+    public boolean collide(EnemyCar enemyCar) {
         return false;
     }
 
@@ -96,15 +102,15 @@ public class PowerUp extends Sprite implements Drawable {
      */
     public void check(Player player) {
         if (collide(player)) {
-            if (player.lives == 3) {
+            if (player.getLives() == 3) {
                 for (int i = 0; i < 10000; i++); {
                     window.fill(255, 255, 255);
-                    window.textFont(manager.contentLoader.mediumFont);
+                    window.textFont(manager.contentLoader.getMediumFont());
                     window.text("HEALTH FULL", (window.width / 4), 327);
                 }
             } else {
                 this.position.x -= 1000;
-                player.lives = 3;
+                player.setLives(3);
             }
         }
     }
@@ -113,8 +119,7 @@ public class PowerUp extends Sprite implements Drawable {
     @Override
     public void draw() {
         if (active) {
-            window.image(parent.contentLoader.powerup, position.x, position.y, 100, 100);
-            System.out.println("Powerup drawn");
+            window.image(parent.contentLoader.getPowerup(), position.x, position.y, 100, 100);
         }
     }
 }

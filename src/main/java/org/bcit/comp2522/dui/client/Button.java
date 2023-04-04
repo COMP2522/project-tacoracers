@@ -9,7 +9,7 @@ public class Button {
         this.manager = manager;
     }
     public void reset() {
-        manager.ui.getPlayer().lives = 3;
+        manager.ui.getPlayer().setLives(manager.ui.getPlayer().getDefaultLives());
         manager.game.updateHighScore();
         manager.game.resetScore();
         manager.game.resumeScore();
@@ -23,7 +23,7 @@ public class Button {
             window.rect((window.width / 2) - 150, 450, 300, 125);
             window.textAlign(window.CENTER);
             window.fill(255, 255, 255);
-            window.textFont(manager.contentLoader.mediumFont);
+            window.textFont(manager.contentLoader.getMediumFont());
             window.text("PLAY", window.width / 2, 535);
             if (window.mousePressed) { // when play button is pressed
                 manager.screenState = 3;
@@ -41,7 +41,7 @@ public class Button {
             window.rect(375, 125, 525, 125);
             window.textAlign(window.CENTER);
             window.fill(255, 255, 255);
-            window.textFont(manager.contentLoader.smallFont);
+            window.textFont(manager.contentLoader.getSmallFont());
             window.text("Difficulty", window.width / 2, 200);
 
             if (window.mousePressed) {
@@ -59,7 +59,7 @@ public class Button {
             window.rect((window.width / 2) - 150, 225, 300, 125);
             window.textAlign(window.CENTER);
             window.fill(255, 255, 255);
-            window.textFont(manager.contentLoader.smallFont);
+            window.textFont(manager.contentLoader.getSmallFont());
             window.text("Cars", window.width / 2, 300);
 
             if (window.mousePressed) {
@@ -77,7 +77,7 @@ public class Button {
             window.rect(350, 325, 575, 125);
             window.textAlign(window.CENTER);
             window.fill(255, 255, 255);
-            window.textFont(manager.contentLoader.smallFont);
+            window.textFont(manager.contentLoader.getSmallFont());
             window.text("Leaderboard", window.width / 2, 400);
 
             if (window.mousePressed) {
@@ -95,7 +95,7 @@ public class Button {
             window.rect(775, 450, 250, 125);
             window.textAlign(window.CENTER);
             window.fill(255, 255, 255);
-            window.textFont(manager.contentLoader.smallFont);
+            window.textFont(manager.contentLoader.getSmallFont());
             window.text("Quit", 900, 535);
 
             if (window.mousePressed) {
@@ -109,7 +109,7 @@ public class Button {
         window.rect((window.width / 2) - 270, 465, 540, 75);
         window.textAlign(window.CENTER);
         window.fill(0);
-        window.textFont(manager.contentLoader.smallFont);
+        window.textFont(manager.contentLoader.getSmallFont());
         window.text("RESTART", (window.width / 2), 525);
         if (window.mouseX > window.width / 2 - 270 && window.mouseX < window.width / 2 + 270
                 && window.mouseY > 465 && window.mouseY < 535) {
@@ -124,7 +124,7 @@ public class Button {
         window.rect((window.width / 2) - 270, 380, 540, 75);
         window.textAlign(window.CENTER);
         window.fill(0);
-        window.textFont(manager.contentLoader.smallFont);
+        window.textFont(manager.contentLoader.getSmallFont());
         window.text("MAIN MENU", (window.width / 2), 440);
         if (window.mouseX > window.width / 2 - 270 && window.mouseX < window.width / 2 + 270
                 && window.mouseY > 380 && window.mouseY < 455) {
@@ -145,12 +145,12 @@ public class Button {
             window.rect(50, 475, 200, 75);
             window.textAlign(window.CENTER);
             window.fill(255);
-            window.textFont(manager.contentLoader.smallFont);
+            window.textFont(manager.contentLoader.getSmallFont());
             window.textSize(30);
             window.text("Select", 150, 525);
 
             if (window.mousePressed) {
-                manager.ui.getPlayer().pickPlayer(manager.contentLoader.playerImageRed);
+                manager.ui.getPlayer().pickPlayer(manager.contentLoader.getPlayerImageRed());
                 manager.screenState = 0;
             }
         }
@@ -166,12 +166,12 @@ public class Button {
 
             window.textAlign(window.CENTER);
             window.fill(255, 0, 0);
-            window.textFont(manager.contentLoader.smallFont);
+            window.textFont(manager.contentLoader.getSmallFont());
             window.textSize(30);
             window.text("Select", 475, 525);
 
             if (window.mousePressed) {
-                manager.ui.getPlayer().pickPlayer(manager.contentLoader.playerImageYellow);
+                manager.ui.getPlayer().pickPlayer(manager.contentLoader.getPlayerImageYellow());
                 manager.screenState = 0;
             }
         }
@@ -186,12 +186,12 @@ public class Button {
 
             window.textAlign(window.CENTER);
             window.fill(255, 0, 0);
-            window.textFont(manager.contentLoader.smallFont);
+            window.textFont(manager.contentLoader.getSmallFont());
             window.textSize(30);
             window.text("Select", 775, 525);
 
             if (window.mousePressed) {
-                manager.ui.getPlayer().pickPlayer(manager.contentLoader.playerImageBlue);
+                manager.ui.getPlayer().pickPlayer(manager.contentLoader.getPlayerImageBlue());
                 manager.screenState = 0;
             }
         }
@@ -207,19 +207,19 @@ public class Button {
 
             window.textAlign(window.CENTER);
             window.fill(255, 0, 0);
-            window.textFont(manager.contentLoader.smallFont);
+            window.textFont(manager.contentLoader.getSmallFont());
             window.textSize(30);
             window.text("Select", 1075, 525);
 
             if (window.mousePressed) {
-                manager.ui.getPlayer().pickPlayer(manager.contentLoader.playerImagePurple);
+                manager.ui.getPlayer().pickPlayer(manager.contentLoader.getPlayerImagePurple());
                 manager.screenState = 0;
             }
         }
     }
     public void checkMuteButtonClick() {
-        if (window.mousePressed && window.mouseX >= 300 && window.mouseX <= 300 + manager.contentLoader.mute.width &&
-                window.mouseY >= 25 && window.mouseY <= 25 + manager.contentLoader.mute.height) {
+        if (window.mousePressed && window.mouseX >= 300 && window.mouseX <= 300 + manager.contentLoader.getMute().width &&
+                window.mouseY >= 25 && window.mouseY <= 25 + manager.contentLoader.getMute().height) {
             manager.muted = true;
         }
     }

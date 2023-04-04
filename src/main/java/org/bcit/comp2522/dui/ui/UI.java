@@ -12,7 +12,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  *
  * @author Eric Tatchell
  */
-public class UI implements Drawable {
+public class UI extends Elements implements Drawable {
 
     // 3 main lanes
     private final float[] lanes = {140, 327, 515};
@@ -67,8 +67,8 @@ public class UI implements Drawable {
      * @param scene window
      */
     public UI(Manager manager, ContentLoader loader, Window scene) {
+        super(scene, manager, loader);
         this.manager = manager;
-        this.elements = new Elements(scene, manager, loader); // Keep this one
         this.player = new Player(manager, scene, new PVector(scene.width / 5, 327), playerWidth, playerHeight);
         this.traffic = new CarLinkedList<EnemyCar>();
         this.cars = new CarLinkedList<>();
@@ -79,7 +79,7 @@ public class UI implements Drawable {
         PVector powerUpPosition = new PVector(window.width, (float) (Math.random() * (window.height - 240) + 140));
         this.powerup = new PowerUp(manager, scene, powerUpPosition, powerUpWidth, powerUpHeight, powerUpSpeed);
 
-        loader.loadCarImages(manager, cars);
+        loader.loadCarImages(cars);
         spawnCars(traffic);
     }
 
@@ -88,10 +88,13 @@ public class UI implements Drawable {
     public void uiElements() {
         window.background(0);
         manager.game.start();
-        elements.borders();
-        elements.displayScore();
-        elements.displayHighScore();
-        elements.muteButton();
+        borders();
+        displayText(manager.contentLoader.getTinyFont(), window.LEFT,
+                0, 0, 255, "Score: " + manager.game.score, 850, 75);
+        displayText(manager.contentLoader.getTinyFont(), window.LEFT,
+                0, 0, 255, "High Score: " + manager.game.score, 850, 45);
+
+        muteButton();
         manager.path.drawLines();
         manager.managePowerUp(powerup);
         powerup.update();
