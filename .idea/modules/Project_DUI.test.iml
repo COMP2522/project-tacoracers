@@ -10,7 +10,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../library/core.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../library/jogl-all.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -28,7 +28,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../library/jogl-all.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../library/core.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
