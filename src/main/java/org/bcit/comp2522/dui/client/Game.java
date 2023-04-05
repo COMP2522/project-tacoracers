@@ -5,17 +5,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * TODO: this
+ * Game class controls player's name and score.
  *
- * @author Pavan Brar
+ * @author Pavanpreet Brar
  */
 public class Game {
-  private static Game theGame; // Static variable reference of theGame of type Singleton
   public long highScore = 0;
   public long score = 0;
   public int scoreIncrement = 10; // Score increment amount in each timer tick
   public int delay = 100;
-  public String name = "Barack Obama"; // Temporary variable until user is able to input their name
+  public String gamePlayerName = "";
 
   Window window;
   // initial variables to work with, both for displaying and tracking score
@@ -23,21 +22,21 @@ public class Game {
 
   Timer scoreTimer;
 
+  /**
+   * Constructor creates a manager and timer object.
+   * Timer is assigned to the scoreTimer instance variable
+   *
+   * @param manager Manager
+   */
   public Game(Manager manager) {
     this.manager = manager;
-  }
-
-  private Game() {
-    scoreTimer = new Timer(delay, new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        updateScore();
-//        System.out.println(score);
-      }
-    });
+    scoreTimer = new Timer(delay, e ->
+            updateScore());
   }
 
   /**
-   * For use when user is slowed
+   * For use when user is slowed.
+   *
    * @param num int
    */
   public void setScoreIncrement(int num) {
@@ -45,37 +44,45 @@ public class Game {
   }
 
   /**
-   * Getter for score increment
+   * Getter for score increment.
+   *
    * @return scoreIncrement
    */
   public int getScoreIncrement() {
     return scoreIncrement;
   }
+
+  /**
+   * Starts the score timer.
+   */
   public void start() {
     scoreTimer.start();
   }
 
-  // Static method to create instance of Singleton class
-  public static Game getInstance() {
-    if (theGame == null) {
-      theGame = new Game();
-    }
-    return theGame;
-  }
-
-  void setup() {
-    highScore = loadHighScoreFromFile(); // load high score from database
-  }
-
+  /**
+   * Stops the score timer.
+   */
   public void stopScore() {
     scoreIncrement = 0;
   }
+
+  /**
+   * Resumes the score timer.
+   */
   public void resumeScore() {
       scoreIncrement = 10;
   }
+
+  /**
+   * Updates the score every 100 milliseconds.
+   */
   public void updateScore() {
     score += scoreIncrement; // Increment the score by the scoreIncrement amount
   }
+
+  /**
+   * Updates the high score and saves it to database.
+   */
   public void updateHighScore() {
     if (score > highScore) {
       highScore = score; // if the user beats the previous high score, their score becomes the new high score
@@ -83,17 +90,29 @@ public class Game {
     }
   }
 
+  /**
+   * Resets the score.
+   */
   public void resetScore() {
     score = 0;
   }
 
-  int loadHighScoreFromFile() {
-    return 0;
+  /**
+   * Sets the player name to a variable used to save it to the database.
+   *
+   * @param playerName
+   */
+  public void setPlayerName(String playerName) {
+    manager.menu.playerName = playerName;
+    this.gamePlayerName = playerName;
   }
 
+  /**
+   * Saves the high score using a put method from the database handler.
+   */
   DatabaseHandler dbh = new DatabaseHandler("pavanbrar73", "KFmJyFJrTM6Dd7c2");
   public void saveHighScoreToFile() {
-    dbh.put("name", name, "score", highScore);
+    dbh.put("name", gamePlayerName, "score", highScore);
   }
 
 }

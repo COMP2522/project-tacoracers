@@ -59,6 +59,8 @@ public class UI extends Elements implements Drawable {
     // window instance
     private Window window;
 
+    private Leaderboard leaderboard;
+
 
     /**
      * Constructor creating all objects.
@@ -75,6 +77,8 @@ public class UI extends Elements implements Drawable {
         this.button = new Button(scene, manager);
         this.menu = new Menu(manager, scene);
         this.window = scene;
+        this.leaderboard = new Leaderboard(manager, scene);
+
 
         PVector powerUpPosition = new PVector(window.width, (float) (Math.random() * (window.height - 240) + 140));
         this.powerup = new PowerUp(manager, scene, powerUpPosition, powerUpWidth, powerUpHeight, powerUpSpeed);
@@ -197,7 +201,7 @@ public class UI extends Elements implements Drawable {
                 menu.carSelection();
                 break;
             case 5:
-                menu.Leaderboard();
+                leaderboard.leaderboard();
                 break;
             case 6:
                 break;
