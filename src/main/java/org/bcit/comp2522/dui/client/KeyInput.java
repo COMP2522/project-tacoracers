@@ -73,7 +73,6 @@ public class KeyInput {
                 case LEFT:
                     // slow the game down
                     path.setSpeed(10);
-                    player.setSpeed(player.getSlowedPlayerSpeed());
                     // halves the score increment
                     if (manager.game.getScoreIncrement() / 2 == 5) {
                         manager.game.setScoreIncrement(manager.game.getScoreIncrement() / 2);

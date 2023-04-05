@@ -153,8 +153,4 @@ public class Player extends Sprite implements Collidable {
     public int getDefaultLives() {
         return defaultLives;
     }
-
-    public float getSlowedPlayerSpeed() {
-        return getSlowedPlayerSpeed();
-    }
 }
