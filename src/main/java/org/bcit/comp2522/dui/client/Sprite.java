@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author Eric Tatchell
  */
-public abstract class Sprite {
+public abstract class Sprite implements Collidable {
 
     // instance for width
     protected float width;
@@ -65,6 +65,8 @@ public abstract class Sprite {
         this.height = height;
         this.speed = speed;
     }
+
+
 
     /**
      * Getter for speed.

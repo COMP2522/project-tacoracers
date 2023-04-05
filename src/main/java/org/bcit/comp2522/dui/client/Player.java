@@ -19,6 +19,9 @@ public class Player extends Sprite implements Collidable {
     // representing player speed
     private final float playerSpeed = 0.3F;
 
+    // representing slowed player speed
+    private final float slowedPlayerSpeed = 0.1f;
+
     // representing the player image
     private PImage playerImage;
 
@@ -104,7 +107,6 @@ public class Player extends Sprite implements Collidable {
     }
 
 
-    @Override
     /**
      * Checks for a collision between the player and another player.
      * As it is not applicable in this context, this method always returns false.
@@ -152,5 +154,9 @@ public class Player extends Sprite implements Collidable {
 
     public int getDefaultLives() {
         return defaultLives;
+    }
+
+    public float getSlowedPlayerSpeed() {
+        return getSlowedPlayerSpeed();
     }
 }

@@ -33,7 +33,7 @@ public class Button extends ButtonHandler {
         float y2 = 575;
         if (hover(x1, x2, y1, y2)) {
             window.fill(0, 0, 255);
-            window.rect(x1, x2, 300, 125);
+            window.rect(x1, x2, y1, y2);
             manager.ui.displayText(manager.contentLoader.getMediumFont(), window.CENTER,
                     255, 255, 255, "PLAY", middle, 535);
             if (clickedWhileHover(x1, x2, y1, y2)) {

@@ -46,11 +46,17 @@ public class EnemyCar extends Sprite implements Drawable {
      * @param minDistance float, can be random
      * @return overlap true/false
      */
-    public boolean checkCarOverlap(EnemyCar otherCar, float minDistance) {
+    public boolean shouldStop(EnemyCar otherCar, float minDistance) {
         float distanceX = Math.abs(otherCar.position.x - this.position.x);
         float distanceY = Math.abs(otherCar.position.y - this.position.y);
 
         return distanceX < minDistance && distanceY < getHeight();
+    }
+
+    public void checkOverlap(EnemyCar otherCar) {
+        if (collide(otherCar)) {
+            position.x -= 1000;
+        }
     }
 
     /**
@@ -84,7 +90,7 @@ public class EnemyCar extends Sprite implements Drawable {
                 return;
             }
 
-            if (checkCarOverlap(otherCar, minDistance)) {
+            if (shouldStop(otherCar, minDistance)) {
                 this.setSpeed(otherCar.getSpeed());
             }
         });
@@ -103,6 +109,16 @@ public class EnemyCar extends Sprite implements Drawable {
     @Override
     public void draw() {
         window.image(car, position.x, position.y, width, height);
+    }
+
+    @Override
+    public boolean collide(Player player) {
+        return false;
+    }
+
+    @Override
+    public boolean collide(EnemyCar enemyCar) {
+        return false;
     }
 }
 

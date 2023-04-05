@@ -127,7 +127,7 @@ public class UI extends Elements implements Drawable {
 
         AtomicBoolean hasOverlap = new AtomicBoolean(false);
         traffic.forEach(otherCar -> {
-            if (car.checkCarOverlap(otherCar, minDistance)) {
+            if (car.shouldStop(otherCar, minDistance)) {
                 hasOverlap.set(true);
             }
         });
@@ -174,6 +174,11 @@ public class UI extends Elements implements Drawable {
                 traffic.forEach(enemyCar -> {
                     enemyCar.update(traffic);
                     enemyCar.draw();
+                    traffic.forEach(enemyCar1 -> {
+                        if (enemyCar1.collide2(enemyCar)) {
+                            enemyCar1.setPosition(enemyCar.getPosition().x + 200, 0);
+                        }
+                    });
                     powerup.check(player);
                     player.check(enemyCar);
                     player.update(this);
