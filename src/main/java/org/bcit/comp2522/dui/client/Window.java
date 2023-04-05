@@ -16,7 +16,7 @@ public class Window extends PApplet {
 
     public void setup() {
         background(0);
-        musicPlayer = new MusicPlayer("src/main/java/org/bcit/comp2522/dui/content/Team America - America, Fck Yeah! (Lyrics).wav");
+        musicPlayer = new MusicPlayer("src/main/java/org/bcit/comp2522/dui/content/Redneck1.wav");
         musicPlayer.play();
         manager = new Manager();
         manager.contentLoader.load();
