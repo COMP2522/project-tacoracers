@@ -15,14 +15,13 @@ public class Window extends PApplet {
     }
 
     public void setup() {
-        surface.setTitle("DUI");
+        background(0);
         musicPlayer = new MusicPlayer("src/main/java/org/bcit/comp2522/dui/content/Team America - America, Fck Yeah! (Lyrics).wav");
-//        musicPlayer.play();
+        musicPlayer.play();
         manager = new Manager();
         manager.contentLoader.load();
         manager.contentLoader.loadFonts(this);
         manager.run(this);
-        background(0);
     }
 
     @Override
