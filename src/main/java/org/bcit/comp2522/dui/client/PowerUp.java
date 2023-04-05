@@ -118,8 +118,10 @@ public class PowerUp extends Sprite implements Drawable, Collidable {
     // Draws the powerup on screen
     @Override
     public void draw() {
-        if (active) {
+        if (active && parent.contentLoader.getPowerup() != null) {
             window.image(parent.contentLoader.getPowerup(), position.x, position.y, 100, 100);
+        } else {
+            System.out.println("wtf");
         }
     }
 }

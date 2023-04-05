@@ -15,6 +15,7 @@ public class Window extends PApplet {
     }
 
     public void setup() {
+        surface.setTitle("DUI");
         musicPlayer = new MusicPlayer("src/main/java/org/bcit/comp2522/dui/content/Team America - America, Fck Yeah! (Lyrics).wav");
 //        musicPlayer.play();
         manager = new Manager();
