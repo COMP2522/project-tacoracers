@@ -18,6 +18,8 @@ public class Manager extends PApplet {
   public KeyInput keyInput;
   public boolean muted;
 
+  public Menu menu;
+
   /**
    * screenState tracks the current state of the screen and which to show.
    * 0: Playing
@@ -35,6 +37,7 @@ public class Manager extends PApplet {
   public Manager() {
     contentLoader = new ContentLoader();
   }
+
   public void run(Window scene) {
     screenState = 2; // main menu
     carType = 2;
@@ -42,7 +45,8 @@ public class Manager extends PApplet {
     path = new Path(this, scene); // Move this line before the UI initialization
     ui = new UI(this, contentLoader, scene);
     keyInput = new KeyInput(scene, ui.getPlayer(), this, ui.getPowerup());
-    game = Game.getInstance();
+    game = new Game(this);
+    this.menu = new Menu(this, scene);
     button = new Button(scene, this);
     ui.init();
   }
