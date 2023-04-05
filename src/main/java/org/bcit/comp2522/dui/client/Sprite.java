@@ -117,4 +117,8 @@ public abstract class Sprite implements Collidable {
         this.position.x = x;
         this.position.y = y;
     }
+
+    public void setPosition(PVector p) {
+        this.position = p;
+    }
 }

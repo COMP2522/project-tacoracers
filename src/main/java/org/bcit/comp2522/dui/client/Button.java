@@ -19,23 +19,25 @@ public class Button extends ButtonHandler {
         this.middle = window.width / 2;
     }
     public void reset() {
-        manager.ui.getPlayer().setLives(manager.ui.getPlayer().getDefaultLives());
         manager.game.updateHighScore();
+        manager.ui.getPlayer().setLives(manager.ui.getPlayer().getDefaultLives());
         manager.game.resetScore();
         manager.game.resumeScore();
         manager.keyInput.pressedKeys.clear();
     }
+
 
     public void play() {
         float x1 = middle - 150;
         float x2 = middle + 150;
         float y1 = 450;
         float y2 = 575;
+
         if (hover(x1, x2, y1, y2)) {
-            window.fill(0, 0, 0);
-            window.rect(x1, x2, 300, 125);
+            window.fill(0, 0, 255);
+            window.rect( x1, y1, 300, 125);
             manager.ui.displayText(manager.contentLoader.getMediumFont(), window.CENTER,
-                    0, 0, 255, "PLAY", middle, 535);
+                    255, 255, 255, "PLAY", middle, 535);
             if (clickedWhileHover(x1, x2, y1, y2)) {
                 manager.screenState = 3;
             }

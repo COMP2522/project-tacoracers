@@ -96,7 +96,7 @@ public class UI extends Elements implements Drawable {
         displayText(manager.contentLoader.getTinyFont(), window.LEFT,
                 0, 0, 255, "Score: " + manager.game.score, 850, 75);
         displayText(manager.contentLoader.getTinyFont(), window.LEFT,
-                0, 0, 255, "High Score: " + manager.game.score, 850, 45);
+                0, 0, 255, "High Score: " + manager.game.highScore, 850, 45);
 
         muteButton();
         manager.path.drawLines();
@@ -121,26 +121,6 @@ public class UI extends Elements implements Drawable {
     }
 
     /**
-     * Checks for car overlap.
-     * @param car EnemyCar
-     * @param traffic CarLinkedList
-     * @return t/f
-     */
-    private boolean carOverlap(EnemyCar car, CarLinkedList<EnemyCar> traffic) {
-        float minDistance = 50; // Set the minimum distance between cars here.
-
-        AtomicBoolean hasOverlap = new AtomicBoolean(false);
-        traffic.forEach(otherCar -> {
-            if (car.shouldStop(otherCar, minDistance)) {
-                hasOverlap.set(true);
-            }
-        });
-
-        return hasOverlap.get();
-    }
-
-
-    /**
      * Sets the EnemyCar positions.
      * @param traffic CarLinkedList
      */
@@ -148,21 +128,13 @@ public class UI extends Elements implements Drawable {
         int numCars = 2;
         int numLanes = lanes.length;
         float carSpacing = window.width / numCars;
-
         for (int i = 0; i < numCars; i++) {
             for (int j = 0; j < numLanes; j++) {
                 float carWidth = 140;
                 float carHeight = 75;
                 float carSpeed = (float) (Math.random() * 8 + 7);
-                float xPos = i * carSpacing + carWidth / 2 + (carSpacing / 2 * j);
+                int xPos = (int) (Math.random() * 2560);
                 EnemyCar car = new EnemyCar(manager, window, new PVector(xPos, lanes[j]), carWidth, carHeight, carSpeed, cars);
-
-                // Adjust the car's position until it does not overlap with any existing car
-                while (carOverlap(car, traffic)) {
-                    xPos += 10; // Increase the X position until there is no overlap
-                    car.getPosition().x = xPos;
-                }
-
                 traffic.add(car);
             }
         }
@@ -178,11 +150,7 @@ public class UI extends Elements implements Drawable {
                 traffic.forEach(enemyCar -> {
                     enemyCar.update(traffic);
                     enemyCar.draw();
-                    traffic.forEach(enemyCar1 -> {
-                        if (enemyCar1.collide2(enemyCar)) {
-                            enemyCar1.setPosition(enemyCar.getPosition().x + 200, 0);
-                        }
-                    });
+                    enemyCar.collide(traffic);
                     powerup.check(player);
                     player.check(enemyCar);
                     player.update(this);

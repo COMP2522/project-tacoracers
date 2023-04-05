@@ -53,11 +53,45 @@ public class EnemyCar extends Sprite implements Drawable {
         return distanceX < minDistance && distanceY < getHeight();
     }
 
-    public void checkOverlap(EnemyCar otherCar) {
-        if (collide(otherCar)) {
-            position.x -= 1000;
+    /**
+     * Checks if the current EnemyCar instance collides with any other EnemyCar in the given linked list.
+     * If a collision is detected, the method adjusts the position of the current EnemyCar and
+     * returns true. Otherwise, it returns false.
+     *
+     * @param enemyCars a CarLinkedList of EnemyCar objects to check for collisions
+     * @return true if a collision is detected, false otherwise
+     */
+    public boolean collide(CarLinkedList<EnemyCar> enemyCars) {
+        boolean collided = false;
+
+        for (int i = 0; i < enemyCars.size(); i++) {
+            EnemyCar otherCar = enemyCars.get(i);
+
+            if (otherCar == this) {
+                continue;
+            }
+
+            float distanceX = Math.abs(otherCar.position.x - this.position.x);
+            float distanceY = Math.abs(otherCar.position.y - this.position.y);
+
+            boolean overlap = distanceX < getWidth() && distanceY < getHeight();
+
+            if (overlap) {
+                enemyCars.remove(this);
+                float offset = (float) (Math.random() * window.width * 0.5);
+                this.position.x = window.width + getWidth() + offset;
+                int laneIndex = (int) (Math.random() * lanes.length);
+                this.position.y = lanes[laneIndex];
+                enemyCars.add(this);
+                collided = true;
+                break; // exit the loop once a collision is detected
+            }
         }
+
+        return collided;
     }
+
+
 
     /**
      * Original speed getter.
@@ -83,7 +117,7 @@ public class EnemyCar extends Sprite implements Drawable {
      * @param enemyCars the arraylist of enemyCars, used in UI.java
      */
     public void update(CarLinkedList<EnemyCar> enemyCars) {
-        float minDistance = 200;
+        float minDistance = 300;
 
         enemyCars.forEach(otherCar -> {
             if (otherCar == this) {
