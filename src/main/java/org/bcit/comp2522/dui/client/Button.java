@@ -1,13 +1,22 @@
 package org.bcit.comp2522.dui.client;
 
 
-public class Button {
-    private Window window;
+public class Button extends ButtonHandler {
+
+    // manager instance
     private Manager manager;
 
+    // window instance
+    private Window window;
+
+    // middle width value
+    private int middle;
+
     public Button(Window window, Manager manager) {
-        this.window = window;
-        this.manager = manager;
+        super(window, manager);
+        this.manager = getManager();
+        this.window = getWindow();
+        this.middle = window.width / 2;
     }
     public void reset() {
         manager.ui.getPlayer().setLives(manager.ui.getPlayer().getDefaultLives());
@@ -18,15 +27,16 @@ public class Button {
     }
 
     public void play() {
-        if (window.mouseX > ((window.width / 2) - 150) && window.mouseX < ((window.width / 2)) + 150
-                && window.mouseY > 450 && window.mouseY < 575) {
+        float x1 = middle - 150;
+        float x2 = middle + 150;
+        float y1 = 450;
+        float y2 = 575;
+        if (hover(x1, x2, y1, y2)) {
             window.fill(0, 0, 255);
-            window.rect((window.width / 2) - 150, 450, 300, 125);
-            window.textAlign(window.CENTER);
-            window.fill(255, 255, 255);
-            window.textFont(manager.contentLoader.getMediumFont());
-            window.text("PLAY", window.width / 2, 535);
-            if (window.mousePressed) { // when play button is pressed
+            window.rect(x1, x2, 300, 125);
+            manager.ui.displayText(manager.contentLoader.getMediumFont(), window.CENTER,
+                    255, 255, 255, "PLAY", middle, 535);
+            if (clickedWhileHover(x1, x2, y1, y2)) {
                 manager.screenState = 3;
             }
         }
