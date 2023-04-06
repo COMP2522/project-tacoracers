@@ -45,15 +45,23 @@ public class Player extends Sprite implements Collidable {
      *
      * @param enemyCar The enemy car to check for collision with the player.
      */
-    public void check(EnemyCar enemyCar) {
+    public void check(EnemyCar enemyCar, CarLinkedList<EnemyCar> enemyCars) {
         if (collide(enemyCar) && lives <= 3) {
             lives -= 1;
-            enemyCar.setPosition(enemyCar.getPosition().x - 1000, 0);
             if (lives == -1) {
                 manager.screenState = 1;
             }
+
+            // Handle enemyCar removal and repositioning
+            enemyCars.remove(enemyCar);
+            float offset = (float) (Math.random() * window.width * 0.5);
+            enemyCar.position.x = window.width + enemyCar.getWidth() + offset;
+            int laneIndex = (int) (Math.random() * enemyCar.lanes.length);
+            enemyCar.position.y = enemyCar.lanes[laneIndex];
+            enemyCars.add(enemyCar);
         }
     }
+
 
     public void setLives(int lives) {
         this.lives = lives;
@@ -148,7 +156,7 @@ public class Player extends Sprite implements Collidable {
      * @param ui The UI object handling user input.
      */
     public void update(UI ui) {
-        manager.keyInput.updateKeyStates(ui);
+        manager.keyInput.updateKeyStates();
         ContentLoader contentLoader = manager.contentLoader;
     }
 

@@ -12,16 +12,16 @@ import processing.core.*;
 public class EnemyCar extends Sprite implements Drawable {
 
     // Main lanes are 140, 327 and 515. All other numbers are to account for AFK cheating
-    public final float[] lanes = {140, 175, 297, 327, 357, 485, 515};
+    public final float[] lanes = {140, 175, 230, 297, 327, 357, 385, 435, 485, 515};
 
     // Image for the enemyCar
     private PImage car;
 
     // enemyCar's original speed value
-    private float originalSpeed;
+    private final float originalSpeed;
 
     // Collection of different car sprites
-    private CarLinkedList<PImage> carImages;
+    private final CarLinkedList<PImage> carImages;
 
     /**
      * Constructor setting car properties, initializing PImage array and picking a car image.
@@ -84,7 +84,7 @@ public class EnemyCar extends Sprite implements Drawable {
                 this.position.y = lanes[laneIndex];
                 enemyCars.add(this);
                 collided = true;
-                break; // exit the loop once a collision is detected
+                break;
             }
         }
 

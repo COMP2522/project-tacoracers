@@ -1,6 +1,6 @@
 package org.bcit.comp2522.dui.client;
 
-import processing.core.PApplet;
+import processing.core.*;
 
 /**
  * Window creates the actual window and Manager runs the game.
@@ -10,14 +10,16 @@ import processing.core.PApplet;
 public class Window extends PApplet {
     private Manager manager;
     public MusicPlayer musicPlayer;
+    PImage background;
     public void settings() {
         size(1280,600);
     }
 
     public void setup() {
-        background(0);
+        background = loadImage("src/main/java/org/bcit/comp2522/dui/content/background3.png");
+        background(background);
         musicPlayer = new MusicPlayer("src/main/java/org/bcit/comp2522/dui/content/Redneck1.wav");
-        musicPlayer.play();
+//        musicPlayer.play();
         manager = new Manager();
         manager.contentLoader.load();
         manager.contentLoader.loadFonts(this);
@@ -27,14 +29,14 @@ public class Window extends PApplet {
     @Override
     public void keyPressed() {
         if (manager.screenState == 0) { // playing
-            manager.keyInput.pressedKeys.add(this.keyCode);
+            manager.keyInput.getPressedKeys().add(this.keyCode);
         }
     }
 
     @Override
     public void keyReleased() {
         if (manager.screenState == 0) { // playing
-            manager.keyInput.pressedKeys.remove(this.keyCode);
+            manager.keyInput.getPressedKeys().remove(this.keyCode);
         }
     }
 

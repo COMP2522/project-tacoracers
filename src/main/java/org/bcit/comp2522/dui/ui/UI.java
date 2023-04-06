@@ -39,27 +39,27 @@ public class UI extends Elements implements Drawable {
     private float powerUpSpeed = 20;
 
     // menu instance
-    private Menu menu;
+    private final Menu menu;
 
     // player instance
-    private Player player;
+    private final Player player;
 
     // button instance
     private Button button;
 
     // manager instance
-    private Manager manager;
+    private final Manager manager;
 
     // instance for ui elements
     private Elements elements;
 
     // instance for the powerup
-    private PowerUp powerup;
+    private final PowerUp powerup;
 
     // window instance
-    private Window window;
+    private final Window window;
 
-    private Leaderboard leaderboard;
+    private final Leaderboard leaderboard;
 
 
     /**
@@ -126,15 +126,13 @@ public class UI extends Elements implements Drawable {
      */
     private void spawnCars(CarLinkedList<EnemyCar> traffic) {
         int numCars = 2;
-        int numLanes = lanes.length;
-        float carSpacing = window.width / numCars;
         for (int i = 0; i < numCars; i++) {
-            for (int j = 0; j < numLanes; j++) {
+            for (float lane : lanes) {
                 float carWidth = 140;
                 float carHeight = 75;
                 float carSpeed = (float) (Math.random() * 8 + 7);
                 int xPos = (int) (Math.random() * 2560);
-                EnemyCar car = new EnemyCar(manager, window, new PVector(xPos, lanes[j]), carWidth, carHeight, carSpeed, cars);
+                EnemyCar car = new EnemyCar(manager, window, new PVector(xPos, lane), carWidth, carHeight, carSpeed, cars);
                 traffic.add(car);
             }
         }
@@ -152,7 +150,7 @@ public class UI extends Elements implements Drawable {
                     enemyCar.draw();
                     enemyCar.collide(traffic);
                     powerup.check(player);
-                    player.check(enemyCar);
+                    player.check(enemyCar, traffic);
                     player.update(this);
                 });
                 break;

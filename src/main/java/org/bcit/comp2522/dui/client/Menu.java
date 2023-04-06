@@ -28,7 +28,7 @@ public class Menu {
   }
 
   public void menu2() {
-    window.background(0);
+    window.background(window.background);
 
 
     window.fill(255);
@@ -54,6 +54,7 @@ public class Menu {
     window.text("Cars", window.width / 2 + 10, 100 + 200);
     manager.button.cars();
 
+
     // Should take you to a page to show you the top 10 scores
     window.fill(0, 0, 255);
     window.textAlign(window.CENTER);
@@ -77,7 +78,7 @@ public class Menu {
    * then in the player class you can use a switch statement to change the color of the car.
    */
   public void carSelection(){
-    window.background(0);
+    window.background(window.background);
 
 
     window.fill(255,255,255);
@@ -152,7 +153,7 @@ public class Menu {
 
   public void gameOver() {
     manager.game.stopScore();
-    window.background(0);
+    window.background(window.background);
     scoreDisplay = String.format("Your score: %d", manager.game.score);
 
     if (manager.game.score > manager.game.highScore) {
@@ -181,7 +182,7 @@ public class Menu {
 
   public void main() {
     validateName();
-    window.background(0);
+    window.background(window.background);
     window.fill(255);
     window.textAlign(window.CENTER);
     window.textFont(manager.contentLoader.getBigFont());

@@ -23,7 +23,7 @@ public class Button extends ButtonHandler {
         manager.ui.getPlayer().setLives(manager.ui.getPlayer().getDefaultLives());
         manager.game.resetScore();
         manager.game.resumeScore();
-        manager.keyInput.pressedKeys.clear();
+        manager.keyInput.getPressedKeys().clear();
     }
 
 
