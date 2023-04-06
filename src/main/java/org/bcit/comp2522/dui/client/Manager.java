@@ -20,6 +20,8 @@ public class Manager extends PApplet {
 
   public Menu menu;
 
+  public int diffState;
+
   /**
    * screenState tracks the current state of the screen and which to show.
    * 0: Playing
@@ -41,6 +43,7 @@ public class Manager extends PApplet {
   public void run(Window scene) {
     screenState = 2; // main menu
     carType = 2;
+    diffState = 2; // medium
 
     path = new Path(this, scene); // Move this line before the UI initialization
     ui = new UI(this, contentLoader, scene);
