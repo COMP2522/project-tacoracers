@@ -9,24 +9,18 @@ import processing.core.*;
  * @author Eric Tatchell
  */
 public class ContentLoader extends PApplet {
-
-  // red car
-  private PImage playerImageRed;
-
-  // yellow car
-  private PImage playerImageYellow;
-
-  // blue car
-  private PImage playerImageBlue;
-
-  // purple car
-  private PImage playerImagePurple;
-
-  // health point
-  private PImage heart;
-
-  // empty health point
-  private PImage heartLost;
+  public PImage playerImageRed;
+  public PImage playerImageYellow;
+  public PImage playerImageBlue;
+  public PImage playerImagePurple;
+  public PImage playerImagemoto1;
+  public PImage playerImagemoto2;
+  public PImage playerImagemoto3;
+  public PImage playerImagemoto4;
+  public PImage playerImagetruck1;
+  public PImage heart;
+  public PImage heartLost;
+  public  PImage playercar;
 
   // individual road line image
   private PImage roadLine;
@@ -52,10 +46,21 @@ public class ContentLoader extends PApplet {
 
   // loads image assets at setup
   public void load() {
+    //cars
     playerImageYellow = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/lambo.png"));
     playerImageRed = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/redside2.png"));
     playerImagePurple = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/Purp.png"));
     playerImageBlue = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/viper.png"));
+
+    //moto
+    playerImagemoto1 = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/redBikeSide.png"));
+    playerImagemoto2 = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/yellowBikeSide.png"));
+    playerImagemoto3 = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/bike1Side.png"));
+    playerImagemoto4 = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/purpleBikeSide.png"));
+
+    //truck
+    playerImagetruck1 = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/truck1Side.png"));
+
     heart = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/heart.png"));
     heartLost = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/heartLost.png"));
     roadLine = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/roadline.png"));
@@ -158,6 +163,97 @@ public class ContentLoader extends PApplet {
   public void setPlayerImagePurple(PImage playerImagePurple) {
     this.playerImagePurple = playerImagePurple;
   }
+
+  /**
+   * Returns the player's PImage.
+   *
+   * @return A PImage object representing the player's image Moto(red)
+   */
+  public PImage getPlayerImagemoto1() {
+    return playerImagemoto1;
+  }
+
+  /**
+   * Sets the player's image Moto(red).
+   *
+   * @param playerImagemoto1 A PImage object representing the player's image Moto(red).
+   */
+  public void setPlayerImagemoto1(PImage playerImagemoto1) {
+    this.playerImagemoto1 = playerImagemoto1;
+  }
+
+  /**
+   * Returns the player's PImage.
+   *
+   * @return A PImage object representing the player's image Moto(yellow)
+   */
+  public PImage getPlayerImagemoto2() {
+    return playerImagemoto2;
+  }
+
+  /**
+   * Sets the player's image Moto(yellow).
+   *
+   * @param playerImagemoto2 A PImage object representing the player's image Moto(yellow).
+   */
+  public void setPlayerImagemoto2(PImage playerImagemoto2) {
+    this.playerImagemoto2 = playerImagemoto2;
+  }
+
+  /**
+   * Returns the player's PImage.
+   *
+   * @return A PImage object representing the player's image Moto(blue)
+   */
+  public PImage getPlayerImagemoto3() {
+    return playerImagemoto3;
+  }
+
+  /**
+   * Sets the player's image Moto(blue).
+   *
+   * @param playerImagemoto3 A PImage object representing the player's image Moto(blue).
+   */
+  public void setPlayerImagemoto3(PImage playerImagemoto3) {
+    this.playerImagemoto3 = playerImagemoto3;
+  }
+
+  /**
+   * Returns the player's PImage.
+   *
+   * @return A PImage object representing the player's image Moto(purple)
+   */
+  public PImage getPlayerImagemoto4() {
+    return playerImagemoto4;
+  }
+
+  /**
+   * Sets the player's image Moto(purple).
+   *
+   * @param playerImagemoto4 A PImage object representing the player's image Moto(purple).
+   */
+  public void setPlayerImagemoto4(PImage playerImagemoto4) {
+    this.playerImagemoto4 = playerImagemoto4;
+  }
+
+  /**
+   * Returns the player's PImage.
+   *
+   * @return A PImage object representing the player's image truck1(red)
+   */
+  public PImage getPlayerImagetruck1() {
+    return playerImagetruck1;
+  }
+
+    /**
+     * Sets the player's image truck1(red).
+     *
+     * @param playerImagetruck1 A PImage object representing the player's image truck1(red).
+     */
+  public void setPlayerImagetruck1(PImage playerImagetruck1) {
+    this.playerImagetruck1 = playerImagetruck1;
+  }
+
 
 
   /**

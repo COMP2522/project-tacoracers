@@ -44,7 +44,20 @@ public class Button extends ButtonHandler {
         }
     }
 
-
+    public void play2() {
+        if (window.mouseX > (750) && window.mouseX < (900) + 150
+                && window.mouseY > 465 && window.mouseY < 575) {
+            window.fill(0, 0, 255);
+            window.rect(750, 465, 300, 110);
+            window.textAlign(window.CENTER);
+            window.fill(255, 255, 255);
+            window.textFont(manager.contentLoader.getMediumFont());
+            window.text("PLAY", 900, 550);
+            if (window.mousePressed) { // when play button is pressed
+                manager.screenState = 0;
+            }
+        }
+    }
 
     public void diff() {
         if (window.mouseX > ((window.width / 2) - 150) &&
@@ -102,14 +115,14 @@ public class Button extends ButtonHandler {
 
 
     public void quit() {
-        if (window.mouseX > ((900) - 150) && window.mouseX < ((900)) + 150
-                && window.mouseY > 450 && window.mouseY < 575) {
+        if (window.mouseX > ((120) - 150) && window.mouseX < ((120)) + 150
+                && window.mouseY > 50 && window.mouseY < 150) {
             window.fill(0, 0, 255);
-            window.rect(775, 450, 250, 125);
+            window.rect(10, 20, 210, 125);
             window.textAlign(window.CENTER);
             window.fill(255, 255, 255);
             window.textFont(manager.contentLoader.getSmallFont());
-            window.text("Quit", 900, 535);
+            window.text("Quit", 120, 100);
 
             if (window.mousePressed) {
                 window.exit();
@@ -164,7 +177,8 @@ public class Button extends ButtonHandler {
 
             if (window.mousePressed) {
                 manager.ui.getPlayer().pickPlayer(manager.contentLoader.getPlayerImageRed());
-                manager.screenState = 0;
+                manager.screenState = 3;
+
             }
         }
     }
@@ -185,7 +199,8 @@ public class Button extends ButtonHandler {
 
             if (window.mousePressed) {
                 manager.ui.getPlayer().pickPlayer(manager.contentLoader.getPlayerImageYellow());
-                manager.screenState = 0;
+                manager.screenState = 3;
+
             }
         }
     }
@@ -205,7 +220,8 @@ public class Button extends ButtonHandler {
 
             if (window.mousePressed) {
                 manager.ui.getPlayer().pickPlayer(manager.contentLoader.getPlayerImageBlue());
-                manager.screenState = 0;
+                manager.screenState = 3;
+
             }
         }
     }
@@ -226,14 +242,192 @@ public class Button extends ButtonHandler {
 
             if (window.mousePressed) {
                 manager.ui.getPlayer().pickPlayer(manager.contentLoader.getPlayerImagePurple());
-                manager.screenState = 0;
+                manager.screenState = 3;
+
             }
         }
     }
-    public void checkMuteButtonClick() {
-        if (window.mousePressed && window.mouseX >= 300 && window.mouseX <= 300 + manager.contentLoader.getMute().width &&
-                window.mouseY >= 25 && window.mouseY <= 25 + manager.contentLoader.getMute().height) {
-            manager.muted = true;
+
+    public void easy() {
+        //easy
+        if (window.mouseX > ((50)) && window.mouseX < ((150)) + 100
+                && window.mouseY > 500 && window.mouseY < 575) {
+
+            window.fill(0, 0, 255);
+            window.rect(50, 475, 200, 75);
+            window.textAlign(window.CENTER);
+            window.fill(255);
+            window.textFont(manager.contentLoader.getSmallFont());
+            window.textSize(30);
+            window.text("Select", 150, 525);
+
+            if (window.mousePressed) {
+                manager.ui.getPlayer().pickPlayer(manager.contentLoader.playerImagemoto1);
+                manager.screenState = 3;
+                manager.diffState = 1;
+
+                // player.setWidth(low);
+            }
         }
     }
-}
+    public void redbike() {
+        //red
+        if (window.mouseX > ((50)) && window.mouseX < ((150)) + 100
+                && window.mouseY > 500 && window.mouseY < 575) {
+
+            window.fill(0, 0, 255);
+            window.rect(50, 475, 200, 75);
+            window.textAlign(window.CENTER);
+            window.fill(255);
+            window.textFont(manager.contentLoader.getSmallFont());
+            window.textSize(30);
+            window.text("Select", 150, 525);
+
+            if (window.mousePressed) {
+                manager.ui.getPlayer().pickPlayer(manager.contentLoader.getPlayerImagemoto1());
+                manager.screenState = 3;
+            }
+        }
+    }
+
+    public void yellowbike() {
+        //yellow
+        if (window.mouseX > ((375)) && window.mouseX < ((475)) + 100
+                && window.mouseY > 500 && window.mouseY < 575) {
+
+            window.fill(0, 0, 255);
+            window.rect(375, 475, 200, 75);
+
+            window.textAlign(window.CENTER);
+            window.fill(255, 0, 0);
+            window.textFont(manager.contentLoader.getSmallFont());
+            window.textSize(30);
+            window.text("Select", 475, 525);
+
+            if (window.mousePressed) {
+                manager.ui.getPlayer().pickPlayer(manager.contentLoader.getPlayerImagemoto2());
+                manager.screenState = 3;
+            }
+        }
+    }
+
+    public void bluebike() {
+        //blue
+        if (window.mouseX > ((675)) && window.mouseX < ((775)) + 100
+                && window.mouseY > 500 && window.mouseY < 575) {
+
+            window.fill(0, 0, 255);
+            window.rect(675, 475, 200, 75);
+
+            window.textAlign(window.CENTER);
+            window.fill(255, 0, 0);
+            window.textFont(manager.contentLoader.getSmallFont());
+            window.textSize(30);
+            window.text("Select", 775, 525);
+
+            if (window.mousePressed) {
+                manager.ui.getPlayer().pickPlayer(manager.contentLoader.getPlayerImagemoto3());
+                manager.screenState = 3;
+            }
+        }
+    }
+
+    public void purplebike() {
+        //purple
+        if (window.mouseX > ((975)) && window.mouseX < ((1075)) + 100
+                && window.mouseY > 500 && window.mouseY < 575) {
+
+            window.fill(0, 0, 255);
+            window.rect(975, 475, 200, 75);
+
+            window.textAlign(window.CENTER);
+            window.fill(255, 0, 0);
+            window.textFont(manager.contentLoader.getSmallFont());
+            window.textSize(30);
+            window.text("Select", 1075, 525);
+
+            if (window.mousePressed) {
+                manager.ui.getPlayer().pickPlayer(manager.contentLoader.getPlayerImagemoto4());
+                manager.screenState = 3;
+            }
+        }
+    }
+
+
+
+    public void medium() {
+        //easy
+        if (window.mouseX > ((500)) && window.mouseX < ((600)) + 100
+                && window.mouseY > 500 && window.mouseY < 575) {
+
+            window.fill(0, 0, 255);
+            window.rect(500, 475, 200, 75);
+            window.textAlign(window.CENTER);
+            window.fill(255);
+            window.textFont(manager.contentLoader.getSmallFont());
+            window.textSize(30);
+            window.text("Select", 600, 525);
+
+            if (window.mousePressed) {
+                manager.ui.getPlayer().pickPlayer(manager.contentLoader.getPlayerImagemoto1());
+                manager.screenState = 3;
+                manager.diffState = 2;
+
+
+                // player.setWidth(normal);
+            }
+        }
+    }
+
+    public void hard() {
+        //easy
+        if (window.mouseX > ((950)) && window.mouseX < ((1050)) + 100
+                && window.mouseY > 500 && window.mouseY < 575) {
+
+            window.fill(0, 0, 255);
+            window.rect(950, 475, 200, 75);
+            window.textAlign(window.CENTER);
+            window.fill(255);
+            window.textFont(manager.contentLoader.getSmallFont());
+            window.textSize(30);
+            window.text("Select", 1050, 525);
+
+            if (window.mousePressed) {
+                manager.ui.getPlayer().pickPlayer(manager.contentLoader.getPlayerImagetruck1());
+                manager.screenState = 3;
+                manager.diffState = 3;
+
+                // player.setWidth(normal);
+            }
+        }
+    }
+
+
+
+//    public void mute() {
+//        if (window.mouseX > 300 && window.mouseX < 350
+//                && window.mouseY > 25 && window.mouseY < 75) {
+//            if (window.mousePressed) {
+//                window.musicPlayer.stop();
+//                manager.muted = true;
+//                manager.ui.elements.muted();
+//            }
+//        }
+//    }
+            public void checkMuteButtonClick () {
+                if (window.mousePressed && window.mouseX >= 300 && window.mouseX <= 300 + manager.contentLoader.getMute().width &&
+                        window.mouseY >= 25 && window.mouseY <= 25 + manager.contentLoader.getMute().height) {
+                    manager.muted = true;
+                }
+            }
+
+
+            public void back () {
+                if (window.mouseX > 50 && window.mouseX < 150
+                        && window.mouseY > 25 && window.mouseY < 75) {
+                    if (window.mousePressed) {
+                        manager.screenState = 3;
+                    }
+                }
+            }
+        }
