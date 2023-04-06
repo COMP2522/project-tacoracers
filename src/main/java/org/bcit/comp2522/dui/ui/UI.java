@@ -164,12 +164,20 @@ public class UI extends Elements implements Drawable {
                 menu.menu2();
                 break;
             case 4:
-                menu.carSelection();
+                if(manager.diffState == 1){
+                     menu.bikeSelection();
+                } else if (manager.diffState == 2){
+                    menu.carSelection();
+                } else if (manager.diffState == 3){
+                    menu.truckSelection();
+                }
+
                 break;
             case 5:
                 leaderboard.leaderboard();
                 break;
             case 6:
+                menu.difficulty();
                 break;
         }
     }
