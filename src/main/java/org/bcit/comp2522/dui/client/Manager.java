@@ -4,11 +4,6 @@ import org.bcit.comp2522.dui.ui.ContentLoader;
 import org.bcit.comp2522.dui.ui.UI;
 import processing.core.*;
 
-/**
- * Manager class creates a UI and game instance
- *
- * @author Eric Tatchell
- */
 public class Manager extends PApplet {
 
   // UI instance, used for all ui interactions
@@ -35,17 +30,9 @@ public class Manager extends PApplet {
   // for player name
   public Menu menu;
 
-  /**
-   * screenState tracks the current state of the screen and which to show.
-   * 0: Playing
-   * 1: Game Over
-   * 2: Title Screen
-   * 3: Main Menu
-   * 4. Car Selection
-   * 5. Leaderboard
-   * 6. Difficulty
-   */
   public int screenState;
+
+  public int diffState;
 
   public int carType;
 

@@ -5,6 +5,7 @@ import processing.core.PImage;
 import org.bson.Document;
 
 public class Menu {
+
   private Manager manager;
   private Window window;
   String scoreDisplay;
@@ -16,9 +17,18 @@ public class Menu {
 
   private boolean keyPressed = false;
 
-  PImage car1, car2, car3, car4,
-          truck1, truck2, truck3,
-          moto1, moto2, moto3, moto4;
+  PImage car1,
+  car2,
+  car3,
+  car4,
+  truck1,
+  truck2,
+  truck3,
+  moto1,
+  moto2,
+  moto3,
+  moto4;
+
   public Menu(Manager manager, Window scene) {
     this.manager = manager;
     this.window = scene;
@@ -171,12 +181,6 @@ public class Menu {
          then in the player class you can use a switch statement to change the color of the car
          */
 
-  /**
-   * Check the score to see if the player has unlocked the next car if they have then call the
-   * function that will see if the player chooses the red yellow or blue car and then
-   * set the player.carColor to the color they chose
-   * then in the player class you can use a switch statement to change the color of the car.
-   */
   public void carSelection(){
     window.background(window.background);
 

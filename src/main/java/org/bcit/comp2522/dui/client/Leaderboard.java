@@ -7,15 +7,21 @@ import org.bson.Document;
  */
 public class Leaderboard {
 
+    /**
+     * The Manager.
+     */
     public Manager manager;
 
+    /**
+     * The Window.
+     */
     public Window window;
 
     /**
      * Constructor creates a manager and window object.
      *
      * @param manager Manager
-     * @param scene Window
+     * @param scene   Window
      */
     public Leaderboard(Manager manager, Window scene) {
         this.manager = manager;

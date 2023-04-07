@@ -2,6 +2,7 @@ package org.bcit.comp2522.dui.client;
 
 import org.bcit.comp2522.dui.ui.*;
 import processing.core.*;
+
 /**
  * Player represents the movable car in the world.
  * Lives, position and sizing properties are kept.
@@ -28,9 +29,9 @@ public class Player extends Sprite implements Collidable {
     /**
      * Constructs a new Player object with the given properties.
      *
-     * @param manager    The Manager object managing the game state.
-     * @param window     The Window object handling the display.
-     * @param position   The PVector object representing the player's position.
+     * @param manager      The Manager object managing the game state.
+     * @param window       The Window object handling the display.
+     * @param position     The PVector object representing the player's position.
      * @param playerWidth  The width of the player's image.
      * @param playerHeight The height of the player's image.
      */
@@ -43,7 +44,8 @@ public class Player extends Sprite implements Collidable {
     /**
      * Checks for a collision between the player and an enemy car.
      *
-     * @param enemyCar The enemy car to check for collision with the player.
+     * @param enemyCar  The enemy car to check for collision with the player.
+     * @param enemyCars the enemy cars
      */
     public void check(EnemyCar enemyCar, CarLinkedList<EnemyCar> enemyCars) {
         if (collide(enemyCar) && lives <= 3) {
@@ -63,6 +65,11 @@ public class Player extends Sprite implements Collidable {
     }
 
 
+    /**
+     * Sets lives.
+     *
+     * @param lives the lives
+     */
     public void setLives(int lives) {
         this.lives = lives;
     }
@@ -81,30 +88,22 @@ public class Player extends Sprite implements Collidable {
      * case 0: last life
      */
     public void displayHealth() {
-        switch (this.lives) {
-            case 3:
-                window.image(manager.contentLoader.getHeart(), 75, 25, 50, 50);
-                window.image(manager.contentLoader.getHeart(), 135, 25, 50, 50);
-                window.image(manager.contentLoader.getHeart(), 195, 25, 50, 50);
-                break;
-            case 2:
-                window.image(manager.contentLoader.getHeart(), 75, 25, 50, 50);
-                window.image(manager.contentLoader.getHeart(), 135, 25, 50, 50);
-                window.image(manager.contentLoader.getHeartLost(), 195, 25, 50, 50);
-                break;
-            case 1:
-                window.image(manager.contentLoader.getHeart(), 75, 25, 50, 50);
-                window.image(manager.contentLoader.getHeartLost(), 135, 25, 50, 50);
-                window.image(manager.contentLoader.getHeartLost(), 195, 25, 50, 50);
-                break;
-            case 0:
-                window.image(manager.contentLoader.getHeartLost(), 75, 25, 50, 50);
-                window.image(manager.contentLoader.getHeartLost(), 135, 25, 50, 50);
-                window.image(manager.contentLoader.getHeartLost(), 195, 25, 50, 50);
+        int heartXPosition = 75;
+        for (int i = 0; i < 3; i++) {
+            if (i < this.lives) {
+                window.image(manager.contentLoader.getHeart(), heartXPosition, 25, 50, 50);
+            } else {
+                window.image(manager.contentLoader.getHeartLost(), heartXPosition, 25, 50, 50);
+            }
+            heartXPosition += 60;
         }
     }
 
-    // draws the player image on screen
+
+    /**
+     * Draw.
+     */
+// draws the player image on screen
     public void draw() {
         window.image(playerImage, getPosition().x, getPosition().y, width, height);
     }
@@ -150,20 +149,25 @@ public class Player extends Sprite implements Collidable {
         this.lives += a;
     }
 
-    /**
-     * Updates the player's state based on user input.
-     *
-     * @param ui The UI object handling user input.
-     */
-    public void update(UI ui) {
+    // updates the ui's keys
+    public void update() {
         manager.keyInput.updateKeyStates();
-        ContentLoader contentLoader = manager.contentLoader;
     }
 
+    /**
+     * Gets default lives.
+     *
+     * @return the default lives
+     */
     public int getDefaultLives() {
         return defaultLives;
     }
 
+    /**
+     * Gets slowed player speed.
+     *
+     * @return the slowed player speed
+     */
     public float getSlowedPlayerSpeed() {
         return getSlowedPlayerSpeed();
     }

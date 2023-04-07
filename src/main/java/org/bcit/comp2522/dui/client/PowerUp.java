@@ -5,6 +5,9 @@ import processing.core.PVector;
 
 import java.util.ArrayList;
 
+/**
+ * The type Power up.
+ */
 public class PowerUp extends Sprite implements Drawable, Collidable {
 
     // window instance
@@ -16,17 +19,21 @@ public class PowerUp extends Sprite implements Drawable, Collidable {
     // manager instance
     private Manager parent;
 
-    // Main lanes are 140, 327 and 515. All other numbers are to account for AFK cheating
+    /**
+     * The Lanes.
+     */
+// Main lanes are 140, 327 and 515. All other numbers are to account for AFK cheating
     public final float[] lanes = {140, 175, 297, 327, 357, 485, 515};
 
     /**
      * Constructor creating a powerup sprite and assigning instances for usable UI additions
-     * @param manager Manager
-     * @param window Window
+     *
+     * @param manager  Manager
+     * @param window   Window
      * @param position PVector
-     * @param width float
-     * @param height float
-     * @param speed float
+     * @param width    float
+     * @param height   float
+     * @param speed    float
      */
     public PowerUp(Manager manager, Window window, PVector position, float width, float height, float speed) {
         super(manager, window, position, width, height, speed);
@@ -37,6 +44,7 @@ public class PowerUp extends Sprite implements Drawable, Collidable {
 
     /**
      * Checks if on screen.
+     *
      * @return active t/f
      */
     public boolean isActive() {
@@ -45,13 +53,17 @@ public class PowerUp extends Sprite implements Drawable, Collidable {
 
     /**
      * Toggles on screen
+     *
      * @param active boolean
      */
     public void setActive(boolean active) {
         this.active = active;
     }
 
-    // used for moving the powerup from left to right
+    /**
+     * Update.
+     */
+// used for moving the powerup from left to right
     public void update() {
         float minDistance = 10000;
         position.x -= getSpeed();
@@ -64,12 +76,18 @@ public class PowerUp extends Sprite implements Drawable, Collidable {
         }
     }
 
-    // Halves the speed for LEFT key press
+    /**
+     * Half speed.
+     */
+// Halves the speed for LEFT key press
     public void halfSpeed() {
         this.speed /= 2;
     }
 
-    // Resets speed after LEFT key press
+    /**
+     * Reset speed.
+     */
+// Resets speed after LEFT key press
     public void resetSpeed() {
         this.speed *= 2;
     }

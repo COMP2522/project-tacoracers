@@ -25,12 +25,13 @@ public class EnemyCar extends Sprite implements Drawable {
 
     /**
      * Constructor setting car properties, initializing PImage array and picking a car image.
-     * @param manager manager
-     * @param window window
-     * @param position PVector
-     * @param width float
-     * @param height float
-     * @param speed float
+     *
+     * @param manager   manager
+     * @param window    window
+     * @param position  PVector
+     * @param width     float
+     * @param height    float
+     * @param speed     float
      * @param carImages arraylist
      */
     public EnemyCar(Manager manager, Window window, PVector position, float width, float height, float speed, CarLinkedList<PImage> carImages) {
@@ -42,7 +43,8 @@ public class EnemyCar extends Sprite implements Drawable {
 
     /**
      * Boolean function checking for car overlap
-     * @param otherCar EnemyCar
+     *
+     * @param otherCar    EnemyCar
      * @param minDistance float, can be random
      * @return overlap true/false
      */
@@ -92,9 +94,9 @@ public class EnemyCar extends Sprite implements Drawable {
     }
 
 
-
     /**
      * Original speed getter.
+     *
      * @return float original speed
      */
     public float getOriginalSpeed() {
@@ -114,6 +116,7 @@ public class EnemyCar extends Sprite implements Drawable {
     /**
      * Move method for EnemyCar, first checks for car overlap, then sets speed accordingly
      * Moves EnemyCar from the end of the screen to the left and moving them back to the right again
+     *
      * @param enemyCars the arraylist of enemyCars, used in UI.java
      */
     public void update(CarLinkedList<EnemyCar> enemyCars) {

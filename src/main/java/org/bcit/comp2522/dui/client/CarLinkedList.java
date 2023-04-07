@@ -2,15 +2,28 @@ package org.bcit.comp2522.dui.client;
 
 import java.util.function.Consumer;
 
+/**
+ * The type Car linked list.
+ *
+ * @param <T> the type parameter
+ */
 public class CarLinkedList<T> {
     private Node<T> head;
     private int size;
 
+    /**
+     * Instantiates a new Car linked list.
+     */
     public CarLinkedList() {
         head = null;
         size = 0;
     }
 
+    /**
+     * Add.
+     *
+     * @param data the data
+     */
     public void add(T data) {
         Node<T> newNode = new Node<>(data);
         if (head == null) {
@@ -25,6 +38,12 @@ public class CarLinkedList<T> {
         size++;
     }
 
+    /**
+     * Get t.
+     *
+     * @param index the index
+     * @return the t
+     */
     public T get(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index out of bounds");
@@ -38,6 +57,11 @@ public class CarLinkedList<T> {
         return current.data;
     }
 
+    /**
+     * Remove.
+     *
+     * @param data the data
+     */
     public void remove(T data) {
         if (head == null) {
             return;
@@ -60,6 +84,11 @@ public class CarLinkedList<T> {
         }
     }
 
+    /**
+     * For each.
+     *
+     * @param action the action
+     */
     public void forEach(Consumer<T> action) {
         Node<T> current = head;
         while (current != null) {
@@ -68,6 +97,11 @@ public class CarLinkedList<T> {
         }
     }
 
+    /**
+     * Size int.
+     *
+     * @return the int
+     */
     public int size() {
         return size;
     }

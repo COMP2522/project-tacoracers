@@ -9,7 +9,13 @@ import processing.core.*;
  */
 public class Window extends PApplet {
     private Manager manager;
+    /**
+     * The Music player.
+     */
     public MusicPlayer musicPlayer;
+    /**
+     * The Background.
+     */
     PImage background;
     public void settings() {
         size(1280,600);
@@ -44,6 +50,11 @@ public class Window extends PApplet {
         manager.ui.init();
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param passedArgs the input arguments
+     */
     public static void main(String[] passedArgs) {
         String[] appletArgs = new String[]{"eatBubbles"};
         Window eatBubbles = new Window();
