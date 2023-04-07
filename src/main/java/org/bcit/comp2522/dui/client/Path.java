@@ -15,20 +15,39 @@ public class Path {
     private float[] linePositions;
     private float speed = 20;
 
+    /**
+     * Instantiates a new Path.
+     *
+     * @param manager the manager
+     * @param scene   the scene
+     */
     public Path(Manager manager, Window scene) {
         this.manager = manager;
         this.window = scene;
         this.linePositions = new float[] {0, 180, 360, 540, 720, 900, 1080};
     }
 
+    /**
+     * Gets speed.
+     *
+     * @return the speed
+     */
     public float getSpeed() {
         return this.speed;
     }
 
+    /**
+     * Sets speed.
+     *
+     * @param speed the speed
+     */
     public void setSpeed(float speed) {
         this.speed = speed;
     }
 
+    /**
+     * Draw lines.
+     */
     public void drawLines() {
 
         // Update line positions

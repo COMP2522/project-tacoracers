@@ -5,6 +5,7 @@ import processing.core.PImage;
 import org.bson.Document;
 
 public class Menu {
+
   private Manager manager;
   private Window window;
   String scoreDisplay;
@@ -16,9 +17,18 @@ public class Menu {
 
   private boolean keyPressed = false;
 
-  PImage car1, car2, car3, car4,
-          truck1, truck2, truck3,
-          moto1, moto2, moto3, moto4;
+  PImage car1,
+  car2,
+  car3,
+  car4,
+  truck1,
+  truck2,
+  truck3,
+  moto1,
+  moto2,
+  moto3,
+  moto4;
+
   public Menu(Manager manager, Window scene) {
     this.manager = manager;
     this.window = scene;
@@ -45,7 +55,7 @@ public class Menu {
   }
 
   public void menu2() {
-    window.background(0);
+    window.background(window.background);
 
     //quit
     window.fill(0, 0, 255);
@@ -77,6 +87,7 @@ public class Menu {
     window.textFont(manager.contentLoader.getSmallFont());
     window.text("Cars", window.width / 2 + 10, 100 + 200);
     manager.button.cars();
+
 
     // Should take you to a page to show you the top 10 scores
     window.fill(0, 0, 255);
@@ -170,14 +181,8 @@ public class Menu {
          then in the player class you can use a switch statement to change the color of the car
          */
 
-  /**
-   * Check the score to see if the player has unlocked the next car if they have then call the
-   * function that will see if the player chooses the red yellow or blue car and then
-   * set the player.carColor to the color they chose
-   * then in the player class you can use a switch statement to change the color of the car.
-   */
   public void carSelection(){
-    window.background(0);
+    window.background(window.background);
 
     //red car
     window.fill(255);
@@ -501,9 +506,8 @@ public class Menu {
 
   public void gameOver() {
     manager.game.stopScore();
-    window.background(0);
-    scoreDisplay = String.format("Your score: %d", manager.game.score);
-    System.out.println(scoreDisplay);
+    window.background(window.background);
+    scoreDisplay = "Score: " + manager.game.score;
 
     if (manager.game.score > manager.game.highScore) {
       highScoreDisplay = "New High Score!";
@@ -590,7 +594,7 @@ public class Menu {
 
   public void main() {
     validateName();
-    window.background(0);
+    window.background(window.background);
     window.fill(255);
     window.textAlign(window.CENTER);
     window.textFont(manager.contentLoader.getBigFont());

@@ -12,25 +12,26 @@ import processing.core.*;
 public class EnemyCar extends Sprite implements Drawable {
 
     // Main lanes are 140, 327 and 515. All other numbers are to account for AFK cheating
-    public final float[] lanes = {140, 175, 297, 327, 357, 485, 515};
+    public final float[] lanes = {140, 175, 230, 297, 327, 357, 385, 435, 485, 515};
 
     // Image for the enemyCar
     private PImage car;
 
     // enemyCar's original speed value
-    private float originalSpeed;
+    private final float originalSpeed;
 
     // Collection of different car sprites
-    private CarLinkedList<PImage> carImages;
+    private final CarLinkedList<PImage> carImages;
 
     /**
      * Constructor setting car properties, initializing PImage array and picking a car image.
-     * @param manager manager
-     * @param window window
-     * @param position PVector
-     * @param width float
-     * @param height float
-     * @param speed float
+     *
+     * @param manager   manager
+     * @param window    window
+     * @param position  PVector
+     * @param width     float
+     * @param height    float
+     * @param speed     float
      * @param carImages arraylist
      */
     public EnemyCar(Manager manager, Window window, PVector position, float width, float height, float speed, CarLinkedList<PImage> carImages) {
@@ -42,7 +43,8 @@ public class EnemyCar extends Sprite implements Drawable {
 
     /**
      * Boolean function checking for car overlap
-     * @param otherCar EnemyCar
+     *
+     * @param otherCar    EnemyCar
      * @param minDistance float, can be random
      * @return overlap true/false
      */
@@ -82,9 +84,10 @@ public class EnemyCar extends Sprite implements Drawable {
                 this.position.x = window.width + getWidth() + offset;
                 int laneIndex = (int) (Math.random() * lanes.length);
                 this.position.y = lanes[laneIndex];
+                this.setSpeed(originalSpeed); // Reset the speed to the original speed
                 enemyCars.add(this);
                 collided = true;
-                break; // exit the loop once a collision is detected
+                break;
             }
         }
 
@@ -92,9 +95,9 @@ public class EnemyCar extends Sprite implements Drawable {
     }
 
 
-
     /**
      * Original speed getter.
+     *
      * @return float original speed
      */
     public float getOriginalSpeed() {
@@ -114,6 +117,7 @@ public class EnemyCar extends Sprite implements Drawable {
     /**
      * Move method for EnemyCar, first checks for car overlap, then sets speed accordingly
      * Moves EnemyCar from the end of the screen to the left and moving them back to the right again
+     *
      * @param enemyCars the arraylist of enemyCars, used in UI.java
      */
     public void update(CarLinkedList<EnemyCar> enemyCars) {

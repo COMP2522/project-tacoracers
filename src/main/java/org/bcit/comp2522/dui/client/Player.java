@@ -2,6 +2,7 @@ package org.bcit.comp2522.dui.client;
 
 import org.bcit.comp2522.dui.ui.*;
 import processing.core.*;
+
 /**
  * Player represents the movable car in the world.
  * Lives, position and sizing properties are kept.
@@ -16,11 +17,8 @@ public class Player extends Sprite implements Collidable {
     // instance representing lives
     private int lives;
 
-    // representing player speed
-    private final float playerSpeed = 0.3F;
-
-    // representing slowed player speed
-    private final float slowedPlayerSpeed = 0.1f;
+    // safe distance before collision detected
+    private final int safeDistance = 30;
 
     // representing the player image
     private PImage playerImage;
@@ -28,9 +26,9 @@ public class Player extends Sprite implements Collidable {
     /**
      * Constructs a new Player object with the given properties.
      *
-     * @param manager    The Manager object managing the game state.
-     * @param window     The Window object handling the display.
-     * @param position   The PVector object representing the player's position.
+     * @param manager      The Manager object managing the game state.
+     * @param window       The Window object handling the display.
+     * @param position     The PVector object representing the player's position.
      * @param playerWidth  The width of the player's image.
      * @param playerHeight The height of the player's image.
      */
@@ -43,18 +41,32 @@ public class Player extends Sprite implements Collidable {
     /**
      * Checks for a collision between the player and an enemy car.
      *
-     * @param enemyCar The enemy car to check for collision with the player.
+     * @param enemyCar  The enemy car to check for collision with the player.
+     * @param enemyCars the enemy cars
      */
-    public void check(EnemyCar enemyCar) {
+    public void check(EnemyCar enemyCar, CarLinkedList<EnemyCar> enemyCars) {
         if (collide(enemyCar) && lives <= 3) {
             lives -= 1;
-            enemyCar.setPosition(enemyCar.getPosition().x - 1000, 0);
             if (lives == -1) {
                 manager.screenState = 1;
             }
+
+            // Handle enemyCar removal and repositioning
+            enemyCars.remove(enemyCar);
+            float offset = (float) (Math.random() * window.width * 0.5);
+            enemyCar.position.x = window.width + enemyCar.getWidth() + offset;
+            int laneIndex = (int) (Math.random() * enemyCar.lanes.length);
+            enemyCar.position.y = enemyCar.lanes[laneIndex];
+            enemyCars.add(enemyCar);
         }
     }
 
+
+    /**
+     * Sets lives.
+     *
+     * @param lives the lives
+     */
     public void setLives(int lives) {
         this.lives = lives;
     }
@@ -73,30 +85,22 @@ public class Player extends Sprite implements Collidable {
      * case 0: last life
      */
     public void displayHealth() {
-        switch (this.lives) {
-            case 3:
-                window.image(manager.contentLoader.getHeart(), 75, 25, 50, 50);
-                window.image(manager.contentLoader.getHeart(), 135, 25, 50, 50);
-                window.image(manager.contentLoader.getHeart(), 195, 25, 50, 50);
-                break;
-            case 2:
-                window.image(manager.contentLoader.getHeart(), 75, 25, 50, 50);
-                window.image(manager.contentLoader.getHeart(), 135, 25, 50, 50);
-                window.image(manager.contentLoader.getHeartLost(), 195, 25, 50, 50);
-                break;
-            case 1:
-                window.image(manager.contentLoader.getHeart(), 75, 25, 50, 50);
-                window.image(manager.contentLoader.getHeartLost(), 135, 25, 50, 50);
-                window.image(manager.contentLoader.getHeartLost(), 195, 25, 50, 50);
-                break;
-            case 0:
-                window.image(manager.contentLoader.getHeartLost(), 75, 25, 50, 50);
-                window.image(manager.contentLoader.getHeartLost(), 135, 25, 50, 50);
-                window.image(manager.contentLoader.getHeartLost(), 195, 25, 50, 50);
+        int heartXPosition = 75;
+        for (int i = 0; i < 3; i++) {
+            if (i < this.lives) {
+                window.image(manager.contentLoader.getHeart(), heartXPosition, 25, 50, 50);
+            } else {
+                window.image(manager.contentLoader.getHeartLost(), heartXPosition, 25, 50, 50);
+            }
+            heartXPosition += 60;
         }
     }
 
-    // draws the player image on screen
+
+    /**
+     * Draw.
+     */
+// draws the player image on screen
     public void draw() {
         window.image(playerImage, getPosition().x, getPosition().y, width, height);
     }
@@ -115,14 +119,17 @@ public class Player extends Sprite implements Collidable {
      * @return A boolean value representing whether the collision occurs or not. Always false in this case.
      */
     public boolean collide(EnemyCar enemyCar) {
-        float minDistanceX = (width / 2) + (enemyCar.getWidth() / 2);
-        float minDistanceY = (height / 2) + (enemyCar.getHeight() / 2);
+        float adjustedWidth = enemyCar.getWidth() - safeDistance;
+        float adjustedHeight = enemyCar.getHeight() - safeDistance;
+        float minDistanceX = (width / 2) + (adjustedWidth / 2);
+        float minDistanceY = (height / 2) + (adjustedHeight / 2);
         if (Math.abs(getPosition().x - enemyCar.getPosition().x) < minDistanceX
                 && Math.abs(getPosition().y - enemyCar.getPosition().y) < minDistanceY) {
             return true;
         }
         return false;
     }
+
 
     /**
      * Returns the player's number of lives.
@@ -142,20 +149,25 @@ public class Player extends Sprite implements Collidable {
         this.lives += a;
     }
 
-    /**
-     * Updates the player's state based on user input.
-     *
-     * @param ui The UI object handling user input.
-     */
-    public void update(UI ui) {
-        manager.keyInput.updateKeyStates(ui);
-        ContentLoader contentLoader = manager.contentLoader;
+    // updates the ui's keys
+    public void update() {
+        manager.keyInput.updateKeyStates();
     }
 
+    /**
+     * Gets default lives.
+     *
+     * @return the default lives
+     */
     public int getDefaultLives() {
         return defaultLives;
     }
 
+    /**
+     * Gets slowed player speed.
+     *
+     * @return the slowed player speed
+     */
     public float getSlowedPlayerSpeed() {
         return getSlowedPlayerSpeed();
     }
