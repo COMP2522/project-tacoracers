@@ -17,11 +17,8 @@ public class Player extends Sprite implements Collidable {
     // instance representing lives
     private int lives;
 
-    // representing player speed
-    private final float playerSpeed = 0.3F;
-
-    // representing slowed player speed
-    private final float slowedPlayerSpeed = 0.1f;
+    // safe distance before collision detected
+    private final int safeDistance = 30;
 
     // representing the player image
     private PImage playerImage;
@@ -122,14 +119,17 @@ public class Player extends Sprite implements Collidable {
      * @return A boolean value representing whether the collision occurs or not. Always false in this case.
      */
     public boolean collide(EnemyCar enemyCar) {
-        float minDistanceX = (width / 2) + (enemyCar.getWidth() / 2);
-        float minDistanceY = (height / 2) + (enemyCar.getHeight() / 2);
+        float adjustedWidth = enemyCar.getWidth() - safeDistance;
+        float adjustedHeight = enemyCar.getHeight() - safeDistance;
+        float minDistanceX = (width / 2) + (adjustedWidth / 2);
+        float minDistanceY = (height / 2) + (adjustedHeight / 2);
         if (Math.abs(getPosition().x - enemyCar.getPosition().x) < minDistanceX
                 && Math.abs(getPosition().y - enemyCar.getPosition().y) < minDistanceY) {
             return true;
         }
         return false;
     }
+
 
     /**
      * Returns the player's number of lives.

@@ -507,8 +507,7 @@ public class Menu {
   public void gameOver() {
     manager.game.stopScore();
     window.background(window.background);
-    scoreDisplay = String.format("Your score: %d", manager.game.score);
-    System.out.println(scoreDisplay);
+    scoreDisplay = "Score: " + manager.game.score;
 
     if (manager.game.score > manager.game.highScore) {
       highScoreDisplay = "New High Score!";

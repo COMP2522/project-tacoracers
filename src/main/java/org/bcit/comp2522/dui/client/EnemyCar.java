@@ -84,6 +84,7 @@ public class EnemyCar extends Sprite implements Drawable {
                 this.position.x = window.width + getWidth() + offset;
                 int laneIndex = (int) (Math.random() * lanes.length);
                 this.position.y = lanes[laneIndex];
+                this.setSpeed(originalSpeed); // Reset the speed to the original speed
                 enemyCars.add(this);
                 collided = true;
                 break;
