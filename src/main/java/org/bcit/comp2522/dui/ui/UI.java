@@ -41,6 +41,11 @@ public class UI extends Elements implements Drawable {
   // menu instance
   private final Menu menu;
 
+  private final CarSelection carselect;
+  private final BikeSelection bikeselect;
+  private final TruckSelection truckselect;
+  private final Difficulty difficulty;
+
   // player instance
   private final Player player;
 
@@ -79,6 +84,10 @@ public class UI extends Elements implements Drawable {
     this.menu = new Menu(manager, scene);
     this.window = scene;
     this.leaderboard = new Leaderboard(manager, scene);
+    this.carselect = new CarSelection(manager, scene);
+    this.bikeselect = new BikeSelection(manager, scene);
+    this.truckselect = new TruckSelection(manager, scene);
+    this.difficulty = new Difficulty(manager, scene);
 
 
     PVector powerUpPosition = new PVector(window.width, (float) (Math.random() * (window.height - 240) + 140));
@@ -171,11 +180,11 @@ public class UI extends Elements implements Drawable {
         break;
       case 4:
         if (manager.diffState == 1) {
-          menu.bikeSelection();
+          bikeselect.bikeSelection();
         } else if (manager.diffState == 2) {
-          menu.carSelection();
+          carselect.CarSelect();
         } else if (manager.diffState == 3) {
-          menu.truckSelection();
+          truckselect.truckSelection();
         }
 
         break;
@@ -183,7 +192,7 @@ public class UI extends Elements implements Drawable {
         leaderboard.leaderboard();
         break;
       case 6:
-        menu.difficulty();
+        difficulty.difficulty();
         break;
     }
   }

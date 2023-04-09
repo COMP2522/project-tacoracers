@@ -45,6 +45,19 @@ public class ContentLoader extends PApplet {
      * The Player imagetruck 1.
      */
     public PImage playerImagetruck1;
+
+  /**
+     * The Player imagetruck 2.
+     */
+    public PImage playerImagetruck2;
+    /**
+     * The Player imagetruck 3.
+     */
+    public PImage playerImagetruck3;
+    /**
+     * The Player imagetruck 4.
+     */
+    public PImage playerImagetruck4;
     /**
      * The Heart.
      */
@@ -98,7 +111,10 @@ public class ContentLoader extends PApplet {
     playerImagemoto4 = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/purpleBikeSide.png"));
 
     //truck
-    playerImagetruck1 = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/truck1Side.png"));
+    playerImagetruck1 = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/Truckside1.png"));
+    playerImagetruck2 = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/logTruckside2.png"));
+    playerImagetruck3 = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/logTruckside3.png"));
+    playerImagetruck4 = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/Oiltruckside4.png"));
 
     heart = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/heart.png"));
     heartLost = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/heartLost.png"));
@@ -293,7 +309,59 @@ public class ContentLoader extends PApplet {
     this.playerImagetruck1 = playerImagetruck1;
   }
 
+  /**
+   * Returns the player's PImage.
+   *
+   * @return A PImage object representing the player's image truck2(yellow)
+   */
+  public PImage getPlayerImagetruck2() {
+    return playerImagetruck2;
+  }
 
+    /**
+     * Sets the player's image truck2(yellow).
+     *
+     * @param playerImagetruck2 A PImage object representing the player's image truck2(yellow).
+     */
+  public void setPlayerImagetruck2(PImage playerImagetruck2) {
+    this.playerImagetruck2 = playerImagetruck2;
+  }
+
+    /**
+     * Returns the player's PImage.
+     *
+     * @return A PImage object representing the player's image truck3(blue)
+     */
+  public PImage getPlayerImagetruck3() {
+    return playerImagetruck3;
+  }
+
+    /**
+     * Sets the player's image truck3(blue).
+     *
+     * @param playerImagetruck3 A PImage object representing the player's image truck3(blue).
+     */
+  public void setPlayerImagetruck3(PImage playerImagetruck3) {
+    this.playerImagetruck3 = playerImagetruck3;
+  }
+
+    /**
+     * Returns the player's PImage.
+     *
+     * @return A PImage object representing the player's image truck4(purple)
+     */
+  public PImage getPlayerImagetruck4() {
+    return playerImagetruck4;
+  }
+
+    /**
+     * Sets the player's image truck4(purple).
+     *
+     * @param playerImagetruck4 A PImage object representing the player's image truck4(purple).
+     */
+  public void setPlayerImagetruck4(PImage playerImagetruck4) {
+    this.playerImagetruck4 = playerImagetruck4;
+  }
     /**
      * Returns the heart PImage.
      *
