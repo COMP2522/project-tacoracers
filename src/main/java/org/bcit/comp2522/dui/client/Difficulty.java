@@ -17,9 +17,9 @@ public class Difficulty {
     private Window window;
 
     /*
-vehicle images
- */
-    PImage car1,
+    vehicle images
+    */
+    PImage  car1,
             truck1,
             moto1;
 
