@@ -107,7 +107,7 @@ public class Menu {
 
   public void main() {
     validateName();
-    window.background(window.background);
+    window.background(0);
     window.fill(255);
     window.textAlign(window.CENTER);
     window.textFont(manager.contentLoader.getBigFont());

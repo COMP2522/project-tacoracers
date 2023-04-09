@@ -26,6 +26,7 @@ public class DatabaseHandler {
      */
     String Collection;
 
+
     /**
      * Database Handler connects the database.
      *
@@ -85,6 +86,7 @@ public class DatabaseHandler {
 
         return highestScores;
     }
+
 
     /**
      * Main method creates an object for the database.
