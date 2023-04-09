@@ -21,7 +21,7 @@ public class Leaderboard {
      * Constructor creates a manager and window object.
      *
      * @param manager Manager
-     * @param scene   Window
+     * @param scene Window
      */
     public Leaderboard(Manager manager, Window scene) {
         this.manager = manager;
@@ -34,10 +34,17 @@ public class Leaderboard {
      * @author Pavanpreet Brar
      */
     public void leaderboard() {
+        window.background(0);
+
+        //back
+        window.fill(0, 0, 255);
+        window.textAlign(window.CENTER);
+        window.textFont(manager.contentLoader.getSmallFont());
+        window.text("Back", 120, 70);
+        manager.button.back();
 
         DatabaseHandler dbhandler = new DatabaseHandler("pavanbrar73", "KFmJyFJrTM6Dd7c2");
 
-        window.background(0);
 
         window.textSize(32);
         window.fill(0, 0, 255);

@@ -51,7 +51,7 @@ public class Button extends ButtonHandler {
 
         if (hover(x1, x2, y1, y2)) {
             window.fill(0, 0, 255);
-            window.rect( x1, y1, 300, 125);
+            window.rect(x1, y1, 300, 125);
             manager.ui.displayText(manager.contentLoader.getMediumFont(), window.CENTER,
                     255, 255, 255, "PLAY", middle, 535);
             if (clickedWhileHover(x1, x2, y1, y2)) {
@@ -141,19 +141,37 @@ public class Button extends ButtonHandler {
         }
     }
 
+    /**
+     * Back.
+     */
+    public void back() {
+        if (window.mouseX > ((120) - 110) && window.mouseX < ((120)) + 90
+                && window.mouseY > 0 && window.mouseY < 100) {
+            window.fill(0, 0, 255);
+            window.rect(10, 0, 210, 100);
+            window.textAlign(window.CENTER);
+            window.fill(255, 255, 255);
+            window.textFont(manager.contentLoader.getSmallFont());
+            window.text("Back", 120, 70);
+
+            if (window.mousePressed) {
+                manager.screenState = 3;
+            }
+        }
+    }
 
     /**
      * Quit.
      */
     public void quit() {
-        if (window.mouseX > ((120) - 150) && window.mouseX < ((120)) + 150
-                && window.mouseY > 50 && window.mouseY < 150) {
+        if (window.mouseX > ((120) - 110) && window.mouseX < ((120)) + 90
+                && window.mouseY > 0 && window.mouseY < 100) {
             window.fill(0, 0, 255);
-            window.rect(10, 20, 210, 125);
+            window.rect(10, 0, 210, 100);
             window.textAlign(window.CENTER);
             window.fill(255, 255, 255);
             window.textFont(manager.contentLoader.getSmallFont());
-            window.text("Quit", 120, 100);
+            window.text("Quit", 120, 70);
 
             if (window.mousePressed) {
                 window.exit();
@@ -487,23 +505,24 @@ public class Button extends ButtonHandler {
 //            }
 //        }
 //    }
-            public void checkMuteButtonClick () {
-                if (window.mousePressed && window.mouseX >= 300 && window.mouseX <= 300 + manager.contentLoader.getMute().width &&
-                        window.mouseY >= 25 && window.mouseY <= 25 + manager.contentLoader.getMute().height) {
-                    manager.muted = true;
-                }
-            }
+    public void checkMuteButtonClick() {
+        if (window.mousePressed && window.mouseX >= 300 && window.mouseX <= 300 + manager.contentLoader.getMute().width &&
+                window.mouseY >= 25 && window.mouseY <= 25 + manager.contentLoader.getMute().height) {
+            manager.muted = true;
+        }
+    }
+}
 
 
     /**
      * Back.
      */
-    public void back () {
-                if (window.mouseX > 50 && window.mouseX < 150
-                        && window.mouseY > 25 && window.mouseY < 75) {
-                    if (window.mousePressed) {
-                        manager.screenState = 3;
-                    }
-                }
-            }
-        }
+//    public void back () {
+//                if (window.mouseX > 50 && window.mouseX < 150
+//                        && window.mouseY > 25 && window.mouseY < 75) {
+//                    if (window.mousePressed) {
+//                        manager.screenState = 3;
+//                    }
+//                }
+//            }
+//        }

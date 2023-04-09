@@ -22,7 +22,7 @@ public class Window extends PApplet {
     }
 
     public void setup() {
-        background = loadImage("src/main/java/org/bcit/comp2522/dui/content/background3.png");
+        background = loadImage("src/main/java/org/bcit/comp2522/dui/content/background4.png");
         background(background);
         musicPlayer = new MusicPlayer("src/main/java/org/bcit/comp2522/dui/content/Redneck1.wav");
 //        musicPlayer.play();
