@@ -64,14 +64,14 @@ public class Button extends ButtonHandler {
      * Play 2.
      */
     public void play2() {
-        if (window.mouseX > (750) && window.mouseX < (900) + 150
-                && window.mouseY > 465 && window.mouseY < 575) {
+        if (window.mouseX > ((window.width - 175) - 150) && window.mouseX < ((window.width - 175)) + 150
+                && window.mouseY > 45 && window.mouseY < 95) {
             window.fill(0, 0, 255);
-            window.rect(750, 465, 300, 110);
+            window.rect((window.width - 175) - 150, 0, 300, 110);
             window.textAlign(window.CENTER);
             window.fill(255, 255, 255);
             window.textFont(manager.contentLoader.getMediumFont());
-            window.text("PLAY", 900, 550);
+            window.text("PLAY", (window.width - 175), 70);
             if (window.mousePressed) { // when play button is pressed
                 manager.screenState = 0;
             }
@@ -431,12 +431,96 @@ public class Button extends ButtonHandler {
             window.text("Select", 1075, 525);
 
             if (window.mousePressed) {
-                manager.ui.getPlayer().pickPlayer(manager.contentLoader.getPlayerImagemoto4());
+                manager.ui.getPlayer().pickPlayer(manager.contentLoader.getPlayerImagetruck1());
                 manager.screenState = 3;
             }
         }
     }
 
+
+    public void redtruck(){
+        //red
+        if (window.mouseX > ((50)) && window.mouseX < ((150)) + 100
+                && window.mouseY > 500 && window.mouseY < 575) {
+
+            window.fill(0, 0, 255);
+            window.rect(50, 475, 200, 75);
+            window.textAlign(window.CENTER);
+            window.fill(255);
+            window.textFont(manager.contentLoader.getSmallFont());
+            window.textSize(30);
+            window.text("Select", 150, 525);
+
+            if (window.mousePressed) {
+                manager.ui.getPlayer().pickPlayer(manager.contentLoader.getPlayerImagetruck1());
+                manager.screenState = 3;
+            }
+        }
+    }
+
+    public void yellowtruck(){
+        //yellow
+        if (window.mouseX > ((375)) && window.mouseX < ((475)) + 100
+                && window.mouseY > 500 && window.mouseY < 575) {
+
+            window.fill(0, 0, 255);
+            window.rect(375, 475, 200, 75);
+
+            window.textAlign(window.CENTER);
+            window.fill(255, 0, 0);
+            window.textFont(manager.contentLoader.getSmallFont());
+            window.textSize(30);
+            window.text("Select", 475, 525);
+
+            if (window.mousePressed) {
+                manager.ui.getPlayer().pickPlayer(manager.contentLoader.getPlayerImagetruck2());
+                manager.screenState = 3;
+            }
+        }
+
+    }
+
+    public void bluetruck(){
+        //blue
+        if (window.mouseX > ((675)) && window.mouseX < ((775)) + 100
+                && window.mouseY > 500 && window.mouseY < 575) {
+
+            window.fill(0, 0, 255);
+            window.rect(675, 475, 200, 75);
+
+            window.textAlign(window.CENTER);
+            window.fill(255, 0, 0);
+            window.textFont(manager.contentLoader.getSmallFont());
+            window.textSize(30);
+            window.text("Select", 775, 525);
+
+            if (window.mousePressed) {
+                manager.ui.getPlayer().pickPlayer(manager.contentLoader.getPlayerImagetruck3());
+                manager.screenState = 3;
+            }
+        }
+    }
+
+    public void purpletruck(){
+        //purple
+        if (window.mouseX > ((975)) && window.mouseX < ((1075)) + 100
+                && window.mouseY > 500 && window.mouseY < 575) {
+
+            window.fill(0, 0, 255);
+            window.rect(975, 475, 200, 75);
+
+            window.textAlign(window.CENTER);
+            window.fill(255, 0, 0);
+            window.textFont(manager.contentLoader.getSmallFont());
+            window.textSize(30);
+            window.text("Select", 1075, 525);
+
+            if (window.mousePressed) {
+                manager.ui.getPlayer().pickPlayer(manager.contentLoader.getPlayerImagetruck4());
+                manager.screenState = 3;
+            }
+        }
+    }
 
     /**
      * Medium.
@@ -490,6 +574,7 @@ public class Button extends ButtonHandler {
             }
         }
     }
+
 
 
     /**
