@@ -1,6 +1,9 @@
 package org.bcit.comp2522.dui.client;
 
 
+/**
+ * The type Button.
+ */
 public class Button extends ButtonHandler {
 
     // manager instance
@@ -12,21 +15,34 @@ public class Button extends ButtonHandler {
     // middle width value
     private int middle;
 
+    /**
+     * Instantiates a new Button.
+     *
+     * @param window  the window
+     * @param manager the manager
+     */
     public Button(Window window, Manager manager) {
         super(window, manager);
         this.manager = getManager();
         this.window = getWindow();
         this.middle = window.width / 2;
     }
+
+    /**
+     * Reset.
+     */
     public void reset() {
         manager.game.updateHighScore();
         manager.ui.getPlayer().setLives(manager.ui.getPlayer().getDefaultLives());
         manager.game.resetScore();
         manager.game.resumeScore();
-        manager.keyInput.pressedKeys.clear();
+        manager.keyInput.getPressedKeys().clear();
     }
 
 
+    /**
+     * Play.
+     */
     public void play() {
         float x1 = middle - 150;
         float x2 = middle + 150;
@@ -35,7 +51,7 @@ public class Button extends ButtonHandler {
 
         if (hover(x1, x2, y1, y2)) {
             window.fill(0, 0, 255);
-            window.rect( x1, y1, 300, 125);
+            window.rect(x1, y1, 300, 125);
             manager.ui.displayText(manager.contentLoader.getMediumFont(), window.CENTER,
                     255, 255, 255, "PLAY", middle, 535);
             if (clickedWhileHover(x1, x2, y1, y2)) {
@@ -44,6 +60,9 @@ public class Button extends ButtonHandler {
         }
     }
 
+    /**
+     * Play 2.
+     */
     public void play2() {
         if (window.mouseX > (750) && window.mouseX < (900) + 150
                 && window.mouseY > 465 && window.mouseY < 575) {
@@ -59,6 +78,9 @@ public class Button extends ButtonHandler {
         }
     }
 
+    /**
+     * Diff.
+     */
     public void diff() {
         if (window.mouseX > ((window.width / 2) - 150) &&
                 window.mouseX < ((window.width / 2)) + 150
@@ -77,6 +99,9 @@ public class Button extends ButtonHandler {
         }
     }
 
+    /**
+     * Cars.
+     */
     public void cars() {
         if (window.mouseX > ((window.width / 2) - 150) &&
                 window.mouseX < ((window.width / 2)) + 150
@@ -95,6 +120,9 @@ public class Button extends ButtonHandler {
         }
     }
 
+    /**
+     * Leaderboard.
+     */
     public void leaderboard() {
         if (window.mouseX > ((window.width / 2) - 150) &&
                 window.mouseX < ((window.width / 2)) + 150
@@ -113,16 +141,37 @@ public class Button extends ButtonHandler {
         }
     }
 
-
-    public void quit() {
-        if (window.mouseX > ((120) - 150) && window.mouseX < ((120)) + 150
-                && window.mouseY > 50 && window.mouseY < 150) {
+    /**
+     * Back.
+     */
+    public void back() {
+        if (window.mouseX > ((120) - 110) && window.mouseX < ((120)) + 90
+                && window.mouseY > 0 && window.mouseY < 100) {
             window.fill(0, 0, 255);
-            window.rect(10, 20, 210, 125);
+            window.rect(10, 0, 210, 100);
             window.textAlign(window.CENTER);
             window.fill(255, 255, 255);
             window.textFont(manager.contentLoader.getSmallFont());
-            window.text("Quit", 120, 100);
+            window.text("Back", 120, 70);
+
+            if (window.mousePressed) {
+                manager.screenState = 3;
+            }
+        }
+    }
+
+    /**
+     * Quit.
+     */
+    public void quit() {
+        if (window.mouseX > ((120) - 110) && window.mouseX < ((120)) + 90
+                && window.mouseY > 0 && window.mouseY < 100) {
+            window.fill(0, 0, 255);
+            window.rect(10, 0, 210, 100);
+            window.textAlign(window.CENTER);
+            window.fill(255, 255, 255);
+            window.textFont(manager.contentLoader.getSmallFont());
+            window.text("Quit", 120, 70);
 
             if (window.mousePressed) {
                 window.exit();
@@ -130,6 +179,9 @@ public class Button extends ButtonHandler {
         }
     }
 
+    /**
+     * Play again.
+     */
     public void playAgain() {
         window.fill(255, 255, 255);
         window.rect((window.width / 2) - 270, 465, 540, 75);
@@ -145,6 +197,10 @@ public class Button extends ButtonHandler {
             }
         }
     }
+
+    /**
+     * Main menu.
+     */
     public void mainMenu() {
         window.fill(255, 255, 255);
         window.rect((window.width / 2) - 270, 380, 540, 75);
@@ -162,6 +218,9 @@ public class Button extends ButtonHandler {
         }
     }
 
+    /**
+     * Red.
+     */
     public void red() {
         //red
         if (window.mouseX > ((50)) && window.mouseX < ((150)) + 100
@@ -183,6 +242,9 @@ public class Button extends ButtonHandler {
         }
     }
 
+    /**
+     * Yellow.
+     */
     public void yellow() {
         //yellow
         if (window.mouseX > ((375)) && window.mouseX < ((475)) + 100
@@ -205,6 +267,9 @@ public class Button extends ButtonHandler {
         }
     }
 
+    /**
+     * Blue.
+     */
     public void blue() {
         if (window.mouseX > ((675)) && window.mouseX < ((775)) + 100
                 && window.mouseY > 500 && window.mouseY < 575) {
@@ -226,6 +291,9 @@ public class Button extends ButtonHandler {
         }
     }
 
+    /**
+     * Purple.
+     */
     public void purple() {
         //purple
         if (window.mouseX > ((975)) && window.mouseX < ((1075)) + 100
@@ -248,6 +316,9 @@ public class Button extends ButtonHandler {
         }
     }
 
+    /**
+     * Easy.
+     */
     public void easy() {
         //easy
         if (window.mouseX > ((50)) && window.mouseX < ((150)) + 100
@@ -270,6 +341,10 @@ public class Button extends ButtonHandler {
             }
         }
     }
+
+    /**
+     * Redbike.
+     */
     public void redbike() {
         //red
         if (window.mouseX > ((50)) && window.mouseX < ((150)) + 100
@@ -290,6 +365,9 @@ public class Button extends ButtonHandler {
         }
     }
 
+    /**
+     * Yellowbike.
+     */
     public void yellowbike() {
         //yellow
         if (window.mouseX > ((375)) && window.mouseX < ((475)) + 100
@@ -311,6 +389,9 @@ public class Button extends ButtonHandler {
         }
     }
 
+    /**
+     * Bluebike.
+     */
     public void bluebike() {
         //blue
         if (window.mouseX > ((675)) && window.mouseX < ((775)) + 100
@@ -332,6 +413,9 @@ public class Button extends ButtonHandler {
         }
     }
 
+    /**
+     * Purplebike.
+     */
     public void purplebike() {
         //purple
         if (window.mouseX > ((975)) && window.mouseX < ((1075)) + 100
@@ -354,7 +438,9 @@ public class Button extends ButtonHandler {
     }
 
 
-
+    /**
+     * Medium.
+     */
     public void medium() {
         //easy
         if (window.mouseX > ((500)) && window.mouseX < ((600)) + 100
@@ -379,6 +465,9 @@ public class Button extends ButtonHandler {
         }
     }
 
+    /**
+     * Hard.
+     */
     public void hard() {
         //easy
         if (window.mouseX > ((950)) && window.mouseX < ((1050)) + 100
@@ -403,7 +492,9 @@ public class Button extends ButtonHandler {
     }
 
 
-
+    /**
+     * Check mute button click.
+     */
 //    public void mute() {
 //        if (window.mouseX > 300 && window.mouseX < 350
 //                && window.mouseY > 25 && window.mouseY < 75) {
@@ -414,20 +505,24 @@ public class Button extends ButtonHandler {
 //            }
 //        }
 //    }
-            public void checkMuteButtonClick () {
-                if (window.mousePressed && window.mouseX >= 300 && window.mouseX <= 300 + manager.contentLoader.getMute().width &&
-                        window.mouseY >= 25 && window.mouseY <= 25 + manager.contentLoader.getMute().height) {
-                    manager.muted = true;
-                }
-            }
-
-
-            public void back () {
-                if (window.mouseX > 50 && window.mouseX < 150
-                        && window.mouseY > 25 && window.mouseY < 75) {
-                    if (window.mousePressed) {
-                        manager.screenState = 3;
-                    }
-                }
-            }
+    public void checkMuteButtonClick() {
+        if (window.mousePressed && window.mouseX >= 300 && window.mouseX <= 300 + manager.contentLoader.getMute().width &&
+                window.mouseY >= 25 && window.mouseY <= 25 + manager.contentLoader.getMute().height) {
+            manager.muted = true;
         }
+    }
+}
+
+
+    /**
+     * Back.
+     */
+//    public void back () {
+//                if (window.mouseX > 50 && window.mouseX < 150
+//                        && window.mouseY > 25 && window.mouseY < 75) {
+//                    if (window.mousePressed) {
+//                        manager.screenState = 3;
+//                    }
+//                }
+//            }
+//        }

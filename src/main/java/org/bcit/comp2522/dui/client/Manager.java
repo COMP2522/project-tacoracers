@@ -4,35 +4,37 @@ import org.bcit.comp2522.dui.ui.ContentLoader;
 import org.bcit.comp2522.dui.ui.UI;
 import processing.core.*;
 
-/**
- * Manager class creates a UI and game instance
- *
- * @author Eric Tatchell
- */
 public class Manager extends PApplet {
+
+  // UI instance, used for all ui interactions
   public UI ui;
+
+  // game instance, used for scoring purposes
   public Game game;
+
+  // button instance, used for menu selections and muting
   public Button button;
+  // leaderboard instance, used for leaderboard
+  public Leaderboard leaderboard;
+
+  // path instance (roadlines), used to manage road speed
   public Path path;
+
+  // loader instance, used for fonts
   public ContentLoader contentLoader;
+
+  // key input instance, used for performing actions based on pressed keys
   public KeyInput keyInput;
+
+  // muting checker
   public boolean muted;
 
+  // for player name
   public Menu menu;
 
-  public int diffState;
-
-  /**
-   * screenState tracks the current state of the screen and which to show.
-   * 0: Playing
-   * 1: Game Over
-   * 2: Title Screen
-   * 3: Main Menu
-   * 4. Car Selection
-   * 5. Leaderboard
-   * 6. Difficulty
-   */
   public int screenState;
+
+  public int diffState;
 
   public int carType;
 
@@ -50,6 +52,7 @@ public class Manager extends PApplet {
     keyInput = new KeyInput(scene, ui.getPlayer(), this, ui.getPowerup());
     game = new Game(this);
     this.menu = new Menu(this, scene);
+    leaderboard = new Leaderboard(this, scene);
     button = new Button(scene, this);
     ui.init();
   }
@@ -61,4 +64,7 @@ public class Manager extends PApplet {
     }
   }
 
+  public UI getUi() {
+    return ui;
+  }
 }

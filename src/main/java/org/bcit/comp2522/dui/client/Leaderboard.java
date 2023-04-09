@@ -7,8 +7,14 @@ import org.bson.Document;
  */
 public class Leaderboard {
 
+    /**
+     * The Manager.
+     */
     public Manager manager;
 
+    /**
+     * The Window.
+     */
     public Window window;
 
     /**
@@ -28,10 +34,17 @@ public class Leaderboard {
      * @author Pavanpreet Brar
      */
     public void leaderboard() {
+        window.background(0);
+
+        //back
+        window.fill(0, 0, 255);
+        window.textAlign(window.CENTER);
+        window.textFont(manager.contentLoader.getSmallFont());
+        window.text("Back", 120, 70);
+        manager.button.back();
 
         DatabaseHandler dbhandler = new DatabaseHandler("pavanbrar73", "KFmJyFJrTM6Dd7c2");
 
-        window.background(0);
 
         window.textSize(32);
         window.fill(0, 0, 255);

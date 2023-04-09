@@ -5,6 +5,7 @@ import processing.core.PImage;
 import org.bson.Document;
 
 public class Menu {
+
   private Manager manager;
   private Window window;
   String scoreDisplay;
@@ -16,9 +17,18 @@ public class Menu {
 
   private boolean keyPressed = false;
 
-  PImage car1, car2, car3, car4,
-          truck1, truck2, truck3,
-          moto1, moto2, moto3, moto4;
+  PImage car1,
+  car2,
+  car3,
+  car4,
+  truck1,
+  truck2,
+  truck3,
+  moto1,
+  moto2,
+  moto3,
+  moto4;
+
   public Menu(Manager manager, Window scene) {
     this.manager = manager;
     this.window = scene;
@@ -45,13 +55,13 @@ public class Menu {
   }
 
   public void menu2() {
-    window.background(0);
+    window.background(window.background);
 
     //quit
     window.fill(0, 0, 255);
     window.textAlign(window.CENTER);
     window.textFont(manager.contentLoader.getSmallFont());
-    window.text("Quit", 120, 100);
+    window.text("Quit", 120, 70);
     manager.button.quit();
 
 
@@ -77,6 +87,7 @@ public class Menu {
     window.textFont(manager.contentLoader.getSmallFont());
     window.text("Cars", window.width / 2 + 10, 100 + 200);
     manager.button.cars();
+
 
     // Should take you to a page to show you the top 10 scores
     window.fill(0, 0, 255);
@@ -170,12 +181,6 @@ public class Menu {
          then in the player class you can use a switch statement to change the color of the car
          */
 
-  /**
-   * Check the score to see if the player has unlocked the next car if they have then call the
-   * function that will see if the player chooses the red yellow or blue car and then
-   * set the player.carColor to the color they chose
-   * then in the player class you can use a switch statement to change the color of the car.
-   */
   public void carSelection(){
     window.background(0);
 
@@ -501,9 +506,8 @@ public class Menu {
 
   public void gameOver() {
     manager.game.stopScore();
-    window.background(0);
-    scoreDisplay = String.format("Your score: %d", manager.game.score);
-    System.out.println(scoreDisplay);
+    window.background(window.background);
+    scoreDisplay = "Score: " + manager.game.score;
 
     if (manager.game.score > manager.game.highScore) {
       highScoreDisplay = "New High Score!";
@@ -529,89 +533,30 @@ public class Menu {
     manager.button.playAgain();
   }
 
-  public void Leaderboard() {
-    DatabaseHandler dbhandler = new DatabaseHandler("pavanbrar73", "KFmJyFJrTM6Dd7c2");
-
-    window.background(0);
-
-    window.textSize(32);
-    window.fill(255);
-    window.textAlign(window.CENTER);
-
-    window.text("Leaderboard", window.width/2, 80);
-    window.text("Rank", 100, 160);
-    window.text("Name", window.width/2 - 200, 160);
-    window.text("Score", window.width/2 + 200, 160);
-
-    window.textSize(28);
-    window.textAlign(window.CENTER, window.CENTER);
-//    window.fill(255);
-    int y = 200;
-    int rank = 1;
-
-    window.stroke(255);
-    window.strokeWeight(2);
-    window.line(80, 180, window.width - 80, 180);
-
-    window.rect(80, 180, 70, y - 180);
-
-    window.rect(window.width/2 - 390, 180, 340, y - 180);
-
-    for (Document doc : dbhandler.getHighestScores()) {
-
-      String name = doc.getString("name");
-      long score = doc.getLong("score");
-      window.stroke(255);
-      window.strokeWeight(2);
-      window.line(80, y - 20, window.width - 80, y - 20);
-
-      window.text(rank, 150, y);
-
-      window.rect(window.width/2 - 390, y - 20, 340, 40);
-
-      window.text(name, window.width/2 - 120, y);
-
-      window.rect(window.width/2 + 150, y - 20, 270, 40);
-
-      window.text(score, window.width/2 + 270, y);
-
-      window.stroke(255);
-      window.strokeWeight(2);
-      window.line(80, y + 20, window.width - 80, y + 20);
-
-      y += 40;
-      rank++;
-    }
-
-    window.stroke(255);
-    window.strokeWeight(2);
-    window.line(80, y - 20, window.width - 80, y - 20);
-  }
-
   public void main() {
     validateName();
-    window.background(0);
+    window.background(window.background);
     window.fill(255);
     window.textAlign(window.CENTER);
     window.textFont(manager.contentLoader.getBigFont());
-    window.text("DUI", window.width / 2, 200);
+    window.text("DUI", window.width / 2, 190);
 
     window.fill(0, 0, 255);
     window.textAlign(window.CENTER);
     window.textFont(manager.contentLoader.getBigFont());
-    window.text("DUI", window.width / 2 + 10, 200 + 10);
+    window.text("DUI", window.width / 2 + 10, 200);
     window.fill(255);
     window.textFont(manager.contentLoader.getSmallFont());
-    window.text("Driving\nUnintelligently", window.width / 2, 300);
+    window.text("Driving\nUnintelligently", window.width / 2, 275);
 
     window.fill(255);
     window.textFont(manager.contentLoader.getTinyFont());
-    window.text("Enter your name: ", window.width / 2, 400);
-    window.rect( (window.width / 2) - 150, 400, 300, 40);
+    window.text("Enter your name: ", window.width / 2, 375);
+    window.rect( (window.width / 2) - 150, 390, 300, 40);
     window.textAlign(window.CENTER);
     window.fill(0);
     window.textAlign(window.CENTER);
-    window.text(playerName, window.width / 2, 430);
+    window.text(playerName, window.width / 2, 420);
 
     window.fill(255);
     window.rect( (window.width / 2) - 150, 450, 300, 125);

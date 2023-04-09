@@ -111,6 +111,7 @@ public class Game {
    * Saves the high score using a put method from the database handler.
    */
   DatabaseHandler dbh = new DatabaseHandler("pavanbrar73", "KFmJyFJrTM6Dd7c2");
+
   public void saveHighScoreToFile() {
     dbh.put("name", gamePlayerName, "score", highScore);
   }

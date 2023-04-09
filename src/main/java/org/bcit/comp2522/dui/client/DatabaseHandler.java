@@ -17,14 +17,20 @@ import java.util.function.Consumer;
  */
 public class DatabaseHandler {
 
+    /**
+     * The Database.
+     */
     MongoDatabase database;
+    /**
+     * The Collection.
+     */
     String Collection;
 
     /**
      * Database Handler connects the database.
      *
-     * @param username
-     * @param password
+     * @param username the username
+     * @param password the password
      */
     public DatabaseHandler(String username, String password) {
         ConnectionString connectionString = new ConnectionString(String.format("mongodb+srv://pavanbrar73:KFmJyFJrTM6Dd7c2@dui-infinite.67uhycx.mongodb.net/?retryWrites=true&w=majority", username, password));
@@ -47,16 +53,26 @@ public class DatabaseHandler {
          * @param val2 long
          */
     }
+
+    /**
+     * Put.
+     *
+     * @param key1 the key 1
+     * @param val1 the val 1
+     * @param key2 the key 2
+     * @param val2 the val 2
+     */
     public void put(String key1, String val1, String key2, long val2){
         Document document = new Document();
         document.append(key1, val1);
         document.append(key2, val2);
         new Thread(() -> database.getCollection("playerScores").insertOne(document)).start();
     };
+
     /**
      * Filters and sorts the documents from highest to lowest and adds 10 to an ArrayList.
      *
-     * @return highestScores
+     * @return highestScores highest scores
      */
     public ArrayList<Document> getHighestScores() {
         ArrayList<Document> highestScores = new ArrayList<>();
@@ -74,7 +90,7 @@ public class DatabaseHandler {
      * Main method creates an object for the database.
      * It also prints a leaderboard
      *
-     * @param args
+     * @param args the input arguments
      */
     public static void main(String[] args) {
         DatabaseHandler dbh = new DatabaseHandler("pavanbrar73", "KFmJyFJrTM6Dd7c2");

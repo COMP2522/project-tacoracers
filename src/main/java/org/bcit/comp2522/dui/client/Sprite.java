@@ -14,31 +14,50 @@ import java.util.ArrayList;
  */
 public abstract class Sprite implements Collidable {
 
-    // instance for width
+    /**
+     * The Width.
+     */
+// instance for width
     protected float width;
 
-    // instance for height
+    /**
+     * The Height.
+     */
+// instance for height
     protected float height;
 
-    // instance for speed
+    /**
+     * The Speed.
+     */
+// instance for speed
     protected float speed;
 
-    // instance for PVector positioning
+    /**
+     * The Position.
+     */
+// instance for PVector positioning
     protected PVector position;
 
-    // instance for manager
+    /**
+     * The Manager.
+     */
+// instance for manager
     protected Manager manager;
 
-    // instance for window
+    /**
+     * The Window.
+     */
+// instance for window
     protected Window window;
 
     /**
      * Constructor creating a sprite without speed (player)
-     * @param manager sprite is able to access all parts of the game
-     * @param scene sprite is able to access drawing methods
+     *
+     * @param manager  sprite is able to access all parts of the game
+     * @param scene    sprite is able to access drawing methods
      * @param position sprite PVector positioning
-     * @param width float
-     * @param height float
+     * @param width    float
+     * @param height   float
      */
     public Sprite(Manager manager, Window scene, PVector position, float width, float height) {
         this.manager = manager;
@@ -50,12 +69,13 @@ public abstract class Sprite implements Collidable {
 
     /**
      * Constructor creating a sprite
-     * @param manager sprite is able to access all parts of the game
-     * @param scene sprite is able to access drawing methods
+     *
+     * @param manager  sprite is able to access all parts of the game
+     * @param scene    sprite is able to access drawing methods
      * @param position sprite PVector positioning
-     * @param width float
-     * @param height float
-     * @param speed float
+     * @param width    float
+     * @param height   float
+     * @param speed    float
      */
     public Sprite(Manager manager, Window scene, PVector position, float width, float height, float speed) {
         this.manager = manager;
@@ -67,9 +87,9 @@ public abstract class Sprite implements Collidable {
     }
 
 
-
     /**
      * Getter for speed.
+     *
      * @return current speed
      */
     public float getSpeed() {
@@ -78,6 +98,7 @@ public abstract class Sprite implements Collidable {
 
     /**
      * Getter for position.
+     *
      * @return x, y or both
      */
     public PVector getPosition() {
@@ -86,7 +107,8 @@ public abstract class Sprite implements Collidable {
 
     /**
      * Getter for width.
-     * @return sprite's width
+     *
+     * @return sprite 's width
      */
     public float getWidth() {
         return this.width;
@@ -94,7 +116,8 @@ public abstract class Sprite implements Collidable {
 
     /**
      * Getter for height
-     * @return sprite's height
+     *
+     * @return sprite 's height
      */
     public float getHeight() {
         return this.height;
@@ -102,6 +125,7 @@ public abstract class Sprite implements Collidable {
 
     /**
      * Mutator for speed.
+     *
      * @param speed sprite's speed
      */
     public void setSpeed(float speed) {
@@ -110,6 +134,7 @@ public abstract class Sprite implements Collidable {
 
     /**
      * Position setter.
+     *
      * @param x x
      * @param y y
      */
@@ -118,6 +143,11 @@ public abstract class Sprite implements Collidable {
         this.position.y = y;
     }
 
+    /**
+     * Sets position.
+     *
+     * @param p the p
+     */
     public void setPosition(PVector p) {
         this.position = p;
     }
