@@ -236,7 +236,7 @@ public class Menu {
 
     window.image(car3, 725, 125, 100, 250);
 
-    if (manager.game.highScore >= 2500) {
+    if (manager.game.highScore >= 3000) {
       window.fill(255, 255, 255);
       window.textAlign(window.CENTER);
       window.textFont(manager.contentLoader.getSmallFont());
@@ -318,7 +318,7 @@ public class Menu {
 //    window.rect(425, 125, 100, 250);
 
     //select/locked
-    if (manager.game.highScore >= 0) {
+    if (manager.game.highScore >= 1000) {
       window.fill(255, 0, 0);
       window.textAlign(window.CENTER);
       window.textFont(manager.contentLoader.getSmallFont());
@@ -346,7 +346,7 @@ public class Menu {
 //    window.rect(725, 125, 100, 250);
 
     //select/locked
-    if (manager.game.highScore >= 0) {
+    if (manager.game.highScore >= 3000) {
       window.fill(255, 0, 0);
       window.textAlign(window.CENTER);
       window.textFont(manager.contentLoader.getSmallFont());
@@ -371,7 +371,7 @@ public class Menu {
     window.image(moto4, 1025, 125, 150, 250);
 
     //select/locked
-    if (manager.game.highScore >= 0) {
+    if (manager.game.highScore >= 5000) {
       window.fill(255, 0, 0);
       window.textAlign(window.CENTER);
       window.textFont(manager.contentLoader.getSmallFont());
@@ -428,7 +428,7 @@ public class Menu {
 //    window.rect(425, 125, 100, 250);
 
     //select/locked
-    if (manager.game.highScore >= 0) {
+    if (manager.game.highScore >= 1000) {
       window.fill(255, 0, 0);
       window.textAlign(window.CENTER);
       window.textFont(manager.contentLoader.getSmallFont());
@@ -456,7 +456,7 @@ public class Menu {
 //    window.rect(725, 125, 100, 250);
 
     //select/locked
-    if (manager.game.highScore >= 0) {
+    if (manager.game.highScore >= 3000) {
       window.fill(255, 0, 0);
       window.textAlign(window.CENTER);
       window.textFont(manager.contentLoader.getSmallFont());
@@ -481,7 +481,7 @@ public class Menu {
     window.image(car4, 1025, 125, 150, 250);
 
     //select/locked
-    if (manager.game.highScore >= 0) {
+    if (manager.game.highScore >= 5000) {
       window.fill(255, 0, 0);
       window.textAlign(window.CENTER);
       window.textFont(manager.contentLoader.getSmallFont());
@@ -645,4 +645,5 @@ public class Menu {
     }
 
   }
+
 }
