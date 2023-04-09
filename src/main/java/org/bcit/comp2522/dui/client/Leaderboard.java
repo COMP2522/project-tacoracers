@@ -2,6 +2,8 @@ package org.bcit.comp2522.dui.client;
 
 import org.bson.Document;
 
+import java.util.ArrayList;
+
 /**
  * Leaderboard class creates a table and fills in the top 10 scores and names on a separate screen.
  */
@@ -17,6 +19,8 @@ public class Leaderboard {
      */
     public Window window;
 
+    private ArrayList<Document> cachedHighestScores;
+
     /**
      * Constructor creates a manager and window object.
      *
@@ -26,6 +30,13 @@ public class Leaderboard {
     public Leaderboard(Manager manager, Window scene) {
         this.manager = manager;
         this.window = scene;
+        this.cachedHighestScores = new ArrayList<>();
+        updateHighestScores();
+    }
+
+    public void updateHighestScores() {
+        DatabaseHandler dbhandler = new DatabaseHandler("pavanbrar73", "KFmJyFJrTM6Dd7c2");
+        this.cachedHighestScores = dbhandler.getHighestScores();
     }
 
     /**
@@ -35,7 +46,8 @@ public class Leaderboard {
      */
     public void leaderboard() {
         window.background(0);
-
+        int y = 200;
+        int rank = 1;
         //back
         window.fill(0, 0, 255);
         window.textAlign(window.CENTER);
@@ -58,9 +70,6 @@ public class Leaderboard {
         window.fill(255);
         window.textSize(28);
         window.textAlign(window.CENTER, window.CENTER);
-        int y = 200;
-        int rank = 1;
-
         window.stroke(255);
         window.strokeWeight(2);
         window.line(80, 180, window.width - 80, 180);
@@ -77,7 +86,7 @@ public class Leaderboard {
         window.line(330, 180, 330, 580);
         window.line(window.width - 450, 180, window.width - 450, 580);
 
-        for (Document doc : dbhandler.getHighestScores()) {
+        for (Document doc : cachedHighestScores) {
 
             String name = doc.getString("name");
             int score = doc.getLong("score").intValue();
