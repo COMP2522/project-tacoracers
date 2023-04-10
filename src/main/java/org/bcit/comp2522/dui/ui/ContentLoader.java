@@ -9,42 +9,42 @@ import processing.core.*;
  * @author Eric Tatchell
  */
 public class ContentLoader extends PApplet {
-    /**
-     * The Player image red.
-     */
-    public PImage playerImageRed;
-    /**
-     * The Player image yellow.
-     */
-    public PImage playerImageYellow;
-    /**
-     * The Player image blue.
-     */
-    public PImage playerImageBlue;
-    /**
-     * The Player image purple.
-     */
-    public PImage playerImagePurple;
-    /**
-     * The Player imagemoto 1.
-     */
-    public PImage playerImagemoto1;
-    /**
-     * The Player imagemoto 2.
-     */
-    public PImage playerImagemoto2;
-    /**
-     * The Player imagemoto 3.
-     */
-    public PImage playerImagemoto3;
-    /**
-     * The Player imagemoto 4.
-     */
-    public PImage playerImagemoto4;
-    /**
-     * The Player imagetruck 1.
-     */
-    public PImage playerImagetruck1;
+  /**
+   * The Player image red.
+   */
+  public PImage playerImageRed;
+  /**
+   * The Player image yellow.
+   */
+  public PImage playerImageYellow;
+  /**
+   * The Player image blue.
+   */
+  public PImage playerImageBlue;
+  /**
+   * The Player image purple.
+   */
+  public PImage playerImagePurple;
+  /**
+   * The Player imagemoto 1.
+   */
+  public PImage playerImagemoto1;
+  /**
+   * The Player imagemoto 2.
+   */
+  public PImage playerImagemoto2;
+  /**
+   * The Player imagemoto 3.
+   */
+  public PImage playerImagemoto3;
+  /**
+   * The Player imagemoto 4.
+   */
+  public PImage playerImagemoto4;
+  /**
+   * The Player imagetruck 1.
+   */
+  public PImage playerImagetruck1;
 
   /**
      * The Player imagetruck 2.

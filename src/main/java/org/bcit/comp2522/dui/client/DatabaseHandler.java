@@ -8,7 +8,6 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
-
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
@@ -24,7 +23,7 @@ public class DatabaseHandler {
     /**
      * The Collection.
      */
-    String Collection;
+    String collection;
 
 
     /**
@@ -34,7 +33,10 @@ public class DatabaseHandler {
      * @param password the password
      */
     public DatabaseHandler(String username, String password) {
-        ConnectionString connectionString = new ConnectionString(String.format("mongodb+srv://pavanbrar73:KFmJyFJrTM6Dd7c2@dui-infinite.67uhycx.mongodb.net/?retryWrites=true&w=majority", username, password));
+        ConnectionString connectionString = new ConnectionString(
+                String.format("mongodb+srv://pavanbrar73:KFmJyFJrTM6Dd7c2@"
+                        + "dui-infinite.67uhycx.mongodb.net/?retryWrites="
+                        + "true&w=majority", username, password));
         MongoClientSettings settings = MongoClientSettings.builder()
                 .applyConnectionString(connectionString)
                 .serverApi(ServerApi.builder()
@@ -43,32 +45,25 @@ public class DatabaseHandler {
                 .build();
         MongoClient mongoClient = MongoClients.create(settings);
         database = mongoClient.getDatabase("test");
-        this.Collection = "playerScores";
+        this.collection = "playerScores";
 
-        /**
-         * Puts name and score key value pairs in a document in a collection.
-         *
-         * @param key1 String
-         * @param val1 String
-         * @param key2 String
-         * @param val2 long
-         */
+
     }
 
     /**
-     * Put.
+     * Puts name and score key value pairs in a document in a collection.
      *
-     * @param key1 the key 1
-     * @param val1 the val 1
-     * @param key2 the key 2
-     * @param val2 the val 2
+     * @param key1 String
+     * @param val1 String
+     * @param key2 String
+     * @param val2 long
      */
-    public void put(String key1, String val1, String key2, long val2){
+    public void put(String key1, String val1, String key2, long val2) {
         Document document = new Document();
         document.append(key1, val1);
         document.append(key2, val2);
         new Thread(() -> database.getCollection("playerScores").insertOne(document)).start();
-    };
+    }
 
     /**
      * Filters and sorts the documents from highest to lowest and adds 10 to an ArrayList.
@@ -78,7 +73,7 @@ public class DatabaseHandler {
     public ArrayList<Document> getHighestScores() {
         ArrayList<Document> highestScores = new ArrayList<>();
 
-        database.getCollection(Collection)
+        database.getCollection(collection)
                 .find()
                 .sort(new Document("score", -1))
                 .limit(10)

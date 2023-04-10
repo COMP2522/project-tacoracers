@@ -19,11 +19,16 @@ public class Difficulty {
     /*
     vehicle images
     */
-    PImage  car1,
-            truck1,
-            moto1;
+    private final PImage  car1;
+    private final PImage truck1;
+    private final PImage moto1;
 
 
+    /**
+     * Creates a difficulty object.
+     * @param manager
+     * @param scene
+     */
     public Difficulty(Manager manager, Window scene) {
         this.manager = manager;
         this.window = scene;

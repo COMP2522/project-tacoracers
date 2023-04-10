@@ -4,8 +4,6 @@ import org.bcit.comp2522.dui.client.*;
 import processing.core.PImage;
 import processing.core.PVector;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
 /**
  * UI controls in what orders players see content.
  * It also sets player and EnemyCar properties.
@@ -81,7 +79,8 @@ public class UI extends Elements implements Drawable {
   public UI(Manager manager, ContentLoader loader, Window scene) {
     super(scene, manager, loader);
     this.manager = manager;
-    this.player = new Player(manager, scene, new PVector(scene.width / 5, 327), playerWidth, playerHeight);
+    this.player = new Player(manager, scene,
+            new PVector(scene.width / 5, 327), playerWidth, playerHeight);
     this.traffic = new CarLinkedList<EnemyCar>();
     this.cars = new CarLinkedList<>();
     this.button = new Button(scene, manager);
@@ -95,8 +94,10 @@ public class UI extends Elements implements Drawable {
     this.difficulty = new Difficulty(manager, scene);
 
 
-    PVector powerUpPosition = new PVector(window.width, (float) (Math.random() * (window.height - 240) + 140));
-    this.powerup = new PowerUp(manager, scene, powerUpPosition, powerUpWidth, powerUpHeight, powerUpSpeed);
+    PVector powerUpPosition = new PVector(window.width,
+            (float) (Math.random() * (window.height - 240) + 140));
+    this.powerup = new PowerUp(manager, scene,
+            powerUpPosition, powerUpWidth, powerUpHeight, powerUpSpeed);
 
     loader.loadCarImages(cars);
     spawnCars(traffic);
@@ -152,7 +153,8 @@ public class UI extends Elements implements Drawable {
         float carHeight = 75;
         float carSpeed = (float) (Math.random() * 8 + 7);
         int xPos = (int) (Math.random() * 2560);
-        EnemyCar car = new EnemyCar(manager, window, new PVector(xPos, lane), carWidth, carHeight, carSpeed, cars);
+        EnemyCar car = new EnemyCar(manager, window, new PVector(xPos, lane),
+                carWidth, carHeight, carSpeed, cars);
         traffic.add(car);
       }
     }
@@ -187,7 +189,7 @@ public class UI extends Elements implements Drawable {
         if (manager.diffState == 1) {
           bikeselect.bikeSelection();
         } else if (manager.diffState == 2) {
-          carselect.CarSelect();
+          carselect.carSelect();
         } else if (manager.diffState == 3) {
           truckselect.truckSelection();
         }
@@ -205,27 +207,27 @@ public class UI extends Elements implements Drawable {
   }
 
   /**
-   * Getter for the player
+   * Getter for the player.
    *
-   * @return player player
+   * @return player
    */
   public Player getPlayer() {
     return player;
   }
 
   /**
-   * Getter for the enemy car list
+   * Getter for the enemy car list.
    *
-   * @return traffic traffic
+   * @return traffic
    */
   public CarLinkedList<EnemyCar> getTraffic() {
     return traffic;
   }
 
   /**
-   * Getter for car images
+   * Getter for car images.
    *
-   * @return cars cars
+   * @return cars
    */
   public CarLinkedList<PImage> getCars() {
     return cars;
