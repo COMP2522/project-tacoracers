@@ -73,7 +73,104 @@ public class Button extends ButtonHandler {
             window.textFont(manager.contentLoader.getMediumFont());
             window.text("PLAY", (window.width - 175), 70);
             if (window.mousePressed) { // when play button is pressed
+                manager.screenState = 7;
+            }
+        }
+    }
+
+    /**
+     * up arrow key control.
+     */
+    public void upArrow() {
+        float x1 = middle + 200;
+        float x2 = middle + 300;
+        float y1 = 110;
+        float y2 = 210;
+
+        if (hover(x1, x2, y1, y2)) {
+            manager.ui.displayText(manager.contentLoader.getTinyFont(), window.CENTER,
+                    255, 255, 255, "Switch to above lane.", middle - 50, 165);
+        }
+    }
+
+    /**
+     * down arrow key control.
+     */
+    public void downArrow() {
+        float x1 = middle - 300;
+        float x2 = middle - 200;
+        float y1 = 210;
+        float y2 = 310;
+
+        if (hover(x1, x2, y1, y2)) {
+            manager.ui.displayText(manager.contentLoader.getTinyFont(), window.CENTER,
+                    255, 255, 255, "Switch to below lane.", middle + 65, 265);
+        }
+    }
+
+    /**
+     * left arrow key control.
+     */
+    public void leftArrow() {
+        float x1 = middle + 200;
+        float x2 = middle + 300;
+        float y1 = 310;
+        float y2 = 410;
+
+        if (hover(x1, x2, y1, y2)) {
+            manager.ui.displayText(manager.contentLoader.getTinyFont(), window.CENTER,
+                    255, 255, 255, "Slow down.", middle - 30, 365);
+        }
+    }
+
+    /**
+     * repair control.
+     */
+    public void repair() {
+        float x1 = middle - 300;
+        float x2 = middle - 200;
+        float y1 = 410;
+        float y2 = 510;
+
+        if (hover(x1, x2, y1, y2)) {
+            manager.ui.displayText(manager.contentLoader.getTinyFont(), window.CENTER,
+                    255, 255, 255, "Refill health to full.", middle + 65, 465);
+        }
+    }
+
+    /**
+     * Play 3 from controls page.
+     */
+    public void play3() {
+        if (window.mouseX > ((window.width - 225) - 200) && window.mouseX < ((window.width - 225)) + 150
+                && window.mouseY > 475 && window.mouseY < 585) {
+            window.fill(0, 0, 255);
+            window.rect((window.width - 225) - 200, 475, 400, 110);
+            window.textAlign(window.CENTER);
+            window.fill(255, 255, 255);
+            window.textFont(manager.contentLoader.getSmallFont());
+            window.text("CONTINUE", (window.width - 225), 550);
+            if (window.mousePressed) { // when play button is pressed
                 manager.screenState = 0;
+            }
+        }
+    }
+
+    /**
+     * Back 2.
+     */
+    public void back2() {
+        if (window.mouseX > (((window.width) - 230)) && window.mouseX < ((window.width))
+                && window.mouseY > 100 && window.mouseY < 200) {
+            window.fill(0, 0, 255);
+            window.rect((window.width) - 230, 135, 210, 100);
+            window.textAlign(window.CENTER);
+            window.fill(255, 255, 255);
+            window.textFont(manager.contentLoader.getSmallFont());
+            window.text("Back", (window.width) - 120, 200);
+
+            if (window.mousePressed) {
+                manager.screenState = 3;
             }
         }
     }
@@ -597,17 +694,3 @@ public class Button extends ButtonHandler {
         }
     }
 }
-
-
-    /**
-     * Back.
-     */
-//    public void back () {
-//                if (window.mouseX > 50 && window.mouseX < 150
-//                        && window.mouseY > 25 && window.mouseY < 75) {
-//                    if (window.mousePressed) {
-//                        manager.screenState = 3;
-//                    }
-//                }
-//            }
-//        }

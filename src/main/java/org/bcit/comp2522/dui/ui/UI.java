@@ -64,7 +64,11 @@ public class UI extends Elements implements Drawable {
   // window instance
   private final Window window;
 
+  // leaderboard instance
   private final Leaderboard leaderboard;
+
+  // instruction instance
+  private final Instruction instruction;
 
 
   /**
@@ -84,6 +88,7 @@ public class UI extends Elements implements Drawable {
     this.menu = new Menu(manager, scene);
     this.window = scene;
     this.leaderboard = new Leaderboard(manager, scene);
+    this.instruction = new Instruction(manager, scene);
     this.carselect = new CarSelection(manager, scene);
     this.bikeselect = new BikeSelection(manager, scene);
     this.truckselect = new TruckSelection(manager, scene);
@@ -194,6 +199,8 @@ public class UI extends Elements implements Drawable {
       case 6:
         difficulty.difficulty();
         break;
+      case 7:
+        instruction.instruction();
     }
   }
 

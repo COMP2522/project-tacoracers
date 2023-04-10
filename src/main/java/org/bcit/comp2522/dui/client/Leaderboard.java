@@ -34,6 +34,9 @@ public class Leaderboard {
         updateHighestScores();
     }
 
+    /**
+     * Updates the top 10 highest scores.
+     */
     public void updateHighestScores() {
         DatabaseHandler dbhandler = new DatabaseHandler("pavanbrar73", "KFmJyFJrTM6Dd7c2");
         this.cachedHighestScores = dbhandler.getHighestScores();
@@ -54,9 +57,6 @@ public class Leaderboard {
         window.textFont(manager.contentLoader.getSmallFont());
         window.text("Back", 120, 70);
         manager.button.back();
-
-        DatabaseHandler dbhandler = new DatabaseHandler("pavanbrar73", "KFmJyFJrTM6Dd7c2");
-
 
         window.textSize(32);
         window.fill(0, 0, 255);

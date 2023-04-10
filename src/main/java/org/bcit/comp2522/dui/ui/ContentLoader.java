@@ -49,47 +49,61 @@ public class ContentLoader extends PApplet {
   /**
      * The Player imagetruck 2.
      */
-    public PImage playerImagetruck2;
-    /**
-     * The Player imagetruck 3.
-     */
-    public PImage playerImagetruck3;
-    /**
-     * The Player imagetruck 4.
-     */
-    public PImage playerImagetruck4;
-    /**
-     * The Heart.
-     */
-    public PImage heart;
-    /**
-     * The Heart lost.
-     */
-    public PImage heartLost;
-    /**
-     * The Playercar.
-     */
-    public  PImage playercar;
+  public PImage playerImagetruck2;
+  /**
+   * The Player imagetruck 3.
+   */
+  public PImage playerImagetruck3;
+  /**
+   * The Player imagetruck 4.
+   */
+  public PImage playerImagetruck4;
+  /**
+   * The Heart.
+   */
+  public PImage heart;
+  /**
+   * The Heart lost.
+   */
+  public PImage heartLost;
+  /**
+   * The Playercar.
+   */
+  public  PImage playercar;
 
-  // individual road line image
+  /**
+   * roadline.
+   */
   private PImage roadLine;
 
-  // mute button
+  /**
+   * mute button.
+   */
   private PImage mute;
 
-  // repair tool
+  /**
+   * repair tool.
+   */
   private PImage powerup;
 
-  // max size font
+  /**
+   * max size font.
+   */
   private PFont bigFont;
 
-  // smaller font
+  /**
+   * smaller font.
+   */
   private PFont smallFont;
 
-  // decent size font
+  /**
+   * decent size font.
+   */
   private PFont mediumFont;
 
-  // 'tiny' font
+  /**
+   * 'tiny' font.
+   */
   private PFont tinyFont;
 
 
@@ -121,6 +135,7 @@ public class ContentLoader extends PApplet {
     roadLine = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/roadline.png"));
     mute = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/mute.png"));
     powerup = loadImage(sketchPath("src/main/java/org/bcit/comp2522/dui/content/repair.png"));
+
   }
 
     /**

@@ -16,20 +16,23 @@ public class TruckSelection {
     private Manager manager;
     private Window window;
 
-    /*
-truck images
- */
+    /**
+     * Truck images.
+     */
     PImage truck1,
             truck2,
             truck3,
             truck4;
-          /*
-        check the score to see if the player has unlocked the next car if they have then call the
-        function that will see if the player chooses the red yellow or blue car and then
-         set the player.carColor to the color they chose
-         then in the player class you can use a switch statement to change the color of the car
-         */
 
+    /**
+     * check the score to see if the player has unlocked the next car if they have then call the
+     * function that will see if the player chooses the red yellow or blue car and then
+     * set the player.carColor to the color they chose
+     * then in the player class you can use a switch statement to change the color of the car
+     *
+     * @param manager Manager
+     * @param window Window
+     */
     public TruckSelection(Manager manager, Window window) {
         this.manager = manager;
         this.window = window;
@@ -42,6 +45,9 @@ truck images
 
     }
 
+    /**
+     * Truck Selection method.
+     */
     public void truckSelection(){
         window.background(0);
 
@@ -109,6 +115,14 @@ truck images
         Trucklocked(5000, 1075, 4);
 
     }
+
+    /**
+     * Locks trucks until a certain score is reached.
+     *
+     * @param highScore highScore
+     * @param x x
+     * @param type type
+     */
     public void Trucklocked(int highScore, int x, int type){
         if (manager.game.highScore >= highScore) {
             window.fill(255, 0, 0);

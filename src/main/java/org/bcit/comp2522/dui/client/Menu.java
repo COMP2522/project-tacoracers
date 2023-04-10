@@ -5,26 +5,66 @@ import processing.core.PImage;
 
 import org.bson.Document;
 
+/**
+ * Menu class handles the 3 menus and name input.
+ */
 public class Menu {
 
+  /**
+   * manager instance.
+   */
   private Manager manager;
+
+  /**
+   * window instance.
+   */
   private Window window;
+
+  /**
+   * score display.
+   */
   String scoreDisplay;
+
+  /**
+   * high score display.
+   */
   String highScoreDisplay;
+
+  /**
+   * input name.
+   */
   public String inputName = "";
+
+  /**
+   * player name.
+   */
   public String playerName = "";
 
+  /**
+   * name is valid.
+   */
   public boolean nameIsValid = false;
 
+  /**
+   * key pressed.
+   */
   private boolean keyPressed = false;
 
-
+  /**
+   * Constructs manager and window objects.
+   *
+   * @param manager Manager
+   * @param scene Window
+   */
   public Menu(Manager manager, Window scene) {
     this.manager = manager;
     this.window = scene;
 
   }
 
+  /**
+   * Second menu.
+   */
   public void menu2() {
     window.background(window.background);
 
@@ -75,7 +115,9 @@ public class Menu {
     manager.button.play2();
   }
 
-
+  /**
+   * game over menu.
+   */
   public void gameOver() {
     manager.game.stopScore();
     window.background(window.background);
@@ -105,9 +147,12 @@ public class Menu {
     manager.button.playAgain();
   }
 
+  /**
+   * Main starting menu.
+   */
   public void main() {
     validateName();
-    window.background(0);
+    window.background(window.background);
     window.fill(255);
     window.textAlign(window.CENTER);
     window.textFont(manager.contentLoader.getBigFont());
@@ -141,6 +186,9 @@ public class Menu {
     }
   }
 
+  /**
+   * Validates the name input.
+   */
   public void validateName() {
     if (window.keyPressed && !keyPressed) {
       if (window.key >= 'a' && window.key <= 'z' || window.key >= 'A' && window.key <= 'Z') {

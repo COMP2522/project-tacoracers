@@ -16,20 +16,23 @@ public class CarSelection {
     private Manager manager;
     private Window window;
 
-    /*
-    car images
+    /**
+     * car images.
      */
     PImage car1,
             car2,
             car3,
             car4;
-          /*
-        check the score to see if the player has unlocked the next car if they have then call the
-        function that will see if the player chooses the red yellow or blue car and then
-         set the player.carColor to the color they chose
-         then in the player class you can use a switch statement to change the color of the car
-         */
 
+    /**
+     * check the score to see if the player has unlocked the next car if they have then call the
+     * function that will see if the player chooses the red yellow or blue car and then
+     * set the player.carColor to the color they chose
+     * then in the player class you can use a switch statement to change the color of the car
+     *
+     * @param manager Manager
+     * @param window Window
+     */
     public CarSelection(Manager manager, Window window) {
         this.manager = manager;
         this.window = window;
@@ -40,6 +43,10 @@ public class CarSelection {
         car3 = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/viperUpright.png");
         car4 = window.loadImage("src/main/java/org/bcit/comp2522/dui/content/PurpUpright.png");
     }
+
+    /**
+     * Car select method.
+     */
     public void CarSelect(){
         window.background(0);
 
@@ -107,6 +114,13 @@ public class CarSelection {
 
     }
 
+    /**
+     * carLocked method locks cars until reaches a certain score.
+     *
+     * @param highScore highScore
+     * @param x x
+     * @param type type
+     */
     public void carlocked(int highScore, int x, int type){
         if (manager.game.highScore >= highScore) {
             window.fill(255, 0, 0);
