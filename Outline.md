@@ -8,6 +8,9 @@ UML Diagram - https://lucid.app/lucidchart/354fd5b3-181c-462a-8c43-1dbef4c79919/
 Eric - My individual contribution of 1000 lines to the project will be traffic pathing logic, player movement, general game state management including dynamic UI elements. Traffic pathing controls replayability and collision logic with relation to the player. I will be focusing my attention to various classes with the main ones being Path.java, UI.java, Obstacle.java and Manager.java.
 Indiviudal UML: https://lucid.app/lucidchart/45481227-1d08-4d91-a21a-933976598bff/edit?viewport_loc=-759%2C-180%2C3328%2C1582%2Ck3pEWUZ1rP0W&invitationId=inv_bc035c31-39cd-4f2f-b036-586e9a280fcb
 
+Jaskaran Toor- My individual contribution of 1000 lines to the project will be mainly focused towards the UI aspect of the game. Including the different menus and car images/graphics. Gameplay Mechanics meaning logic of spawining enemy cars, on different lanes and different positions on the lanes. Aswell as working of the key presses of the player for player movemnt. UI/UX this is the graphics and sound of the game(images, music) this also includes the different selection menu for different "skins" of the cars and different vehicles. Menus is the menus that come up after the first play, including, difficulty, skin selection, and leadersboard. all these having their own working buttons. 
+Individual UML: https://lucid.app/lucidchart/2c28dbe9-0448-48cb-9bfa-d15e500d57db/edit?viewport_loc=-1116%2C-308%2C4155%2C1900%2C0_0&invitationId=inv_f3510925-59a4-438e-8d4b-0e62f2e6dbf5
+
 ## Technical Project Requirements
 
 The minimum requirements for the project are outlined here to give you a starting point. Meeting the minimum requirements alone will not guarantee you a good mark. You are welcome to meet and exceed the minimum requirements if you have good, creative ideas and would like to discuss them with me.
