@@ -672,21 +672,6 @@ public class Button extends ButtonHandler {
         }
     }
 
-
-
-    /**
-     * Check mute button click.
-     */
-//    public void mute() {
-//        if (window.mouseX > 300 && window.mouseX < 350
-//                && window.mouseY > 25 && window.mouseY < 75) {
-//            if (window.mousePressed) {
-//                window.musicPlayer.stop();
-//                manager.muted = true;
-//                manager.ui.elements.muted();
-//            }
-//        }
-//    }
     public void checkMuteButtonClick() {
         if (window.mousePressed && window.mouseX >= 300 && window.mouseX <= 300 + manager.contentLoader.getMute().width &&
                 window.mouseY >= 25 && window.mouseY <= 25 + manager.contentLoader.getMute().height) {

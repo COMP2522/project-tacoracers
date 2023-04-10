@@ -33,10 +33,9 @@ public abstract class Elements {
     this.window = window;
   }
 
-    /**
-     * Mute button.
-     */
-// draws the mute button
+  /**
+   *  draws the mute button.
+   */
   public void muteButton() {
     window.image(manager.contentLoader.getMute(), 300, 25);
     manager.button.checkMuteButtonClick();
@@ -47,10 +46,9 @@ public abstract class Elements {
     }
   }
 
-    /**
-     * Borders.
-     */
-// draws the white border on top
+  /**
+   * draws the borders on top.
+   */
   public void borders() {
     window.background(0);
     window.fill(255);
@@ -69,8 +67,9 @@ public abstract class Elements {
      * @param x     x pos
      * @param y     y pos
      */
-    public void displayText(PFont font, int align, float R, float G, float B, String text, float x, float y) {
-    window.fill(R,G,B);
+    public void displayText(PFont font, int align,
+                            float R, float G, float B, String text, float x, float y) {
+    window.fill(R, G, B);
     window.textFont(font);
     if (align != 0) {
       window.textAlign(align);

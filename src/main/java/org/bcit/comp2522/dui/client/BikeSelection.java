@@ -13,16 +13,16 @@ import processing.core.PImage;
  * @version 2023.1.1
  */
 public class BikeSelection {
-    private Manager manager;
-    private Window window;
+    private final Manager manager;
+    private final Window window;
 
     /**
      * moto images.
      */
-    PImage  moto1,
-            moto2,
-            moto3,
-            moto4;
+    private final PImage  moto1;
+    private final PImage moto2;
+    private final PImage moto3;
+    private final PImage moto4;
 
     /**
      * check the score to see if the player has unlocked the next car if they have then call the
@@ -48,7 +48,7 @@ public class BikeSelection {
     /**
      * bikeSelection method.
      */
-    public void bikeSelection(){
+    public void bikeSelection() {
         window.background(0);
 
 
@@ -84,11 +84,9 @@ public class BikeSelection {
 
         //image
         window.image(moto2, 425, 125, 150, 250);
-//    window.fill(255, 0, 0);
-//    window.rect(425, 125, 100, 250);
 
         //select/locked
-        Bikelocked(1000, 475, 2);
+        bikeLocked(1000, 475, 2);
 
 
         //blue car
@@ -101,7 +99,7 @@ public class BikeSelection {
         window.image(moto3, 725, 125, 150, 250);
 
         //select/locked
-        Bikelocked(3000, 775, 3);
+        bikeLocked(3000, 775, 3);
 
 
 
@@ -113,9 +111,7 @@ public class BikeSelection {
 
         window.image(moto4, 1025, 125, 150, 250);
 
-        Bikelocked(5000, 1075, 4);
-        //select/locked
-
+        bikeLocked(5000, 1075, 4);
     }
 
     /**
@@ -125,20 +121,20 @@ public class BikeSelection {
      * @param x x
      * @param type type
      */
-    public void Bikelocked(int highScore, int x, int type){
+    public void bikeLocked(int highScore, int x, int type) {
         if (manager.game.highScore >= highScore) {
             window.fill(255, 0, 0);
             window.textAlign(window.CENTER);
             window.textFont(manager.contentLoader.getSmallFont());
             window.textSize(30);
             window.text("Select", x, 525);
-            if (type == 1){
+            if (type == 1) {
                 manager.button.redbike();
-            } else if (type == 2){
+            } else if (type == 2) {
                 manager.button.yellowbike();
-            } else if (type == 3){
+            } else if (type == 3) {
                 manager.button.bluebike();
-            } else if (type == 4){
+            } else if (type == 4) {
                 manager.button.purplebike();
             }
         } else {

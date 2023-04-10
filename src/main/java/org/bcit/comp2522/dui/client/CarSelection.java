@@ -19,10 +19,10 @@ public class CarSelection {
     /**
      * car images.
      */
-    PImage car1,
-            car2,
-            car3,
-            car4;
+    private final PImage car1;
+    private final PImage car2;
+    private final PImage car3;
+    private final PImage car4;
 
     /**
      * check the score to see if the player has unlocked the next car if they have then call the
@@ -47,7 +47,7 @@ public class CarSelection {
     /**
      * Car select method.
      */
-    public void CarSelect(){
+    public void carSelect() {
         window.background(0);
 
         //red car

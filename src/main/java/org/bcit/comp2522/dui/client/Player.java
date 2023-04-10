@@ -96,11 +96,7 @@ public class Player extends Sprite implements Collidable {
         }
     }
 
-
-    /**
-     * Draw.
-     */
-// draws the player image on screen
+    // draws the player image on screen
     public void draw() {
         window.image(playerImage, getPosition().x, getPosition().y, width, height);
     }

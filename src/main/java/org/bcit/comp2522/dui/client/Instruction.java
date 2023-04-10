@@ -23,22 +23,22 @@ public class Instruction {
     /**
      * upkey image.
      */
-    PImage upKey;
+    private PImage upKey;
 
     /**
      * downkey image.
      */
-    PImage downKey;
+    private PImage downKey;
 
     /**
      * leftkey image.
      */
-    PImage leftKey;
+    private PImage leftKey;
 
     /**
      * repairkey image.
      */
-    PImage repairKey;
+    private PImage repairKey;
 
 
     /**
@@ -62,7 +62,7 @@ public class Instruction {
      * Hovering over each button displays the function
      */
     public void instruction() {
-        window.background(window.background);
+        window.background(window.getBackground());
 
         window.textSize(48);
         window.fill(0, 0, 255);
