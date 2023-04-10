@@ -242,14 +242,14 @@ public class Button extends ButtonHandler {
      * Back.
      */
     public void back() {
-        if (window.mouseX > ((120) - 110) && window.mouseX < ((120)) + 90
+        if (window.mouseX > ((350) - 130) && window.mouseX < ((350)) + 70
                 && window.mouseY > 0 && window.mouseY < 100) {
             window.fill(0, 0, 255);
-            window.rect(10, 0, 210, 100);
+            window.rect(220, 0, 210, 100);
             window.textAlign(window.CENTER);
             window.fill(255, 255, 255);
             window.textFont(manager.contentLoader.getSmallFont());
-            window.text("Back", 120, 70);
+            window.text("Back", 330, 70);
 
             if (window.mousePressed) {
                 manager.screenState = 3;
@@ -261,7 +261,7 @@ public class Button extends ButtonHandler {
      * Quit.
      */
     public void quit() {
-        if (window.mouseX > ((120) - 110) && window.mouseX < ((120)) + 90
+        if (window.mouseX > ((120) - 110) && window.mouseX < ((120)) + 60
                 && window.mouseY > 0 && window.mouseY < 100) {
             window.fill(0, 0, 255);
             window.rect(10, 0, 210, 100);
