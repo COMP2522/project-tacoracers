@@ -51,7 +51,7 @@ public abstract class Sprite implements Collidable {
     protected Window window;
 
     /**
-     * Constructor creating a sprite without speed (player)
+     * Constructor creating a sprite without speed (player).
      *
      * @param manager  sprite is able to access all parts of the game
      * @param scene    sprite is able to access drawing methods
@@ -68,7 +68,7 @@ public abstract class Sprite implements Collidable {
     }
 
     /**
-     * Constructor creating a sprite
+     * Constructor creating a sprite.
      *
      * @param manager  sprite is able to access all parts of the game
      * @param scene    sprite is able to access drawing methods

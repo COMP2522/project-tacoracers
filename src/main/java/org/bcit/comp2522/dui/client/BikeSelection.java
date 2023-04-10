@@ -12,25 +12,27 @@ import processing.core.PImage;
  * @author Jaskaran Toor
  * @version 2023.1.1
  */
-
 public class BikeSelection {
     private Manager manager;
     private Window window;
 
-    /*
-bike images
- */
+    /**
+     * moto images.
+     */
     PImage  moto1,
             moto2,
             moto3,
             moto4;
-          /*
-        check the score to see if the player has unlocked the next car if they have then call the
-        function that will see if the player chooses the red yellow or blue car and then
-         set the player.carColor to the color they chose
-         then in the player class you can use a switch statement to change the color of the car
-         */
 
+    /**
+     * check the score to see if the player has unlocked the next car if they have then call the
+     * function that will see if the player chooses the red yellow or blue car and then
+     * set the player.carColor to the color they chose
+     * then in the player class you can use a switch statement to change the color of the car
+     *
+     * @param manager Manager
+     * @param window Window
+     */
     public BikeSelection(Manager manager, Window window) {
         this.manager = manager;
         this.window = window;
@@ -43,6 +45,9 @@ bike images
 
     }
 
+    /**
+     * bikeSelection method.
+     */
     public void bikeSelection(){
         window.background(0);
 
@@ -113,7 +118,13 @@ bike images
 
     }
 
-
+    /**
+     * Bikelocked method locks bikes unless a certain score is reached.
+     *
+     * @param highScore highScore
+     * @param x x
+     * @param type type
+     */
     public void Bikelocked(int highScore, int x, int type){
         if (manager.game.highScore >= highScore) {
             window.fill(255, 0, 0);

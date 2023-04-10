@@ -17,8 +17,19 @@ public class Window extends PApplet {
      * The Background.
      */
     PImage background;
+
+    /**
+     * constant for window width.
+     */
+    private static final int WINDOW_WIDTH = 1280;
+
+    /**
+     * constant for window height.
+     */
+    private static final int WINDOW_HEIGHT = 600;
+
     public void settings() {
-        size(1280,600);
+        size(WINDOW_WIDTH,WINDOW_HEIGHT);
     }
 
     public void setup() {

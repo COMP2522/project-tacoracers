@@ -16,7 +16,6 @@ public class Game {
   public int delay = 100;
   public String gamePlayerName = "";
 
-  Window window;
   // initial variables to work with, both for displaying and tracking score
   Manager manager;
 
@@ -107,11 +106,11 @@ public class Game {
     this.gamePlayerName = playerName;
   }
 
+  DatabaseHandler dbh = new DatabaseHandler("pavanbrar73", "KFmJyFJrTM6Dd7c2");
+
   /**
    * Saves the high score using a put method from the database handler.
    */
-  DatabaseHandler dbh = new DatabaseHandler("pavanbrar73", "KFmJyFJrTM6Dd7c2");
-
   public void saveHighScoreToFile() {
     dbh.put("name", gamePlayerName, "score", highScore);
   }

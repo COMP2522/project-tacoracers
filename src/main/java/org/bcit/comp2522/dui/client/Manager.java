@@ -14,8 +14,12 @@ public class Manager extends PApplet {
 
   // button instance, used for menu selections and muting
   public Button button;
+
   // leaderboard instance, used for leaderboard
   public Leaderboard leaderboard;
+
+  // instruction instance, used for controls page
+  public Instruction instruction;
 
   // path instance (roadlines), used to manage road speed
   public Path path;
@@ -53,6 +57,7 @@ public class Manager extends PApplet {
     game = new Game(this);
     this.menu = new Menu(this, scene);
     leaderboard = new Leaderboard(this, scene);
+    instruction = new Instruction(this, scene);
     button = new Button(scene, this);
     ui.init();
   }
