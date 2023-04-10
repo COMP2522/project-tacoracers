@@ -58,6 +58,7 @@ Contributions:
  - Username input   
  - Leaderboard   
  - Score Logic   
+ - Controls page
    
 **Jaskaran Toor**   
 Roles: Gameplay Mechanics, UI/UX, Menu Guy   
