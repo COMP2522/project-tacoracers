@@ -55,7 +55,7 @@ public class Leaderboard {
         window.fill(0, 0, 255);
         window.textAlign(window.CENTER);
         window.textFont(manager.contentLoader.getSmallFont());
-        window.text("Back", 120, 70);
+        window.text("Back", 330, 70);
         manager.button.back();
 
         window.textSize(32);
