@@ -36,6 +36,8 @@ public class UI extends Elements implements Drawable {
   // default powerup speed
   private float powerUpSpeed = 20;
 
+  private final int hardcoreScore = 10000;
+
   // menu instance
   private final Menu menu;
 
@@ -140,6 +142,8 @@ public class UI extends Elements implements Drawable {
     }
   }
 
+
+
   /**
    * Sets the EnemyCar positions.
    *
@@ -168,6 +172,7 @@ public class UI extends Elements implements Drawable {
       case 0:
         uiElements();
         traffic.forEach(enemyCar -> {
+          // manager.toggleHardcoreMode((int) manager.game.score, enemyCar, manager.path);
           enemyCar.update(traffic);
           enemyCar.draw();
           enemyCar.collide(traffic);

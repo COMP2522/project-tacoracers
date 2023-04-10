@@ -66,4 +66,8 @@ public class Path {
             }
         }
     }
+
+  public float getOriginalSpeed() {
+      return (float) 20;
+  }
 }
