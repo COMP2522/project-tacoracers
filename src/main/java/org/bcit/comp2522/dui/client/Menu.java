@@ -66,7 +66,7 @@ public class Menu {
    * Second menu.
    */
   public void menu2() {
-    window.background(window.background);
+    window.background(window.getBackground());
 
     //quit
     window.fill(0, 0, 255);
@@ -120,7 +120,7 @@ public class Menu {
    */
   public void gameOver() {
     manager.game.stopScore();
-    window.background(window.background);
+    window.background(window.getBackground());
     scoreDisplay = "Score: " + manager.game.score;
 
     if (manager.game.score > manager.game.highScore) {
@@ -152,7 +152,7 @@ public class Menu {
    */
   public void main() {
     validateName();
-    window.background(window.background);
+    window.background(window.getBackground());
     window.fill(255);
     window.textAlign(window.CENTER);
     window.textFont(manager.contentLoader.getBigFont());

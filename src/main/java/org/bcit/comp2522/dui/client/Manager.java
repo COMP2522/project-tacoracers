@@ -62,6 +62,21 @@ public class Manager extends PApplet {
     ui.init();
   }
 
+//  /**
+//   * Turns on hardcore mode for the game
+//   * @param score
+//   * @param enemyCar
+//   */
+//  public void toggleHardcoreMode(int score, EnemyCar enemyCar, Path path) {
+//    if (score > 15000) {
+//      enemyCar.setSpeed(enemyCar.getSpeed() + 1);
+//      path.setSpeed(path.getSpeed() * 2);
+//    } else {
+//      enemyCar.setSpeed(enemyCar.getOriginalSpeed());
+//      path.setSpeed(path.getOriginalSpeed());
+//    }
+//  }
+
   public void managePowerUp(PowerUp powerup) {
     if (!powerup.isActive()) {
       ui.spawnPowerUp(powerup);
