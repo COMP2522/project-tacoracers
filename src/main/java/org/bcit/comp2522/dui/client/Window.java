@@ -12,6 +12,7 @@ public class Window extends PApplet {
     private Manager manager;
     public MusicPlayer musicPlayer;
     private PImage background;
+    private PImage gameBackground;
 
     private static final int WINDOW_WIDTH = 1280;
     private static final int WINDOW_HEIGHT = 600;
@@ -66,6 +67,5 @@ public class Window extends PApplet {
         Window eatBubbles = new Window();
         PApplet.runSketch(appletArgs, eatBubbles);
     }
-
 
 }

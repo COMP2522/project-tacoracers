@@ -111,7 +111,6 @@ public class UI extends Elements implements Drawable {
    */
 // spawns most UI elements
   public void uiElements() {
-    window.background(0);
     manager.game.start();
     borders();
     displayText(manager.contentLoader.getTinyFont(), window.LEFT,

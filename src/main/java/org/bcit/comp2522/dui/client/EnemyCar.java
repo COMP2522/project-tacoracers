@@ -11,7 +11,7 @@ import processing.core.*;
  */
 public class EnemyCar extends Sprite implements Drawable {
 
-    // Main lanes are 140, 327 and 515. All other numbers are to account for AFK cheating
+    // Main lanes are 140, 327 and 515. All other numbers are to account for AFK exploiting
     public final float[] lanes = {140, 175, 230, 297, 327, 357, 385, 435, 485, 515};
 
     // Image for the enemyCar
