@@ -38,7 +38,7 @@ public class Leaderboard {
      * Updates the top 10 highest scores.
      */
     public void updateHighestScores() {
-        DatabaseHandler dbhandler = new DatabaseHandler("pavanbrar73", "KFmJyFJrTM6Dd7c2");
+        DatabaseHandler dbhandler = new DatabaseHandler("erictatch", "1UCQfffWKdXM6Aom");
         this.cachedHighestScores = dbhandler.getHighestScores();
     }
 
