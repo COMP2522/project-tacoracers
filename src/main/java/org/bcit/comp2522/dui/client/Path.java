@@ -46,23 +46,31 @@ public class Path {
     }
 
     /**
-     * Draw lines.
+     * Draw roadlines moving right to left
      */
     public void drawLines() {
-
         // Update line positions
         for (int i = 0; i < linePositions.length; i++) {
             linePositions[i] -= speed;
             if (linePositions[i] < -180) {
-                linePositions[i] = window.width;
+                linePositions[i] += window.width;
+            }
+        }
+        float rightmostPosition = window.width;
+        for (float linePosition : linePositions) {
+            if (linePosition < rightmostPosition) {
+                rightmostPosition = linePosition;
             }
         }
 
         // Draw the roadlines
-        for (float linePosition : linePositions) {
-            for (int i = 0; i < 4; i++) {
-                window.image(manager.contentLoader.getRoadLine(), linePosition + i * 180, 430);
-                window.image(manager.contentLoader.getRoadLine(), linePosition + i * 180, 233);
+        for (int i = 0; i < 4; i++) {
+            for (float linePosition : linePositions) {
+                // Ensure that the line is within the visible area
+                if (linePosition + i * 180 >= rightmostPosition) {
+                    window.image(manager.contentLoader.getRoadLine(), linePosition + i * 180, 430);
+                    window.image(manager.contentLoader.getRoadLine(), linePosition + i * 180, 233);
+                }
             }
         }
     }

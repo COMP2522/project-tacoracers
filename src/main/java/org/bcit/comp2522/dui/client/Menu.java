@@ -104,7 +104,7 @@ public class Menu {
     window.fill(0, 0, 255);
     window.textAlign(window.CENTER);
     window.textFont(manager.contentLoader.getSmallFont());
-    window.text("LeaderBoard", window.width / 2 + 10, 100 + 300);
+    window.text("Leaderboard", window.width / 2 + 10, 100 + 300);
     manager.button.leaderboard();
 
     // play button
