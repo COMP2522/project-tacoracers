@@ -34,9 +34,8 @@ public class DatabaseHandler {
      */
     public DatabaseHandler(String username, String password) {
         ConnectionString connectionString = new ConnectionString(
-                String.format("mongodb+srv://pavanbrar73:KFmJyFJrTM6Dd7c2@"
-                        + "dui-infinite.67uhycx.mongodb.net/?retryWrites="
-                        + "true&w=majority", username, password));
+                String.format("mongodb+srv://erictatch:1UCQfffWKdXM6Aom@"
+                        + "cluster0.rlhe8nt.mongodb.net/", username, password));
         MongoClientSettings settings = MongoClientSettings.builder()
                 .applyConnectionString(connectionString)
                 .serverApi(ServerApi.builder()
@@ -90,7 +89,7 @@ public class DatabaseHandler {
      * @param args the input arguments
      */
     public static void main(String[] args) {
-        DatabaseHandler dbh = new DatabaseHandler("pavanbrar73", "KFmJyFJrTM6Dd7c2");
+        DatabaseHandler dbh = new DatabaseHandler("erictatch", "1UCQfffWKdXM6Aom");
 
         ArrayList<Document> highestScores = dbh.getHighestScores();
 

@@ -27,7 +27,7 @@ public class Window extends PApplet {
         background = loadImage("src/main/java/org/bcit/comp2522/dui/content/background4.png");
         background(background);
         musicPlayer = new MusicPlayer("src/main/java/org/bcit/comp2522/dui/content/Redneck1.wav");
-        musicPlayer.play();
+//        musicPlayer.play();
         manager = new Manager();
         manager.contentLoader.load();
         manager.contentLoader.loadFonts(this);
