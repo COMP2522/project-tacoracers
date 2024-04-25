@@ -106,13 +106,13 @@ public class Game {
     this.gamePlayerName = playerName;
   }
 
-  DatabaseHandler dbh = new DatabaseHandler("pavanbrar73", "KFmJyFJrTM6Dd7c2");
+   DatabaseHandler dbh = new DatabaseHandler("erictatch", "1UCQfffWKdXM6Aom");
 
   /**
    * Saves the high score using a put method from the database handler.
    */
-  public void saveHighScoreToFile() {
-    dbh.put("name", gamePlayerName, "score", highScore);
-  }
+    public void saveHighScoreToFile() {
+      dbh.put("name", gamePlayerName, "score", highScore);
+    }
 
 }
