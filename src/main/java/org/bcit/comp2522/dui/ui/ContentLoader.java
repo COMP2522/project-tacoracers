@@ -419,8 +419,8 @@ public class ContentLoader extends PApplet {
      * @return A PImage object representing the road line.
      */
     public PImage getRoadLine() {
-    return roadLine;
-  }
+      return roadLine;
+    }
 
     /**
      * Sets the road line PImage.

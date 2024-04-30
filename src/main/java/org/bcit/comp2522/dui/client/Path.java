@@ -51,7 +51,7 @@ public class Path {
     public void drawLines() {
         // Update line positions
         for (int i = 0; i < linePositions.length; i++) {
-            linePositions[i] -= speed;
+            linePositions[i] -= this.speed;
             if (linePositions[i] < -180) {
                 linePositions[i] += window.width;
             }
@@ -64,7 +64,7 @@ public class Path {
         }
 
         // Draw the roadlines
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 2; i++) {
             for (float linePosition : linePositions) {
                 // Ensure that the line is within the visible area
                 if (linePosition + i * 180 >= rightmostPosition) {

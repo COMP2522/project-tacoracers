@@ -51,7 +51,7 @@ public class Manager extends PApplet {
     carType = 2;
     diffState = 2; // medium
 
-    path = new Path(this, scene); // Move this line before the UI initialization
+    path = new Path(this, scene);
     ui = new UI(this, contentLoader, scene);
     keyInput = new KeyInput(scene, ui.getPlayer(), this, ui.getPowerup());
     game = new Game(this);
@@ -62,20 +62,14 @@ public class Manager extends PApplet {
     ui.init();
   }
 
-//  /**
-//   * Turns on hardcore mode for the game
-//   * @param score
-//   * @param enemyCar
-//   */
-//  public void toggleHardcoreMode(int score, EnemyCar enemyCar, Path path) {
-//    if (score > 15000) {
-//      enemyCar.setSpeed(enemyCar.getSpeed() + 1);
-//      path.setSpeed(path.getSpeed() * 2);
-//    } else {
-//      enemyCar.setSpeed(enemyCar.getOriginalSpeed());
-//      path.setSpeed(path.getOriginalSpeed());
-//    }
-//  }
+  /**
+   * Turns on hardcore mode for the game
+   * @param score
+   * @param enemyCar
+   */
+  public void toggleHardcoreMode(Path path) {
+      this.path.setSpeed(path.getSpeed() + 10);
+  }
 
   public void managePowerUp(PowerUp powerup) {
     if (!powerup.isActive()) {
@@ -86,5 +80,9 @@ public class Manager extends PApplet {
 
   public UI getUi() {
     return ui;
+  }
+
+  public Path getPath() {
+    return this.path;
   }
 }

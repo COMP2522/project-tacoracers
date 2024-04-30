@@ -36,7 +36,8 @@ public class UI extends Elements implements Drawable {
   // default powerup speed
   private float powerUpSpeed = 20;
 
-  private final int hardcoreScore = 10000;
+  private final int hardcoreScore = 20000;
+
 
   // menu instance
   private final Menu menu;
@@ -178,7 +179,12 @@ public class UI extends Elements implements Drawable {
           powerup.check(player);
           player.check(enemyCar, traffic);
           player.update();
+          if ((int) manager.game.getScore() > hardcoreScore && !enemyCar.isHardcoreModeActivated()) {
+            manager.toggleHardcoreMode(manager.getPath());
+            enemyCar.setHardcoreModeActivated(true); // Activate hardcore mode for this enemy car
+          }
         });
+
         break;
       case 1:
         menu.gameOver();
