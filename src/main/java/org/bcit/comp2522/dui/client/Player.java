@@ -49,6 +49,7 @@ public class Player extends Sprite implements Collidable {
             lives -= 1;
             if (lives == -1) {
                 manager.screenState = 1;
+                return;
             }
 
             // Handle enemyCar removal and repositioning

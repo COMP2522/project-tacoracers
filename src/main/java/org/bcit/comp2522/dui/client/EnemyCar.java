@@ -23,6 +23,8 @@ public class EnemyCar extends Sprite implements Drawable {
     // Collection of different car sprites
     private final CarLinkedList<PImage> carImages;
 
+    private boolean hardcoreMode = false;
+
     /**
      * Constructor setting car properties, initializing PImage array and picking a car image.
      *
@@ -157,6 +159,15 @@ public class EnemyCar extends Sprite implements Drawable {
     @Override
     public boolean collide(EnemyCar enemyCar) {
         return false;
+    }
+
+    public void setHardcoreModeActivated(boolean b) {
+        this.setSpeed(this.speed + 10);
+        hardcoreMode = true;
+    }
+
+    public boolean isHardcoreModeActivated() {
+        return hardcoreMode;
     }
 }
 

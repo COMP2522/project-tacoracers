@@ -33,6 +33,11 @@ public class Button extends ButtonHandler {
      */
     public void reset() {
         manager.game.updateHighScore();
+        manager.getPath().setSpeed(manager.getPath().getOriginalSpeed());
+        manager.ui.getTraffic().forEach(enemyCar -> {
+            enemyCar.setHardcoreModeActivated(false);
+            enemyCar.setSpeed(enemyCar.getOriginalSpeed());
+        });
         manager.ui.getPlayer().setLives(manager.ui.getPlayer().getDefaultLives());
         manager.game.resetScore();
         manager.game.resumeScore();

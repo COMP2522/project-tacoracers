@@ -79,6 +79,10 @@ public class Game {
     score += scoreIncrement; // Increment the score by the scoreIncrement amount
   }
 
+  public long getScore() {
+    return score;
+  }
+
   /**
    * Updates the high score and saves it to database.
    */
